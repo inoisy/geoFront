@@ -9,6 +9,10 @@ export const state = () => ({
         address: "",
         companyName: "",
         descriptor: ""
+    },
+    dialog: {
+        name: "",
+        isShow: false
     }
 })
 export const mutations = {
@@ -21,6 +25,9 @@ export const mutations = {
     init(state, data) {
         state.info = data.info
         state.services = data.services
+    },
+    dialog(state, data) {
+        state.dialog = data
     }
 }
 export const actions = {
@@ -95,5 +102,8 @@ export const actions = {
         })
         // console.log("🚀 ~ file: index.js ~ line 72 ~ fetchMainPage ~ data", data)
         return data
+    },
+    showDialog(state, data) {
+        state.commit("dialog", data)
     }
 }

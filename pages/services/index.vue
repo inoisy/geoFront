@@ -31,7 +31,7 @@
               >
                 Подробнее
               </v-btn>
-              <v-btn class="mb-3" outlined light @click="handleOffer">
+              <v-btn class="mb-3" outlined light @click="handleOffer(service)">
                 Заказать работы
               </v-btn>
             </div>
@@ -222,8 +222,11 @@ export default {
     };
   },
   methods: {
-    handleOffer() {
-      // TODO
+    handleOffer(service) {
+      this.$store.dispatch("showDialog", {
+        name: service.name,
+        isShow: true,
+      });
       return true;
     },
   },

@@ -34,7 +34,7 @@
           <h1 :class="$style.header" class="mb-6">{{ header }}</h1>
           <div :class="$style.subheader" class="mb-8" v-html="subheader"></div>
           <v-btn class="mb-0" outlined large @click="handleOffer">
-            {{ shiwIcon }} Заказать работы
+            Заказать работы
           </v-btn>
         </v-col>
 
@@ -181,7 +181,10 @@ export default {
   },
   methods: {
     handleOffer() {
-      // TODO
+      this.$store.dispatch("showDialog", {
+        name: this.header,
+        isShow: true,
+      });
       return true;
     },
   },

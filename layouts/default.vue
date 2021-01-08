@@ -238,6 +238,7 @@
         </v-row>
       </v-container>
     </v-footer>
+    <default-dialog></default-dialog>
   </v-app>
 </template>
 <style lang="scss" scoped module>

@@ -1,10 +1,13 @@
 import colors from 'vuetify/es5/util/colors'
-const backendUrl = "http://api.geoworksmsk.ru"
+const backendUrl = process.env.BACKEND_URL || "http://api.geoworksmsk.ru"
 // console.log("🚀 ~ file: nuxt.config.js ~ line 3 ~ backendUrl", backendUrl)
 export default {
+  loading: {
+    color: 'rgb(0, 126, 255)'
+  },
   publicRuntimeConfig: {
-    baseUrl: process.env.BACKEND_URL || backendUrl,
-    imageBaseUrl: process.env.IMAGE_BACKEND_URL || process.env.BACKEND_URL || backendUrl
+    baseUrl: backendUrl,
+    imageBaseUrl: process.env.IMAGE_BACKEND_URL || backendUrl
   },
   // env: {
   //   baseUrl: process.env.BACKEND_URL || backendUrl,
@@ -96,7 +99,9 @@ export default {
     stylus: []
   },
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-  axios: {},
+  axios: {
+    baseURL: backendUrl
+  },
 
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
   vuetify: {
