@@ -171,7 +171,7 @@ export default {
   },
   data() {
     return {
-      imageBaseUrl: process.env.imageBaseUrl || "http://194.58.97.115",
+      imageBaseUrl: this.$config.imageBaseUrl,
     };
   },
   computed: {

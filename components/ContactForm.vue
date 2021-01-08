@@ -228,7 +228,7 @@ export default {
       //   // console.log("submit -> busket", busketObj);
       //   try {
       //     this.loading = true;
-      //     const req = await this.$axios.post(process.env.baseUrl + "/orders", {
+      //     const req = await this.$axios.post("/orders", {
       //       oneClickbuy: this.oneClickBuy,
       //       productName: this.oneClickBuy ? this.productName : null,
       //       busket: busketObj,

@@ -1,10 +1,15 @@
 import colors from 'vuetify/es5/util/colors'
-const backendUrl = "http://194.58.97.115"
+const backendUrl = "http://api.geoworksmsk.ru"
+// console.log("🚀 ~ file: nuxt.config.js ~ line 3 ~ backendUrl", backendUrl)
 export default {
-  env: {
+  publicRuntimeConfig: {
     baseUrl: process.env.BACKEND_URL || backendUrl,
     imageBaseUrl: process.env.IMAGE_BACKEND_URL || process.env.BACKEND_URL || backendUrl
   },
+  // env: {
+  //   baseUrl: process.env.BACKEND_URL || backendUrl,
+  //   imageBaseUrl: process.env.IMAGE_BACKEND_URL || process.env.BACKEND_URL || backendUrl
+  // },
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     titleTemplate: '%s - GeoWorks',

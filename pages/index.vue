@@ -588,7 +588,7 @@ export default {
   },
   data() {
     return {
-      imageBaseUrl: process.env.imageBaseUrl,
+      imageBaseUrl: this.$config.imageBaseUrl,
     };
   },
   methods: {
