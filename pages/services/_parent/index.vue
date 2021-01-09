@@ -64,7 +64,7 @@
                   class="mb-3 mr-2 d-inline-flex"
                   outlined
                   light
-                  @click="handleOffer"
+                  @click="handleOffer(service.name)"
                 >
                   Заказать
                 </v-btn>
@@ -263,9 +263,12 @@ export default {
     },
   },
   methods: {
-    handleOffer() {
-      // TODO
-      return true;
+    handleOffer(serviceName) {
+      this.$store.dispatch("showDialog", {
+        name: serviceName,
+        isShow: true,
+      });
+      // return true;
     },
   },
 };

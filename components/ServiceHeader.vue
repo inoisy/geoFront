@@ -69,8 +69,8 @@
 <style lang="scss" scoped module>
 .firstSection {
   @include bg(
-    linear-gradient(180deg, rgba(0, 0, 0, 0.68) 0%, rgba(0, 0, 0, 0) 100%),
-    linear-gradient(0deg, rgba(0, 0, 0, 0.57), rgba(0, 0, 0, 0.57)),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 100%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.57)),
     url(~assets/images/bg1.jpg)
   );
   min-height: 370px;
@@ -87,6 +87,7 @@
       right: 12px;
       bottom: 0;
       display: table;
+      width: 70px;
       // transform: translate(0, -50%);
       // width: 15%;
       .icon {
@@ -134,8 +135,8 @@
       .iconWrapper {
         width: 27%;
         // right: 0;
-        // top: 50%;
-        // transform: translate(0, -50%);
+        top: 50%;
+        transform: translate(0, -50%);
       }
     }
   }

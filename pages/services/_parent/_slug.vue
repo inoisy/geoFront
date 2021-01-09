@@ -10,7 +10,24 @@
     <section class="content-wrapper white">
       <v-container grid-list-lg>
         <v-row>
-          <v-col v-html="service.content"> </v-col>
+          <v-col :class="$style.contentWithImgWrapper">
+            <!-- {{ service.img }} -->
+            <v-card
+              v-if="service.img"
+              :class="$style.imgWrapper"
+              hover
+              @click="showDialog = true"
+            >
+              <thumbnail :img="service.img" :alt="service.name" />
+              <!-- <v-img
+                :src="imageBaseUrl + service.img.url"
+                :alt="service.name"
+                :aspect-ratio="14 / 9"
+                max-height="300px"
+              ></v-img> -->
+            </v-card>
+            <div v-html="service.content"></div>
+          </v-col>
         </v-row>
       </v-container>
     </section>
@@ -106,6 +123,31 @@
         </v-slide-group>
       </v-container>
     </section>
+    <v-dialog v-model="showDialog" v-if="service.img">
+      <div :class="$style.dialogImgWrapper">
+        <!-- v-lazy:background-image="imageBaseUrl + product.img.url" -->
+        <img
+          :class="$style.dialogImg"
+          :src="imageBaseUrl + service.img.url"
+          :alt="service.name"
+          style="
+            width: 100%;
+            display: block;
+            object-fit: cover;
+            max-height: calc(100vh - 64px);
+          "
+        />
+        <v-btn
+          class="close-btn"
+          fab
+          color="black"
+          @click="showDialog = false"
+          style="position: absolute; top: 16px; right: 16px; z-index: 10"
+        >
+          <v-icon>close</v-icon>
+        </v-btn>
+      </div>
+    </v-dialog>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -134,6 +176,47 @@
 // }
 </style>
 <style lang="scss" scoped module>
+.dialogImgWrapper {
+  background-color: white;
+  position: relative;
+  .dialogImg {
+  }
+}
+.contentWithImgWrapper {
+  // display: flex;
+  // flex-direction: column;
+  // flex-flow: column-reverse;
+  @include sm {
+    // display: block;
+  }
+  .imgWrapper {
+    width: 100%;
+    float: right;
+    display: inline-flex;
+    // margin-top: 1rem;
+    margin-bottom: 2rem;
+    // box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
+    // height: 300px;
+    // .img {
+    //   border-radius: 3px;
+    //   box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
+    // }
+    @include sm {
+      width: 250px;
+      margin-left: 1rem;
+      margin-bottom: 1rem;
+      // margin-top: 0;
+      // margin-bottom: 0;
+    }
+    @include md {
+      width: 350px;
+    }
+    @include lg {
+      width: 400px;
+    }
+  }
+}
+
 .othersWrapper {
   background-color: $gray;
   color: $black;
@@ -142,19 +225,13 @@
   height: 100%;
   // width: 350px;
 }
-// .carouselWrapper {
-//   contain: content;
-//   display: flex;
-//   flex: 1 1 auto;
-//   overflow: hidden;
-//   touch-action: none;
-//   flex-wrap: no-wrap;
-// }
 </style>
 <script>
 import gql from "graphql-tag";
+import Thumbnail from "~/components/Thumbnail.vue";
 
 export default {
+  components: { Thumbnail },
   async asyncData({ params, app, error }) {
     const client = app.apolloProvider.defaultClient;
     const { data } = await client.query({
@@ -170,6 +247,10 @@ export default {
             subheader
             metaDescrtiption
             content
+            img {
+              url
+              formats
+            }
             icon {
               url
             }
@@ -218,6 +299,7 @@ export default {
     return {
       slide: "",
       imageBaseUrl: this.$config.imageBaseUrl,
+      showDialog: false,
     };
   },
 

@@ -1,6 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
 const backendUrl = process.env.BACKEND_URL || "https://api.geoworksmsk.ru"
-// console.log("🚀 ~ file: nuxt.config.js ~ line 3 ~ backendUrl", backendUrl)
+console.log("🚀 ~ file: nuxt.config.js ~ line 3 ~ backendUrl", backendUrl)
 export default {
   loading: {
     color: 'rgb(0, 126, 255)'
