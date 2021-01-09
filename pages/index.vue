@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="white text--black">
     <section :class="$style['first-section']">
       <v-container grid-list-lg fill-height class="py-12">
         <v-row justify="center" align="center">
@@ -24,7 +24,7 @@
         </v-row>
       </v-container>
     </section>
-    <section class="white">
+    <section>
       <v-container grid-list-lg style="position: relative">
         <v-row
           justify="center"
@@ -73,7 +73,7 @@
       </v-container>
     </section>
 
-    <section class="white">
+    <section>
       <v-container grid-list-lg class="pt-12">
         <template v-for="(service, i) in services">
           <v-row
@@ -182,7 +182,7 @@
         </v-row>
       </v-container>
     </section>
-    <section :class="$style.benefitsWrapper" class="white">
+    <section :class="$style.benefitsWrapper">
       <v-container grid-list-lg>
         <!-- {{ page.benefits }} -->
         <v-row>
