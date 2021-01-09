@@ -123,7 +123,7 @@
         </v-slide-group>
       </v-container>
     </section>
-    <v-dialog v-model="showDialog" v-if="service.img">
+    <v-dialog v-if="service.img" v-model="showDialog">
       <v-card :class="$style.dialogImgWrapper">
         <!-- v-lazy:background-image="imageBaseUrl + product.img.url" -->
         <div>
@@ -139,8 +139,8 @@
           class="close-btn"
           fab
           outlined
-          @click="showDialog = false"
           style="position: absolute; top: 16px; right: 16px; z-index: 10"
+          @click="showDialog = false"
         >
           <v-icon>close</v-icon>
         </v-btn>

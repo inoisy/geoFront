@@ -140,7 +140,7 @@
           :class="$style['link-icon']"
           class="d-dlex"
           icon
-          :mailto="`tel:${info.email}`"
+          :href="`mailto:${info.email}`"
         >
           <mail-icon />
         </v-btn>
@@ -195,8 +195,10 @@
                 <v-list-item-icon>
                   <pin-icon />
                 </v-list-item-icon>
-                <v-list-item-content
-                  ><span style="font-size: 0.8rem">{{ info.address }}</span>
+                <v-list-item-content>
+                  <span style="font-size: 0.8rem">
+                    {{ info.address }}
+                  </span>
                 </v-list-item-content>
               </v-list-item>
             </v-list>

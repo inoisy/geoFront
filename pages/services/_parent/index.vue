@@ -70,7 +70,12 @@
                 </v-btn>
               </div>
             </v-col>
-            <v-col :class="$style.serviceFeatureImgWrapper" cols="12" md="6">
+            <v-col
+              v-if="service.img"
+              :class="$style.serviceFeatureImgWrapper"
+              cols="12"
+              md="6"
+            >
               <v-img
                 :class="$style.serviceFeatureImg"
                 :src="
