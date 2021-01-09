@@ -84,8 +84,9 @@
     }
     .iconWrapper {
       position: absolute;
-      right: 25px;
-      top: 20px;
+      right: 12px;
+      bottom: 0;
+      display: table;
       // transform: translate(0, -50%);
       // width: 15%;
       .icon {
@@ -108,7 +109,7 @@
   }
   .header {
     font-weight: 600;
-    font-size: 49px;
+    font-size: 2.5rem;
     line-height: 125%;
   }
   .subheader {
@@ -121,6 +122,7 @@
       }
       .iconWrapper {
         width: 25%;
+        // top: 20px;
       }
     }
   }
@@ -131,9 +133,9 @@
       }
       .iconWrapper {
         width: 27%;
-        right: 0;
-        top: 50%;
-        transform: translate(0, -50%);
+        // right: 0;
+        // top: 50%;
+        // transform: translate(0, -50%);
       }
     }
   }

@@ -269,10 +269,10 @@
     .benefitItem {
       .benefitsTextWrapper {
         .benefitsHeader {
-          font-size: 24px;
+          font-size: 1.5rem;
         }
         .benefitsText {
-          font-size: 16px;
+          font-size: 1rem;
         }
       }
     }
@@ -280,7 +280,8 @@
 }
 .pageHeader {
   font-weight: 600;
-  font-size: 48px;
+  font-size: 2.9rem;
+  line-height: 125%;
 }
 .first-section {
   min-height: 610px;
@@ -295,12 +296,12 @@
   background-position: 80%;
 }
 .header {
-  font-size: 28px;
+  font-size: 2rem;
   // font-weight: normal;
-  line-height: normal;
+  line-height: 125%;
 }
 .subheader {
-  font-size: 16px;
+  font-size: 1rem;
 }
 .serviceCardWrapper {
   margin-top: -50px;

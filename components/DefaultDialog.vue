@@ -4,8 +4,8 @@
     width="600"
     style="overflow-x: hidden"
     content-class="dialog-active"
-    @click:outside="close"
     light
+    @click:outside="close"
   >
     <v-card class="dialog-inner py-12 px-8">
       <!-- <div class="headline d-flex py-3 px-5 align-center" primary-title> -->
@@ -19,8 +19,8 @@
         outlined
         large
         color="primary"
-        @click="close"
         style="position: absolute; right: 24px; top: 24px"
+        @click="close"
       >
         <v-icon>close</v-icon>
       </v-btn>
@@ -44,45 +44,47 @@
         <!-- {{ formSuccess }} -->
 
         <p class="mb-8 pr-12">
-          Пожалуйста, заполните краткую контактную информацию, и наши сотрудники
-          обязательно свяжутся с Вами.
+          Пожалуйста, заполните контактную информацию, и наши сотрудники
+          свяжутся с Вами.
         </p>
-        <v-form class="layout wrap" v-model="form">
+        <v-form v-model="form" class="layout wrap">
           <v-text-field
-            class="xs12 py-0 flex"
             v-model="name"
+            class="xs12 py-0 flex"
             :error-messages="nameErrors"
-            :counter="35"
-            :label="'Ваше имя'"
+            label="Имя"
+            :dense="isMobile"
             required
             outlined
             @blur="$v.name.$touch()"
           ></v-text-field>
           <v-text-field
-            class="xs12 py-0 flex"
             v-model="email"
+            class="xs12 py-0 flex"
             :error-messages="emailErrors"
+            :dense="isMobile"
             label="E-mail"
             required
             outlined
             @blur="$v.email.$touch()"
           ></v-text-field>
           <v-text-field
-            class="xs12 py-0 flex"
             v-model="phone"
-            :error-messages="phoneErrors"
             v-mask="mask"
-            :label="'Телефон'"
+            class="xs12 py-0 flex"
+            :error-messages="phoneErrors"
+            label="Телефон"
+            :dense="isMobile"
             required
             outlined
             @blur="$v.phone.$touch()"
           ></v-text-field>
           <v-textarea
+            v-model="message"
             class="xs12 py-0 flex mb-6"
             outlined
             dense
             height="100px"
-            v-model="message"
             hide-details
             label="Комментарий"
           ></v-textarea>
@@ -94,27 +96,26 @@
               large
               block
               light
-              @click="submit"
               :disabled="submitDisabled"
               :loading="loading"
-              >Отправить</v-btn
+              @click="submit"
             >
+              Отправить
+            </v-btn>
           </v-flex>
 
           <v-slide-y-transition>
-            <v-flex xs12 v-if="this.formSuccess || this.formError">
+            <v-flex v-if="formSuccess || formError" xs12>
               <v-alert
-                :value="this.formSuccess"
+                :value="formSuccess"
                 class="flex xs12 mt-3"
                 type="success"
-                >Cообщение отправлено!</v-alert
               >
-              <v-alert
-                :value="this.formError"
-                class="flex xs12 mt-3"
-                type="error"
-                >Ошибка при отправке!</v-alert
-              >
+                Cообщение отправлено!
+              </v-alert>
+              <v-alert :value="formError" class="flex xs12 mt-3" type="error">
+                Ошибка при отправке!
+              </v-alert>
             </v-flex>
           </v-slide-y-transition>
         </v-form>
@@ -147,10 +148,11 @@ import {
 } from "vuelidate/lib/validators";
 
 export default {
-  mixins: [validationMixin],
   directives: {
     mask,
   },
+  mixins: [validationMixin],
+
   validations() {
     return {
       name: { required, maxLength: maxLength(35), minLength: minLength(3) },
@@ -170,7 +172,52 @@ export default {
     mask: "+7 (###) ### - ####",
     loading: false,
   }),
-  beforeDestroy() {
+  computed: {
+    isMobile() {
+      return this.$vuetify.breakpoint.smAndDown;
+    },
+    submitDisabled() {
+      return !this.name || !this.phone || !this.email || this.$v.$anyError;
+    },
+    nameErrors() {
+      const errors = [];
+      if (!this.$v.name.$dirty) return errors;
+      !this.$v.name.maxLength && errors.push("Слишком длинное имя");
+      !this.$v.name.minLength && errors.push("Слишком короткое имя");
+      !this.$v.name.required && errors.push("Введите имя");
+      return errors;
+    },
+    phoneErrors() {
+      const errors = [];
+      if (!this.$v.phone.$dirty) return errors;
+      !this.$v.phone.maxLength && errors.push("Слишком длинный телефон");
+      !this.$v.phone.minLength && errors.push("Слишком короткий телефон");
+      !this.$v.phone.required && errors.push("Введите телефон");
+      return errors;
+    },
+    emailErrors() {
+      const errors = [];
+      if (!this.$v.email.$dirty) return errors;
+      !this.$v.email.email && errors.push("Введите корректный email");
+      !this.$v.email.required && errors.push("Введите email");
+      return errors;
+    },
+    productName() {
+      return this.$store.state.dialog.name;
+    },
+    isShow: {
+      get() {
+        return this.$store.state.dialog.isShow;
+      },
+      async set(val) {
+        await this.$store.dispatch("showDialog", {
+          name: "",
+          isShow: val,
+        });
+      },
+    },
+  },
+  afterDestroy() {
     this.close();
   },
   methods: {
@@ -205,10 +252,10 @@ export default {
 
       try {
         this.loading = true;
-        console.log(
-          "🚀 ~ file: DefaultDialog.vue ~ line 215 ~ submit ~ this.$store.state.dialog.name",
-          this.$store.state.dialog.name
-        );
+        // console.log(
+        //   "🚀 ~ file: DefaultDialog.vue ~ line 215 ~ submit ~ this.$store.state.dialog.name",
+        //   this.$store.state.dialog.name
+        // );
 
         const req = await this.$axios.post("/orders", {
           name: this.name,
@@ -284,48 +331,6 @@ export default {
     //     this.loading = false;
     //   }
     // },
-  },
-  computed: {
-    submitDisabled() {
-      return !this.name || !this.phone || !this.email || this.$v.$anyError;
-    },
-    nameErrors() {
-      const errors = [];
-      if (!this.$v.name.$dirty) return errors;
-      !this.$v.name.maxLength && errors.push("Слишком длинное имя");
-      !this.$v.name.minLength && errors.push("Слишком короткое имя");
-      !this.$v.name.required && errors.push("Введите имя");
-      return errors;
-    },
-    phoneErrors() {
-      const errors = [];
-      if (!this.$v.phone.$dirty) return errors;
-      !this.$v.phone.maxLength && errors.push("Слишком длинный телефон");
-      !this.$v.phone.minLength && errors.push("Слишком короткий телефон");
-      !this.$v.phone.required && errors.push("Введите телефон");
-      return errors;
-    },
-    emailErrors() {
-      const errors = [];
-      if (!this.$v.email.$dirty) return errors;
-      !this.$v.email.email && errors.push("Введите корректный email");
-      !this.$v.email.required && errors.push("Введите email");
-      return errors;
-    },
-    productName() {
-      return this.$store.state.dialog.name;
-    },
-    isShow: {
-      get() {
-        return this.$store.state.dialog.isShow;
-      },
-      async set(val) {
-        await this.$store.dispatch("showDialog", {
-          name: "",
-          isShow: val,
-        });
-      },
-    },
   },
 };
 </script>

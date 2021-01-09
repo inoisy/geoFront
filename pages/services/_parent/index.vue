@@ -71,7 +71,7 @@
               </div>
             </v-col>
             <v-col :class="$style.serviceFeatureImgWrapper" cols="12" md="6">
-              <img
+              <v-img
                 :class="$style.serviceFeatureImg"
                 :src="
                   service.img && service.img.url
@@ -79,6 +79,8 @@
                     : require('~/assets/icons/no-camera.svg')
                 "
                 :alt="service.name"
+                :aspect-ratio="14 / 9"
+                max-height="300px"
             /></v-col>
           </v-row>
         </template>
@@ -123,16 +125,7 @@
       flex-direction: row-reverse;
     }
   }
-  @include md {
-    &:nth-child(odd) {
-      .serviceFeatureRow {
-        .serviceFeatureImgWrapper {
-          padding-right: 8.33333%;
-          padding-left: 12px;
-        }
-      }
-    }
-  }
+
   .serviceFeatureRow {
     .serviceFeatureImgWrapper {
       display: flex;
@@ -143,6 +136,14 @@
         width: 100%;
         max-width: 100%;
         display: block;
+        @include sm {
+          width: 65%;
+          max-width: 65%;
+        }
+        @include md {
+          width: 100%;
+          max-width: 100%;
+        }
       }
     }
     .serviceFeatureTextWrapper {
@@ -174,6 +175,16 @@
       //     padding-left: 12px;
       //   }
       // }
+    }
+  }
+  @include md {
+    &:nth-child(odd) {
+      .serviceFeatureRow {
+        .serviceFeatureImgWrapper {
+          padding-right: 8.33333%;
+          padding-left: 12px;
+        }
+      }
     }
   }
 }
