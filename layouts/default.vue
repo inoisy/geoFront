@@ -239,9 +239,77 @@
       </v-container>
     </v-footer>
     <default-dialog></default-dialog>
+    <v-fab-transition>
+      <v-btn
+        :class="$style.floatingButton"
+        color="black"
+        dark
+        fixed
+        bottom
+        right
+        fab
+        large
+        @click="handleOffer"
+      >
+        <!-- v-show="!hidden" -->
+        <!-- <phone-icon></phone-icon> -->
+        <svg width="26" height="24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M13 0C5.82 0 0 4.925 0 11c0 2.676 1.132 5.126 3.01 7.033.038.095 1.001 2.574-1.852 5.102a.5.5 0 0 0 .45.853c2.875-.17 5.335-1.597 6.837-2.697 1.42.45 2.95.709 4.555.709 7.18 0 13-4.925 13-11S20.18 0 13 0zm0 4.5a1.5 1.5 0 1 1-.001 3.001A1.5 1.5 0 0 1 13 4.5zM12 10h2v7h-2v-7z"
+            fill="#FFF"
+            fill-rule="nonzero"
+          ></path>
+        </svg>
+      </v-btn>
+      <!-- <div class="z-widget-button z-widget-simple-btn">
+    </div> -->
+    </v-fab-transition>
   </v-app>
 </template>
 <style lang="scss" scoped module>
+.floatingButton {
+  width: 64px;
+  height: 64px;
+  &:before {
+    content: "";
+    width: 76px;
+    height: 76px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    z-index: -1;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70px;
+    height: 70px;
+    background: transparent;
+    border: 3px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    animation: z-widget-simple-btn-pulse infinite 2s linear;
+  }
+}
+@keyframes z-widget-simple-btn-pulse {
+  0% {
+    width: 70px;
+    height: 70px;
+  }
+  50% {
+    width: 100px;
+    height: 100px;
+  }
+  100% {
+    width: 70px;
+    height: 70px;
+  }
+}
 .footer {
   @include bg(url(~assets/images/footerbg.jpg));
   background-position: 80% 50%;
@@ -350,6 +418,15 @@ export default {
     },
     info() {
       return this.$store.state.info;
+    },
+  },
+  methods: {
+    handleOffer() {
+      this.$store.dispatch("showDialog", {
+        name: "",
+        isShow: true,
+      });
+      return true;
     },
   },
 };

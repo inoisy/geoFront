@@ -27,10 +27,10 @@
       <div v-if="!formSuccess">
         <!-- <template v-if="!formSuccess"> -->
         <div
-          class="mb-6"
-          style="font-size: 2rem; font-weight: 500"
+          class="mb-6 pr-12"
+          style="font-size: 2rem; font-weight: 500; line-height: 125%"
           v-text="
-            productName ? `Заказать услугу ${productName}` : 'ЗАКАЗАТЬ ЗВОНОК'
+            productName ? `Заказать услугу «${productName}»` : 'ЗАКАЗАТЬ ЗВОНОК'
           "
         >
           <!-- <span class="pr-3" v-if="productName">
@@ -81,7 +81,7 @@
           ></v-text-field>
           <v-textarea
             v-model="message"
-            class="xs12 py-0 flex mb-6"
+            class="xs12 py-0 flex mb-9"
             outlined
             dense
             height="100px"
