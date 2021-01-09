@@ -124,29 +124,27 @@
       </v-container>
     </section>
     <v-dialog v-model="showDialog" v-if="service.img">
-      <div :class="$style.dialogImgWrapper">
+      <v-card :class="$style.dialogImgWrapper">
         <!-- v-lazy:background-image="imageBaseUrl + product.img.url" -->
-        <img
-          :class="$style.dialogImg"
-          :src="imageBaseUrl + service.img.url"
-          :alt="service.name"
-          style="
-            width: 100%;
-            display: block;
-            object-fit: cover;
-            max-height: calc(100vh - 64px);
-          "
-        />
+        <div>
+          <v-img
+            :class="$style.dialogImg"
+            :src="imageBaseUrl + service.img.url"
+            :alt="service.name"
+            :contain="true"
+          />
+        </div>
+
         <v-btn
           class="close-btn"
           fab
-          color="black"
+          outlined
           @click="showDialog = false"
           style="position: absolute; top: 16px; right: 16px; z-index: 10"
         >
           <v-icon>close</v-icon>
         </v-btn>
-      </div>
+      </v-card>
     </v-dialog>
   </div>
 </template>
@@ -177,9 +175,16 @@
 </style>
 <style lang="scss" scoped module>
 .dialogImgWrapper {
-  background-color: white;
-  position: relative;
+  // background-color: white;
+  // position: relative;
   .dialogImg {
+    //   width: 100%;
+    //   display: block;
+    //   object-fit: cover;
+    max-height: calc(100vh - 64px);
+    @include md {
+      max-height: calc(90vh - 24px);
+    }
   }
 }
 .contentWithImgWrapper {
