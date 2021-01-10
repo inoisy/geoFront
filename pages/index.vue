@@ -123,7 +123,7 @@
               sm="10"
               md="6"
             >
-              <img
+              <v-img
                 :class="$style.serviceFeatureImg"
                 :src="
                   service.info.img
@@ -131,6 +131,9 @@
                     : require('~/assets/icons/no-camera.svg')
                 "
                 :alt="service.name"
+                aspect-ratio="1.555"
+                max-height="500px"
+                gradient="to top right, rgba(0,0,0,0), rgba(0,0,0,.4)"
             /></v-col>
           </v-row>
         </template>
