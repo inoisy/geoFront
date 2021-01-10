@@ -96,15 +96,9 @@
 </template>
 <style lang="scss" scoped module>
 .asideMenuWrapper {
-  // flex-direction: column-reverse;
-  // display: flex;
-
   .asideMenu {
     max-width: 100%;
     margin-bottom: 50px;
-    // float: right;
-    // margin-left: 30px;
-    // margin-bottom: 30px;
   }
 }
 
@@ -120,9 +114,6 @@
     }
   }
 }
-// &:nth-child(odd) {
-//     background-color: gray;
-//   }
 .serviceFeatureWrapper {
   background-color: white;
   &:nth-child(odd) {
@@ -158,8 +149,8 @@
       flex-direction: column;
       justify-content: center;
       .serviceFeatureHeader {
-        font-weight: 600;
-        font-size: 32px;
+        font-weight: 500;
+        font-size: 1.8rem;
         margin-bottom: 24px;
         line-height: 125%;
       }

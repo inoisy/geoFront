@@ -115,27 +115,6 @@
   }
 }
 
-// .firstSection {
-//   @include bg(
-//     linear-gradient(180deg, rgba(0, 0, 0, 0.68) 0%, rgba(0, 0, 0, 0) 100%),
-//     linear-gradient(0deg, rgba(0, 0, 0, 0.57), rgba(0, 0, 0, 0.57)),
-//     url(~assets/images/bg1.jpg)
-//   );
-//   min-height: 370px;
-//   .breadcrumbs {
-//     position: absolute;
-//     top: 10px;
-//     padding-left: 12px;
-//   }
-//   > div {
-//     min-height: inherit;
-//   }
-//   .header {
-//     font-weight: 600;
-//     font-size: 49px;
-//   }
-// }
-
 @include sm {
   .servicesWrapper {
     .servicesTextWrapper {
