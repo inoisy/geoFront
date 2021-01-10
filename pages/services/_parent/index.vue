@@ -86,6 +86,7 @@
                 :alt="service.name"
                 aspect-ratio="1.7777"
                 max-height="500px"
+                gradient="to top right, rgba(0,0,0,0), rgba(0,0,0,.4)"
             /></v-col>
           </v-row>
         </template>
