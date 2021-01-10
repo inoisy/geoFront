@@ -84,8 +84,8 @@
                     : require('~/assets/icons/no-camera.svg')
                 "
                 :alt="service.name"
-                :aspect-ratio="14 / 9"
-                max-height="300px"
+                aspect-ratio="1.7777"
+                max-height="500px"
             /></v-col>
           </v-row>
         </template>

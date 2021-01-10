@@ -159,10 +159,10 @@
 @include lg {
   .servicesWrapper {
     .servicesTextWrapper {
-      max-width: 50%;
+      max-width: 60%;
     }
     .servicesIcon {
-      width: 30%;
+      width: 20%;
     }
   }
 }
