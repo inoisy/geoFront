@@ -62,5 +62,17 @@ export default {
       return true;
     },
   },
+  head() {
+    return {
+      title: "О компании",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: this.page.metaDescription || "О компании - GeoWorks",
+        },
+      ],
+    };
+  },
 };
 </script>

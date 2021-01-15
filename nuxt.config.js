@@ -9,18 +9,6 @@ const axios = require('axios')
 
 async function routes() {
   let routes = []
-  // const {
-  //   data: pages
-  // } = await axios.get(backendUrl + '/pages?_limit=99999')
-  // for (let item of pages) {
-  //   routes.push(`${item.slug}`)
-  // }
-  // const {
-  //   data: manufacturers
-  // } = await axios.get(backendUrl + '/manufacturers?_limit=99999')
-  // for (let item of manufacturers) {
-  //   routes.push(`/manufacturers/${item.slug}`)
-  // }
   const {
     data: services
   } = await axios.get(backendUrl + '/services?_limit=99999')
@@ -34,11 +22,6 @@ async function routes() {
         routes.push(`/services/${service.slug}/${child.slug}`)
       }
     }
-    // if (service.product_types.length) {
-    //   for (type of service.product_types) {
-    //     routes.push(`/catalog/${service.slug}?type=${type.slug}`)
-    //   }
-    // }
   }
 
   return routes
@@ -68,10 +51,10 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      // {
-      //   rel: 'stylesheet',
-      //   href: 'https://fonts.googleapis.com/css?family=Material+Icons'
-      // }
+      { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
+      { rel: 'icon', type: "image/png", sizes: '32x32', href: '/favicon-32x32.png' },
+      { rel: 'icon', type: "image/png", sizes: '16x16', href: '/favicon-16x16.png' },
+      { rel: 'manifest', href: '/site.webmanifest' }
     ]
   },
 

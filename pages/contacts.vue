@@ -138,5 +138,17 @@ export default {
       return true;
     },
   },
+  head() {
+    return {
+      title: "Контакты",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: "Контакты - GeoWorks",
+        },
+      ],
+    };
+  },
 };
 </script>

@@ -209,5 +209,17 @@ export default {
       return true;
     },
   },
+  head() {
+    return {
+      title: "Услуги",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: "Услуги - GeoWorks",
+        },
+      ],
+    };
+  },
 };
 </script>

@@ -603,5 +603,18 @@ export default {
       return true;
     },
   },
+  head() {
+    return {
+      title: this.page.title || "GeoWorks",
+      titleTemplate: "",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: this.page.metaDescription,
+        },
+      ],
+    };
+  },
 };
 </script>

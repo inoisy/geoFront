@@ -260,5 +260,17 @@ export default {
       return true;
     },
   },
+  head() {
+    return {
+      title: this.service.name,
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: this.service.metaDescription,
+        },
+      ],
+    };
+  },
 };
 </script>
