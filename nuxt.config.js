@@ -99,16 +99,15 @@ export default {
       ['@nuxtjs/google-analytics', {
         id: process.env.GOOGLE_ID
       }] : []),
-    ...(process.env.YANDEX_ID ? [
-      '@nuxtjs/yandex-metrika',
+
+    ['@nuxtjs/yandex-metrika',
       {
         id: process.env.YANDEX_ID,
         clickmap: true,
         trackLinks: true,
         accurateTrackBounce: true,
         webvisor: true
-      }
-    ] : []),
+      }],
     ...(process.env.SENTRY_DSN ? ['@nuxtjs/sentry', {
       dsn: process.env.SENTRY_DSN, // Enter your project's DSN here
       config: {}, // Additional config
