@@ -8,41 +8,27 @@
     @click:outside="close"
   >
     <v-card class="dialog-inner py-12 px-8">
-      <!-- <div class="headline d-flex py-3 px-5 align-center" primary-title> -->
-      <!-- :class="!formSuccess && 'grey lighten-2 '" -->
-
-      <!-- </div> -->
       <v-btn
         class="ml-auto"
         text
         icon
         outlined
         large
-        color="primary"
+        color="black"
         style="position: absolute; right: 24px; top: 24px"
         @click="close"
       >
-        <v-icon>close</v-icon>
+        <!-- <v-icon>close</v-icon> -->
+        <svg-icon name="close" style="width: 24px; height: 24px" />
       </v-btn>
       <div v-if="!formSuccess">
-        <!-- <template v-if="!formSuccess"> -->
         <div
           class="mb-6 pr-12"
           style="font-size: 2rem; font-weight: 500; line-height: 125%"
           v-text="
             productName ? `Заказать услугу «${productName}»` : 'ЗАКАЗАТЬ ЗВОНОК'
           "
-        >
-          <!-- <span class="pr-3" v-if="productName">
-            Заказать услугу "{{ productName }}"
-          </span>
-          <span v-else>ЗАКАЗАТЬ ЗВОНОК </span> -->
-        </div>
-
-        <!-- </template> -->
-        <!-- {{ isAttachment }} -->
-        <!-- {{ formSuccess }} -->
-
+        ></div>
         <p class="mb-8 pr-12">
           Пожалуйста, заполните контактную информацию, и наши сотрудники
           свяжутся с Вами.
