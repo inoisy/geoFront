@@ -1,6 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 const backendUrl = process.env.BACKEND_URL || "https://api.geoworksmsk.ru"
-console.log("🚀 ~ file: nuxt.config.js ~ line 3 ~ backendUrl", backendUrl)
+console.log("backendUrl", backendUrl)
+console.log("process.env.YANDEX_ID", process.env.YANDEX_ID)
 
 const companyName = 'GeoWorks'
 
