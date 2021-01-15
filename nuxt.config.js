@@ -4,6 +4,46 @@ console.log("backendUrl", backendUrl)
 console.log("process.env.YANDEX_ID", process.env.YANDEX_ID)
 
 const companyName = 'GeoWorks'
+const axios = require('axios')
+// const backendUrl = process.env.BACKEND_URL || "https://api.prodaem-kolbasu.ru"
+
+async function routes() {
+  let routes = []
+  // const {
+  //   data: pages
+  // } = await axios.get(backendUrl + '/pages?_limit=99999')
+  // for (let item of pages) {
+  //   routes.push(`${item.slug}`)
+  // }
+  // const {
+  //   data: manufacturers
+  // } = await axios.get(backendUrl + '/manufacturers?_limit=99999')
+  // for (let item of manufacturers) {
+  //   routes.push(`/manufacturers/${item.slug}`)
+  // }
+  const {
+    data: services
+  } = await axios.get(backendUrl + '/services?_limit=99999')
+  for (let service of services) {
+    if (service.parent.length) {
+      continue
+    }
+    routes.push(`/services/${service.slug}`)
+    if (service.child.length) {
+      for (let child of service.child) {
+        routes.push(`/services/${service.slug}/${child.slug}`)
+      }
+    }
+    // if (service.product_types.length) {
+    //   for (type of service.product_types) {
+    //     routes.push(`/catalog/${service.slug}?type=${type.slug}`)
+    //   }
+    // }
+  }
+
+  return routes
+}
+// module.exports = main
 
 export default {
   loading: {
@@ -78,7 +118,7 @@ export default {
     // ['vue-yandex-maps/nuxt', ],
     ['@nuxtjs/sitemap', {
       gzip: true,
-      // routes
+      routes
     }],
     ['@nuxtjs/robots', {
       UserAgent: '*',
