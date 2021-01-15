@@ -1,9 +1,9 @@
 import colors from 'vuetify/es5/util/colors';
 import os from "os";
 
-const siteUrl = process.env.SITE_URL || "https://" + os.hostname()
+const siteUrl = process.env.SITE_URL || "https://geoworksmsk.ru"
 const backendUrl = process.env.BACKEND_URL || "https://api.geoworksmsk.ru"
-console.log("backendUrl", backendUrl)
+console.log("siteUrl", siteUrl)
 console.log("process.env.YANDEX_ID", process.env.YANDEX_ID)
 
 const companyName = 'GeoWorks'
