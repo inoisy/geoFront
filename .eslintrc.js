@@ -28,6 +28,7 @@ module.exports = {
     "vue/max-attributes-per-line": "off",
     "linebreak-style": "off",
     "indent": "off",
-    "vue/no-v-html": "off"
+    "vue/no-v-html": "off",
+    "eol-last": "off"
   }
 }

@@ -1,6 +1,9 @@
 import colors from 'vuetify/es5/util/colors'
 const backendUrl = process.env.BACKEND_URL || "https://api.geoworksmsk.ru"
 console.log("🚀 ~ file: nuxt.config.js ~ line 3 ~ backendUrl", backendUrl)
+
+const companyName = 'GeoWorks'
+
 export default {
   loading: {
     color: 'rgb(0, 126, 255)'
@@ -15,8 +18,8 @@ export default {
   // },
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    titleTemplate: '%s - GeoWorks',
-    title: 'GeoWorks',
+    titleTemplate: `%s - ${companyName}`,
+    title: companyName,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -38,6 +41,7 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
+    { src: '~/plugins/ymapPlugin.js', mode: 'client' }
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -57,7 +61,8 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    "@nuxtjs/svg",
+    // https://www.npmjs.com/package/@nuxtjs/svg-sprite
+    '@nuxtjs/svg-sprite',
     'nuxt-webfontloader',
     ['@nuxtjs/apollo', {
       // watchLoading: '~/plugins/apollo-watch-loading-handler.js',
@@ -69,22 +74,59 @@ export default {
         },
       }
     }],
-    ['vue-yandex-maps/nuxt', {
-      apiKey: process.env.MAP_KEY,
-      lang: 'ru_RU',
-      coordorder: 'latlong',
-      version: '2.1'
+    // ['vue-yandex-maps/nuxt', ],
+    ['@nuxtjs/sitemap', {
+      gzip: true,
+      // routes
     }],
+    ['@nuxtjs/robots', {
+      UserAgent: '*',
+      Allow: '/',
+      Sitemap: "/sitemap.xml"
+    }],
+    ['nuxt-social-meta', {
+      // url: sitename,
+      title: companyName,
+      // description: description,
+      // img: imageUrl + "/uploads/031ba5905e18488794851c8d512b1227.jpg",
+      locale: 'ru_RU',
+      themeColor: '#d50000'
+    }],
+    ...(process.env.REDIRECT_ROUTES && process.env.REDIRECT_ROUTES.length ? ['@nuxtjs/redirect-module', process.env.REDIRECT_ROUTES] : []),
+
+    ...(process.env.GOOGLE_ID ?
+      ['@nuxtjs/google-analytics', {
+        id: process.env.GOOGLE_ID
+      }] : []),
+    ...(process.env.YANDEX_ID ? [
+      '@nuxtjs/yandex-metrika',
+      {
+        id: process.env.YANDEX_ID,
+        clickmap: true,
+        trackLinks: true,
+        accurateTrackBounce: true,
+        webvisor: true
+      }
+    ] : []),
+    ...(process.env.SENTRY_DSN ? ['@nuxtjs/sentry', {
+      dsn: process.env.SENTRY_DSN, // Enter your project's DSN here
+      config: {}, // Additional config
+    }] : [])
+
+
   ],
+  // sentry: ,
+  svgSprite: {
+    input: '~/assets/icons/'
+  },
   webfontloader: {
     google: {
-      families: ['Castoro:400', 'Montserrat:300,400,500,600,700', 'Material+Icons'],
+      families: ['Castoro:400', 'Montserrat:300,400,500,600,700'],
       urls: [
         // for each Google Fonts add url + options you want
         // here add font-display option
         "https://fonts.googleapis.com/css2?family=Castoro&display=swap",
-        'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap',
-        'https://fonts.googleapis.com/css?family=Material+Icons'
+        'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap'
       ]
     }
   },

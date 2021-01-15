@@ -1,6 +1,6 @@
 <template>
   <nuxt-link class="mr-auto logoWrapper" :class="mini && 'mini'" to="/">
-    <logo-img class="logoImg mr-2" />
+    <svg-icon name="logo" class="logoImg mr-2" />
     <span class="logoHeader">GEOWORKS</span>
   </nuxt-link>
 </template>
@@ -66,9 +66,7 @@
 }
 </style>
 <script>
-import LogoImg from "~/assets/images/logo.svg?inline";
 export default {
-  components: { LogoImg },
   props: {
     mini: {
       type: Boolean,

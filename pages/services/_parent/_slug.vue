@@ -19,12 +19,6 @@
               @click="showDialog = true"
             >
               <thumbnail :img="service.img" :alt="service.name" />
-              <!-- <v-img
-                :src="imageBaseUrl + service.img.url"
-                :alt="service.name"
-                :aspect-ratio="14 / 9"
-                max-height="300px"
-              ></v-img> -->
             </v-card>
             <div v-html="service.content"></div>
           </v-col>
@@ -44,26 +38,10 @@
             :sm="isFewChilds ? 12 : 6"
             :md="isFewChilds ? 6 : 4"
           >
-            <v-card
-              :class="$style.carouselItem"
-              :to="`/services/${service.slug}/${child.slug}`"
-              light
-              hover
-              style="width: 100%; height: 100%"
-            >
-              <v-img
-                :src="
-                  child.img && child.img.url
-                    ? imageBaseUrl + child.img.url
-                    : require('~/assets/icons/no-camera.svg')
-                "
-                height="200px"
-              ></v-img>
-              <v-card-title>
-                <span class="text-truncate"> {{ child.name }}</span>
-              </v-card-title>
-              <v-card-text>{{ child.description }}</v-card-text>
-            </v-card>
+            <service-card
+              :item="child"
+              :parent-slug="service.slug"
+            ></service-card>
           </v-col>
         </v-row>
         <v-slide-group v-else>
@@ -97,27 +75,10 @@
           </template>
           <v-slide-item v-for="child in child" :key="child.id">
             <div class="pa-3" style="width: 350px">
-              <v-card
-                :to="`/services/${service.slug}/${child.slug}`"
-                light
-                hover
-                style="width: 100%; height: 100%"
-              >
-                <v-img
-                  :src="
-                    child.img && child.img.url
-                      ? imageBaseUrl + child.img.url
-                      : require('~/assets/icons/no-camera.svg')
-                  "
-                  height="200px"
-                ></v-img>
-                <v-card-title>
-                  <span class="text-truncate"> {{ child.name }}</span>
-                </v-card-title>
-                <v-card-text>
-                  <div class="text-elepsis">{{ child.description }}</div>
-                </v-card-text>
-              </v-card>
+              <service-card
+                :item="child"
+                :parent-slug="service.slug"
+              ></service-card>
             </div>
           </v-slide-item>
         </v-slide-group>
@@ -125,7 +86,6 @@
     </section>
     <v-dialog v-if="service.img" v-model="showDialog">
       <v-card :class="$style.dialogImgWrapper">
-        <!-- v-lazy:background-image="imageBaseUrl + product.img.url" -->
         <div>
           <v-img
             :class="$style.dialogImg"
@@ -148,39 +108,10 @@
     </v-dialog>
   </div>
 </template>
-<style lang="scss" scoped>
-.text-elepsis {
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  display: -webkit-box;
-  overflow: hidden;
-  // padding: 0;
-}
-// .slider-wrapper {
-//   padding-right: 12px;
-//   padding-left: 12px;
-// }
-// @include md {
-//   .slider-wrapper {
-//     padding-right: 2rem;
-//     padding-left: 2rem;
-//   }
-// }
-// @include lg {
-//   .slider-wrapper {
-//     padding-right: 4rem;
-//     padding-left: 4rem;
-//   }
-// }
-</style>
+
 <style lang="scss" scoped module>
 .dialogImgWrapper {
-  // background-color: white;
-  // position: relative;
   .dialogImg {
-    //   width: 100%;
-    //   display: block;
-    //   object-fit: cover;
     max-height: calc(100vh - 64px);
     @include md {
       max-height: calc(90vh - 24px);
@@ -188,30 +119,15 @@
   }
 }
 .contentWithImgWrapper {
-  // display: flex;
-  // flex-direction: column;
-  // flex-flow: column-reverse;
-  @include sm {
-    // display: block;
-  }
   .imgWrapper {
     width: 100%;
     float: right;
     display: inline-flex;
-    // margin-top: 1rem;
     margin-bottom: 2rem;
-    // box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
-    // height: 300px;
-    // .img {
-    //   border-radius: 3px;
-    //   box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
-    // }
     @include sm {
       width: 250px;
       margin-left: 1rem;
       margin-bottom: 1rem;
-      // margin-top: 0;
-      // margin-bottom: 0;
     }
     @include md {
       width: 350px;
@@ -228,7 +144,6 @@
 }
 .carouselItem {
   height: 100%;
-  // width: 350px;
 }
 </style>
 <script>

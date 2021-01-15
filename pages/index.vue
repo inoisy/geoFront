@@ -4,17 +4,16 @@
       <v-container grid-list-lg fill-height class="py-12">
         <v-row justify="center" align="center">
           <v-col cols="12" sm="10" md="10" lg="7">
-            <h1 :class="$style['header']" class="mb-5 text-center">
+            <h1 :class="$style.header" class="mb-5 text-center">
               {{ page.header }}
             </h1>
-            <p :class="$style['subheader']" class="text-center mb-6">
+            <p :class="$style.subheader" class="text-center mb-6">
               {{ page.subheader }}
             </p>
             <v-btn
               id="main-screen-btn"
               class="mx-auto d-flex"
-              rounded
-              large
+              x-large
               outlined
               @click="handleOffer"
             >

@@ -68,8 +68,7 @@
                 v-on="on"
               >
                 {{ item.name }}
-                <arrow-down-icon />
-                <!-- <v-icon>arrow_drop_down</v-icon> -->
+                <svg-icon name="arrowdown" style="width: 24px; height: 24px" />
               </v-btn>
             </template>
             <v-list>
@@ -134,7 +133,7 @@
           icon
           :href="`tel:${info.phone}`"
         >
-          <phone-icon />
+          <svg-icon name="phone" style="width: 24px; height: 24px" />
         </v-btn>
         <v-btn
           :class="$style['link-icon']"
@@ -142,15 +141,11 @@
           icon
           :href="`mailto:${info.email}`"
         >
-          <mail-icon />
+          <svg-icon name="mail" style="width: 24px; height: 24px" />
         </v-btn>
-        <!-- <v-btn :class="$style['link-icon']" class="d-dlex" icon>
-          <search-icon />
-        </v-btn> -->
         <v-btn class="hidden-md-and-up" icon @click.stop="drawer = !drawer">
-          <menu-icon />
+          <svg-icon name="menu" style="width: 24px; height: 24px" />
         </v-btn>
-        <!-- </div> -->
       </v-container>
     </v-app-bar>
     <v-main>
@@ -177,7 +172,7 @@
                 height="48"
               >
                 <v-list-item-icon>
-                  <phone-icon />
+                  <svg-icon name="phone" style="width: 24px; height: 24px" />
                 </v-list-item-icon>
                 <v-list-item-content itemprop="telephone">{{
                   info.phone
@@ -185,7 +180,7 @@
               </v-list-item>
               <v-list-item :href="`mailto:${info.email}`" title="email">
                 <v-list-item-icon>
-                  <mail-icon />
+                  <svg-icon name="mail" style="width: 24px; height: 24px" />
                 </v-list-item-icon>
                 <v-list-item-content itemprop="email">
                   {{ info.email }}
@@ -193,7 +188,7 @@
               </v-list-item>
               <v-list-item title="address">
                 <v-list-item-icon>
-                  <pin-icon />
+                  <svg-icon name="pin" style="width: 24px; height: 24px" />
                 </v-list-item-icon>
                 <v-list-item-content>
                   <span style="font-size: 0.8rem">
@@ -253,8 +248,6 @@
         large
         @click="handleOffer"
       >
-        <!-- v-show="!hidden" -->
-        <!-- <phone-icon></phone-icon> -->
         <svg width="26" height="24" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M13 0C5.82 0 0 4.925 0 11c0 2.676 1.132 5.126 3.01 7.033.038.095 1.001 2.574-1.852 5.102a.5.5 0 0 0 .45.853c2.875-.17 5.335-1.597 6.837-2.697 1.42.45 2.95.709 4.555.709 7.18 0 13-4.925 13-11S20.18 0 13 0zm0 4.5a1.5 1.5 0 1 1-.001 3.001A1.5 1.5 0 0 1 13 4.5zM12 10h2v7h-2v-7z"
@@ -263,8 +256,6 @@
           ></path>
         </svg>
       </v-btn>
-      <!-- <div class="z-widget-button z-widget-simple-btn">
-    </div> -->
     </v-fab-transition>
   </v-app>
 </template>
@@ -359,33 +350,14 @@
 </style>
 <script>
 import Logo from "~/components/Logo";
-import MenuIcon from "~/assets/icons/menu.svg?inline";
-import ArrowDownIcon from "~/assets/icons/arrowDown.svg?inline";
-import MailIcon from "~/assets/icons/mail.svg?inline";
-import PhoneIcon from "~/assets/icons/phone.svg?inline";
-import PinIcon from "~/assets/icons/pin.svg?inline";
-// import SearchIcon from "~/assets/icons/search.svg?inline";
 
 export default {
   components: {
     Logo,
-    MenuIcon,
-    ArrowDownIcon,
-    MailIcon,
-    PhoneIcon,
-    PinIcon,
-    // SearchIcon,
   },
   data() {
     return {
       companyName: "GEOWORKS",
-
-      // contacts: {
-      //   phone: "+1111",
-      //   email: "dsda@sdas.re",
-      //   accessTime: "sda",
-      //   address: "dsad",
-      // },
 
       drawer: false,
     };

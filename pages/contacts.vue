@@ -16,7 +16,8 @@
                 height="48"
               >
                 <v-list-item-icon>
-                  <phone-icon />
+                  <!-- <phone-icon /> -->
+                  <svg-icon name="phone" style="width: 24px; height: 24px" />
                 </v-list-item-icon>
                 <v-list-item-content itemprop="telephone">
                   {{ info.phone }}
@@ -24,7 +25,8 @@
               </v-list-item>
               <v-list-item :href="`mailto:${info.email}`" title="email">
                 <v-list-item-icon>
-                  <mail-icon />
+                  <!-- <mail-icon /> -->
+                  <svg-icon name="mail" style="width: 24px; height: 24px" />
                 </v-list-item-icon>
                 <v-list-item-content itemprop="email">
                   {{ info.email }}
@@ -32,13 +34,16 @@
               </v-list-item>
               <v-list-item title="Адрес">
                 <v-list-item-icon>
-                  <pin-icon />
+                  <!-- <pin-icon /> -->
+                  <svg-icon name="pin" style="width: 24px; height: 24px" />
                 </v-list-item-icon>
                 {{ info.address }}
               </v-list-item>
               <v-list-item title="Время работы">
                 <v-list-item-icon>
-                  <time-icon />
+                  <svg-icon name="time" style="width: 24px; height: 24px" />
+
+                  <!-- <time-icon /> -->
                 </v-list-item-icon>
                 {{ info.accessTime }}
               </v-list-item>
@@ -106,19 +111,7 @@
 }
 </style>
 <script>
-import MailIcon from "~/assets/icons/mail.svg?inline";
-import PhoneIcon from "~/assets/icons/phone.svg?inline";
-import PinIcon from "~/assets/icons/pin.svg?inline";
-import TimeIcon from "~/assets/icons/access_time.svg?inline";
-
 export default {
-  components: {
-    MailIcon,
-    PhoneIcon,
-    PinIcon,
-    TimeIcon,
-  },
-
   data() {
     return {
       imageBaseUrl: this.$config.imageBaseUrl,
