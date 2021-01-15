@@ -102,7 +102,7 @@
           style="position: absolute; top: 16px; right: 16px; z-index: 10"
           @click="showDialog = false"
         >
-          <v-icon>close</v-icon>
+          <svg-icon name="close" style="width: 24px; height: 24px" />
         </v-btn>
       </v-card>
     </v-dialog>

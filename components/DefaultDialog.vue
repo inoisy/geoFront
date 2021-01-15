@@ -18,7 +18,6 @@
         style="position: absolute; right: 24px; top: 24px"
         @click="close"
       >
-        <!-- <v-icon>close</v-icon> -->
         <svg-icon name="close" style="width: 24px; height: 24px" />
       </v-btn>
       <div v-if="!formSuccess">
@@ -107,7 +106,12 @@
         </v-form>
       </div>
       <div v-else-if="true" class="pt-0 pb-7">
-        <v-icon size="200" class="mx-auto d-flex">check_circle_outline</v-icon>
+        <svg-icon
+          class="mx-auto d-flex mb-6 mt-6"
+          name="check"
+          style="width: 200px; height: 200px"
+        />
+        <!-- <v-icon size="200" class="mx-auto d-flex">check_circle_outline</v-icon> -->
         <p class="text-h4 text-center">Заявка отправлена!</p>
         <p class="text-center text-title">
           Мы свяжемся с вами в ближайшее время.
