@@ -1,4 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
+const siteUrl = process.env.SITE_URL || "https://geoworksmsk.ru"
 const backendUrl = process.env.BACKEND_URL || "https://api.geoworksmsk.ru"
 console.log("backendUrl", backendUrl)
 console.log("process.env.YANDEX_ID", process.env.YANDEX_ID)
@@ -100,6 +101,7 @@ export default {
     }],
     // ['vue-yandex-maps/nuxt', ],
     ['@nuxtjs/sitemap', {
+      hostname: siteUrl,
       gzip: true,
       routes
     }],
