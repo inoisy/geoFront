@@ -1,5 +1,5 @@
 import colors from 'vuetify/es5/util/colors';
-import os from "os";
+// import os from "os";
 
 const siteUrl = process.env.SITE_URL || "https://geoworksmsk.ru"
 const backendUrl = process.env.BACKEND_URL || "https://api.geoworksmsk.ru"
@@ -110,7 +110,7 @@ export default {
     ['@nuxtjs/robots', {
       UserAgent: '*',
       Allow: '/',
-      Sitemap: "/sitemap.xml"
+      Sitemap: siteUrl + "/sitemap.xml"
     }],
     ['nuxt-social-meta', {
       // url: sitename,
@@ -118,14 +118,8 @@ export default {
       // description: description,
       // img: imageUrl + "/uploads/031ba5905e18488794851c8d512b1227.jpg",
       locale: 'ru_RU',
-      themeColor: '#d50000'
+      themeColor: '#151317'
     }],
-    ...(process.env.REDIRECT_ROUTES && process.env.REDIRECT_ROUTES.length ? ['@nuxtjs/redirect-module', process.env.REDIRECT_ROUTES] : []),
-
-    ...(process.env.GOOGLE_ID ?
-      ['@nuxtjs/google-analytics', {
-        id: process.env.GOOGLE_ID
-      }] : []),
 
     ['@nuxtjs/yandex-metrika',
       {
@@ -135,14 +129,15 @@ export default {
         accurateTrackBounce: true,
         webvisor: true
       }],
-    ...(process.env.SENTRY_DSN ? ['@nuxtjs/sentry', {
-      dsn: process.env.SENTRY_DSN, // Enter your project's DSN here
-      config: {}, // Additional config
-    }] : [])
-
-
+    //  ['@nuxtjs/redirect-module', process.env.REDIRECT_ROUTES],
+    // ['@nuxtjs/google-analytics', {
+    //   id: process.env.GOOGLE_ID
+    // }],
+    //  ['@nuxtjs/sentry', {
+    //     dsn: process.env.SENTRY_DSN, // Enter your project's DSN here
+    //     config: {}, // Additional config
+    //   }] 
   ],
-  // sentry: ,
   svgSprite: {
     input: '~/assets/icons/'
   },
