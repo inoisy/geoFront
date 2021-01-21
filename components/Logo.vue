@@ -47,11 +47,11 @@
 @include md {
   .logoWrapper {
     .logoHeader {
-      font-size: 28px;
+      font-size: 24px;
     }
     .logoImg {
-      height: 75px;
-      width: 75px;
+      height: 55px;
+      width: 55px;
     }
   }
   .logoWrapper.mini {
@@ -61,6 +61,17 @@
     .logoImg {
       height: 44px;
       width: 44px;
+    }
+  }
+}
+@include lg {
+  .logoWrapper {
+    .logoHeader {
+      font-size: 28px;
+    }
+    .logoImg {
+      height: 75px;
+      width: 75px;
     }
   }
 }

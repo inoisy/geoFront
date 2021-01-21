@@ -39,7 +39,7 @@
         :class="$style['header']"
         class="py-0 d-flex align-center"
       >
-        <logo />
+        <logo class="pr-3" />
 
         <template v-for="(item, index) in menuItems">
           <v-menu
@@ -81,9 +81,9 @@
                     :class="$style['link']"
                     class="list-item"
                   >
-                    <span style="line-height: normal; font-size: 15px">{{
-                      category.name
-                    }}</span>
+                    <span style="line-height: normal; font-size: 15px">
+                      {{ category.name }}
+                    </span>
                   </v-list-item>
                   <v-list-item
                     v-for="child in category.children"
@@ -128,12 +128,15 @@
         </template>
 
         <v-btn
-          :class="$style['link-icon']"
           class="d-dlex"
-          icon
           :href="`tel:${info.phone}`"
+          :class="$style['link-tel']"
+          text
         >
+          <!-- icon           -->
           <svg-icon name="phone" style="width: 24px; height: 24px" />
+
+          <span class="hidden-sm-and-down pl-2">{{ info.phone }}</span>
         </v-btn>
         <v-btn
           :class="$style['link-icon']"
@@ -174,9 +177,9 @@
                 <v-list-item-icon>
                   <svg-icon name="phone" style="width: 24px; height: 24px" />
                 </v-list-item-icon>
-                <v-list-item-content itemprop="telephone">{{
-                  info.phone
-                }}</v-list-item-content>
+                <v-list-item-content itemprop="telephone">
+                  {{ info.phone }}
+                </v-list-item-content>
               </v-list-item>
               <v-list-item :href="`mailto:${info.email}`" title="email">
                 <v-list-item-icon>
@@ -311,12 +314,41 @@
   flex-wrap: nowrap !important;
 }
 
+.link,
+.link-tel {
+  font-size: 0.8rem !important;
+}
 .link {
   height: 100% !important;
-  font-size: 0.8rem !important;
-  // padding: 0 8px !important;
+
   color: #f1f3ef;
-  // display: flex;
+  padding: 0 6px !important;
+  @include md {
+    padding: 0 8px !important;
+  }
+  @include lg {
+    padding: 0 16px !important;
+  }
+}
+.link-tel {
+  height: 48px !important;
+  width: 48px !important;
+  display: flex;
+  min-height: 48px !important;
+  min-width: 48px !important;
+  padding: 0;
+  border-radius: 50%;
+  @include md {
+    height: 100% !important;
+    width: unset !important;
+    font-size: 0.8rem !important;
+    color: #f1f3ef;
+    border-radius: 0;
+    padding: 0 8px !important;
+  }
+  @include lg {
+    padding: 0 16px !important;
+  }
 }
 .link-icon {
   height: 36px !important;
@@ -336,13 +368,15 @@
   .footer {
     background-position: 100% 50%;
   }
-  .link {
+  .link,
+  .link-tel {
     font-size: 0.8rem !important;
     // padding: 0 6px !important;
   }
 }
 @include lg {
-  .link {
+  .link,
+  .link-tel {
     font-size: 0.85rem !important;
     // padding: 0 12px !important;
   }
