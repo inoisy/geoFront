@@ -6,12 +6,11 @@
       :subheader="service.subheader"
       :icon="service.icon"
     ></service-header>
-    <!-- {{ service.icon }} -->
     <section class="content-wrapper white">
       <v-container grid-list-lg>
         <v-row>
+          <!-- {{ service }} -->
           <v-col :class="$style.contentWithImgWrapper">
-            <!-- {{ service.img }} -->
             <v-card
               v-if="service.img"
               :class="$style.imgWrapper"
@@ -40,7 +39,7 @@
           >
             <service-card
               :item="child"
-              :parent-slug="service.slug"
+              :parent-slug="service.parent[0].slug"
             ></service-card>
           </v-col>
         </v-row>
@@ -73,11 +72,12 @@
               ></path>
             </svg>
           </template>
+          <!-- {{ service }} -->
           <v-slide-item v-for="child in child" :key="child.id">
             <div class="pa-3" style="width: 350px">
               <service-card
                 :item="child"
-                :parent-slug="service.slug"
+                :parent-slug="service.parent[0].slug"
               ></service-card>
             </div>
           </v-slide-item>

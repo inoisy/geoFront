@@ -160,9 +160,7 @@
           <v-col cols="12" sm="6" md="6" lg="3">
             <logo :mini="true" class="mb-5" />
             <p style="font-weight: normal; font-size: 14px; line-height: 24px">
-              Lorem ipsum dolor amet, consectetur adipiscing elit. Eget nisl
-              nunc quam ac sed turpis volutpat. Cursus sed massa non nisi,
-              placerat.
+              {{ info.descriptor }}
             </p>
           </v-col>
           <v-col cols="12" sm="6" md="6" lg="3">
@@ -392,7 +390,6 @@ export default {
   data() {
     return {
       companyName: "GEOWORKS",
-
       drawer: false,
     };
   },

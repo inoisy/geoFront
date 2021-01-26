@@ -32,6 +32,10 @@ async function routes() {
 // module.exports = main
 
 export default {
+  // target: "static",
+  // generate: {
+  //   routes
+  // },
   loading: {
     color: 'rgb(0, 126, 255)'
   },
@@ -39,10 +43,6 @@ export default {
     baseUrl: backendUrl,
     imageBaseUrl: process.env.IMAGE_BACKEND_URL || backendUrl
   },
-  // env: {
-  //   baseUrl: process.env.BACKEND_URL || backendUrl,
-  //   imageBaseUrl: process.env.IMAGE_BACKEND_URL || process.env.BACKEND_URL || backendUrl
-  // },
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     titleTemplate: `%s - ${companyName}`,

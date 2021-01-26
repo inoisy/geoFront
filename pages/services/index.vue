@@ -38,9 +38,9 @@
 
             <ul v-if="service.child.length">
               <li v-for="child in service.child" :key="child.id">
-                <nuxt-link :to="`/services/${service.slug}/${child.slug}`">{{
-                  child.name
-                }}</nuxt-link>
+                <nuxt-link :to="`/services/${service.slug}/${child.slug}`">
+                  {{ child.name }}
+                </nuxt-link>
               </li>
             </ul>
           </v-col>
@@ -216,7 +216,8 @@ export default {
         {
           hid: "description",
           name: "description",
-          content: "Услуги - GeoWorks",
+          content:
+            "Наша организация оказывает широкий спектр современных и востребованных геодезических услуг. После проведения научных изысканий подготавливаются проектные документы, служащие основой по вопросам строительства объектов.",
         },
       ],
     };
