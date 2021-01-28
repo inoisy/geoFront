@@ -9,7 +9,6 @@
     <section class="content-wrapper white">
       <v-container grid-list-lg>
         <v-row>
-          <!-- {{ service }} -->
           <v-col :class="$style.contentWithImgWrapper">
             <v-card
               v-if="service.img"
@@ -267,7 +266,7 @@ export default {
         {
           hid: "description",
           name: "description",
-          content: this.service.metaDescription,
+          content: this.service.metaDescrtiption,
         },
       ],
     };

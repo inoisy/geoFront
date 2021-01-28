@@ -275,7 +275,7 @@ export default {
         {
           hid: "description",
           name: "description",
-          content: this.service.metaDescription,
+          content: this.service.metaDescrtiption,
         },
       ],
     };
