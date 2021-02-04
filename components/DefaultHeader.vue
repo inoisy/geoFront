@@ -3,11 +3,11 @@
     <section :class="$style.firstSection">
       <v-container grid-list-lg fill-height class="py-12">
         <v-row align="center">
-          <v-breadcrumbs
+          <breadcrumbs :items="breadcrumbs" :class="$style.breadcrumbs" />
+          <!-- <v-breadcrumbs
             :class="$style.breadcrumbs"
             divider="/"
             :items="breadcrumbs"
-            style=""
           >
             <template v-slot:item="{ item }">
               <v-breadcrumbs-item
@@ -21,7 +21,7 @@
                 {{ item.text }}
               </v-breadcrumbs-item>
             </template>
-          </v-breadcrumbs>
+          </v-breadcrumbs> -->
           <v-col cols="12" sm="10" md="10" lg="7">
             <h1 :class="$style.header" class="mb-0">{{ header }}</h1>
           </v-col>
@@ -35,7 +35,7 @@
   @include bg(
     linear-gradient(180deg, rgba(0, 0, 0, 0.68) 0%, rgba(0, 0, 0, 0) 100%),
     linear-gradient(0deg, rgba(0, 0, 0, 0.57), rgba(0, 0, 0, 0.57)),
-    url(~assets/images/bg1.jpg)
+    url(/bg1.jpg)
   );
   min-height: 370px;
   .breadcrumbs {
@@ -53,7 +53,10 @@
 }
 </style>
 <script>
+import Breadcrumbs from "~/components/Breadcrumbs.vue";
+
 export default {
+  components: { Breadcrumbs },
   props: {
     header: {
       type: String,

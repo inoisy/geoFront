@@ -7,33 +7,24 @@
     >
       <v-row align="center">
         <v-col cols="12">
-          <v-breadcrumbs
+          <breadcrumbs
+            :items="breadcrumbs"
             :class="$style.breadcrumbs"
             class="mb-8"
-            divider="/"
-            :items="breadcrumbs"
-            style=""
-          >
-            <template v-slot:item="{ item }">
-              <v-breadcrumbs-item
-                :to="item.to"
-                :class="$style.breadcrumbsItem"
-                nuxt
-                exact
-                :title="item.text"
-                class="breadcrumbs-item"
-              >
-                {{ item.text }}
-              </v-breadcrumbs-item>
-            </template>
-          </v-breadcrumbs>
+          />
         </v-col>
       </v-row>
       <v-row style="position: relative">
         <v-col :class="$style.textWrapper" class="text-wrapper">
           <h1 :class="$style.header" class="mb-6">{{ header }}</h1>
           <div :class="$style.subheader" class="mb-8" v-html="subheader"></div>
-          <v-btn class="mb-0" outlined large @click="handleOffer">
+          <v-btn
+            class="mb-0"
+            outlined
+            large
+            title="Заказать работы"
+            @click="handleOffer"
+          >
             Заказать работы
           </v-btn>
         </v-col>
@@ -43,19 +34,13 @@
             :class="$style.icon"
             :src="imageBaseUrl + icon.url"
             :alt="header"
+            :title="header"
           />
         </div>
       </v-row>
     </v-container>
   </section>
 </template>
-<style lang="scss" >
-.breadcrumbs-item {
-  a {
-    color: white;
-  }
-}
-</style>
 <style lang="scss" scoped>
 .noIcon {
   // color: red;
@@ -71,7 +56,7 @@
   @include bg(
     linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 100%),
     linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.57)),
-    url(~assets/images/bg1.jpg)
+    url(/bg1.jpg)
   );
   min-height: 370px;
 
@@ -79,9 +64,6 @@
     padding-bottom: 110px;
     padding-top: 25px;
 
-    .textWrapper {
-      //  max-width: 70%;
-    }
     .iconWrapper {
       position: absolute;
       right: 12px;
@@ -153,7 +135,12 @@
 }
 </style>
 <script>
+import Breadcrumbs from "~/components/Breadcrumbs.vue";
+
 export default {
+  components: {
+    Breadcrumbs,
+  },
   props: {
     breadcrumbs: {
       type: Array,

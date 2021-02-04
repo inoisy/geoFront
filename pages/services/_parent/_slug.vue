@@ -1,13 +1,15 @@
 <template>
   <div>
-    <service-header
-      :breadcrumbs="breadcrumbs"
-      :header="service.name"
-      :subheader="service.subheader"
-      :icon="service.icon"
-    ></service-header>
-    <section class="content-wrapper white">
-      <v-container grid-list-lg>
+    <LazyHydrate when-idle>
+      <service-header
+        :breadcrumbs="breadcrumbs"
+        :header="service.name"
+        :subheader="service.subheader"
+        :icon="service.icon"
+      ></service-header>
+    </LazyHydrate>
+    <section class="white">
+      <v-container class="pt-14 pb-12" grid-list-lg>
         <v-row>
           <v-col :class="$style.contentWithImgWrapper">
             <v-card
@@ -16,9 +18,13 @@
               hover
               @click="showDialog = true"
             >
-              <thumbnail :img="service.img" :alt="service.name" />
+              <LazyHydrate when-visible>
+                <thumbnail :img="service.img" :alt="service.name" />
+              </LazyHydrate>
             </v-card>
-            <div v-html="service.content"></div>
+            <LazyHydrate never>
+              <content-wrapper :content="service.content" />
+            </LazyHydrate>
           </v-col>
         </v-row>
       </v-container>
@@ -28,95 +34,27 @@
         <h2 class="mb-8" style="font-size: 2.5rem; font-weight: 600">
           Смотрите также
         </h2>
-        <v-row v-if="!isTooManyChilds">
-          <v-col
-            v-for="child in child"
-            :key="child.id"
-            cols="12"
-            :sm="isFewChilds ? 12 : 6"
-            :md="isFewChilds ? 6 : 4"
-          >
-            <service-card
-              :item="child"
-              :parent-slug="service.parent[0].slug"
-            ></service-card>
-          </v-col>
-        </v-row>
-        <v-slide-group v-else>
-          <template v-slot:next>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              role="img"
-              aria-hidden="true"
-              class="v-icon__svg"
-            >
-              <path
-                fill="currentColor"
-                d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"
-              ></path>
-            </svg>
-          </template>
-          <template v-slot:prev>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              role="img"
-              aria-hidden="true"
-              class="v-icon__svg"
-            >
-              <path
-                fill="currentColor"
-                d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z"
-              ></path>
-            </svg>
-          </template>
-          <!-- {{ service }} -->
-          <v-slide-item v-for="child in child" :key="child.id">
-            <div class="pa-3" style="width: 350px">
-              <service-card
-                :item="child"
-                :parent-slug="service.parent[0].slug"
-              ></service-card>
-            </div>
-          </v-slide-item>
-        </v-slide-group>
+        <LazyHydrate when-visible>
+          <lazy-service-slider
+            v-if="isTooManyChilds"
+            :items="child"
+            :slug="parentSlug"
+          />
+          <lazy-service-cards v-else :items="child" :slug="parentSlug" />
+        </LazyHydrate>
       </v-container>
     </section>
-    <v-dialog v-if="service.img" v-model="showDialog">
-      <v-card :class="$style.dialogImgWrapper">
-        <div>
-          <v-img
-            :class="$style.dialogImg"
-            :src="imageBaseUrl + service.img.url"
-            :alt="service.name"
-            :contain="true"
-          />
-        </div>
-
-        <v-btn
-          class="close-btn"
-          fab
-          outlined
-          style="position: absolute; top: 16px; right: 16px; z-index: 10"
-          @click="showDialog = false"
-        >
-          <svg-icon name="close" style="width: 24px; height: 24px" />
-        </v-btn>
-      </v-card>
-    </v-dialog>
+    <lazy-image-dialog
+      v-if="showDialog"
+      :img="service.img.url"
+      :alt="service.name"
+      :show="showDialog"
+      @close="showDialog = false"
+    />
   </div>
 </template>
 
 <style lang="scss" scoped module>
-.dialogImgWrapper {
-  .dialogImg {
-    max-height: calc(100vh - 64px);
-    @include md {
-      max-height: calc(90vh - 24px);
-    }
-  }
-}
 .contentWithImgWrapper {
   .imgWrapper {
     width: 100%;
@@ -141,16 +79,41 @@
   background-color: $gray;
   color: $black;
 }
-.carouselItem {
-  height: 100%;
-}
 </style>
 <script>
 import gql from "graphql-tag";
-import Thumbnail from "~/components/Thumbnail.vue";
+// import {
+//   hydrateOnInteraction,
+//   hydrateNever,
+//   hydrateWhenIdle,
+//   hydrateWhenVisible,
+// } from "vue-lazy-hydration";
+import LazyHydrate from "vue-lazy-hydration";
+// import ContentWrapper from "~/components/ContentWrapper.vue";
+// import ServiceHeader from "~/components/ServiceHeader.vue";
+// import Thumbnail from "~/components/Thumbnail.vue";
 
 export default {
-  components: { Thumbnail },
+  components: {
+    LazyHydrate,
+
+    // ContentWrapper: hydrateNever(() =>
+    //   import("~/components/ContentWrapper.vue")
+    // ),
+    // ServiceHeader: hydrateWhenIdle(() =>
+    //   import("~/components/ServiceHeader.vue")
+    // ),
+    // Thumbnail: hydrateWhenVisible(() => import("~/components/Thumbnail.vue")),
+    // ImageDialog: hydrateOnInteraction(() =>
+    //   import("~/components/ImageDialog.vue")
+    // ),
+    // ServiceCards: hydrateWhenVisible(() =>
+    //   import("~/components/ServiceCards.vue")
+    // ),
+    // ServiceSlider: hydrateWhenVisible(() =>
+    //   import("~/components/ServiceSlider.vue")
+    // ),
+  },
   async asyncData({ params, app, error }) {
     const client = app.apolloProvider.defaultClient;
     const { data } = await client.query({
@@ -184,6 +147,7 @@ export default {
                 description
                 img {
                   url
+                  formats
                 }
               }
             }
@@ -216,13 +180,18 @@ export default {
   },
   data() {
     return {
-      slide: "",
-      imageBaseUrl: this.$config.imageBaseUrl,
       showDialog: false,
     };
   },
 
   computed: {
+    parentSlug() {
+      if (this.service && this.service.parent && this.service.parent.length) {
+        return this.service.parent[0].slug;
+      } else {
+        return "";
+      }
+    },
     breadcrumbs() {
       const base = [
         {
@@ -234,10 +203,10 @@ export default {
           to: "/services",
         },
       ];
-      if (this.service && this.service.parent && this.service.parent.length) {
+      if (this.parentSlug) {
         base.push({
           text: this.service.parent[0].name,
-          to: `/services/${this.service.parent[0].slug}`,
+          to: `/services/${this.parentSlug}`,
         });
       }
       base.push({
@@ -246,18 +215,12 @@ export default {
       });
       return base;
     },
-    isFewChilds() {
-      return this.child.length < 3;
-    },
     isTooManyChilds() {
-      return this.child.length > 6;
+      return this.child.length > 5;
     },
-  },
-  methods: {
-    handleOffer() {
-      // TODO
-      return true;
-    },
+    // componentName() {
+    //   return this.child.length > 5 ? "ServiceSlider" : "ServiceCards";
+    // },
   },
   head() {
     return {
@@ -267,6 +230,27 @@ export default {
           hid: "description",
           name: "description",
           content: this.service.metaDescrtiption,
+        },
+        {
+          hid: "og:url",
+          property: "og:url",
+          content: this.$config.siteUrl + this.$route.path,
+        },
+        {
+          hid: "og:title",
+          property: "og:title",
+          content: this.service.name,
+        },
+        {
+          hid: "og:description",
+          property: "og:description",
+          content: this.service.metaDescrtiption,
+        },
+      ],
+      link: [
+        {
+          rel: "canonical",
+          href: `${this.$config.siteUrl}/services/${this.parentSlug}/${this.service.slug}`,
         },
       ],
     };

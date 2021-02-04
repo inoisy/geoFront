@@ -1,14 +1,12 @@
-import colors from 'vuetify/es5/util/colors';
-// import os from "os";
+// const LRU = require("lru-cache")
 
 const siteUrl = process.env.SITE_URL || "https://geoworksmsk.ru"
 const backendUrl = process.env.BACKEND_URL || "https://api.geoworksmsk.ru"
-console.log("siteUrl", siteUrl)
-console.log("process.env.YANDEX_ID", process.env.YANDEX_ID)
 
 const companyName = 'GeoWorks'
+const description = `Инженерные изыскания в Москве и МО. Геодезические, геологические изыскания, кадастровые услуги "под ключ" для проектирования и строительства.`
+
 const axios = require('axios')
-// const backendUrl = process.env.BACKEND_URL || "https://api.prodaem-kolbasu.ru"
 
 async function routes() {
   let routes = []
@@ -29,35 +27,41 @@ async function routes() {
 
   return routes
 }
-// module.exports = main
-
 export default {
+  // version: pkg.version,
   // target: "static",
-  // generate: {
-  //   routes
-  // },
+  components: false,
+  generate: {
+    routes
+  },
   loading: {
     color: 'rgb(0, 126, 255)'
   },
   publicRuntimeConfig: {
+    siteUrl,
     baseUrl: backendUrl,
     imageBaseUrl: process.env.IMAGE_BACKEND_URL || backendUrl
   },
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
+    htmlAttrs: {
+      lang: 'ru'
+    },
     titleTemplate: `%s - ${companyName}`,
     title: companyName,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      { hid: 'description', name: 'description', content: description },
+      { property: "og:image:width", content: "740" },
+      { property: "og:image:height", content: "300" },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
       { rel: 'icon', type: "image/png", sizes: '32x32', href: '/favicon-32x32.png' },
       { rel: 'icon', type: "image/png", sizes: '16x16', href: '/favicon-16x16.png' },
-      { rel: 'manifest', href: '/site.webmanifest' }
+      { rel: 'manifest', href: '/site.webmanifest' },
     ]
   },
 
@@ -68,7 +72,9 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
-    { src: '~/plugins/ymapPlugin.js', mode: 'client' }
+    // { src: '~/plugins/ymapPlugin.js', mode: 'client' },
+    '~/plugins/cachedApi.js',
+    // '~/plugins/cache.js',
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -86,15 +92,14 @@ export default {
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
+    // '@blokwise/dynamic',
+    'nuxt-ssr-cache',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://www.npmjs.com/package/@nuxtjs/svg-sprite
     '@nuxtjs/svg-sprite',
     'nuxt-webfontloader',
     ['@nuxtjs/apollo', {
-      // watchLoading: '~/plugins/apollo-watch-loading-handler.js',
-      // optional
-      // errorHandler: '~/plugins/apollo-error-handler.js',
       clientConfigs: {
         default: {
           httpEndpoint: backendUrl + '/graphql',
@@ -113,10 +118,10 @@ export default {
       Sitemap: siteUrl + "/sitemap.xml"
     }],
     ['nuxt-social-meta', {
-      // url: sitename,
+      url: siteUrl,
       title: companyName,
-      // description: description,
-      // img: imageUrl + "/uploads/031ba5905e18488794851c8d512b1227.jpg",
+      description: description,
+      img: "/social.jpg",
       locale: 'ru_RU',
       themeColor: '#151317'
     }],
@@ -126,8 +131,7 @@ export default {
         id: process.env.YANDEX_ID,
         clickmap: true,
         trackLinks: true,
-        accurateTrackBounce: true,
-        webvisor: true
+        accurateTrackBounce: true
       }],
     //  ['@nuxtjs/redirect-module', process.env.REDIRECT_ROUTES],
     // ['@nuxtjs/google-analytics', {
@@ -138,18 +142,34 @@ export default {
     //     config: {}, // Additional config
     //   }] 
   ],
+  cache: {
+    // if you're serving multiple host names (with differing
+    // results) from the same server, set this option to true.
+    // (cache keys will be prefixed by your host name)
+    // if your server is behind a reverse-proxy, please use
+    // express or whatever else that uses 'X-Forwarded-Host'
+    // header field to provide req.hostname (actual host name)
+    useHostPrefix: false,
+    pages: ["/"],
+    store: {
+      type: 'memory',
+
+      // maximum number of pages to store in memory
+      // if limit is reached, least recently used page
+      // is removed.
+      max: 100,
+
+      // number of seconds to store this page in cache
+      ttl: 600000,
+    },
+  },
+
   svgSprite: {
     input: '~/assets/icons/'
   },
   webfontloader: {
     google: {
-      families: ['Castoro:400', 'Montserrat:300,400,500,600,700'],
-      urls: [
-        // for each Google Fonts add url + options you want
-        // here add font-display option
-        "https://fonts.googleapis.com/css2?family=Castoro&display=swap",
-        'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap'
-      ]
+      families: ['Montserrat:400,500,700']
     }
   },
   styleResources: {
@@ -171,17 +191,18 @@ export default {
   vuetify: {
     customVariables: ["~/assets/variables.scss"],
     treeShake: true,
+    options: {
+      customProperties: true
+    },
     theme: {
       dark: true,
+      // options: { themeCache },
       themes: {
         dark: {
-          primary: colors.blue.darken2,
-          accent: colors.blue.accent4,
-          secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3
+          accent: "#1867c0"
+        },
+        light: {
+          accent: "#1867c0"
         }
       }
     },
@@ -200,7 +221,7 @@ export default {
         }],
       ]
     },
-    transpile: ["@nuxtjs/vuetify", /^aos/, /^@nuxtjs.*/, "nuxt-vuex-localstorage"],
-    extend(config, ctx) { }
+    transpile: ["@nuxtjs/vuetify", /^@nuxtjs.*/, "cachedApi"],
+
   }
 }

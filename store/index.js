@@ -15,13 +15,30 @@ export const state = () => ({
         isShow: false
     }
 })
+export const getters = {
+    menuItems: (state) => {
+        return [
+            {
+                name: "Главная",
+                slug: "/",
+            },
+            {
+                name: "Услуги",
+                slug: "/services",
+                items: state.services,
+            },
+            {
+                name: "О компании",
+                slug: "/about",
+            },
+            {
+                name: "Контакты",
+                slug: "/contacts",
+            },
+        ];
+    }
+}
 export const mutations = {
-    // services(state, item) {
-    //     state.services = item
-    // },
-    // info(state, item) {
-    //     state.info = item
-    // },
     init(state, data) {
         state.info = data.info
         state.services = data.services
@@ -31,45 +48,40 @@ export const mutations = {
     }
 }
 export const actions = {
-    async nuxtServerInit(state, ctx) {
-        const client = this.app.apolloProvider.defaultClient;
-        const query = gql`
-        {
-            services(where:{isMain:true}) {
-                name
-                slug
-                # description
-                # icon{
-                #     url
-                # }
-                # info{
-                #     header
-                #     content
-                #         img{
-                #             url
-                #         }
-                # }
-            }
-            info{
-                phone
-                email
-                accessTime
-                address
-                companyName
-                descriptor
-                addressCoords
-            }
-        }
-        `
-        const {
-            data
-        } = await client.query({
-            query
-        })
-        // console.log("🚀 ~ file: index.js ~ line 60 ~ nuxtServerInit ~ data", data)
-        if (data.services && data.services.length) {
-            state.commit("init", data);
-        }
+    async nuxtServerInit(state, { app }) {
+        await state.commit("init", (await this._vm.$getCachedData()));
+        // const cache = await this._vm.$getCachedData()
+        // // console.log("cache", cache)
+        // if (cache) {
+        //     await state.commit("init", cache)
+        // } else {
+        //     const client = this.app.apolloProvider.defaultClient;
+        //     const query = gql`
+        //         {
+        //             services(where:{isMain:true}) {
+        //                 name
+        //                 slug
+        //             }
+        //             info{
+        //                 phone
+        //                 email
+        //                 accessTime
+        //                 address
+        //                 companyName
+        //                 descriptor
+        //                 addressCoords
+        //             }
+        //         }
+        //     `
+        //     const {
+        //         data
+        //     } = await client.query({
+        //         query
+        //     })
+        //     // if (data.services && data.services.length) {
+        //     state.commit("init", data);
+        //     // }
+        // }
     },
     async fetchMainPage(state) {
         const client = this.app.apolloProvider.defaultClient;

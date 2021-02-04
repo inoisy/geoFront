@@ -26,9 +26,8 @@ export default {
   computed: {
     imgUrl() {
       if (!this.img) {
-        return false;
+        return require("~/assets/icons/no-camera.svg");
       }
-      // const isThumb = this.item.img.formats && this.item.img.formats.thumbnail.url
       if (
         this.img.formats &&
         this.img.formats.small &&
@@ -37,13 +36,10 @@ export default {
         return this.imageBaseUrl + this.img.formats.small.url;
       }
       return this.imageBaseUrl + this.img.url;
-      //  this.item.img && this.item.img.formats && this.item.img.formats.thumbnail.url
-      //       ? this.imageBaseUrl + this.item.img.formats.thumbnail.url
-      //       : require('~/assets/no-image1.png')
     },
-    srcSet() {
-      return "";
-    },
+    // srcSet() {
+    //   return "";
+    // },
   },
 };
 </script>

@@ -1,195 +1,71 @@
 <template>
   <div>
-    <service-header
-      :breadcrumbs="breadcrumbs"
-      :header="service.name"
-      :subheader="service.subheader"
-      :icon="service.icon"
-    ></service-header>
-    <section class="content-wrapper white">
-      <v-container grid-list-lg>
+    <LazyHydrate when-idle>
+      <service-header
+        :breadcrumbs="breadcrumbs"
+        :header="service.name"
+        :subheader="service.subheader"
+        :icon="service.icon"
+      ></service-header>
+    </LazyHydrate>
+    <section class="white">
+      <v-container grid-list-lg class="pt-14 pb-12">
         <v-row>
-          <v-col :class="$style.asideMenuWrapper" cols="12">
-            <v-card :class="$style.asideMenu" light>
-              <v-list color="transparent" dense light>
-                <v-list-item
-                  v-for="child in service.child"
-                  :key="child.id"
-                  :to="`/services/${service.slug}/${child.slug}`"
-                >
-                  <v-list-item-content>
-                    <v-list-item-title v-text="child.name"> </v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-            </v-card>
-
-            <div v-html="service.content"></div>
+          <v-col cols="12">
+            <LazyHydrate when-visible>
+              <mobile-aside-menu
+                :services="service.child"
+                :slug="service.slug"
+              />
+            </LazyHydrate>
+            <LazyHydrate when-visible>
+              <desktop-aside-menu
+                :services="service.child"
+                :slug="service.slug"
+              />
+            </LazyHydrate>
+            <LazyHydrate never>
+              <content-wrapper :content="service.content" />
+            </LazyHydrate>
           </v-col>
         </v-row>
       </v-container>
     </section>
-    <section
+    <LazyHydrate
       v-for="(service, i) in service.child"
-      :key="`service-text-${i}`"
-      :class="$style.serviceFeatureWrapper"
+      :key="`service-${i}`"
+      when-visible
     >
-      <v-container grid-list-lg class="py-12">
-        <template>
-          <v-row :class="$style.serviceFeatureRow" justify="center">
-            <v-col
-              :class="$style.serviceFeatureTextWrapper"
-              cols="12"
-              md="6"
-              class=""
-            >
-              <h2 :class="$style.serviceFeatureHeader">
-                {{ service.name }}
-              </h2>
-              <div
-                :class="$style.serviceFeatureContent"
-                class="mb-5"
-                v-html="service.description"
-              ></div>
-              <div>
-                <v-btn
-                  class="mb-3 mr-2 d-inline-flex"
-                  :to="`/services/${service.parent[0].slug}/${service.slug}`"
-                  outlined
-                  light
-                >
-                  Подробнее
-                </v-btn>
-                <v-btn
-                  class="mb-3 mr-2 d-inline-flex"
-                  outlined
-                  light
-                  @click="handleOffer(service.name)"
-                >
-                  Заказать
-                </v-btn>
-              </div>
-            </v-col>
-            <v-col
-              v-if="service.img"
-              :class="$style.serviceFeatureImgWrapper"
-              cols="12"
-              md="6"
-            >
-              <v-img
-                :class="$style.serviceFeatureImg"
-                :src="
-                  service.img && service.img.url
-                    ? imageBaseUrl + service.img.url
-                    : require('~/assets/icons/no-camera.svg')
-                "
-                :alt="service.name"
-                aspect-ratio="1.555"
-                max-height="500px"
-                gradient="to top right, rgba(0,0,0,0), rgba(0,0,0,.2)"
-            /></v-col>
-          </v-row>
-        </template>
-      </v-container>
-    </section>
+      <service-feature
+        :header="service.name"
+        :content="service.description"
+        :img="service.img"
+        :slug="`/services/${service.parent[0].slug}/${service.slug}`"
+        :is-with-gray="true"
+        :name="service.name"
+      ></service-feature>
+    </LazyHydrate>
   </div>
 </template>
-<style lang="scss" scoped module>
-.asideMenuWrapper {
-  .asideMenu {
-    max-width: 100%;
-    margin-bottom: 50px;
-  }
-}
 
-@include md {
-  .asideMenuWrapper {
-    display: block;
-    .asideMenu {
-      // margin-top: 0px;
-      max-width: 30%;
-      float: right;
-      margin-left: 30px;
-      margin-bottom: 30px;
-    }
-  }
-}
-.serviceFeatureWrapper {
-  background-color: white;
-  &:nth-child(odd) {
-    background-color: $gray;
-    .serviceFeatureRow {
-      flex-direction: row-reverse;
-    }
-  }
-
-  .serviceFeatureRow {
-    .serviceFeatureImgWrapper {
-      display: flex;
-      align-items: center;
-      .serviceFeatureImg {
-        border-radius: 3px;
-        box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
-        width: 100%;
-        max-width: 100%;
-        display: block;
-        @include sm {
-          width: 65%;
-          max-width: 65%;
-        }
-        @include md {
-          width: 100%;
-          max-width: 100%;
-        }
-      }
-    }
-    .serviceFeatureTextWrapper {
-      color: #18191f;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      .serviceFeatureHeader {
-        font-weight: 500;
-        font-size: 1.8rem;
-        margin-bottom: 24px;
-        line-height: 125%;
-      }
-      .serviceFeatureContent {
-        font-weight: 300;
-        // font-size: 16px;
-        line-height: 150%;
-      }
-    }
-
-    @include md {
-      .serviceFeatureImgWrapper {
-        padding-left: 8.33333%;
-      }
-      // padding-left: 8.33333%;
-      // &:nth-child(odd) {
-      //   .serviceFeatureImgWrapper {
-      //     padding-right: 8.33333%;
-      //     padding-left: 12px;
-      //   }
-      // }
-    }
-  }
-  @include md {
-    &:nth-child(odd) {
-      .serviceFeatureRow {
-        .serviceFeatureImgWrapper {
-          padding-right: 8.33333%;
-          padding-left: 12px;
-        }
-      }
-    }
-  }
-}
-</style>
 <script>
 import gql from "graphql-tag";
+import LazyHydrate from "vue-lazy-hydration";
+// import ServiceHeader from "~/components/ServiceHeader.vue";
+// import ServiceFeature from "~/components/ServiceFeature.vue";
+// import MobileAsideMenu from "~/components/MobileAsideMenu.vue";
+// import DesktopAsideMenu from "~/components/DesktopAsideMenu.vue";
+// import ContentWrapper from "~/components/ContentWrapper.vue";
 
 export default {
+  components: {
+    LazyHydrate,
+    // ServiceHeader,
+    // ServiceFeature,
+    // MobileAsideMenu,
+    // DesktopAsideMenu,
+    // ContentWrapper,
+  },
   async asyncData({ params, app, error }) {
     const client = app.apolloProvider.defaultClient;
     const { data } = await client.query({
@@ -218,6 +94,7 @@ export default {
               }
               img {
                 url
+                formats
               }
             }
           }
@@ -235,12 +112,6 @@ export default {
       service: data.services[0],
     };
   },
-  data() {
-    return {
-      imageBaseUrl: this.$config.imageBaseUrl,
-    };
-  },
-
   computed: {
     breadcrumbs() {
       return [
@@ -259,15 +130,6 @@ export default {
       ];
     },
   },
-  methods: {
-    handleOffer(serviceName) {
-      this.$store.dispatch("showDialog", {
-        name: serviceName,
-        isShow: true,
-      });
-      // return true;
-    },
-  },
   head() {
     return {
       title: this.service.name,
@@ -276,6 +138,27 @@ export default {
           hid: "description",
           name: "description",
           content: this.service.metaDescrtiption,
+        },
+        {
+          hid: "og:url",
+          property: "og:url",
+          content: this.$config.siteUrl + this.$route.path,
+        },
+        {
+          hid: "og:title",
+          property: "og:title",
+          content: this.service.name,
+        },
+        {
+          hid: "og:description",
+          property: "og:description",
+          content: this.service.metaDescrtiption,
+        },
+      ],
+      link: [
+        {
+          rel: "canonical",
+          href: `${this.$config.siteUrl}/services/${this.service.name}`,
         },
       ],
     };

@@ -29,6 +29,9 @@ module.exports = {
     "linebreak-style": "off",
     "indent": "off",
     "vue/no-v-html": "off",
-    "eol-last": "off"
+    "eol-last": "off",
+    "no-unused-expressions": "off",
+    "import/no-duplicates": "off",
+    "require-jsdoc": "off"
   }
 }

@@ -1,6 +1,8 @@
 <template>
   <div>
-    <default-header header="УСЛУГИ" :breadcrumbs="breadcrumbs" />
+    <LazyHydrate when-idle>
+      <default-header :header="title" :breadcrumbs="breadcrumbs" />
+    </LazyHydrate>
     <section
       v-for="(service, i) in services"
       :key="`service-${i}`"
@@ -9,14 +11,17 @@
       <v-container grid-list-lg fill-height class="py-12">
         <v-row align="center">
           <v-col :class="$style.serviceItem" class="py-12" cols="12">
-            <img
+            <v-img
               v-if="service.icon"
               :class="$style.servicesIcon"
               :src="imageBaseUrl + service.icon.url"
               :alt="service.name"
             />
             <div :class="$style.servicesTextWrapper" class="mb-7">
-              <nuxt-link :to="`/services/${service.slug}`">
+              <nuxt-link
+                :to="`/services/${service.slug}`"
+                :title="service.name"
+              >
                 <h2 :class="$style.serviceHeader" class="d-inline-block">
                   {{ service.name }}
                 </h2>
@@ -26,19 +31,29 @@
               <v-btn
                 class="mb-3 mr-2"
                 :to="`/services/${service.slug}`"
+                title="Подробнее"
                 outlined
                 light
               >
                 Подробнее
               </v-btn>
-              <v-btn class="mb-3" outlined light @click="handleOffer(service)">
+              <v-btn
+                class="mb-3"
+                outlined
+                light
+                title="Заказать работы"
+                @click="handleOffer(service)"
+              >
                 Заказать работы
               </v-btn>
             </div>
 
             <ul v-if="service.child.length">
               <li v-for="child in service.child" :key="child.id">
-                <nuxt-link :to="`/services/${service.slug}/${child.slug}`">
+                <nuxt-link
+                  :title="child.name"
+                  :to="`/services/${service.slug}/${child.slug}`"
+                >
                   {{ child.name }}
                 </nuxt-link>
               </li>
@@ -49,13 +64,6 @@
     </section>
   </div>
 </template>
-<style lang="scss" >
-.breadcrumbs-item {
-  a {
-    color: white;
-  }
-}
-</style>
 <style lang="scss" scoped module>
 .servicesWrapper {
   &:nth-child(odd) {
@@ -82,10 +90,6 @@
   .serviceItem {
     position: relative;
   }
-  .servicesTextWrapper {
-    // max-width: 50%;
-    // background-color: black;
-  }
   .servicesIcon {
     width: 50px;
     height: auto;
@@ -94,7 +98,7 @@
     opacity: 0.3;
   }
   .serviceHeader {
-    font-weight: 500;
+    font-weight: 600;
     font-size: 22px;
     text-transform: uppercase;
     color: $black;
@@ -148,9 +152,18 @@
 </style>
 <script>
 import gql from "graphql-tag";
-import DefaultHeader from "~/components/DefaultHeader.vue";
+import LazyHydrate from "vue-lazy-hydration";
+// import DefaultHeader from "~/components/DefaultHeader.vue";
+
+// import DefaultHeader from "~/components/DefaultHeader.vue";
+const title = "Услуги";
+const description =
+  "Наша организация оказывает широкий спектр современных и востребованных геодезических услуг. После проведения научных изысканий подготавливаются проектные документы, служащие основой по вопросам строительства объектов.";
 export default {
-  components: { DefaultHeader },
+  components: {
+    LazyHydrate,
+    // DefaultHeader,
+  },
   async asyncData({ app, error }) {
     const client = app.apolloProvider.defaultClient;
     const { data } = await client.query({
@@ -159,9 +172,7 @@ export default {
           services(where: { isMain: true }) {
             name
             slug
-            description
             descriptionLong
-            metaDescrtiption
             icon {
               url
             }
@@ -182,6 +193,7 @@ export default {
     }
     return {
       services: data.services,
+      title,
     };
   },
 
@@ -194,7 +206,7 @@ export default {
           to: "/",
         },
         {
-          text: "Услуги",
+          text: title,
           to: "/services",
         },
       ],
@@ -211,13 +223,33 @@ export default {
   },
   head() {
     return {
-      title: "Услуги",
+      title,
       meta: [
         {
           hid: "description",
           name: "description",
-          content:
-            "Наша организация оказывает широкий спектр современных и востребованных геодезических услуг. После проведения научных изысканий подготавливаются проектные документы, служащие основой по вопросам строительства объектов.",
+          content: description,
+        },
+        {
+          hid: "og:url",
+          property: "og:url",
+          content: this.$config.siteUrl + this.$route.path,
+        },
+        {
+          hid: "og:title",
+          property: "og:title",
+          content: title,
+        },
+        {
+          hid: "og:description",
+          property: "og:description",
+          content: description,
+        },
+      ],
+      link: [
+        {
+          rel: "canonical",
+          href: this.$config.siteUrl + "/services",
         },
       ],
     };

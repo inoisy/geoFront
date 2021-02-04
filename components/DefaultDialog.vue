@@ -23,7 +23,7 @@
       <div v-if="!formSuccess">
         <div
           class="mb-6 pr-12"
-          style="font-size: 2rem; font-weight: 500; line-height: 125%"
+          style="font-size: 2rem; font-weight: 600; line-height: 125%"
           v-text="
             productName ? `Заказать услугу «${productName}»` : 'ЗАКАЗАТЬ ЗВОНОК'
           "
@@ -243,7 +243,7 @@ export default {
       try {
         this.loading = true;
         // console.log(
-        //   "🚀 ~ file: DefaultDialog.vue ~ line 215 ~ submit ~ this.$store.state.dialog.name",
+        //   "🚀 ~ file: LazyDefaultDialog.vue ~ line 215 ~ submit ~ this.$store.state.dialog.name",
         //   this.$store.state.dialog.name
         // );
 

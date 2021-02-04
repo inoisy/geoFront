@@ -1,44 +1,41 @@
 <template>
-  <v-app dark>
-    <h1 v-if="error.statusCode === 404">
-      {{ pageNotFound }}
-    </h1>
-    <h1 v-else>
-      {{ otherError }}
-    </h1>
-    <NuxtLink to="/">
-      Home page
-    </NuxtLink>
-  </v-app>
+  <v-container grid-list-lg class="fill-height">
+    <v-row justify="center">
+      <v-col cols="12" md="6">
+        <h1 :class="$style.title">{{ error.statusCode }}</h1>
+        <h2 :class="$style.info">{{ error.message }}</h2>
+        <v-btn :class="$style.button" to="/" replace color="black" dark large>
+          Вернуться на главную
+        </v-btn>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
-
 <script>
 export default {
-  layout: 'empty',
-  props: {
-    error: {
-      type: Object,
-      default: null
-    }
-  },
-  data () {
-    return {
-      pageNotFound: '404 Not Found',
-      otherError: 'An error occurred'
-    }
-  },
-  head () {
-    const title =
-      this.error.statusCode === 404 ? this.pageNotFound : this.otherError
-    return {
-      title
-    }
-  }
-}
+  props: { error: { type: Object, default: () => {} } },
+};
 </script>
 
-<style scoped>
-h1 {
-  font-size: 20px;
+<style scoped module>
+.title {
+  /* margin-top: 15px; */
+  font-size: 5rem;
+  text-align: center;
+  line-height: 100%;
+  margin-bottom: 25px;
+}
+.info {
+  font-weight: 300;
+  color: #484848;
+  margin: 0;
+  text-align: center;
+}
+.button {
+  margin-top: 35px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  width: 270px;
 }
 </style>
