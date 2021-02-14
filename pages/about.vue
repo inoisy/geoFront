@@ -6,13 +6,11 @@
     <section class="white black--text">
       <v-container grid-list-lg>
         <v-row class="py-12">
-          <!-- {{ page }} -->
           <v-col cols="12">
             <LazyHydrate never>
               <content-wrapper :content="page.content" />
             </LazyHydrate>
           </v-col>
-          <!-- <v-col cols="12" v-html="page.content"> </v-col> -->
         </v-row>
       </v-container>
     </section>
@@ -29,9 +27,10 @@ import LazyHydrate from "vue-lazy-hydration";
 const title = "О компании";
 export default {
   components: { LazyHydrate },
-  async asyncData(ctx) {
-    const client = ctx.app.apolloProvider.defaultClient;
-    const { data } = await client.query({
+  async asyncData({ app, error }) {
+    const {
+      data: { aboutPage },
+    } = await app.apolloProvider.defaultClient.query({
       query: gql`
         {
           aboutPage {
@@ -41,15 +40,15 @@ export default {
         }
       `,
     });
-    if (!data.aboutPage) {
-      return ctx.error({
+    if (!aboutPage) {
+      return error({
         statusCode: 404,
         message: "Информацию не удалось получить",
       });
     }
 
     return {
-      page: data.aboutPage,
+      page: aboutPage,
     };
   },
   data() {

@@ -1,5 +1,8 @@
 <template>
-  <section :class="$style.firstSection">
+  <section
+    :class="$style.firstSection"
+    :style="`background-image: url(${require('~/assets/bg.jpg')})`"
+  >
     <v-container
       :class="[$style.firstSectionInner, noIcon && 'noIcon']"
       grid-list-lg
@@ -53,11 +56,15 @@
 </style>
 <style lang="scss" scoped module>
 .firstSection {
-  @include bg(
-    linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 100%),
-    linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.57)),
-    url(/bg1.jpg)
-  );
+  // @include bg(
+  //   linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 100%),
+  //   linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.57)),
+  //   url(/bg1.jpg)
+  // );
+  background-color: #161616;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   min-height: 370px;
 
   .firstSectionInner {

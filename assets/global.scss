@@ -1,8 +1,3 @@
-@import "_vars/vars";
-@import "_fonts/fonts";
-
-
-
 body {
     min-width: 320px;
 }
@@ -12,7 +7,7 @@ body {
 }
 
 .v-application {
-    font-family: $body-font-family !important;
+    font-family: $body-font-family, sans-serif !important;
 }
 
 .position-relative {
@@ -37,6 +32,11 @@ body {
     @include md {
         margin-top: 90px;
     }
+}
+
+.sprite-icons {
+    width: 24px;
+    height: 24px;
 }
 
 html {

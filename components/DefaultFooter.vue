@@ -1,5 +1,11 @@
 <template>
-  <v-footer :class="$style.footer" class="footer pt-4" dark height="auto">
+  <v-footer
+    :class="$style.footer"
+    class="footer pt-4"
+    dark
+    height="auto"
+    :style="`background-image: url(${require('~/assets/footerbg.jpg')})`"
+  >
     <!-- v-intersect.once="onIntersect" -->
     <v-container grid-list-lg class="py-12">
       <v-row class="d-flex justify-center">
@@ -54,7 +60,7 @@
             <v-list-item
               v-for="menuItem in menuItems"
               :key="menuItem.slug"
-              :to="menuItem.slug"
+              :to="`${menuItem.slug}`"
               :title="menuItem.name"
               exact
             >
@@ -88,7 +94,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 80% 50%;
-  background-image: url(/footerbg.jpg);
+  // background-image: url(/footerbg.jpg);
   @include sm {
     background-position: 90% 50%;
   }
@@ -98,9 +104,9 @@
 }
 </style>
 <script>
-import Logo from "~/components/Logo.vue";
+// import Logo from "~/components/Logo.vue";
 export default {
-  components: { Logo },
+  // components: { Logo },
   computed: {
     menuItems() {
       return this.$store.getters.menuItems;
@@ -112,12 +118,5 @@ export default {
       return this.$store.state.services;
     },
   },
-  // methods: {
-  //   onIntersect(entries, observer, isIntersecting) {
-  //     if (isIntersecting) {
-  //       entries[0].target.style.backgroundImage = "url(/footerbg.jpg)";
-  //     }
-  //   },
-  // },
 };
 </script>

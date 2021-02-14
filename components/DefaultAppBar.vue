@@ -9,79 +9,10 @@
       <logo class="pr-3 mr-auto fill-height" />
 
       <template v-for="(item, index) in menuItems">
-        <v-menu
-          v-if="item.items && item.items.length > 0"
-          :key="index"
-          :class="$style.link"
-          class="fill-height hidden-sm-and-down"
-          style="height: 100%"
-          allow-overflow
-          open-on-hover
-          offset-y
-          left
-          z-index="3000"
-        >
-          <template v-slot:activator="{ on }">
-            <v-btn
-              slot="activator"
-              :class="$style.link"
-              class="fill-height ma-0 header-link hidden-sm-and-down"
-              style="height: 100%"
-              text
-              tile
-              nuxt
-              :to="item.slug"
-              :title="item.name"
-              v-on="on"
-            >
-              {{ item.name }}
-              <svg-icon name="arrowdown" style="width: 24px; height: 24px" />
-            </v-btn>
-          </template>
-          <v-list>
-            <template v-for="(category, i) in item.items">
-              <template v-if="category.children && category.children.length">
-                <v-list-item
-                  :key="'list-group' + i"
-                  :to="`/services/${category.slug}`"
-                  :title="category.name"
-                  :class="$style.link"
-                  class="list-item"
-                >
-                  <span style="line-height: normal; font-size: 15px">
-                    {{ category.name }}
-                  </span>
-                </v-list-item>
-                <v-list-item
-                  v-for="child in category.children"
-                  :key="child.id"
-                  :to="`/services/${child.slug}`"
-                  :title="child.name"
-                  :class="$style.link"
-                  class="list-item"
-                >
-                  <span class="pl-4">{{ child.name }}</span>
-                </v-list-item>
-              </template>
-              <v-list-item
-                v-else
-                :key="i"
-                :class="$style.link"
-                class="list-item"
-                nuxt
-                :to="`${item.slug}/${category.slug}`"
-                :title="category.name"
-              >
-                {{ category.name }}
-              </v-list-item>
-            </template>
-          </v-list>
-        </v-menu>
-
         <v-btn
-          v-else
+          v-if="!item.disable"
           :key="index"
-          :to="item.slug"
+          :to="`/${item.slug}`"
           :title="item.name"
           :class="$style.link"
           class="ma-0 hidden-sm-and-down"
@@ -92,7 +23,25 @@
         >
           {{ item.name }}
         </v-btn>
+        <v-btn
+          v-else
+          :id="item.slug"
+          :key="index"
+          :title="item.name"
+          :class="$style.link"
+          class="ma-0 hidden-sm-and-down"
+          text
+          tile
+        >
+          {{ item.name }}
+          <svg-icon name="arrowdown" style="width: 24px; height: 24px" />
+        </v-btn>
       </template>
+      <lazy-toolbar-catalog-menu
+        v-if="!isMobile && isMounted"
+        :items="menuItems[0].items"
+        parent-slug="services"
+      />
 
       <v-btn
         class="d-dlex"
@@ -208,10 +157,15 @@
 }
 </style>
 <script>
-import Logo from "~/components/Logo.vue";
+// import Logo from "~/components/Logo.vue";
 
 export default {
-  components: { Logo },
+  // components: { Logo },
+  data() {
+    return {
+      isMounted: false,
+    };
+  },
   computed: {
     isMobile() {
       return this.$vuetify.breakpoint.smAndDown;
@@ -225,6 +179,10 @@ export default {
     services() {
       return this.$store.state.services;
     },
+  },
+
+  mounted() {
+    this.isMounted = true;
   },
 };
 </script>

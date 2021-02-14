@@ -14,7 +14,7 @@
       <template v-for="item in menuItems">
         <v-list-item
           :key="item.name"
-          :to="item.slug"
+          :to="`/${item.slug}`"
           nuxt
           ripple
           exact

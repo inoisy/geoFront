@@ -126,6 +126,8 @@
 }
 </style>
 <script>
+import gql from "graphql-tag";
+
 // import ContactForm from "~/components/ContactForm";
 import { validationMixin } from "vuelidate";
 import { mask } from "vue-the-mask";
@@ -239,88 +241,51 @@ export default {
     async submit() {
       this.$v.$touch();
       if (this.$v.$anyError) return;
-
-      try {
-        this.loading = true;
-        // console.log(
-        //   "🚀 ~ file: LazyDefaultDialog.vue ~ line 215 ~ submit ~ this.$store.state.dialog.name",
-        //   this.$store.state.dialog.name
-        // );
-
-        const req = await this.$axios.post("/orders", {
-          name: this.name,
-          phone: this.phone,
-          message: this.message,
-          email: this.email,
-          serviceName: this.$store.state.dialog.name,
-        });
-        this.loading = false;
-        if (req.status === 200) {
-          // this.$store.commit("saveBasket");
-
+      this.loading = true;
+      await this.$apollo
+        .mutate({
+          mutation: gql`
+            mutation(
+              $name: String!
+              $phone: String!
+              $message: String
+              $email: String!
+              $serviceName: String
+            ) {
+              createOrder(
+                input: {
+                  data: {
+                    name: $name
+                    phone: $phone
+                    message: $message
+                    email: $email
+                    serviceName: $serviceName
+                  }
+                }
+              ) {
+                order {
+                  id
+                }
+              }
+            }
+          `,
+          variables: {
+            name: this.name,
+            phone: this.phone,
+            message: this.message,
+            email: this.email,
+            serviceName: this.$store.state.dialog.name,
+          },
+        })
+        .then(() => {
           this.formSuccess = true;
-        } else {
+          this.clear();
+        })
+        .catch(() => {
           this.formError = true;
-          this.loading = false;
-        }
-      } catch (error) {
-        this.loading = false;
-        // console.log("submit -> error", error);
-        this.formError = true;
-        this.clear();
-      }
+        });
+      this.loading = false;
     },
-    // async submit() {
-    //   // console.log("files", this.files);
-    //   // console.log("files", this.$refs);
-    //   // console.log(
-    //   //   "🚀 ~ file: ContactForm.vue ~ line 136 ~ submit ~ this.$v.$anyError",
-    //   //   this.$v.$anyError
-    //   // );
-
-    //   console.log("files", this.files);
-    //   this.$v.$touch();
-    //   if (!this.$v.$anyError) {
-    //     try {
-    //       this.loading = true;
-    //       // const form = new FormData();
-    //       // const data = {
-    //       //   name: this.name,
-    //       //   email: this.email,
-    //       //   phone: this.phone,
-    //       //   productName: this.$store.state.dialog.name,
-    //       //   sendEmail: true,
-    //       //   message: this.message,
-    //       // };
-    //       // form.append("data", JSON.stringify(data));
-    //       // if (this.files && this.files.length) {
-    //       //   for (const file of this.files) {
-    //       //     form.append(`files.files`, file);
-    //       //   }
-    //       // }
-    //       const request = await this.$axios.post(
-    //         process.env.baseUrl + "/orders",
-    //         form
-    //       );
-    //       if (request && request.data && request.data.id) {
-    //         this.formSuccess = true;
-    //         this.$emit("success", true);
-    //       }
-    //       console.log(
-    //         "🚀 ~ file: ContactForm.vue ~ line 141 ~ submit ~ request",
-    //         request
-    //       );
-    //     } catch (error) {
-    //       this.loading = false;
-    //       this.formError = true;
-    //       console.log(
-    //         "🚀 ~ file: ContactForm.vue ~ line 139 ~ submit ~ error",
-    //         error
-    //       );
-    //     }
-    //     this.loading = false;
-    //   }
-    // },
   },
 };
 </script>

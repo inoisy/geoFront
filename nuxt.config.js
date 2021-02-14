@@ -30,7 +30,7 @@ async function routes() {
 export default {
   // version: pkg.version,
   // target: "static",
-  components: false,
+  // components: true,
   generate: {
     routes
   },
@@ -67,13 +67,13 @@ export default {
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
-    '@/assets/styles/index.scss',
+    '@/assets/global.scss',
   ],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
     // { src: '~/plugins/ymapPlugin.js', mode: 'client' },
-    '~/plugins/cachedApi.js',
+    // '~/plugins/cachedApi.js',
     // '~/plugins/cache.js',
   ],
 
@@ -82,12 +82,40 @@ export default {
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
+    '~/modules/hook.js',
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
     // https://github.com/nuxt-community/style-resources-module
     '@nuxtjs/style-resources',
+    ['@aceforth/nuxt-optimized-images', {
+      inlineImageLimit: 1000,
+      imagesName: ({ isDev }) => isDev ? '[path][name][hash:optimized].[ext]' : 'img/[contenthash:7].[ext]',
+      responsiveImagesName: ({ isDev }) => isDev ? '[path][name]--[width][hash:optimized].[ext]' : 'img/[contenthash:7]-[width].[ext]',
+      handleImages: ['jpeg', 'png', 'svg', 'webp'],
+      optimizeImages: true,
+      optimizeImagesInDev: true, // TODO
+      defaultImageLoader: 'img-loader',
+      mozjpeg: {
+        quality: 80,
+      },
+      optipng: {
+        optimizationLevel: 3,
+      },
+      pngquant: false,
+      // gifsicle: {
+      //   interlaced: true,
+      //   optimizationLevel: 3,
+      // },
+      svgo: {
+        // enable/disable svgo plugins here
+      },
+      webp: {
+        preset: 'default',
+        quality: 75,
+      },
+    },]
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -95,7 +123,7 @@ export default {
     // '@blokwise/dynamic',
     'nuxt-ssr-cache',
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios',
+    // '@nuxtjs/axios',
     // https://www.npmjs.com/package/@nuxtjs/svg-sprite
     '@nuxtjs/svg-sprite',
     'nuxt-webfontloader',
@@ -126,12 +154,13 @@ export default {
       themeColor: '#151317'
     }],
 
-    ['@nuxtjs/yandex-metrika',
+    ['@rkaliev/nuxtjs-yandex-metrika',
       {
         id: process.env.YANDEX_ID,
         clickmap: true,
         trackLinks: true,
-        accurateTrackBounce: true
+        accurateTrackBounce: true,
+        webvisor: true
       }],
     //  ['@nuxtjs/redirect-module', process.env.REDIRECT_ROUTES],
     // ['@nuxtjs/google-analytics', {
@@ -174,18 +203,15 @@ export default {
   },
   styleResources: {
     // your settings here
-    sass: [],
     scss: [
       './assets/styles/_mixins/*.scss',
       './assets/styles/_vars/*.scss',
-    ],
-    less: [],
-    stylus: []
+    ]
   },
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-  axios: {
-    baseURL: backendUrl
-  },
+  // axios: {
+  //   baseURL: backendUrl
+  // },
 
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
   vuetify: {
@@ -211,17 +237,16 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
-    babel: {
-      sourceType: 'unambiguous',
-      presets: [
-        ["@nuxt/babel-preset-app", {
-          corejs: {
-            version: 2
-          }
-        }],
-      ]
-    },
-    transpile: ["@nuxtjs/vuetify", /^@nuxtjs.*/, "cachedApi"],
-
+    // babel: {
+    //   sourceType: 'unambiguous',
+    //   presets: [
+    //     ["@nuxt/babel-preset-app", {
+    //       corejs: {
+    //         version: 2
+    //       }
+    //     }],
+    //   ]
+    // },
+    // transpile: ["@nuxtjs/apollo", "@nuxtjs/vuetify", /^@nuxtjs.*/, "vue-lazy-hydration", "vue-the-mask", "vue-yandex-maps", "vuelidate", "@rkaliev/nuxtjs-yandex-metrika", "nuxt-social-meta", "nuxt-ssr-cache", "graphql-tag", "vuelidate"]
   }
 }

@@ -1,9 +1,15 @@
 <template>
   <nuxt-link class="logoWrapper" :class="mini && 'mini'" to="/" title="Логотип">
-    <svg-icon name="logo" class="logo" />
+    <!-- <svg-icon name="logo" class="logo" /> -->
+    <v-img
+      class="logo"
+      :src="require('~/assets/logo.svg?inline')"
+      alt="Логотип"
+      contain
+    />
   </nuxt-link>
 </template>
-<style lang="scss"  >
+<style lang="scss" scoped>
 .logoWrapper {
   display: flex;
   align-items: center;
@@ -17,6 +23,7 @@
   &.mini {
     .logo {
       width: 180px;
+      max-width: 180px;
       height: 50px;
     }
   }
@@ -24,6 +31,12 @@
     opacity: 0.8;
   }
 }
+// .mini {
+//   .logo {
+//     width: 180px;
+//     height: 50px;
+//   }
+// }
 </style>
 <script>
 export default {

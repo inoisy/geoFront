@@ -48,7 +48,7 @@
               </v-btn>
             </div>
 
-            <ul v-if="service.child.length">
+            <ul v-if="service.child && service.child.length">
               <li v-for="child in service.child" :key="child.id">
                 <nuxt-link
                   :title="child.name"
@@ -153,20 +153,17 @@
 <script>
 import gql from "graphql-tag";
 import LazyHydrate from "vue-lazy-hydration";
-// import DefaultHeader from "~/components/DefaultHeader.vue";
-
-// import DefaultHeader from "~/components/DefaultHeader.vue";
 const title = "Услуги";
 const description =
   "Наша организация оказывает широкий спектр современных и востребованных геодезических услуг. После проведения научных изысканий подготавливаются проектные документы, служащие основой по вопросам строительства объектов.";
 export default {
   components: {
     LazyHydrate,
-    // DefaultHeader,
   },
   async asyncData({ app, error }) {
-    const client = app.apolloProvider.defaultClient;
-    const { data } = await client.query({
+    const {
+      data: { services },
+    } = await app.apolloProvider.defaultClient.query({
       query: gql`
         {
           services(where: { isMain: true }) {
@@ -185,21 +182,22 @@ export default {
         }
       `,
     });
-    if (!data.services) {
+    if (!services) {
       return error({
         statusCode: 404,
         message: "Информацию не удалось получить",
       });
     }
+
     return {
-      services: data.services,
-      title,
+      services: services, // Object.freeze(services), // services.forEach(Object.freeze),
     };
   },
 
   data() {
     return {
       imageBaseUrl: this.$config.imageBaseUrl,
+      title,
       breadcrumbs: [
         {
           text: "Главная",
@@ -233,7 +231,7 @@ export default {
         {
           hid: "og:url",
           property: "og:url",
-          content: this.$config.siteUrl + this.$route.path,
+          content: this.$config.siteUrl + "/services",
         },
         {
           hid: "og:title",

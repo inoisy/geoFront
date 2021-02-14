@@ -6,7 +6,7 @@
         :header="service.name"
         :subheader="service.subheader"
         :icon="service.icon"
-      ></service-header>
+      />
     </LazyHydrate>
     <section class="white">
       <v-container class="pt-14 pb-12" grid-list-lg>
@@ -23,7 +23,10 @@
               </LazyHydrate>
             </v-card>
             <LazyHydrate never>
-              <content-wrapper :content="service.content" />
+              <lazy-content-wrapper
+                v-if="service.content"
+                :content="service.content"
+              />
             </LazyHydrate>
           </v-col>
         </v-row>
@@ -82,41 +85,15 @@
 </style>
 <script>
 import gql from "graphql-tag";
-// import {
-//   hydrateOnInteraction,
-//   hydrateNever,
-//   hydrateWhenIdle,
-//   hydrateWhenVisible,
-// } from "vue-lazy-hydration";
 import LazyHydrate from "vue-lazy-hydration";
-// import ContentWrapper from "~/components/ContentWrapper.vue";
-// import ServiceHeader from "~/components/ServiceHeader.vue";
-// import Thumbnail from "~/components/Thumbnail.vue";
-
 export default {
   components: {
     LazyHydrate,
-
-    // ContentWrapper: hydrateNever(() =>
-    //   import("~/components/ContentWrapper.vue")
-    // ),
-    // ServiceHeader: hydrateWhenIdle(() =>
-    //   import("~/components/ServiceHeader.vue")
-    // ),
-    // Thumbnail: hydrateWhenVisible(() => import("~/components/Thumbnail.vue")),
-    // ImageDialog: hydrateOnInteraction(() =>
-    //   import("~/components/ImageDialog.vue")
-    // ),
-    // ServiceCards: hydrateWhenVisible(() =>
-    //   import("~/components/ServiceCards.vue")
-    // ),
-    // ServiceSlider: hydrateWhenVisible(() =>
-    //   import("~/components/ServiceSlider.vue")
-    // ),
   },
   async asyncData({ params, app, error }) {
-    const client = app.apolloProvider.defaultClient;
-    const { data } = await client.query({
+    const {
+      data: { services },
+    } = await app.apolloProvider.defaultClient.query({
       variables: {
         slug: params.slug,
       },
@@ -164,18 +141,14 @@ export default {
         }
       `,
     });
-    if (!data.services || !data.services.length) {
+    if (!services || !services.length) {
       return error({
         statusCode: 404,
         message: "Информацию не удалось получить",
       });
     }
     return {
-      // slug: params.parent,
-      service: data.services[0],
-      child: data.services[0].parent[0].child.filter(
-        (item) => item.slug !== data.services[0].slug
-      ),
+      service: services[0],
     };
   },
   data() {
@@ -185,8 +158,13 @@ export default {
   },
 
   computed: {
+    child() {
+      return this.service.parent[0].child.filter(
+        (item) => item.slug !== this.service.slug
+      );
+    },
     parentSlug() {
-      if (this.service && this.service.parent && this.service.parent.length) {
+      if (this.service.parent && this.service.parent.length) {
         return this.service.parent[0].slug;
       } else {
         return "";
@@ -218,10 +196,10 @@ export default {
     isTooManyChilds() {
       return this.child.length > 5;
     },
-    // componentName() {
-    //   return this.child.length > 5 ? "ServiceSlider" : "ServiceCards";
-    // },
   },
+  // mounted() {
+  //   console.log(this.service);
+  // },
   head() {
     return {
       title: this.service.name,

@@ -1,10 +1,5 @@
 <template>
-  <v-img
-    :src="imgUrl"
-    :alt="alt"
-    :aspect-ratio="14 / 9"
-    max-height="300px"
-  ></v-img>
+  <v-img :src="imgUrl" :alt="alt" :aspect-ratio="14 / 9" max-height="300px" />
 </template>
 <script>
 export default {

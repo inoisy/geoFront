@@ -43,7 +43,7 @@
         :slug="`/services/${service.parent[0].slug}/${service.slug}`"
         :is-with-gray="true"
         :name="service.name"
-      ></service-feature>
+      />
     </LazyHydrate>
   </div>
 </template>
@@ -67,13 +67,15 @@ export default {
     // ContentWrapper,
   },
   async asyncData({ params, app, error }) {
-    const client = app.apolloProvider.defaultClient;
-    const { data } = await client.query({
+    // const client = ;
+    const {
+      data: { services },
+    } = await app.apolloProvider.defaultClient.query({
       variables: {
         slug: params.parent,
       },
       query: gql`
-        query ServicesQuery($slug: String!) {
+        query ServiceQuery($slug: String!) {
           services(where: { slug: $slug }) {
             name
             slug
@@ -101,15 +103,14 @@ export default {
         }
       `,
     });
-    if (!data.services || !data.services.length) {
+    if (!services || !services.length) {
       return error({
         statusCode: 404,
         message: "Информацию не удалось получить",
       });
     }
     return {
-      // slug: params.parent,
-      service: data.services[0],
+      service: services[0], //Object.freeze(services[0]),
     };
   },
   computed: {

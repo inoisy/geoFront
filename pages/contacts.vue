@@ -6,11 +6,7 @@
         <v-row class="py-12">
           <v-col cols="12" md="6" lg="4" :class="$style.contactsWrapper">
             <v-list style="background: transparent !important" light>
-              <v-list-item
-                title="Телефон"
-                :href="`tel:${info.phone}`"
-                height="48"
-              >
+              <v-list-item title="Телефон" :href="`tel:${info.phone}`">
                 <v-list-item-icon>
                   <svg-icon name="phone" style="width: 24px; height: 24px" />
                 </v-list-item-icon>
@@ -87,14 +83,11 @@ const description =
   "Для получения профессиональной консультации, оформления заявки на желаемую услугу достаточно позвонить по телефонному номеру, указанному на сайте, выслать запрос на электронную почту.";
 export default {
   components: {
-    // addressCoords,
     DefaultHeader: hydrateWhenIdle(() =>
       import("~/components/DefaultHeader.vue")
     ),
-    MapComponent: hydrateWhenVisible(
-      () => import("~/components/MapComponent.vue")
-      // Optional.
-      // { observerOptions: { rootMargin: "100px" } }
+    MapComponent: hydrateWhenVisible(() =>
+      import("~/components/MapComponent.vue")
     ),
   },
   data() {
@@ -118,12 +111,6 @@ export default {
       return this.$store.state.info;
     },
   },
-  // methods: {
-  //   handleOffer() {
-  //     // TODO
-  //     return true;
-  //   },
-  // },
   head() {
     return {
       title,
@@ -136,7 +123,7 @@ export default {
         {
           hid: "og:url",
           property: "og:url",
-          content: this.$config.siteUrl + this.$route.path,
+          content: this.$config.siteUrl + "/contacts",
         },
         {
           hid: "og:title",

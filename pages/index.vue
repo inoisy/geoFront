@@ -1,6 +1,9 @@
 <template>
   <div class="white text--black">
-    <section :class="$style['first-section']">
+    <section
+      :class="$style.firstSection"
+      :style="`background-image: url(${require('~/assets/bg1.jpg')})`"
+    >
       <v-container grid-list-lg fill-height class="py-12">
         <v-row justify="center" align="center">
           <v-col cols="12" sm="10" md="10" lg="7">
@@ -83,7 +86,7 @@
         :img="service.info.img"
         :slug="`/services/${service.slug}`"
         :name="service.name"
-      ></service-feature>
+      />
     </LazyHydrate>
     <LazyHydrate when-visible>
       <steps :steps="page.steps" class="mt-12" />
@@ -93,25 +96,157 @@
     </LazyHydrate>
   </div>
 </template>
+<script>
+import gql from "graphql-tag";
+import LazyHydrate from "vue-lazy-hydration";
+
+export default {
+  components: {
+    LazyHydrate,
+  },
+  async asyncData({ app, error }) {
+    const {
+      data: { services, mainPage },
+    } = await app.apolloProvider.defaultClient.query({
+      query: gql`
+        {
+          services(where: { isMain: true }) {
+            name
+            slug
+            description
+            icon {
+              url
+            }
+            info {
+              header
+              content
+              img {
+                url
+                formats
+              }
+            }
+          }
+          mainPage {
+            title
+            metaDescription
+            content
+            header
+            subheader
+            benefits {
+              header
+              content
+              icon {
+                url
+              }
+            }
+            steps {
+              header
+              content
+              icon {
+                url
+              }
+              order
+            }
+          }
+        }
+      `,
+    });
+    if (!mainPage || !services) {
+      return error({
+        statusCode: 404,
+        message: "Информацию не удалось получить",
+      });
+    }
+
+    mainPage.steps = mainPage.steps.sort((a, b) => a.order - b.order);
+    return {
+      page: mainPage,
+      services: services,
+    };
+  },
+  head() {
+    return {
+      title: this.page.title || "GeoWorks",
+      titleTemplate: "",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: this.page.metaDescription,
+        },
+        {
+          hid: "og:url",
+          property: "og:url",
+          content: this.$config.siteUrl,
+        },
+        {
+          hid: "og:title",
+          property: "og:title",
+          content: this.page.title,
+        },
+        {
+          hid: "og:description",
+          property: "og:description",
+          content: this.page.metaDescription,
+        },
+      ],
+      link: [
+        {
+          rel: "canonical",
+          href: this.$config.siteUrl,
+        },
+      ],
+    };
+  },
+  methods: {
+    handleOffer() {
+      this.$store.dispatch("showDialog", {
+        isShow: true,
+      });
+    },
+  },
+};
+</script>
+
 <style lang="scss" scoped module>
-.first-section {
+.firstSection {
   min-height: 610px;
   > div {
     min-height: inherit;
   }
-  @include bg(
-    linear-gradient(180deg, rgba(0, 0, 0, 0.68) 0%, rgba(0, 0, 0, 0) 100%),
-    linear-gradient(0deg, rgba(0, 0, 0, 0.57), rgba(0, 0, 0, 0.57)),
-    url(/bg.jpg)
-  );
+  // background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #161616;
+  // @include bg(
+  //   linear-gradient(180deg, rgba(0, 0, 0, 0.68) 0%, rgba(0, 0, 0, 0) 100%),
+  //   linear-gradient(0deg, rgba(0, 0, 0, 0.57), rgba(0, 0, 0, 0.57)),
+  //   url(/bg.jpg)
+  // );
   background-position: 80%;
+  @include sm {
+    background-position: 70%;
+  }
+  @include md {
+    background-position: center;
+  }
 }
+
 .header {
   font-size: 2rem;
   line-height: 125%;
+  @include sm {
+    font-size: 36px;
+  }
+  @include lg {
+    font-size: 48px;
+  }
 }
 .subheader {
   font-size: 1rem;
+  @include sm {
+    font-size: 18px;
+  }
 }
 .serviceCardWrapper {
   margin-top: -50px;
@@ -217,153 +352,25 @@
   }
 }
 
-@include sm {
-  .header {
-    font-size: 36px;
-  }
-  .subheader {
-    font-size: 18px;
-  }
-  .first-section {
-    background-position: 70%;
-  }
-}
-@include md {
-  .first-section {
-    background-position: center;
-  }
-}
-@include lg {
-  .header {
-    font-size: 48px;
-  }
-}
+// @include sm {
+//   .header {
+//     font-size: 36px;
+//   }
+//   .subheader {
+//     font-size: 18px;
+//   }
+//   .firstSection {
+//     background-position: 70%;
+//   }
+// }
+// @include md {
+//   .firstSection {
+//     background-position: center;
+//   }
+// }
+// @include lg {
+//   .header {
+//     font-size: 48px;
+//   }
+// }
 </style>
-<script>
-import gql from "graphql-tag";
-import LazyHydrate from "vue-lazy-hydration";
-// import ServiceFeature from "~/components/ServiceFeature.vue";
-// import Steps from "~/components/Steps.vue";
-// import Benefits from "~/components/Benefits.vue";
-
-export default {
-  components: {
-    LazyHydrate,
-    // ServiceFeature,
-    // Steps,
-    // Benefits,
-  },
-  async asyncData(ctx) {
-    const client = ctx.app.apolloProvider.defaultClient;
-    const { data } = await client.query({
-      query: gql`
-        {
-          services(where: { isMain: true }) {
-            name
-            slug
-            description
-            icon {
-              url
-            }
-            info {
-              header
-              content
-              img {
-                url
-                formats
-              }
-            }
-          }
-          mainPage {
-            title
-            metaDescription
-            content
-            header
-            subheader
-            benefits {
-              header
-              content
-              icon {
-                url
-              }
-            }
-            steps {
-              header
-              content
-              icon {
-                url
-              }
-              order
-            }
-          }
-        }
-      `,
-    });
-    if (!data.mainPage) {
-      return ctx.error({
-        statusCode: 404,
-        message: "Информацию не удалось получить",
-      });
-    }
-
-    // return this.arrays;
-    data.mainPage.steps = data.mainPage.steps.sort((a, b) => {
-      if (a.order < b.order) return -1;
-      if (a.order > b.order) return 1;
-      return 0;
-    });
-    // console.log("🚀 ~ file: index.vue ~ line 265 ~ asyncData ~ data", data);
-    return {
-      page: data.mainPage,
-      services: data.services,
-    };
-  },
-  data() {
-    return {
-      // imageBaseUrl: this.$config.imageBaseUrl,
-      showExample: false,
-    };
-  },
-  methods: {
-    handleOffer() {
-      this.$store.dispatch("showDialog", {
-        isShow: true,
-      });
-    },
-  },
-  head() {
-    return {
-      title: this.page.title || "GeoWorks",
-      titleTemplate: "",
-      meta: [
-        {
-          hid: "description",
-          name: "description",
-          content: this.page.metaDescription,
-        },
-        {
-          hid: "og:url",
-          property: "og:url",
-          content: this.$config.siteUrl,
-        },
-        {
-          hid: "og:title",
-          property: "og:title",
-          content: this.page.title,
-        },
-        {
-          hid: "og:description",
-          property: "og:description",
-          content: this.page.metaDescription,
-        },
-      ],
-      link: [
-        {
-          rel: "canonical",
-          href: this.$config.siteUrl + "/",
-        },
-      ],
-    };
-  },
-};
-</script>

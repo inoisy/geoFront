@@ -1,4 +1,5 @@
-import gql from "graphql-tag";
+// import gql from "graphql-tag";
+import data from '~/static/data.json'
 
 export const state = () => ({
     services: [],
@@ -18,22 +19,23 @@ export const state = () => ({
 export const getters = {
     menuItems: (state) => {
         return [
-            {
-                name: "Главная",
-                slug: "/",
-            },
+            // {
+            //     name: "Главная",
+            //     slug: "/",
+            // },
             {
                 name: "Услуги",
-                slug: "/services",
+                slug: "services",
                 items: state.services,
+                disable: true
             },
             {
                 name: "О компании",
-                slug: "/about",
+                slug: "about",
             },
             {
                 name: "Контакты",
-                slug: "/contacts",
+                slug: "contacts",
             },
         ];
     }
@@ -48,9 +50,9 @@ export const mutations = {
     }
 }
 export const actions = {
-    async nuxtServerInit(state, { app }) {
-        await state.commit("init", (await this._vm.$getCachedData()));
-        // const cache = await this._vm.$getCachedData()
+    async nuxtServerInit(state) {
+        await state.commit("init", data);
+        // const cache = await this._vm.$getCachedData(), { app }
         // // console.log("cache", cache)
         // if (cache) {
         //     await state.commit("init", cache)
@@ -83,38 +85,37 @@ export const actions = {
         //     // }
         // }
     },
-    async fetchMainPage(state) {
-        const client = this.app.apolloProvider.defaultClient;
-        const query = gql`{
-            mainPage {
-                title
-                metaDescription
-                content
-                benefits {
-                header
-                content
-                icon {
-                    url
-                }
-                }
-                steps {
-                header
-                content
-                icon {
-                    url
-                }
-                order
-                }
-            }
-            }`
-        const {
-            data
-        } = await client.query({
-            query
-        })
-        // console.log("🚀 ~ file: index.js ~ line 72 ~ fetchMainPage ~ data", data)
-        return data
-    },
+    // async fetchMainPage(state) {
+    //     const client = this.app.apolloProvider.defaultClient;
+    //     const query = gql`{
+    //         mainPage {
+    //             title
+    //             metaDescription
+    //             content
+    //             benefits {
+    //             header
+    //             content
+    //             icon {
+    //                 url
+    //             }
+    //             }
+    //             steps {
+    //             header
+    //             content
+    //             icon {
+    //                 url
+    //             }
+    //             order
+    //             }
+    //         }
+    //         }`
+    //     const {
+    //         data
+    //     } = await client.query({
+    //         query
+    //     })
+    //     return data
+    // },
     showDialog(state, data) {
         state.commit("dialog", data)
     }
