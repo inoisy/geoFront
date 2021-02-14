@@ -1,6 +1,6 @@
 export default ({ app }, inject) => {
   const moduleOptions = JSON.parse('<%= JSON.stringify(options) %>');
-  const isLocal = true
+  const isLocal = process.env.USE_LOCAL_YM || false;
   // console.log("🚀 ~ file: plugin.js ~ line 3 ~ moduleOptions", moduleOptions)
   const { router } = app;
   const ymUrl =
