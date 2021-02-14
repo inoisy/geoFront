@@ -128,7 +128,8 @@ export default {
         accurateTrackBounce: true,
         webvisor: true,
         useCDN: false,
-        defer: true
+        defer: true,
+        // useLocal:true
       }],
     // ['@rkaliev/nuxtjs-yandex-metrika',
     //   {

@@ -91,3 +91,5 @@ sw.*
 yarn.lock
 .trash
 yarn-error.log
+static/tag.js
+static/data.json

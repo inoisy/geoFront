@@ -3,23 +3,23 @@ const axios = require("axios")
 const fs = require('fs')
 const path = require('path')
 
-// async function downloadImage(url, dir, name) {
-//     const downloadPath = path.resolve(__dirname, dir, name)
-//     const writer = fs.createWriteStream(downloadPath)
+async function download(url, dir, name) {
+  const downloadPath = path.resolve(__dirname, dir, name)
+  const writer = fs.createWriteStream(downloadPath)
 
-//     const response = await axios({
-//         url: encodeURI(url),
-//         method: 'GET',
-//         responseType: 'stream'
-//     })
+  const response = await axios({
+    url: encodeURI(url),
+    method: 'GET',
+    responseType: 'stream'
+  })
 
-//     response.data.pipe(writer)
+  response.data.pipe(writer)
 
-//     return new Promise((resolve, reject) => {
-//         writer.on('finish', resolve)
-//         writer.on('error', reject)
-//     })
-// }
+  return new Promise((resolve, reject) => {
+    writer.on('finish', resolve)
+    writer.on('error', reject)
+  })
+}
 const query = `
       {
       services(where:{isMain:true}) {
@@ -66,10 +66,15 @@ export default async function (ctx) {
       //     // console.log(manufacturer.img)
       //     await downloadImage(apiUrl + manufacturer.img.url, "../assets/images/manufacturers", manufacturer.slug + manufacturer.img.ext)
       // }
+
+
       await fs.writeFileSync(
         path.resolve(__dirname, "../static/data.json"),
         JSON.stringify({ info, services }),
       );
+
+      await download("https://mc.yandex.ru/metrika/tag.js", "../static", "tag.js")
+
     } catch (e) {
       throw new Error(e)
     }

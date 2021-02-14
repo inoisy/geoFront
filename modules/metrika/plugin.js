@@ -1,10 +1,12 @@
 export default ({ app }, inject) => {
   const moduleOptions = JSON.parse('<%= JSON.stringify(options) %>');
+  const isLocal = true
   // console.log("🚀 ~ file: plugin.js ~ line 3 ~ moduleOptions", moduleOptions)
   const { router } = app;
   const ymUrl =
-    (moduleOptions.useCDN ? 'https://cdn.jsdelivr.net/npm/yandex-metrica-watch' : 'https://mc.yandex.ru/metrika') +
-    '/tag.js';
+    isLocal ? "/tag.js" :
+      (moduleOptions.useCDN ? 'https://cdn.jsdelivr.net/npm/yandex-metrica-watch' : 'https://mc.yandex.ru/metrika') +
+      '/tag.js';
 
   /* eslint-disable */
   (function (m, e, t, r, i, k, a) {
