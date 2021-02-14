@@ -120,6 +120,25 @@ export default {
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
+    ["~/modules/metrika/index.js",
+      {
+        id: process.env.YANDEX_ID,
+        clickmap: true,
+        trackLinks: true,
+        accurateTrackBounce: true,
+        webvisor: true,
+        useCDN: false,
+        defer: true
+      }],
+    // ['@rkaliev/nuxtjs-yandex-metrika',
+    //   {
+    //     id: process.env.YANDEX_ID,
+    //     clickmap: true,
+    //     trackLinks: true,
+    //     accurateTrackBounce: true,
+    //     webvisor: true,
+    //     useCDN: false
+    //   }],
     // '@blokwise/dynamic',
     'nuxt-ssr-cache',
     // https://go.nuxtjs.dev/axios
@@ -154,14 +173,7 @@ export default {
       themeColor: '#151317'
     }],
 
-    ['@rkaliev/nuxtjs-yandex-metrika',
-      {
-        id: process.env.YANDEX_ID,
-        clickmap: true,
-        trackLinks: true,
-        accurateTrackBounce: true,
-        webvisor: true
-      }],
+
     //  ['@nuxtjs/redirect-module', process.env.REDIRECT_ROUTES],
     // ['@nuxtjs/google-analytics', {
     //   id: process.env.GOOGLE_ID
@@ -247,6 +259,6 @@ export default {
     //     }],
     //   ]
     // },
-    // transpile: ["@nuxtjs/apollo", "@nuxtjs/vuetify", /^@nuxtjs.*/, "vue-lazy-hydration", "vue-the-mask", "vue-yandex-maps", "vuelidate", "@rkaliev/nuxtjs-yandex-metrika", "nuxt-social-meta", "nuxt-ssr-cache", "graphql-tag", "vuelidate"]
+    transpile: ["@nuxtjs/apollo", "@nuxtjs/vuetify", /^@nuxtjs.*/, "vue-lazy-hydration", "vue-the-mask", "vue-yandex-maps", "vuelidate", "nuxt-social-meta", "nuxt-ssr-cache", "graphql-tag", "vuelidate"]
   }
 }
