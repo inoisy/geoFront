@@ -2,13 +2,19 @@
   <div>
     <default-header :header="title" :breadcrumbs="breadcrumbs"></default-header>
     <section class="white">
-      <v-container grid-list-lg>
-        <v-row class="py-12">
-          <v-col cols="12" md="6" lg="4" :class="$style.contactsWrapper">
+      <v-container>
+        <v-row class="py-12" no-gutters>
+          <v-col
+            cols="12"
+            md="6"
+            lg="4"
+            :class="$style.contactsWrapper"
+            class="pa-3"
+          >
             <v-list style="background: transparent !important" light>
               <v-list-item title="Телефон" :href="`tel:${info.phone}`">
                 <v-list-item-icon>
-                  <svg-icon name="phone" style="width: 24px; height: 24px" />
+                  <svg-icon name="phone" />
                 </v-list-item-icon>
                 <v-list-item-content itemprop="telephone">
                   {{ info.phone }}
@@ -16,7 +22,7 @@
               </v-list-item>
               <v-list-item :href="`mailto:${info.email}`" title="email">
                 <v-list-item-icon>
-                  <svg-icon name="mail" style="width: 24px; height: 24px" />
+                  <svg-icon name="mail" />
                 </v-list-item-icon>
                 <v-list-item-content itemprop="email">
                   {{ info.email }}
@@ -24,13 +30,13 @@
               </v-list-item>
               <v-list-item title="Адрес">
                 <v-list-item-icon>
-                  <svg-icon name="pin" style="width: 24px; height: 24px" />
+                  <svg-icon name="pin" />
                 </v-list-item-icon>
                 {{ info.address }}
               </v-list-item>
               <v-list-item title="Время работы">
                 <v-list-item-icon>
-                  <svg-icon name="time" style="width: 24px; height: 24px" />
+                  <svg-icon name="time" />
                 </v-list-item-icon>
                 {{ info.accessTime }}
               </v-list-item>
@@ -42,6 +48,7 @@
             offset-lg="1"
             lg="7"
             :class="$style.yandexMapWrapper"
+            class="pa-3"
           >
             <client-only>
               <map-component :coords="info.addressCoords" />

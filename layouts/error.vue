@@ -1,7 +1,7 @@
 <template>
-  <v-container grid-list-lg class="fill-height">
+  <v-container class="fill-height" style="min-height: 70vh">
     <v-row justify="center">
-      <v-col cols="12" md="6">
+      <v-col cols="12" md="6" class="py-16">
         <h1 :class="$style.title">{{ error.statusCode }}</h1>
         <h2 :class="$style.info">{{ error.message }}</h2>
         <v-btn :class="$style.button" to="/" replace color="black" dark large>

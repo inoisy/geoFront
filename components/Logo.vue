@@ -3,7 +3,7 @@
     <!-- <svg-icon name="logo" class="logo" /> -->
     <v-img
       class="logo"
-      :src="require('~/assets/logo.svg?inline')"
+      :src="require('~/assets/logo.svg')"
       alt="Логотип"
       contain
     />
@@ -14,8 +14,11 @@
   display: flex;
   align-items: center;
   .logo {
-    width: 200px;
+    width: 160px;
     max-height: 85%;
+    @include sm {
+      width: 200px;
+    }
     @include md {
       width: 260px;
     }

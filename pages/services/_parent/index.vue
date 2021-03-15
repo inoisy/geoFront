@@ -8,41 +8,39 @@
         :icon="service.icon"
       ></service-header>
     </LazyHydrate>
-    <section class="white">
-      <v-container grid-list-lg class="pt-14 pb-12">
-        <v-row>
-          <v-col cols="12">
-            <LazyHydrate when-visible>
-              <mobile-aside-menu
-                :services="service.child"
-                :slug="service.slug"
-              />
-            </LazyHydrate>
-            <LazyHydrate when-visible>
-              <desktop-aside-menu
-                :services="service.child"
-                :slug="service.slug"
-              />
-            </LazyHydrate>
-            <LazyHydrate never>
-              <content-wrapper :content="service.content" />
-            </LazyHydrate>
-          </v-col>
-        </v-row>
+    <section class="sectionWrapper">
+      <v-container>
+        <!-- <v-row no-gutters> -->
+        <div class="pa-3">
+          <LazyHydrate when-visible>
+            <mobile-aside-menu
+              class="mb-14 hidden-md-and-up"
+              :services="children"
+              :slug="service.slug"
+            />
+          </LazyHydrate>
+          <LazyHydrate when-visible>
+            <desktop-aside-menu :services="children" :slug="service.slug" />
+          </LazyHydrate>
+          <LazyHydrate never>
+            <content-wrapper :content="service.content" />
+          </LazyHydrate>
+        </div>
+        <!-- </v-row> -->
       </v-container>
     </section>
     <LazyHydrate
-      v-for="(service, i) in service.child"
+      v-for="(child, i) in children"
       :key="`service-${i}`"
       when-visible
     >
       <service-feature
-        :header="service.name"
-        :content="service.description"
-        :img="service.img"
-        :slug="`/services/${service.parent[0].slug}/${service.slug}`"
+        :header="child.name"
+        :content="child.description"
+        :imgUrl="child.img"
+        :slug="`/services/${service.slug}/${child.slug}`"
         :is-with-gray="true"
-        :name="service.name"
+        :name="child.name"
       />
     </LazyHydrate>
   </div>
@@ -51,20 +49,11 @@
 <script>
 import gql from "graphql-tag";
 import LazyHydrate from "vue-lazy-hydration";
-// import ServiceHeader from "~/components/ServiceHeader.vue";
-// import ServiceFeature from "~/components/ServiceFeature.vue";
-// import MobileAsideMenu from "~/components/MobileAsideMenu.vue";
-// import DesktopAsideMenu from "~/components/DesktopAsideMenu.vue";
-// import ContentWrapper from "~/components/ContentWrapper.vue";
+import { calculateImageUrl } from "~/utils/images";
 
 export default {
   components: {
     LazyHydrate,
-    // ServiceHeader,
-    // ServiceFeature,
-    // MobileAsideMenu,
-    // DesktopAsideMenu,
-    // ContentWrapper,
   },
   async asyncData({ params, app, error }) {
     // const client = ;
@@ -77,6 +66,7 @@ export default {
       query: gql`
         query ServiceQuery($slug: String!) {
           services(where: { slug: $slug }) {
+            _id
             name
             slug
             description
@@ -86,14 +76,13 @@ export default {
             icon {
               url
             }
-            child {
-              id
+            child(sort: "name:asc") {
               name
               slug
               description
-              parent {
-                slug
-              }
+              # parent {
+              #   slug
+              # }
               img {
                 url
                 formats
@@ -103,19 +92,36 @@ export default {
         }
       `,
     });
+
     if (!services || !services.length) {
       return error({
         statusCode: 404,
         message: "Информацию не удалось получить",
       });
     }
+    const { child, ...service } = services[0];
+    // const children = child.reduce((acc, val) => {
+    //   acc.push({
+    //     ...val,
+    //     img: calculateImageUrl(val.img),
+    //   });
+    //   return acc;
+    // }, []);
+    // console.log(
+    //   "🚀 ~ file: index.vue ~ line 116 ~ children ~ children",
+    //   children
+    // );
+
     return {
-      service: services[0], //Object.freeze(services[0]),
-    };
-  },
-  computed: {
-    breadcrumbs() {
-      return [
+      service,
+      children: child.reduce((acc, val) => {
+        acc.push({
+          ...val,
+          img: calculateImageUrl(val.img),
+        });
+        return acc;
+      }, []), // Object.freeze(services[0]),
+      breadcrumbs: [
         {
           text: "Главная",
           to: "/",
@@ -125,12 +131,30 @@ export default {
           to: "/services",
         },
         {
-          text: this.service.name,
-          to: this.service.slug,
+          text: service.name,
+          to: service.slug,
         },
-      ];
-    },
+      ],
+    };
   },
+  // computed: {
+  //   breadcrumbs() {
+  //     return [
+  //       {
+  //         text: "Главная",
+  //         to: "/",
+  //       },
+  //       {
+  //         text: "Услуги",
+  //         to: "/services",
+  //       },
+  //       {
+  //         text: this.service.name,
+  //         to: this.service.slug,
+  //       },
+  //     ];
+  //   },
+  // },
   head() {
     return {
       title: this.service.name,
@@ -143,7 +167,7 @@ export default {
         {
           hid: "og:url",
           property: "og:url",
-          content: this.$config.siteUrl + this.$route.path,
+          content: `${this.$config.siteUrl}/services/${this.service.name}`,
         },
         {
           hid: "og:title",
@@ -166,3 +190,14 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped module>
+// .section {
+//   padding-top: 4.5rem;
+//   padding-bottom: 4rem;
+//   @include md {
+//     padding-top: 6rem;
+//     padding-bottom: 5rem;
+//   }
+// }
+</style>

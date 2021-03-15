@@ -1,104 +1,123 @@
 <template>
-  <div class="white text--black">
-    <section
-      :class="$style.firstSection"
-      :style="`background-image: url(${require('~/assets/bg1.jpg')})`"
-    >
-      <v-container grid-list-lg fill-height class="py-12">
-        <v-row justify="center" align="center">
-          <v-col cols="12" sm="10" md="10" lg="7">
-            <h1 :class="$style.header" class="mb-5 text-center">
-              {{ page.header }}
-            </h1>
-            <p :class="$style.subheader" class="text-center mb-6">
-              {{ page.subheader }}
-            </p>
-            <v-btn
-              id="main-screen-btn"
-              class="mx-auto d-flex"
-              x-large
-              outlined
-              @click="handleOffer(false)"
-            >
-              Оставить заявку
-            </v-btn>
-          </v-col>
-        </v-row>
-      </v-container>
-    </section>
-    <section>
-      <v-container grid-list-lg style="position: relative">
-        <v-row
-          justify="center"
-          align="center"
-          :class="$style.serviceCardWrapper"
+  <div>
+    <LazyHydrate when-visible>
+      <section
+        :class="$style.firstSection"
+        :style="`background-image: url(${require('~/assets/bg1.jpg')})`"
+      >
+        <v-container
+          :class="$style.firstSectionInner"
+          fill-height
+          class="py-12"
         >
-          <v-col
-            v-for="(service, i) in services"
-            :key="`service-card-${i}`"
-            class="mb-3"
-            cols="12"
-            sm="10"
-            md="4"
-          >
-            <v-card
-              :to="`/services/${service.slug}`"
-              :class="$style.serviceCard"
-              :title="service.name"
-              class="px-6 py-4"
-              light
-            >
-              <div
-                :class="$style.serviceImgWrapper"
-                class="d-flex align-center mb-2"
-              >
-                <v-img
-                  :src="
-                    service.icon
-                      ? $config.imageBaseUrl + service.icon.url
-                      : '/no-camera.svg'
-                  "
-                  :alt="service.name"
-                  class="d-block mx-auto"
-                  width="55px"
-                  height="55px"
-                />
-              </div>
-              <h2 :class="$style.serviceCardHeader" class="mb-2">
-                {{ service.name }}
-              </h2>
-              <p :class="$style.serviceCardDescription">
-                {{ service.description }}
+          <v-row justify="center" align="center" no-gutters>
+            <v-col class="pa-3" cols="12" sm="10" md="10" lg="7">
+              <h1 :class="$style.header" class="mb-5 text-center">
+                {{ page.header }}
+              </h1>
+              <p :class="$style.subheader" class="text-center mb-6">
+                {{ page.subheader }}
               </p>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-container>
-    </section>
+              <v-btn
+                class="callToActionButton mx-auto d-flex"
+                outlined
+                dark
+                @click="handleOffer(false)"
+              >
+                Оставить заявку
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-container>
+      </section>
+    </LazyHydrate>
+    <LazyHydrate when-visible>
+      <section>
+        <v-container style="position: relative">
+          <v-row
+            justify="center"
+            align="center"
+            :class="$style.serviceCardWrapper"
+            no-gutters
+          >
+            <v-col
+              v-for="(service, i) in services"
+              :key="`service-card-${i}`"
+              class="mb-3 pa-3"
+              cols="12"
+              sm="10"
+              md="4"
+            >
+              <v-card
+                :to="`/services/${service.slug}`"
+                :class="$style.serviceCard"
+                :title="service.name"
+                class="px-6 py-4"
+                light
+              >
+                <div
+                  :class="$style.serviceImgWrapper"
+                  class="d-flex align-center mb-2"
+                >
+                  <v-img
+                    :src="
+                      service.icon
+                        ? $config.imageBaseUrl + service.icon.url
+                        : '/no-camera.svg'
+                    "
+                    :alt="service.name"
+                    class="d-block mx-auto"
+                    width="55px"
+                    height="55px"
+                  />
+                </div>
+                <h2 :class="$style.serviceCardHeader" class="mb-2">
+                  {{ service.name }}
+                </h2>
+                <div :class="$style.serviceCardDescription">
+                  {{ service.description }}
+                </div>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      </section>
+    </LazyHydrate>
     <LazyHydrate
       v-for="(service, i) in services"
       :key="`service-${i}`"
       when-visible
     >
       <service-feature
-        :header="service.info.header"
-        :content="service.info.content"
-        :img="service.info.img"
+        :class="$style.section"
+        class="sectionWrapper"
+        :header="service.header"
+        :content="service.content"
+        :imgUrl="service.img"
         :slug="`/services/${service.slug}`"
         :name="service.name"
       />
     </LazyHydrate>
     <LazyHydrate when-visible>
-      <steps :steps="page.steps" class="mt-12" />
+      <steps
+        :class="$style.section"
+        class="sectionWrapper mt-12"
+        :items="page.steps"
+      />
     </LazyHydrate>
     <LazyHydrate when-visible>
-      <benefits :benefits="page.benefits" />
+      <benefits
+        :class="$style.section"
+        class="sectionWrapper"
+        :items="page.benefits"
+      />
     </LazyHydrate>
   </div>
 </template>
 <script>
 import gql from "graphql-tag";
 import LazyHydrate from "vue-lazy-hydration";
+import { calculateImageUrl } from "~/utils/images";
 
 export default {
   components: {
@@ -157,11 +176,31 @@ export default {
         message: "Информацию не удалось получить",
       });
     }
-
-    mainPage.steps = mainPage.steps.sort((a, b) => a.order - b.order);
+    const servicesData = services.reduce((acc, service) => {
+      acc.push({
+        header: service.info.header,
+        content: service.info.content,
+        slug: service.slug,
+        name: service.name,
+        img: calculateImageUrl(service.info.img),
+        icon: service.icon,
+        description: service.description,
+      });
+      return acc;
+    }, []);
+    // console.log(
+    //   "🚀 ~ file: index.vue ~ line 176 ~ servicesData ~ servicesData",
+    //   servicesData
+    // );
+    // mainPage.steps = mainPage.steps; //.sort((a, b) => a.order - b.order);
+    // :header="service.info.header"
+    //   :content="service.info.content"
+    //   :img="service.info.img"
+    //   :slug="`/services/${service.slug}`"
+    //   :name="service.name"
     return {
       page: mainPage,
-      services: services,
+      services: servicesData, // : services,
     };
   },
   head() {
@@ -209,9 +248,19 @@ export default {
 </script>
 
 <style lang="scss" scoped module>
+.section {
+  // padding-top: 6rem;
+  // padding-bottom: 5rem;
+  &:nth-child(2n) {
+    background-color: $gray;
+    --content-color: white;
+  }
+}
 .firstSection {
-  min-height: 610px;
-  > div {
+  height: 610px;
+  max-height: calc(100vh - var(--toolbar-height));
+  color: $white;
+  .firstSectionInner {
     min-height: inherit;
   }
   // background-position: center;
@@ -306,51 +355,51 @@ export default {
   }
 }
 
-.serviceFeatureRow {
-  .serviceFeatureImgWrapper {
-    display: flex;
-    align-items: center;
-    .serviceFeatureImg {
-      border-radius: 3px;
-      box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 100%;
-      display: block;
-    }
-  }
-  .serviceFeatureTextWrapper {
-    color: #18191f;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    .serviceFeatureHeader {
-      font-weight: 600;
-      font-size: 32px;
-      margin-bottom: 24px;
-      line-height: 125%;
-    }
-    .serviceFeatureContent {
-      font-weight: 300;
-      font-size: 16px;
-      line-height: 150%;
-    }
-  }
-  &:nth-child(odd) {
-    flex-direction: row-reverse;
-  }
-  @include md {
-    .serviceFeatureImgWrapper {
-      padding-left: 8.33333%;
-    }
-    // padding-left: 8.33333%;
-    &:nth-child(odd) {
-      .serviceFeatureImgWrapper {
-        padding-right: 8.33333%;
-        padding-left: 12px;
-      }
-    }
-  }
-}
+// .serviceFeatureRow {
+//   .serviceFeatureImgWrapper {
+//     display: flex;
+//     align-items: center;
+//     .serviceFeatureImg {
+//       border-radius: 3px;
+//       box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.1);
+//       width: 100%;
+//       max-width: 100%;
+//       display: block;
+//     }
+//   }
+//   .serviceFeatureTextWrapper {
+//     color: #18191f;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     .serviceFeatureHeader {
+//       font-weight: 600;
+//       font-size: 32px;
+//       margin-bottom: 24px;
+//       line-height: 125%;
+//     }
+//     .serviceFeatureContent {
+//       font-weight: 300;
+//       font-size: 16px;
+//       line-height: 150%;
+//     }
+//   }
+//   &:nth-child(odd) {
+//     flex-direction: row-reverse;
+//   }
+//   @include md {
+//     .serviceFeatureImgWrapper {
+//       padding-left: 8.33333%;
+//     }
+//     // padding-left: 8.33333%;
+//     &:nth-child(odd) {
+//       .serviceFeatureImgWrapper {
+//         padding-right: 8.33333%;
+//         padding-left: 12px;
+//       }
+//     }
+//   }
+// }
 
 // @include sm {
 //   .header {

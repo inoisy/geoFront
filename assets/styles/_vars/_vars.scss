@@ -13,5 +13,24 @@ $link-hover: #2d56d0;
 $body-font-family: "Montserrat";
 
 $black: #18191f;
-$accent: rgb(0, 126, 255);
+$accent: #004bff;
 $gray:#ececec;
+$white:#f1f3ef;
+
+// @function derive-rgb-values-from-hex($hex) {
+    //     @return red($hex),
+    //     green($hex),
+    //     blue($hex);
+    // }
+
+:root {
+    --toolbar-height: 64px;
+
+    // --white-rgb: rgb(#{derive-rgb-values-from-hex($white)});
+
+    @include md {
+        --toolbar-height: 90px;
+        // margin-top: 90px;
+    }
+
+}

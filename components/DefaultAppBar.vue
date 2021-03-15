@@ -1,8 +1,7 @@
 <template>
-  <div :class="$style.appBar">
+  <header :class="$style.appBar">
     <v-container
       fill-height
-      grid-list-lg
       :class="$style['header']"
       class="py-0 d-flex align-center"
     >
@@ -34,126 +33,190 @@
           tile
         >
           {{ item.name }}
-          <svg-icon name="arrowdown" style="width: 24px; height: 24px" />
+          <svg-icon name="arrowdown" style="margin-right: -5px" />
         </v-btn>
       </template>
-      <lazy-toolbar-catalog-menu
-        v-if="!isMobile && isMounted"
-        :items="menuItems[0].items"
-        parent-slug="services"
-      />
 
       <v-btn
         class="d-dlex"
         :href="`tel:${info.phone}`"
-        :class="$style['link-tel']"
+        :class="$style['linkTel']"
         title="Телефон"
         text
       >
-        <svg-icon name="phone" style="width: 24px; height: 24px" />
-        <span class="hidden-sm-and-down pl-2">{{ info.phone }}</span>
+        <svg-icon name="phone" />
+        <span class="hidden-lg-and-down pl-2">{{ info.phone }}</span>
       </v-btn>
       <v-btn
-        :class="$style['link-icon']"
+        :class="$style['linkIcon']"
         class="d-dlex"
         icon
         :href="`mailto:${info.email}`"
         title="Почта"
       >
-        <svg-icon name="mail" style="width: 24px; height: 24px" />
+        <svg-icon name="mail" />
       </v-btn>
       <v-btn
+        :class="$style['linkIcon']"
         class="hidden-md-and-up"
         icon
         title="Меню"
         @click.stop="$emit('show')"
       >
-        <svg-icon name="menu" style="width: 24px; height: 24px" />
+        <svg-icon name="menu" />
       </v-btn>
+      <lazy-toolbar-catalog-menu
+        v-if="!isMobile && isMounted"
+        :items="menuItems[0].items"
+        parent-slug="services"
+      />
     </v-container>
-  </div>
+  </header>
 </template>
 <style lang="scss" scoped module>
 .appBar {
-  height: 64px;
-  margin-top: 0px;
-  left: 0px;
-  right: 0px;
+  height: var(--toolbar-height);
+  min-height: var(--toolbar-height);
+
   background-color: rgb(21, 19, 23);
-  border-color: rgb(21, 19, 23);
-  box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%),
-    0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+  // border-color: rgb(21, 19, 23);
+  // box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%),
+  //   0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+  // box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%),
+  //   0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
   position: fixed;
   top: 0;
   z-index: 5;
-  @include md {
-    height: 90px;
+  margin-top: 0px;
+  // transform: translateY(0px);
+  left: 0px;
+  right: 0px;
+  // border: none;
+  // contain: layout;
+  // display: block;
+  // flex: 1 1 auto;
+  // max-width: 100%;
+
+  // transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1) transform,
+  //   0.2s cubic-bezier(0.4, 0, 0.2, 1) background-color,
+  //   0.2s cubic-bezier(0.4, 0, 0.2, 1) left,
+  //   0.2s cubic-bezier(0.4, 0, 0.2, 1) right,
+  //   280ms cubic-bezier(0.4, 0, 0.2, 1) box-shadow,
+  //   0.25s cubic-bezier(0.4, 0, 0.2, 1) max-width,
+  //   0.25s cubic-bezier(0.4, 0, 0.2, 1) width;
+  // transform: translateZ(0) perspective(1px);
+  // transition: none !important;
+
+  --icon-size: 36px;
+  --font-size: 14px;
+  --padding: 6px;
+
+  @include sm {
+    --icon-size: 48px;
   }
-}
-.header {
-  flex-wrap: nowrap !important;
-}
-
-.link,
-.link-tel {
-  font-size: 0.8rem !important;
-}
-.link {
-  height: 100% !important;
-
-  color: #f1f3ef;
-  padding: 0 6px !important;
   @include md {
-    padding: 0 8px !important;
+    --padding: 8px;
+    // .link,
+    // .linkTel {
+    //   font-size: 0.8rem !important;
+    //   // padding: 0 6px !important;
+    // }
   }
   @include lg {
-    padding: 0 16px !important;
+    --font-size: 15px;
+    --padding: 16px;
+    // .link,
+    // .linkTel {
+    //   font-size: 0.85rem !important;
+    //   // padding: 0 12px !important;
+    // }
   }
-}
-.link-tel {
-  height: 48px !important;
-  width: 48px !important;
-  display: flex;
-  min-height: 48px !important;
-  min-width: 48px !important;
-  padding: 0;
-  border-radius: 50%;
-  @include md {
+  // @include md {
+
+  // }
+  .header {
+    flex-wrap: nowrap !important;
+    background-color: #151317;
+  }
+
+  .link,
+  .linkTel {
+    font-size: var(--font-size) !important;
+  }
+  .link {
     height: 100% !important;
-    width: unset !important;
-    font-size: 0.8rem !important;
+    min-width: 100px;
     color: #f1f3ef;
-    border-radius: 0;
-    padding: 0 8px !important;
+    padding: 0 var(--padding) !important;
+    // @include md {
+    //   padding: 0 8px !important;
+    // }
+    // @include lg {
+    //   padding: 0 16px !important;
+    // }
   }
-  @include lg {
-    padding: 0 16px !important;
+
+  .linkTel {
+    height: var(--icon-size) !important;
+    width: var(--icon-size) !important;
+    display: flex;
+    min-height: var(--icon-size) !important;
+    min-width: var(--icon-size) !important;
+    padding: 0;
+    border-radius: 50%;
+    color: $white !important;
+    font-size: var(--font-size);
+    // @include sm {
+    //   height: var(--icon-size) !important;
+    //   width: var(--icon-size) !important;
+    // }
+    @include lg {
+      height: 100% !important;
+      width: unset !important;
+      // font-size: 0.8rem !important;
+      color: #f1f3ef;
+      border-radius: 0;
+      padding: 0 var(--padding) !important;
+    }
+    // @include lg {
+    //   padding: 0 16px !important;
+    // }
   }
-}
-.link-icon {
-  height: 36px !important;
-  width: 36px !important;
-  display: flex;
-}
-@include sm {
-  .link-icon {
-    height: 48px !important;
-    width: 48px !important;
+  .linkIcon {
+    height: var(--icon-size) !important;
+    width: var(--icon-size) !important;
+    display: flex;
+    color: $white !important;
   }
-}
-@include md {
-  .link,
-  .link-tel {
-    font-size: 0.8rem !important;
-    // padding: 0 6px !important;
+  .linkIcon + .linkIcon {
+    margin-left: 5px;
   }
-}
-@include lg {
-  .link,
-  .link-tel {
-    font-size: 0.85rem !important;
-    // padding: 0 12px !important;
+  .linkTel + .linkIcon {
+    margin-left: 5px;
   }
+  .link + .linkTel {
+    margin-left: 5px;
+  }
+  // @include sm {
+  //   .linkIcon {
+  //     height: var(--icon-size) !important;
+  //     width: var(--icon-size) !important;
+  //   }
+  // }
+  // @include md {
+  //   .link,
+  //   .linkTel {
+  //     font-size: 0.8rem !important;
+  //     // padding: 0 6px !important;
+  //   }
+  // }
+  // @include lg {
+  //   .link,
+  //   .linkTel {
+  //     font-size: 0.85rem !important;
+  //     // padding: 0 12px !important;
+  //   }
+  // }
 }
 </style>
 <script>

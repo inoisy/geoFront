@@ -6,11 +6,7 @@
     class="mb-6"
     style="width: 100%; height: 100%"
   >
-    <ymap-marker
-      marker-id="1"
-      marker-type="placemark"
-      :coords="coords"
-    ></ymap-marker>
+    <ymap-marker marker-id="1" marker-type="placemark" :coords="coords" />
   </yandex-map>
 </template>
 <script>
@@ -23,7 +19,7 @@ export default {
   data() {
     return {
       mapSettings: {
-        apiKey: process.env.MAP_KEY,
+        apiKey: this.$config.yandexMapID, //process.env.MAP_KEY,
         lang: "ru_RU",
         version: "2.1",
       },

@@ -1,24 +1,27 @@
 <template>
-  <v-dialog :value="show" @click:outside="close">
-    <v-card :class="$style.dialogImgWrapper">
-      <div>
-        <v-img
-          :class="$style.dialogImg"
-          :src="$config.imageBaseUrl + img"
-          :alt="alt"
-          contain
-        />
+  <v-dialog
+    v-model="isShow"
+    :max-width="imgWidth"
+    :scrollable="false"
+    :max-height="imgHeight"
+  >
+    <v-card :class="$style.dialogImgWrapper" dark>
+      <!-- <div> -->
+      <v-img
+        :class="$style.dialogImg"
+        :src="imgUrl"
+        :alt="alt"
+        contain
+        :max-width="imgWidth"
+        :height="imgHeight"
+      />
+      <!-- </div> -->
+      <div :class="$style.buttonWrapper">
+        <v-btn class="close-btn" fab @click="close">
+          <!-- style=" z-index: 10" -->
+          <svg-icon name="close" />
+        </v-btn>
       </div>
-
-      <v-btn
-        class="close-btn"
-        fab
-        outlined
-        style="position: absolute; top: 16px; right: 16px; z-index: 10"
-        @click="close"
-      >
-        <svg-icon name="close" style="width: 24px; height: 24px" />
-      </v-btn>
     </v-card>
   </v-dialog>
 </template>
@@ -30,13 +33,19 @@ export default {
       type: Boolean,
       default: false,
     },
-    img: {
+    imgUrl: {
       type: String,
-      default: "",
+      required: true,
     },
     alt: {
       type: String,
-      default: "",
+      required: true,
+    },
+    imgWidth: {
+      type: Number,
+    },
+    imgHeight: {
+      type: Number,
     },
   },
   methods: {
@@ -44,16 +53,40 @@ export default {
       this.$emit("close");
     },
   },
+  computed: {
+    isShow: {
+      get() {
+        return this.show;
+      },
+      set(val) {
+        if (!val) {
+          this.close();
+        }
+      },
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped module>
 .dialogImgWrapper {
+  position: relative;
+  max-height: inherit;
   .dialogImg {
-    max-height: calc(100vh - 64px);
-    @include md {
-      max-height: calc(90vh - 24px);
-    }
+    // height: 100%;
+    max-height: inherit;
+    width: 100%;
   }
+  .buttonWrapper {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
+  // .dialogImg {
+  //   max-height: calc(100vh - 64px);
+  //   @include md {
+  //     max-height: calc(90vh - 24px);
+  //   }
+  // }
 }
 </style>

@@ -1,3 +1,4 @@
+$xl-width:1904px;
 $lg-width: 1264px;
 $md-width: 960px;
 $sm-width: 600px;
@@ -5,6 +6,16 @@ $sm-width: 600px;
 /*==========  Desktop First  ==========*/
 
 /* Large devices | 1200px or less */
+// }// @media (min-width: $xl-width) {
+//     .container {}
+// }
+
+@mixin xl {
+    @media only screen and (min-width: #{$xl-width}) {
+        @content
+    }
+}
+
 @mixin lg {
     @media only screen and (min-width: #{$lg-width}) {
         @content

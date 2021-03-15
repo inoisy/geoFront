@@ -18,7 +18,7 @@
         style="position: absolute; right: 24px; top: 24px"
         @click="close"
       >
-        <svg-icon name="close" style="width: 24px; height: 24px" />
+        <svg-icon name="close" />
       </v-btn>
       <div v-if="!formSuccess">
         <div
@@ -112,10 +112,12 @@
           style="width: 200px; height: 200px"
         />
         <!-- <v-icon size="200" class="mx-auto d-flex">check_circle_outline</v-icon> -->
-        <p class="text-h4 text-center">Заявка отправлена!</p>
-        <p class="text-center text-title">
+        <h2 class="text-center" style="margin-bottom: 1.3rem; font-size: 2rem">
+          Заявка отправлена!
+        </h2>
+        <div class="text-center" style="font-size: 20px">
           Мы свяжемся с вами в ближайшее время.
-        </p>
+        </div>
       </div>
     </v-card>
   </v-dialog>
@@ -279,7 +281,22 @@ export default {
         })
         .then(() => {
           this.formSuccess = true;
+
+          // if (window.yaCounter54918895) {
+          //
+          // }
           this.clear();
+
+          if (
+            this.$config.yandexMetrikaID &&
+            window[`yaCounter${this.$config.yandexMetrikaID}`]
+          ) {
+            console.log("order");
+            window[`yaCounter${this.$config.yandexMetrikaID}`].reachGoal(
+              "order"
+            );
+          }
+          // window[`yaCounter${this.$config.yandexMetrikaID}`]
         })
         .catch(() => {
           this.formError = true;

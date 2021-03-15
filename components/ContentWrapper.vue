@@ -75,6 +75,47 @@
   ::v-deep h2:not(:first-child) {
     margin-top: 3rem;
   }
+
+  ::v-deep table {
+    border-spacing: 0;
+    max-width: 100%;
+    width: 100%;
+
+    tr:not(:last-child) td {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    }
+
+    tr td:not(:last-child),
+    td:only-child {
+      border-right: 1px solid rgba(0, 0, 0, 0.12);
+    }
+
+    tr {
+      td {
+        padding-right: 16px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        // &:last-child {
+        //   text-align: right;
+        // }
+      }
+
+      td:only-child:not([rowspan]) {
+        padding-left: 16px;
+        // padding-right: 16px;
+      }
+
+      td:not(:first-child) {
+        padding-left: 16px;
+        // padding-right: 16px;
+      }
+    }
+
+    td,
+    th {
+      height: 36px;
+    }
+  }
 }
 </style>
 <script>

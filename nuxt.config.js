@@ -2,7 +2,7 @@
 
 const siteUrl = process.env.SITE_URL || "https://geoworksmsk.ru"
 const backendUrl = process.env.BACKEND_URL || "https://api.geoworksmsk.ru"
-
+// BACKEND_URL = http://localhost:1337 "http://localhost:1337"; 
 const companyName = 'GeoWorks'
 const description = `Инженерные изыскания в Москве и МО. Геодезические, геологические изыскания, кадастровые услуги "под ключ" для проектирования и строительства.`
 
@@ -28,10 +28,10 @@ async function routes() {
   return routes
 }
 export default {
-  // version: pkg.version,
-  // target: "static",
-  // components: true,
+  target: "static",
   generate: {
+    fallback: '404.html',
+    subFolders: false,
     routes
   },
   loading: {
@@ -40,7 +40,12 @@ export default {
   publicRuntimeConfig: {
     siteUrl,
     baseUrl: backendUrl,
-    imageBaseUrl: process.env.IMAGE_BACKEND_URL || backendUrl
+    imageBaseUrl: process.env.IMAGE_BACKEND_URL || backendUrl,
+    yandexMetrikaID: process.env.YANDEX_ID,
+  },
+  privateRuntimeConfig: {
+
+    yandexMapID: process.env.MAP_KEY
   },
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
@@ -62,8 +67,10 @@ export default {
       { rel: 'icon', type: "image/png", sizes: '32x32', href: '/favicon-32x32.png' },
       { rel: 'icon', type: "image/png", sizes: '16x16', href: '/favicon-16x16.png' },
       { rel: 'manifest', href: '/site.webmanifest' },
-    ]
+    ],
   },
+
+
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
@@ -84,7 +91,7 @@ export default {
   buildModules: [
     '~/modules/hook.js',
     // https://go.nuxtjs.dev/eslint
-    '@nuxtjs/eslint-module',
+    // '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
     // https://github.com/nuxt-community/style-resources-module
@@ -117,10 +124,12 @@ export default {
       },
     },]
   ],
-
+  // dev: false,
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
-    ["~/modules/metrika/index.js",
+    [
+      // "~/modules/metrika/index.js", // TODO
+      "@nuxtjs/yandex-metrika",
       {
         id: process.env.YANDEX_ID,
         clickmap: true,
@@ -128,7 +137,8 @@ export default {
         accurateTrackBounce: true,
         webvisor: true,
         useCDN: false,
-        defer: true,
+        // dev: false
+        // defer: true,
         // useLocal:true
       }],
     // ['@rkaliev/nuxtjs-yandex-metrika',
@@ -141,7 +151,7 @@ export default {
     //     useCDN: false
     //   }],
     // '@blokwise/dynamic',
-    'nuxt-ssr-cache',
+    // 'nuxt-ssr-cache',
     // https://go.nuxtjs.dev/axios
     // '@nuxtjs/axios',
     // https://www.npmjs.com/package/@nuxtjs/svg-sprite
@@ -149,9 +159,10 @@ export default {
     'nuxt-webfontloader',
     ['@nuxtjs/apollo', {
       clientConfigs: {
-        default: {
-          httpEndpoint: backendUrl + '/graphql',
-        },
+        default: '~/graphql/config/config.js'
+        // {
+        //   httpEndpoint: backendUrl + '/graphql',
+        // },
       }
     }],
     // ['vue-yandex-maps/nuxt', ],
@@ -184,27 +195,27 @@ export default {
     //     config: {}, // Additional config
     //   }] 
   ],
-  cache: {
-    // if you're serving multiple host names (with differing
-    // results) from the same server, set this option to true.
-    // (cache keys will be prefixed by your host name)
-    // if your server is behind a reverse-proxy, please use
-    // express or whatever else that uses 'X-Forwarded-Host'
-    // header field to provide req.hostname (actual host name)
-    useHostPrefix: false,
-    pages: ["/"],
-    store: {
-      type: 'memory',
+  // cache: {
+  //   // if you're serving multiple host names (with differing
+  //   // results) from the same server, set this option to true.
+  //   // (cache keys will be prefixed by your host name)
+  //   // if your server is behind a reverse-proxy, please use
+  //   // express or whatever else that uses 'X-Forwarded-Host'
+  //   // header field to provide req.hostname (actual host name)
+  //   useHostPrefix: false,
+  //   pages: ["/"],
+  //   store: {
+  //     type: 'memory',
 
-      // maximum number of pages to store in memory
-      // if limit is reached, least recently used page
-      // is removed.
-      max: 100,
+  //     // maximum number of pages to store in memory
+  //     // if limit is reached, least recently used page
+  //     // is removed.
+  //     max: 100,
 
-      // number of seconds to store this page in cache
-      ttl: 600000,
-    },
-  },
+  //     // number of seconds to store this page in cache
+  //     ttl: 600000,
+  //   },
+  // },
 
   svgSprite: {
     input: '~/assets/icons/'
@@ -234,18 +245,20 @@ export default {
       customProperties: true
     },
     theme: {
-      dark: true,
-      // options: { themeCache },
-      themes: {
-        dark: {
-          accent: "#1867c0"
-        },
-        light: {
-          accent: "#1867c0"
-        }
-      }
+      disable: true,
+      //   dark: true,
+      //   // options: { themeCache },
+      //   themes: {
+      //     dark: {
+      //       accent: "#1867c0"
+      //     },
+      //     light: {
+      //       accent: "#1867c0"
+      //     }
+      //   }
     },
-    defaultAssets: false
+    defaultAssets: false,
+    optionsPath: './vuetify.options.js'
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)

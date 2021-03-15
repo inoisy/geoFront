@@ -6,6 +6,7 @@
       :class="$style.breadcrumbsItem"
     >
       <nuxt-link
+        v-if="item.to"
         :class="$style.breadcrumbsItemLink"
         :to="item.to"
         nuxt
@@ -15,6 +16,9 @@
       >
         {{ item.text }}
       </nuxt-link>
+      <div v-else :class="$style.breadcrumbsItemLink">
+        {{ item.text }}
+      </div>
     </li>
   </ul>
 </template>
@@ -37,25 +41,36 @@ export default {
 
 <style style lang="scss" scoped module>
 .breadcrumbs {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  flex: 0 1 auto;
+  // align-items: center;
+  // display: flex;
+  // flex-wrap: wrap;
+  // flex: 0 1 auto;
   list-style-type: none;
-  margin: 0;
+  // margin: 0;
   padding: 18px 12px;
   .breadcrumbsItem {
     align-items: center;
-    display: inline-flex;
-    font-size: 14px;
-    &:not(:first-child) {
-      &:before {
+    display: inline;
+    font-size: 12px;
+    @include md {
+      font-size: 14px;
+    }
+    &:not(:last-child) {
+      &:after {
         content: "/";
-        display: block;
+        display: inline;
         padding: 0 12px;
-        color: rgba(255, 255, 255, 0.5);
+        color: rgba($white, 0.5);
       }
     }
+    // &:not(:first-child) {
+    //   &:before {
+    //     content: "/";
+    //     display: block;
+    //     padding: 0 12px;
+    //     color: rgba(255, 255, 255, 0.5);
+    //   }
+    // }
     &:last-child {
       .breadcrumbsItemLink {
         color: rgba(255, 255, 255, 0.5);
@@ -65,7 +80,7 @@ export default {
     .breadcrumbsItemLink {
       color: white;
       align-items: center;
-      display: inline-flex;
+      display: inline;
       text-decoration: none;
     }
   }

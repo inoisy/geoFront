@@ -1,63 +1,58 @@
 <template>
   <section
     :class="[$style.serviceFeatureWrapper, isWithGray && $style.withGray]"
+    class="sectionWrapper"
   >
-    <v-container grid-list-lg class="py-12">
-      <template>
-        <v-row :class="$style.serviceFeatureRow" justify="center">
-          <v-col
-            :class="$style.serviceFeatureTextWrapper"
-            cols="12"
-            md="6"
-            class=""
-          >
-            <h2 :class="$style.serviceFeatureHeader">
-              {{ header }}
-            </h2>
-            <div
-              :class="$style.serviceFeatureContent"
-              class="mb-5"
-              v-html="content"
-            ></div>
-            <div>
-              <v-btn class="mb-3 mr-2 d-inline-flex" :to="slug" outlined light>
-                Подробнее
-              </v-btn>
-              <v-btn
-                class="mb-3 mr-2 d-inline-flex"
-                outlined
-                light
-                @click="handleOffer(name)"
-              >
-                Заказать
-              </v-btn>
-            </div>
-          </v-col>
-          <v-col
-            v-if="img"
-            :class="$style.serviceFeatureImgWrapper"
-            cols="12"
-            md="6"
-          >
-            <service-image
-              :class="$style.serviceFeatureImg"
-              :img="img"
-              :alt="name"
-            ></service-image>
-          </v-col>
-        </v-row>
-      </template>
+    <v-container>
+      <!-- <template> -->
+      <v-row :class="$style.serviceFeatureRow" justify="center" no-gutters>
+        <v-col :class="$style.serviceFeatureTextWrapper" cols="12" md="6">
+          <h2 :class="$style.serviceFeatureHeader">
+            {{ header }}
+          </h2>
+          <div :class="$style.serviceFeatureContent" v-html="content" />
+          <div :class="$style.buttonWrapper">
+            <v-btn :class="$style.button" :to="slug" outlined light>
+              Подробнее
+            </v-btn>
+            <v-btn
+              :class="$style.button"
+              outlined
+              light
+              @click="handleOffer(name)"
+            >
+              Заказать
+            </v-btn>
+          </div>
+        </v-col>
+        <v-col
+          v-if="imgUrl"
+          :class="$style.serviceFeatureImgWrapper"
+          cols="12"
+          md="6"
+        >
+          <service-image
+            :class="$style.serviceFeatureImg"
+            :imgUrl="imgUrl"
+            :alt="name"
+          />
+        </v-col>
+      </v-row>
+      <!-- </template> -->
     </v-container>
   </section>
 </template>
 <style lang="scss" scoped module>
 .serviceFeatureWrapper {
   background-color: white;
+  // padding-top: 6rem;
+  // padding-bottom: 5rem;
   &.withGray {
     &:nth-child(odd) {
       background-color: $gray;
     }
   }
+
   &:nth-child(odd) {
     // background-color: $gray;
     .serviceFeatureRow {
@@ -69,6 +64,7 @@
     .serviceFeatureImgWrapper {
       display: flex;
       align-items: center;
+      padding: 12px;
       .serviceFeatureImg {
         border-radius: 3px;
         box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
@@ -86,20 +82,54 @@
       }
     }
     .serviceFeatureTextWrapper {
+      padding: 12px;
       color: #18191f;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      margin-bottom: 40px;
+      @include md {
+        margin-bottom: auto;
+        margin-top: auto;
+      }
+      .buttonWrapper {
+        display: flex;
+        flex-wrap: wrap;
+
+        @include sm {
+          flex-wrap: nowrap;
+          .button + .button {
+            margin-left: 10px;
+          }
+        }
+        .button {
+          margin-bottom: 12px;
+          flex: 1 1 100%;
+          @include sm {
+            flex: 0 0 165px;
+          }
+        }
+      }
       .serviceFeatureHeader {
         font-weight: 600;
-        font-size: 1.8rem;
+        font-size: 22px;
         margin-bottom: 24px;
         line-height: 125%;
+        @include sm {
+          font-size: 28px;
+        }
+        // @include md {
+        //   font-size: 32px;
+        // }
       }
       .serviceFeatureContent {
         font-weight: 300;
         // font-size: 16px;
         line-height: 150%;
+        margin-bottom: 35px;
+        & ::v-deep p:last-of-type {
+          margin-bottom: 0;
+        }
       }
     }
 
@@ -131,9 +161,10 @@ export default {
       type: Boolean,
       default: false,
     },
-    img: {
-      type: Object,
-      default: () => {},
+    imgUrl: {
+      type: String,
+      default: null,
+      // default: () => {},
     },
     header: {
       type: String,

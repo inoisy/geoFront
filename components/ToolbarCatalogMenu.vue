@@ -6,7 +6,7 @@
     content-class="catalog-menu-inner"
     :activator="`#${parentSlug}`"
   >
-    <v-list dense>
+    <v-list dense dark>
       <template v-for="(child, index) in items">
         <template v-if="child.child && child.child.length">
           <v-menu
@@ -42,7 +42,11 @@
               </v-list-item>
             </template>
             <template v-if="child.child && child.child.length">
-              <v-list dense :class="[child.child.length > 10 && 'two-columns']">
+              <v-list
+                dense
+                dark
+                :class="[child.child.length > 10 && 'two-columns']"
+              >
                 <v-list-item
                   v-for="(grandChild, i) in child.child"
                   :key="`${grandChild.name}-${i}`"
@@ -99,6 +103,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// .list {
+//   background: #1e1e1e;
+//   color: $white;
+// }
 .two-columns {
   column-count: 2;
   max-width: 100%;

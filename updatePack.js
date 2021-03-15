@@ -35,7 +35,7 @@ async function main() {
     const packageData = JSON.parse(await fs.readFileSync("./package.json"))
     const dependencies = Object.keys(packageData.dependencies).removeArr('core-js', "shelljs")
     console.log("🚀 ~ file: updatePack.js ~ line 37 ~ main ~ dependencies", dependencies)
-    const updateDepString = "yarn add " + dependencies.map(item => item + "@latest").join(" ")
+    const updateDepString = "yarn upgrade " + dependencies.map(item => item).join(" ")
     // console.log(updateDepString)
     const devDependencies = Object.keys(packageData.devDependencies).removeArr(["sass-loader", 'vue', 'vue-template-compiler', "node-sass", "core-js", "deepmerge", "shelljs", "fibers"])
     console.log("🚀 ~ file: updatePack.js ~ line 41 ~ main ~ devDependencies", devDependencies)

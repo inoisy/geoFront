@@ -1,18 +1,17 @@
 <template>
   <section :class="$style.benefitsWrapper">
-    <v-container grid-list-lg>
+    <v-container>
       <v-row>
         <v-col cols="12">
-          <h2 class="mb-10 text-center text-md-left pageHeader">
-            Наши преимущества
-          </h2>
+          <h2 class="mb-10 pageHeader">Наши преимущества</h2>
         </v-col>
       </v-row>
-      <v-row class="justify-center">
+      <v-row class="justify-center" no-gutters>
         <v-col
-          v-for="(benefit, i) in benefits"
+          v-for="(benefit, i) in items"
           :key="`benefit-${i}`"
           :class="$style.benefitItem"
+          class="pa-3"
           cols="12"
           sm="10"
           md="6"
@@ -31,59 +30,112 @@
           </div>
           <div :class="$style.benefitsTextWrapper">
             <h3 :class="$style.benefitsHeader">{{ benefit.header }}</h3>
-            <p :class="$style.benefitsText">{{ benefit.content }}</p>
+            <div :class="$style.benefitsText">{{ benefit.content }}</div>
           </div>
         </v-col>
       </v-row>
     </v-container>
   </section>
 </template>
-
 <style lang="scss" scoped module>
 .benefitsWrapper {
   color: #18191f;
-  > div {
-    padding-top: 65px;
-    padding-bottom: 65px;
-  }
+  // > div {
+  //   padding-top: 65px;
+  //   padding-bottom: 65px;
+  // }
   .benefitItem {
     display: flex;
+    margin-bottom: 25px;
+    &:last-child {
+      margin-bottom: -25px;
+    }
+    &:hover {
+      .benefitsImageWrapper {
+        background-color: $black;
+        &:before {
+          --size: -5px;
+          top: var(--size);
+          right: var(--size);
+          bottom: var(--size);
+          left: var(--size);
+          border-width: 2px;
+          border-color: $black;
+
+          @include sm {
+            --size: -8px;
+            border-width: 3.5px;
+          }
+        }
+        .benefitsImage {
+          filter: invert(1);
+        }
+      }
+    }
     .benefitsImageWrapper {
-      background-color: #ececec;
+      background-color: var(--content-color, #ececec);
       display: inline-flex;
       border-radius: 50%;
-      width: 72px;
-      min-width: 72px;
-      height: 72px;
+      width: 60px;
+      min-width: 60px;
+      height: 60px;
       align-items: center;
       justify-content: center;
-      margin-right: 24px;
+      transition: 0.3s ease all;
+      transform: perspective(1px) translateZ(0);
+      box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+      position: relative;
+      margin-right: 10px;
+      @include sm {
+        margin-right: 24px;
+        width: 72px;
+        min-width: 72px;
+        height: 72px;
+      }
+      &:before {
+        content: "";
+        position: absolute;
+        border: #e1e1e1 solid 1px;
+        border-radius: 50%;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        // -webkit-transition-duration: 0.3s;
+        // transition-duration: 0.3s;
+        // // -webkit-transition-property: top, right, bottom, left;
+        // transition-property: all;
+        transition: 0.3s ease all;
+      }
       .benefitsImage {
-        width: 44px;
-        height: 44px;
+        transition: 0.2s ease;
+        width: 32px;
+        height: 32px;
+        @include sm {
+          width: 44px;
+          height: 44px;
+        }
       }
     }
     .benefitsTextWrapper {
       .benefitsHeader {
         font-weight: 600;
-        font-size: 18px;
+        font-size: 16px;
         line-height: 125%;
         margin-bottom: 16px;
+        word-break: break-word;
+        @include sm {
+          font-size: 18px;
+        }
+        @include md {
+          font-size: 1.5rem;
+        }
       }
       .benefitsText {
         font-weight: normal;
         font-size: 14px;
         font-weight: 300;
-      }
-    }
-  }
-  @include md {
-    .benefitItem {
-      .benefitsTextWrapper {
-        .benefitsHeader {
-          font-size: 1.5rem;
-        }
-        .benefitsText {
+        @include md {
           font-size: 1rem;
         }
       }
@@ -94,7 +146,7 @@
 <script>
 export default {
   props: {
-    benefits: {
+    items: {
       type: Array,
       default: () => [],
     },

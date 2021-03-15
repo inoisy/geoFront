@@ -1,30 +1,33 @@
 <template>
   <v-card
-    :to="`/services/${parentSlug}/${item.slug}`"
-    :title="item.name"
+    :to="`/services/${parentSlug}/${slug}`"
+    :title="name"
+    nuxt
     light
     hover
   >
-    <v-img :src="imgUrl" height="200px" :alt="item.name" :title="item.name" />
+    <service-image :imgUrl="imgUrl" :alt="name" />
+    <!-- <v-img :src="imgUrl" height="200px" :alt="name" :title="name" /> -->
     <v-card-title :class="$style.cardTitle">
       <span class="text-truncate">
-        {{ item.name }}
+        {{ name }}
       </span>
     </v-card-title>
     <v-card-text :class="$style.cardDescription">
       <div :class="$style.elepsis">
-        {{ item.description }}
+        {{ description }}
       </div>
     </v-card-text>
   </v-card>
 </template>
 <style lang="scss" scoped module>
 .cardTitle {
-  font-size: 18px !important;
+  font-size: 1rem !important;
   line-height: 150% !important;
+  font-weight: bold;
 }
 .cardDescription {
-  font-size: 16px !important;
+  // font-size: 16px !important;
   line-height: 125% !important;
   .elepsis {
     -webkit-line-clamp: 3;
@@ -38,34 +41,50 @@
 <script>
 export default {
   props: {
-    item: {
-      type: Object,
-      default: () => {},
+    // item: {
+    //   type: Object,
+    //   default: () => {},
+    // },
+    name: {
+      type: String,
+      required: true,
     },
-    parentSlug: {
+    slug: {
+      type: String,
+      required: true,
+    },
+    description: {
       type: String,
       default: "",
     },
-  },
-  data() {
-    return {
-      imageBaseUrl: this.$config.imageBaseUrl,
-    };
-  },
-  computed: {
-    imgUrl() {
-      if (!this.item.img) {
-        return require("~/assets/icons/no-camera.svg");
-      }
-      if (
-        this.item.img.formats &&
-        this.item.img.formats.small &&
-        this.item.img.formats.small.url
-      ) {
-        return this.imageBaseUrl + this.item.img.formats.small.url;
-      }
-      return this.imageBaseUrl + this.item.img.url;
+    parentSlug: {
+      type: String,
+      required: true,
+    },
+    imgUrl: {
+      type: String,
+      required: true,
     },
   },
+  // data() {
+  //   return {
+  //     imageBaseUrl: this.$config.imageBaseUrl,
+  //   };
+  // },
+  // computed: {
+  //   imgUrl() {
+  //     if (!this.item.img) {
+  //       return require("~/assets/icons/no-camera.svg");
+  //     }
+  //     if (
+  //       this.item.img.formats &&
+  //       this.item.img.formats.small &&
+  //       this.item.img.formats.small.url
+  //     ) {
+  //       return this.imageBaseUrl + this.item.img.formats.small.url;
+  //     }
+  //     return this.imageBaseUrl + this.item.img.url;
+  //   },
+  // },
 };
 </script>

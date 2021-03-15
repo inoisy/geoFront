@@ -25,7 +25,7 @@ const query = `
       services(where:{isMain:true}) {
           name
           slug
-          child {
+          child(sort: "name:asc") {
             id
             name
             slug

@@ -1,21 +1,21 @@
 <template>
   <v-footer
     :class="$style.footer"
-    class="footer pt-4"
+    class="footer pa-0"
     dark
     height="auto"
     :style="`background-image: url(${require('~/assets/footerbg.jpg')})`"
   >
     <!-- v-intersect.once="onIntersect" -->
-    <v-container grid-list-lg class="py-12">
+    <v-container class="py-12">
       <v-row class="d-flex justify-center">
-        <v-col cols="12" sm="6" md="6" lg="3">
+        <v-col class="pt-5 px-7" cols="12" sm="6" md="6" lg="3">
           <logo :mini="true" class="mb-5" />
-          <p style="font-weight: normal; font-size: 14px; line-height: 24px">
+          <div style="font-weight: normal; font-size: 14px; line-height: 24px">
             {{ info.descriptor }}
-          </p>
+          </div>
         </v-col>
-        <v-col cols="12" sm="6" md="6" lg="3">
+        <v-col class="" cols="12" sm="6" md="6" lg="3">
           <v-subheader class="hidden-sm-and-down">КОНТАКТЫ</v-subheader>
           <v-list style="background: transparent !important">
             <v-list-item
@@ -25,7 +25,7 @@
               height="48"
             >
               <v-list-item-icon>
-                <svg-icon name="phone" style="width: 24px; height: 24px" />
+                <svg-icon name="phone" />
               </v-list-item-icon>
               <v-list-item-content itemprop="telephone">
                 {{ info.phone }}
@@ -33,7 +33,7 @@
             </v-list-item>
             <v-list-item :href="`mailto:${info.email}`" title="email">
               <v-list-item-icon>
-                <svg-icon name="mail" style="width: 24px; height: 24px" />
+                <svg-icon name="mail" />
               </v-list-item-icon>
               <v-list-item-content itemprop="email">
                 {{ info.email }}
@@ -41,7 +41,7 @@
             </v-list-item>
             <v-list-item title="Адрес">
               <v-list-item-icon>
-                <svg-icon name="pin" style="width: 24px; height: 24px" />
+                <svg-icon name="pin" />
               </v-list-item-icon>
               <v-list-item-content>
                 <span style="font-size: 12px">
@@ -60,7 +60,7 @@
             <v-list-item
               v-for="menuItem in menuItems"
               :key="menuItem.slug"
-              :to="`${menuItem.slug}`"
+              :to="`/${menuItem.slug}`"
               :title="menuItem.name"
               exact
             >
@@ -94,6 +94,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 80% 50%;
+  min-height: inherit;
   // background-image: url(/footerbg.jpg);
   @include sm {
     background-position: 90% 50%;

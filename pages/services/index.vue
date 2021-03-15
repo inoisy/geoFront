@@ -7,10 +7,11 @@
       v-for="(service, i) in services"
       :key="`service-${i}`"
       :class="$style.servicesWrapper"
+      class="sectionWrapper"
     >
-      <v-container grid-list-lg fill-height class="py-12">
-        <v-row align="center">
-          <v-col :class="$style.serviceItem" class="py-12" cols="12">
+      <v-container fill-height>
+        <v-row align="center" no-gutters>
+          <v-col :class="$style.serviceItem" class="pa-3" cols="12">
             <v-img
               v-if="service.icon"
               :class="$style.servicesIcon"
@@ -28,24 +29,27 @@
               </nuxt-link>
 
               <div class="mb-7" v-html="service.descriptionLong"></div>
-              <v-btn
-                class="mb-3 mr-2"
-                :to="`/services/${service.slug}`"
-                title="Подробнее"
-                outlined
-                light
-              >
-                Подробнее
-              </v-btn>
-              <v-btn
-                class="mb-3"
-                outlined
-                light
-                title="Заказать работы"
-                @click="handleOffer(service)"
-              >
-                Заказать работы
-              </v-btn>
+              <div :class="$style.buttonWrapper">
+                <v-btn
+                  :class="$style.button"
+                  class="mb-3"
+                  :to="`/services/${service.slug}`"
+                  title="Подробнее"
+                  outlined
+                  light
+                >
+                  Подробнее
+                </v-btn>
+                <v-btn
+                  :class="$style.button"
+                  outlined
+                  light
+                  title="Заказать работы"
+                  @click="handleOffer(service)"
+                >
+                  Заказать работы
+                </v-btn>
+              </div>
             </div>
 
             <ul v-if="service.child && service.child.length">
@@ -66,11 +70,13 @@
 </template>
 <style lang="scss" scoped module>
 .servicesWrapper {
-  &:nth-child(odd) {
+  // padding-top: 6rem;
+  // padding-bottom: 5rem;
+  &:nth-child(2n + 1) {
     background-color: #f4f4f4;
   }
-  background-color: white;
-  color: $black;
+  // background-color: white;
+  // color: $black;
   a {
     text-decoration: none;
   }
@@ -87,15 +93,39 @@
       }
     }
   }
+  .buttonWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    @include sm {
+      flex-wrap: nowrap;
+      .button + .button {
+        margin-left: 10px;
+      }
+    }
+    .button {
+      flex: 1 1 100%;
+      @include sm {
+        flex: 0 0 190px;
+      }
+    }
+  }
+
   .serviceItem {
     position: relative;
   }
+  --icon-size: 100px;
   .servicesIcon {
-    width: 50px;
-    height: auto;
-    position: absolute;
-    right: 14px;
+    width: var(--icon-size);
+    height: var(--icon-size);
+    // position: absolute;
+    float: right;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    // right: 14px;
     opacity: 0.3;
+    @include sm {
+      --icon-size: 150px;
+    }
   }
   .serviceHeader {
     font-weight: 600;
@@ -119,23 +149,25 @@
   }
 }
 
-@include sm {
-  .servicesWrapper {
-    .servicesTextWrapper {
-      max-width: 70%;
-    }
-    .servicesIcon {
-      width: 25%;
-    }
-  }
-}
+// @include sm {
+//   .servicesWrapper {
+//     .servicesTextWrapper {
+//       max-width: 70%;
+//     }
+//     .servicesIcon {
+//       width: 25%;
+//       height: auto;
+//     }
+//   }
+// }
 @include md {
   .servicesWrapper {
     .servicesTextWrapper {
-      max-width: 50%;
+      max-width: 60%;
     }
     .servicesIcon {
       width: 27%;
+      height: auto;
     }
   }
 }
@@ -153,6 +185,7 @@
 <script>
 import gql from "graphql-tag";
 import LazyHydrate from "vue-lazy-hydration";
+
 const title = "Услуги";
 const description =
   "Наша организация оказывает широкий спектр современных и востребованных геодезических услуг. После проведения научных изысканий подготавливаются проектные документы, служащие основой по вопросам строительства объектов.";
@@ -173,8 +206,7 @@ export default {
             icon {
               url
             }
-            child {
-              id
+            child(sort: "name:asc") {
               name
               slug
             }
@@ -190,7 +222,7 @@ export default {
     }
 
     return {
-      services: services, // Object.freeze(services), // services.forEach(Object.freeze),
+      services, // : services, // Object.freeze(services), // services.forEach(Object.freeze),
     };
   },
 

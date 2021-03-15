@@ -1,5 +1,6 @@
 // import gql from "graphql-tag";
 import data from '~/static/data.json'
+import gql from "graphql-tag";
 
 export const state = () => ({
     services: [],
@@ -30,6 +31,10 @@ export const getters = {
                 disable: true
             },
             {
+                name: "Цены",
+                slug: "prices",
+            },
+            {
                 name: "О компании",
                 slug: "about",
             },
@@ -51,37 +56,44 @@ export const mutations = {
 }
 export const actions = {
     async nuxtServerInit(state) {
-        await state.commit("init", data);
+        state.commit("init", data);
         // const cache = await this._vm.$getCachedData(), { app }
         // // console.log("cache", cache)
         // if (cache) {
         //     await state.commit("init", cache)
         // } else {
-        //     const client = this.app.apolloProvider.defaultClient;
-        //     const query = gql`
-        //         {
-        //             services(where:{isMain:true}) {
-        //                 name
-        //                 slug
-        //             }
-        //             info{
-        //                 phone
-        //                 email
-        //                 accessTime
-        //                 address
-        //                 companyName
-        //                 descriptor
-        //                 addressCoords
-        //             }
-        //         }
+        // console.log(this.app.context)
+        const client = this.app.apolloProvider.defaultClient;
+        const query = gql`
+        {
+            services(where:{isMain:true}) {
+                name
+                slug
+                child(sort: "name:asc") {
+                    id
+                    name
+                    slug
+                }
+            }
+            info{
+                phone
+                email
+                accessTime
+                address
+                companyName
+                descriptor
+                addressCoords
+            }
+        }
+        `
         //     `
-        //     const {
-        //         data
-        //     } = await client.query({
-        //         query
-        //     })
+        const {
+            data: generalData
+        } = await client.query({
+            query
+        })
         //     // if (data.services && data.services.length) {
-        //     state.commit("init", data);
+        state.commit("init", generalData);
         //     // }
         // }
     },
