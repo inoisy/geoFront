@@ -11,15 +11,19 @@
       class="sectionWrapper"
     >
       <v-container>
-        <!-- <v-row no-gutters> -->
         <v-row align="center" no-gutters>
           <v-col class="pa-3" cols="12">
-            <!-- :class="$style.serviceItem" <div :class="$style.servicesTextWrapper" class="mb-7"> -->
             <nuxt-link :to="`/services/${service.slug}`" :title="service.name">
               <h2 :class="$style.serviceHeader" class="d-inline-block">
                 {{ service.name }}
               </h2>
             </nuxt-link>
+
+            <prices
+              v-if="service.prices"
+              :class="$style.prices"
+              :content="service.prices"
+            />
             <div
               v-for="child in service.child"
               :key="child.id"
@@ -282,10 +286,11 @@ export default {
             icon {
               url
             }
+            prices
             child(
               limit: 999
               where: { _or: [{ price_null: false }, { prices_null: false }] }
-              sort: "price:ASC,name:asc"
+              sort: "name:asc"
             ) {
               id
               icon {
@@ -318,7 +323,18 @@ export default {
     // console.log("prices ", services);
 
     return {
-      services: services.filter((item) => item.child.length), // TODO
+      services: services, //.filter((item) => item.child.length),
+      // .reduce((acc, item) => {
+      //   const { child, ...itemData } = item;
+      //   const child = Object.assign({})
+      //   console.log("🚀 ~ file: prices.vue ~ line 325 ~ .reduce ~ itemData", {
+      //     ...itemData,
+      //     child: child.sort((a, b) => a.price > b.price),
+      //   });
+      //   // acc.push();
+      //   acc.push(item);
+      //   return acc;
+      // }, []), // TODO
       // service,
       // children: child.reduce((acc, val) => {
       //   acc.push({

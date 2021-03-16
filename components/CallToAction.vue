@@ -6,10 +6,10 @@
       <!-- <img :srcSet="srcSet.srcSet" :src="srcSet.src" />
 :src="require('~/assets/call.jpg?resize&size=1980')" :srcSet="srcSet.srcSet" :src="srcSet.src"-->
       <div
-        class="mb-3 pa-3 col col-12 col-sm-10 col-md-8 text-center text-md-left"
+        class="mb-3 pa-3 col col-12 col-sm-8 col-md-8 col-lg-7 text-center text-md-left"
         style="font-size: 1.2rem"
       >
-        <div class="mb-12">
+        <div style="margin-bottom: 2.5rem">
           <!-- Остались вопросы или не можете определиться какая услуга вам нужна? -->
           Получить консультацию и расчёт полной стоимости услуг можно оставив
           контакты в форме ниже или позвонив по телефону

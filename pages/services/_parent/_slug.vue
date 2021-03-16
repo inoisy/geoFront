@@ -47,14 +47,10 @@
         :key="`dynamic-${index}`"
       />
     </template> -->
-    <section
-      :class="$style.section"
-      class="sectionWrapper"
-      v-if="!!service.prices"
-    >
+    <section :class="$style.section" class="sectionWrapper" v-if="!!pricesFind">
       <v-container>
         <h2 class="pageHeader mb-8 pa-3">Стоимость работ</h2>
-        <lazy-prices class="pa-3" :content="service.prices" />
+        <lazy-prices class="pa-3" :content="pricesFind" />
       </v-container>
     </section>
     <call-to-action />
@@ -137,16 +133,6 @@
 import gql from "graphql-tag";
 import LazyHydrate from "vue-lazy-hydration";
 import { calculateImageUrl } from "~/utils/images";
-// import CallToAction from '~/components/CallToAction.vue';
-// function calculateImageUrl(img, imageBaseUrl) {
-//   if (!img) {
-//     return "/no-camera.svg";
-//   }
-//   if (img.formats && img.formats.small && img.formats.small.url) {
-//     return imageBaseUrl + img.formats.small.url;
-//   }
-//   return imageBaseUrl + img.url;
-// }
 
 const query = gql`
   query ServicesQuery($slug: String!) {
@@ -193,6 +179,7 @@ const query = gql`
       parent {
         name
         slug
+        prices
         icon {
           url
         }
@@ -263,6 +250,7 @@ export default {
         img,
         icon,
         dynamicContent,
+        prices,
         ...service
       },
     ] = services;
@@ -313,6 +301,12 @@ export default {
     } else {
       iconFind = parentData.icon;
     }
+    let pricesFind;
+    if (prices) {
+      pricesFind = prices;
+    } else {
+      pricesFind = parentData.prices;
+    }
     // const siblings = ;
 
     // const service = service;
@@ -330,7 +324,7 @@ export default {
     }
     return {
       service,
-
+      pricesFind,
       parentSlug,
 
       thumbnailUrl,

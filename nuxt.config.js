@@ -31,7 +31,7 @@ export default {
   target: "static",
   generate: {
     fallback: '404.html',
-    subFolders: false,
+    // subFolders: false,
     dir: process.env.GENERATE_DIR || "/var/www/front",
     routes
   },
