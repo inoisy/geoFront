@@ -15,19 +15,19 @@
           cols="10"
           md="3"
         >
-          <div :class="$style.stepImageWrapper" class="mb-4">
-            <v-img
-              :class="$style.stepImage"
-              :src="
-                step.icon
-                  ? $config.imageBaseUrl + step.icon.url
-                  : '/no-camera.svg'
-              "
-              :alt="step.header"
-              width="53px"
-              max-width="53px"
-              contain
-            />
+          <div :class="$style.stepImageWrapper" class="mb-6">
+            <div :class="$style.stepImageInner">
+              <v-img
+                v-if="step.icon"
+                :class="$style.stepImage"
+                :src="$config.imageBaseUrl + step.icon.url"
+                :alt="step.header"
+                width="53px"
+                max-width="53px"
+                contain
+              />
+            </div>
+
             <svg-icon :class="$style.stepPath" name="path" />
           </div>
 
@@ -44,16 +44,57 @@
 </template>
 <style lang="scss" scoped module>
 .stepsWrapper {
+  $icon-size: 53px;
+  $icon-padding: 18px;
   // background-color: #ececec;
   // color: #18191f;
   .steps {
+    .stepImageWrapper {
+      .stepImageInner {
+        position: relative;
+        &:before {
+          position: absolute;
+          transition: all 0.2s ease-in-out;
+
+          content: "";
+          display: block;
+          width: 0;
+          height: 0;
+          margin: auto;
+          top: 50%;
+          left: 0;
+          right: 0;
+          background: #f2f2f2;
+          box-sizing: border-box;
+          border-radius: 100%;
+        }
+      }
+
+      // .stepImage {
+      // }
+    }
     &:hover {
       .stepImageWrapper {
-        .stepImage {
-          box-shadow: 0 0 10px #ccc;
-          // transform: scale(1.1);
-          transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
+        .stepImageInner {
+          &:before {
+            // top: 0;
+            top: -$icon-padding;
+            left: -$icon-padding;
+            width: $icon-size + $icon-padding * 2;
+            height: $icon-size + $icon-padding * 2;
+            // line-height: 103px;
+            background: $black;
+          }
+          .stepImage {
+            filter: invert(1);
+          }
         }
+
+        // .stepImage {
+        //   // box-shadow: 0 0 10px #ccc;
+        //   // // transform: scale(1.1);
+        //   // transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
+        // }
       }
     }
 
@@ -85,11 +126,12 @@
       width: 100%;
       justify-content: center;
       .stepImage {
+        transition: all 0.2s ease-in-out;
         width: 53px;
         // max-width: 53px;
         min-height: 53px;
-        transform: translateZ(0);
-        transition-timing-function: ease-out;
+        // transform: translateZ(0);
+        // transition-timing-function: ease-out;
       }
     }
     .stepPath {
@@ -101,12 +143,12 @@
       min-width: 70px;
       height: 25px;
       min-height: 25px;
-      &:hover {
-        path {
-          stroke: red;
-        }
-        color: red;
-      }
+      // &:hover {
+      //   path {
+      //     stroke: red;
+      //   }
+      //   color: red;
+      // }
     }
 
     &:nth-child(even) .stepPath {

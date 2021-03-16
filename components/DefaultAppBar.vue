@@ -91,22 +91,6 @@
   // transform: translateY(0px);
   left: 0px;
   right: 0px;
-  // border: none;
-  // contain: layout;
-  // display: block;
-  // flex: 1 1 auto;
-  // max-width: 100%;
-
-  // transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1) transform,
-  //   0.2s cubic-bezier(0.4, 0, 0.2, 1) background-color,
-  //   0.2s cubic-bezier(0.4, 0, 0.2, 1) left,
-  //   0.2s cubic-bezier(0.4, 0, 0.2, 1) right,
-  //   280ms cubic-bezier(0.4, 0, 0.2, 1) box-shadow,
-  //   0.25s cubic-bezier(0.4, 0, 0.2, 1) max-width,
-  //   0.25s cubic-bezier(0.4, 0, 0.2, 1) width;
-  // transform: translateZ(0) perspective(1px);
-  // transition: none !important;
-
   --icon-size: 36px;
   --font-size: 14px;
   --padding: 6px;
@@ -116,20 +100,10 @@
   }
   @include md {
     --padding: 8px;
-    // .link,
-    // .linkTel {
-    //   font-size: 0.8rem !important;
-    //   // padding: 0 6px !important;
-    // }
   }
   @include lg {
     --font-size: 15px;
     --padding: 16px;
-    // .link,
-    // .linkTel {
-    //   font-size: 0.85rem !important;
-    //   // padding: 0 12px !important;
-    // }
   }
   // @include md {
 
@@ -148,12 +122,6 @@
     min-width: 100px;
     color: #f1f3ef;
     padding: 0 var(--padding) !important;
-    // @include md {
-    //   padding: 0 8px !important;
-    // }
-    // @include lg {
-    //   padding: 0 16px !important;
-    // }
   }
 
   .linkTel {
@@ -175,7 +143,7 @@
       width: unset !important;
       // font-size: 0.8rem !important;
       color: #f1f3ef;
-      border-radius: 0;
+      // border-radius: 0;
       padding: 0 var(--padding) !important;
     }
     // @include lg {
