@@ -40,15 +40,15 @@
       <v-btn
         class="d-dlex"
         :href="`tel:${info.phone}`"
-        :class="$style['linkTel']"
+        :class="$style.linkTel"
         title="Телефон"
         text
       >
         <svg-icon name="phone" />
-        <span class="hidden-lg-and-down pl-2">{{ info.phone }}</span>
+        <span :class="$style.linkTelText" class="pl-2">{{ info.phone }}</span>
       </v-btn>
       <v-btn
-        :class="$style['linkIcon']"
+        :class="$style.linkIcon"
         class="d-dlex"
         icon
         :href="`mailto:${info.email}`"
@@ -57,7 +57,7 @@
         <svg-icon name="mail" />
       </v-btn>
       <v-btn
-        :class="$style['linkIcon']"
+        :class="$style.linkIcon"
         class="hidden-md-and-up"
         icon
         title="Меню"
@@ -138,13 +138,19 @@
     //   height: var(--icon-size) !important;
     //   width: var(--icon-size) !important;
     // }
+    .linkTelText {
+      display: none;
+    }
     @include lg {
       height: 100% !important;
       width: unset !important;
       // font-size: 0.8rem !important;
       color: #f1f3ef;
-      // border-radius: 0;
+      border-radius: 0;
       padding: 0 var(--padding) !important;
+      .linkTelText {
+        display: inline;
+      }
     }
     // @include lg {
     //   padding: 0 16px !important;
