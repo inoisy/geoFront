@@ -280,7 +280,7 @@ export default {
       },
       query: gql`
         query ServicePricesQuery {
-          services(where: { isMain: true }) {
+          services(where: { isMain: true }, sort: "name:asc") {
             name
             slug
             icon {
@@ -290,7 +290,7 @@ export default {
             child(
               limit: 999
               where: { _or: [{ price_null: false }, { prices_null: false }] }
-              sort: "name:asc"
+              sort: "prices:desc,name:asc"
             ) {
               id
               icon {
