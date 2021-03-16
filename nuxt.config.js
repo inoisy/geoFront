@@ -28,7 +28,7 @@ async function routes() {
   return routes
 }
 export default {
-  target: "static",
+  target: process.env.TARGET || "static",
   generate: {
     fallback: '404.html',
     // subFolders: false,
