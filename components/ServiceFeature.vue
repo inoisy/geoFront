@@ -33,8 +33,8 @@
           <v-img
             :class="$style.serviceFeatureImg"
             :src="imgUrl"
-            :alt="alt"
-            :title="alt"
+            :alt="name"
+            :title="name"
             aspect-ratio="1.555"
             max-height="400px"
             gradient="to top right, rgba(0,0,0,0), rgba(0,0,0,.4)"
