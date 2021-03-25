@@ -18,12 +18,25 @@
                 {{ service.name }}
               </h2>
             </nuxt-link>
-
-            <prices
-              v-if="service.prices"
-              :class="$style.prices"
-              :content="service.prices"
-            />
+            <div v-if="service.prices" class="position-relative">
+              <prices :class="$style.prices" :content="service.prices" />
+              <v-img
+                v-if="service.icon"
+                :class="$style.servicesIcon"
+                :src="imageBaseUrl + service.icon.url"
+                :alt="service.name"
+              />
+              <v-btn
+                :class="$style.button"
+                class="callToActionButton"
+                outlined
+                light
+                title="Заказать"
+                @click="handleOffer(service)"
+              >
+                Заказать
+              </v-btn>
+            </div>
             <div
               v-for="child in service.child"
               :key="child.id"
@@ -84,174 +97,6 @@
     </section>
   </div>
 </template>
-<style lang="scss" scoped module>
-.servicesWrapper {
-  // padding-top: 6rem;
-  padding-bottom: 6rem;
-  --button-color: 93 93 93;
-  &:nth-child(2n + 1) {
-    background-color: #f4f4f4;
-    --content-color: white;
-  }
-  // background-color: white;
-  // color: $black;
-  .childWrapper {
-    .childName {
-      font-size: 2rem;
-      line-height: 125%;
-      display: inline;
-    }
-    // .prices{
-    //   & ~ .button
-    // }
-    .button {
-      margin-top: 2rem;
-      width: 100%;
-      box-shadow: 0 2px 10px rgba(100, 100, 100, 0.65);
-      @include sm {
-        width: auto;
-        min-width: 180px;
-      }
-      @include md {
-        min-width: 220px;
-      }
-    }
-    .price {
-      font-weight: bold;
-      font-size: 1.7rem;
-      margin-top: -10px;
-      color: rgba($black, 0.87);
-      // & + .button {
-      //   margin-bottom: 10px;
-      // }
-    }
-    & + .childWrapper {
-      margin-top: 4.5rem;
-      @include md {
-        margin-top: 6rem;
-      }
-    }
-    .childLink {
-      text-decoration: none;
-      color: $black;
-      &:hover {
-        color: $accent;
-      }
-    }
-  }
-
-  // ul {
-  //   list-style: square inside url("~assets/icons/bullet.svg");
-  //   padding-left: 0px;
-  //   li {
-  //     margin-bottom: 15px;
-  //     a {
-  //       color: $black;
-  //       &:hover {
-  //         color: $accent;
-  //       }
-  //     }
-  //   }
-  // }
-  .buttonWrapper {
-    display: flex;
-    flex-wrap: wrap;
-    @include sm {
-      flex-wrap: nowrap;
-      .button + .button {
-        margin-left: 10px;
-      }
-    }
-    .button {
-      flex: 1 1 100%;
-      @include sm {
-        flex: 0 0 190px;
-      }
-    }
-  }
-
-  // .serviceItem {
-  //   position: relative;
-  // }
-  --icon-size: 100px;
-  .servicesIcon {
-    width: var(--icon-size);
-    height: var(--icon-size);
-    // position: absolute;
-    float: right;
-    margin-bottom: 10px;
-    margin-left: 10px;
-    // right: 14px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    opacity: 0.05;
-    @include sm {
-      --icon-size: 150px;
-    }
-  }
-  .serviceHeader {
-    font-weight: 600;
-    font-size: 2.5rem;
-    text-transform: uppercase;
-    color: $black;
-    position: relative;
-    margin-bottom: 5rem;
-    @include md {
-      font-size: 3rem;
-    }
-    &:hover {
-      color: $accent;
-      &:after {
-        background-color: $accent;
-      }
-    }
-    &:after {
-      content: "";
-      display: block;
-      height: 2px;
-      width: 120px;
-      background-color: $black;
-      position: absolute;
-      bottom: -8px;
-      left: 3px;
-    }
-  }
-}
-
-// @include sm {
-//   .servicesWrapper {
-//     .servicesTextWrapper {
-//       max-width: 70%;
-//     }
-//     .servicesIcon {
-//       width: 25%;
-//       height: auto;
-//     }
-//   }
-// }
-// @include md {
-//   .servicesWrapper {
-//     // .servicesTextWrapper {
-//     //   max-width: 60%;
-//     // }
-//     .servicesIcon {
-//       width: 27%;
-//       height: auto;
-//     }
-//   }
-// }
-// @include lg {
-//   .servicesWrapper {
-//     // .servicesTextWrapper {
-//     //   max-width: 60%;
-//     // }
-//     .servicesIcon {
-//       width: 20%;
-//     }
-//   }
-// }
-</style>
 
 <script>
 import gql from "graphql-tag";
@@ -424,3 +269,125 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped module>
+.servicesWrapper {
+  // padding-top: 6rem;
+  padding-bottom: 6rem;
+  --button-color: 93 93 93;
+  &:nth-child(2n + 1) {
+    background-color: #f4f4f4;
+    --content-color: white;
+  }
+  // background-color: white;
+  // color: $black;
+  .button {
+    margin-top: 2rem;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(100, 100, 100, 0.65);
+    @include sm {
+      width: auto;
+      min-width: 180px;
+    }
+    @include md {
+      min-width: 220px;
+    }
+  }
+  .childWrapper {
+    .childName {
+      font-size: 2rem;
+      line-height: 125%;
+      display: inline;
+    }
+    // .prices{
+    //   & ~ .button
+    // }
+
+    .price {
+      font-weight: bold;
+      font-size: 1.7rem;
+      margin-top: -10px;
+      color: rgba($black, 0.87);
+      // & + .button {
+      //   margin-bottom: 10px;
+      // }
+    }
+    & + .childWrapper {
+      margin-top: 4.5rem;
+      @include md {
+        margin-top: 6rem;
+      }
+    }
+    .childLink {
+      text-decoration: none;
+      color: $black;
+      &:hover {
+        color: $accent;
+      }
+    }
+  }
+  // .buttonWrapper {
+  //   display: flex;
+  //   flex-wrap: wrap;
+  //   @include sm {
+  //     flex-wrap: nowrap;
+  //     .button + .button {
+  //       margin-left: 10px;
+  //     }
+  //   }
+  //   .button {
+  //     flex: 1 1 100%;
+  //     @include sm {
+  //       flex: 0 0 190px;
+  //     }
+  //   }
+  // }
+
+  // .serviceItem {
+  //   position: relative;
+  // }
+  --icon-size: 100px;
+  .servicesIcon {
+    width: var(--icon-size);
+    height: var(--icon-size);
+    // position: absolute;
+    float: right;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    // right: 14px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0.05;
+    @include sm {
+      --icon-size: 150px;
+    }
+  }
+  .serviceHeader {
+    font-weight: 600;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    color: $black;
+    position: relative;
+    margin-bottom: 5rem;
+    @include md {
+      font-size: 3rem;
+    }
+    &:hover {
+      color: $accent;
+      &:after {
+        background-color: $accent;
+      }
+    }
+    &:after {
+      content: "";
+      display: block;
+      height: 2px;
+      width: 120px;
+      background-color: $black;
+      position: absolute;
+      bottom: -8px;
+      left: 3px;
+    }
+  }
+}
+</style>

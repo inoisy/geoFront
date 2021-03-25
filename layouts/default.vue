@@ -6,7 +6,11 @@
     <v-main>
       <nuxt />
     </v-main>
-    <v-lazy v-model="isFooter" min-height="300">
+    <v-lazy
+      v-model="isFooter"
+      min-height="300"
+      style="background-color: #06070c"
+    >
       <lazy-default-footer v-if="isFooter" />
     </v-lazy>
     <lazy-default-dialog v-if="isDialog" />
