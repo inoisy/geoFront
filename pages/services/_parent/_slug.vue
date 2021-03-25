@@ -256,13 +256,20 @@ export default {
     ] = services;
     // console.log("🚀 ~ file: _slug.vue ~ line 243 ~ service", parentData);
     let benefits;
-    benefits = dynamicContent.find(
+    const advantagesObject = dynamicContent.find(
       (item) => item.__typename === "ComponentGroupsAdvantages"
     );
+    if (advantagesObject && advantagesObject.advantage.length > 3) {
+      benefits = advantagesObject.advantage;
+    }
+
     if (!benefits) {
-      benefits = parentData.dynamicContent.find(
+      const advantagesObject = parentData.dynamicContent.find(
         (item) => item.__typename === "ComponentGroupsAdvantages"
       );
+      if (advantagesObject && advantagesObject.advantage.length > 3) {
+        benefits = advantagesObject.advantage;
+      }
     }
     if (!benefits) {
       const {
@@ -294,7 +301,6 @@ export default {
       });
       benefits = mainPageBenefits;
     }
-    // console.log("🚀 ~ file: _slug.vue ~ line 254 ~ benefits", benefits);
     let iconFind;
     if (icon) {
       iconFind = icon;

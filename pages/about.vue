@@ -4,9 +4,9 @@
       <default-header :header="title" :breadcrumbs="breadcrumbs" />
     </LazyHydrate>
     <section class="white black--text">
-      <v-container>
-        <v-row class="py-12">
-          <v-col cols="12">
+      <v-container class="sectionWrapper">
+        <v-row no-gutters>
+          <v-col class="pa-3" cols="12">
             <LazyHydrate never>
               <content-wrapper :content="page.content" />
             </LazyHydrate>

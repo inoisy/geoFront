@@ -4,7 +4,6 @@
     class="sectionWrapper"
   >
     <v-container>
-      <!-- <template> -->
       <v-row :class="$style.serviceFeatureRow" justify="center" no-gutters>
         <v-col :class="$style.serviceFeatureTextWrapper" cols="12" md="6">
           <h2 :class="$style.serviceFeatureHeader">
@@ -31,14 +30,17 @@
           cols="12"
           md="6"
         >
-          <service-image
+          <v-img
             :class="$style.serviceFeatureImg"
-            :imgUrl="imgUrl"
-            :alt="name"
+            :src="imgUrl"
+            :alt="alt"
+            :title="alt"
+            aspect-ratio="1.555"
+            max-height="400px"
+            gradient="to top right, rgba(0,0,0,0), rgba(0,0,0,.4)"
           />
         </v-col>
       </v-row>
-      <!-- </template> -->
     </v-container>
   </section>
 </template>

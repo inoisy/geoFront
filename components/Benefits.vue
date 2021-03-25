@@ -40,10 +40,6 @@
 <style lang="scss" scoped module>
 .benefitsWrapper {
   color: #18191f;
-  // > div {
-  //   padding-top: 65px;
-  //   padding-bottom: 65px;
-  // }
   .benefitItem {
     display: flex;
     margin-bottom: 25px;

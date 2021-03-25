@@ -56,7 +56,7 @@ export default {
     LazyHydrate,
   },
   async asyncData({ params, app, error }) {
-    // const client = ;
+    // console.log("asyncData");
     const {
       data: { services },
     } = await app.apolloProvider.defaultClient.query({

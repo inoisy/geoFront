@@ -44,7 +44,7 @@
 </template>
 <style lang="scss" scoped module>
 .stepsWrapper {
-  $icon-size: 53px;
+  $icon-size: 70px;
   $icon-padding: 18px;
   // background-color: #ececec;
   // color: #18191f;
@@ -53,11 +53,10 @@
       .stepImageInner {
         position: relative;
         &:before {
-          position: absolute;
-          transition: all 0.2s ease-in-out;
-
           content: "";
           display: block;
+          position: absolute;
+          transition: all 0.2s ease-in-out;
           width: 0;
           height: 0;
           margin: auto;
@@ -69,9 +68,6 @@
           border-radius: 100%;
         }
       }
-
-      // .stepImage {
-      // }
     }
     &:hover {
       .stepImageWrapper {
@@ -143,12 +139,6 @@
       min-width: 70px;
       height: 25px;
       min-height: 25px;
-      // &:hover {
-      //   path {
-      //     stroke: red;
-      //   }
-      //   color: red;
-      // }
     }
 
     &:nth-child(even) .stepPath {
