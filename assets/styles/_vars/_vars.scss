@@ -14,14 +14,16 @@ $body-font-family: "Montserrat";
 
 $black: #18191f;
 $accent: #004bff;
-$gray:#ececec;
-$white:#f1f3ef;
+$gray: #ececec;
+$white: #f1f3ef;
 
+$error: #ff5252;
+$success: #4caf50;
 // @function derive-rgb-values-from-hex($hex) {
-    //     @return red($hex),
-    //     green($hex),
-    //     blue($hex);
-    // }
+//     @return red($hex),
+//     green($hex),
+//     blue($hex);
+// }
 
 :root {
     --toolbar-height: 64px;
@@ -32,5 +34,4 @@ $white:#f1f3ef;
         --toolbar-height: 90px;
         // margin-top: 90px;
     }
-
 }

@@ -42,9 +42,10 @@
   color: #18191f;
   .benefitItem {
     display: flex;
-    margin-bottom: 25px;
+    margin-bottom: 12px;
+
     &:last-child {
-      margin-bottom: -25px;
+      margin-bottom: -12px;
     }
     &:hover {
       .benefitsImageWrapper {
@@ -118,22 +119,26 @@
         font-weight: 600;
         font-size: 16px;
         line-height: 125%;
-        margin-bottom: 16px;
+        margin-bottom: 8px;
         word-break: break-word;
         @include sm {
           font-size: 18px;
         }
         @include md {
-          font-size: 1.5rem;
+          font-size: 20px;
+          margin-bottom: 12px;
         }
       }
       .benefitsText {
         font-weight: normal;
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 300;
-        @include md {
-          font-size: 1rem;
+        @include sm {
+          font-size: 14px;
         }
+        // @include md {
+        //   font-size: 1rem;
+        // }
       }
     }
   }

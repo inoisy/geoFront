@@ -19,6 +19,25 @@ body {
     color: rgba(0, 0, 0, 0.38) !important;
 }
 
+.error {
+    background-color: $error !important;
+    border-color: $error !important;
+}
+
+.error--text {
+    color: $error !important;
+    caret-color: $error !important;
+}
+
+.success {
+    background-color: $success !important;
+    border-color: $success !important;
+}
+
+.success--text {
+    color: $success !important;
+    caret-color: $success !important;
+}
 
 .pageHeader {
     font-weight: 600;
@@ -34,18 +53,12 @@ body {
 }
 
 .callToActionButton {
-
     height: 36px !important;
     // min-width: 64px !important;
     padding: 0 16px !important;
     font-size: 12px !important;
     box-shadow: 0 0 15px rgba($white, 0.65);
-    transition-property: box-shadow,
-        transform,
-        opacity,
-        background-color,
-        border-color,
-        color;
+    transition-property: box-shadow, transform, opacity, background-color, border-color, color;
 
     &:hover {
         background-color: $accent !important;
@@ -68,7 +81,6 @@ body {
         font-size: 1rem !important;
     }
 }
-
 
 // .theme--light.v-application {
 //     background-color: rgb(21, 19, 23) !important;

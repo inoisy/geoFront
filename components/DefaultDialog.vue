@@ -7,31 +7,31 @@
     light
     @click:outside="close"
   >
-    <v-card class="dialog-inner py-12 px-8">
+    <v-card :class="$style.dialogInner">
       <v-btn
+        :class="$style.closeButton"
         class="ml-auto"
         text
         icon
         outlined
         large
         color="black"
-        style="position: absolute; right: 24px; top: 24px"
         @click="close"
       >
         <svg-icon name="close" />
       </v-btn>
       <div v-if="!formSuccess">
         <div
-          class="mb-6 pr-12"
-          style="font-size: 2rem; font-weight: 600; line-height: 125%"
+          :class="$style.header"
+          class="mb-6"
           v-text="
             productName ? `Заказать услугу «${productName}»` : 'ЗАКАЗАТЬ ЗВОНОК'
           "
-        ></div>
-        <p class="mb-8 pr-12">
+        />
+        <div :class="$style.subheader" class="mb-8">
           Пожалуйста, заполните контактную информацию, и наши сотрудники
           свяжутся с Вами.
-        </p>
+        </div>
         <v-form v-model="form" class="layout wrap">
           <v-text-field
             v-model="name"
@@ -42,7 +42,7 @@
             required
             outlined
             @blur="$v.name.$touch()"
-          ></v-text-field>
+          />
           <v-text-field
             v-model="email"
             class="xs12 py-0 flex"
@@ -52,7 +52,7 @@
             required
             outlined
             @blur="$v.email.$touch()"
-          ></v-text-field>
+          />
           <v-text-field
             v-model="phone"
             v-mask="mask"
@@ -63,7 +63,7 @@
             required
             outlined
             @blur="$v.phone.$touch()"
-          ></v-text-field>
+          />
           <v-textarea
             v-model="message"
             class="xs12 py-0 flex mb-9"
@@ -72,7 +72,7 @@
             height="100px"
             hide-details
             label="Комментарий"
-          ></v-textarea>
+          />
 
           <v-flex xs12>
             <v-btn
@@ -105,26 +105,87 @@
           </v-slide-y-transition>
         </v-form>
       </div>
-      <div v-else-if="true" class="pt-0 pb-7">
-        <svg-icon
-          class="mx-auto d-flex mb-6 mt-6"
-          name="check"
-          style="width: 200px; height: 200px"
-        />
+      <div v-else>
+        <svg-icon name="checked" :class="$style.successIcon" />
         <!-- <v-icon size="200" class="mx-auto d-flex">check_circle_outline</v-icon> -->
-        <h2 class="text-center" style="margin-bottom: 1.3rem; font-size: 2rem">
+        <div :class="$style.successHeader" class="text-center">
           Заявка отправлена!
-        </h2>
-        <div class="text-center" style="font-size: 20px">
+        </div>
+        <div :class="$style.successSubHeader" class="text-center">
           Мы свяжемся с вами в ближайшее время.
         </div>
       </div>
+      <div
+        :class="[
+          $style.bottomLine,
+          formSuccess && 'success',
+          formError && 'error',
+        ]"
+      />
     </v-card>
   </v-dialog>
 </template>
 <style lang="scss">
 .dialog-active {
   overflow-x: hidden;
+}
+</style>
+<style lang="scss" scoped module>
+.dialogInner {
+  padding: 24px 20px 30px;
+  @include md {
+    padding: 2.2rem 2rem 2.4rem;
+  }
+}
+.successIcon {
+  width: 230px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+  max-width: 70%;
+  height: auto;
+  display: block;
+}
+.successHeader {
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 125%;
+  margin-bottom: 1.2rem;
+}
+.successSubHeader {
+  font-size: 1rem;
+  @include lg {
+    font-size: 1.2rem;
+  }
+}
+
+.closeButton {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}
+.header {
+  font-size: 1.5rem;
+  padding-right: 44px;
+  font-weight: 600;
+  line-height: 125%;
+  @include sm {
+    font-size: 2rem;
+  }
+}
+.subheader {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+.bottomLine {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 100%;
+  height: 7px;
+  background: darken($accent, 10%);
 }
 </style>
 <script>

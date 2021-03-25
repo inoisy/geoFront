@@ -41,12 +41,7 @@ export default {
 
 <style style lang="scss" scoped module>
 .breadcrumbs {
-  // align-items: center;
-  // display: flex;
-  // flex-wrap: wrap;
-  // flex: 0 1 auto;
   list-style-type: none;
-  // margin: 0;
   padding: 18px 12px;
   .breadcrumbsItem {
     align-items: center;
@@ -63,14 +58,6 @@ export default {
         color: rgba($white, 0.5);
       }
     }
-    // &:not(:first-child) {
-    //   &:before {
-    //     content: "/";
-    //     display: block;
-    //     padding: 0 12px;
-    //     color: rgba(255, 255, 255, 0.5);
-    //   }
-    // }
     &:last-child {
       .breadcrumbsItemLink {
         color: rgba(255, 255, 255, 0.5);
