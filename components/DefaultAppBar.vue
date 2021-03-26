@@ -86,7 +86,7 @@
   //   0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
   position: fixed;
   top: 0;
-  z-index: 5;
+  z-index: 250;
   margin-top: 0px;
   // transform: translateY(0px);
   left: 0px;

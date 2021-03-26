@@ -11,7 +11,7 @@
     @input="change"
   >
     <v-subheader :class="$style.subHeader">НАВИГАЦИЯ</v-subheader>
-    <v-list :class="$style.listWrapper" class="pt-0">
+    <v-list :class="$style.listWrapper" dark class="pt-0">
       <template v-for="item in menuItems">
         <v-list-group v-if="item.items && item.items.length > 0" :key="item.to">
           <v-list-item
@@ -27,24 +27,14 @@
           <template #appendIcon>
             <svg-icon class="icon" name="arrowdown" />
           </template>
-          <!-- <v-list-group v-for='child in node.children' v-model='child.active'>
-                <v-list-tile slot='activator' @click=''>
-                    <v-list-tile-title>{{child.text}}</v-list-tile-title>
-                </v-list-tile>
-                <v-list class='py-0 pl-2' v-for='grandchild in child.children'>
-                    <v-list-tile>
-                        <v-list-tile-title>{{grandchild.text}}</v-list-tile-title>
-                    </v-list-tile>
-                </v-list>
-            </v-list-group> -->
-          <!-- <template v-if="product.child && product.child.length > 0"> -->
+
           <v-list
             class="pa-0"
             dense
+            dark
             v-for="product in item.items"
             :key="product.name"
           >
-            <!-- <template> class="pl-6"-->
             <v-list-group>
               <v-list-item
                 slot="activator"
@@ -62,7 +52,7 @@
               <template #appendIcon>
                 <svg-icon class="icon" name="arrowdown" />
               </template>
-              <v-list>
+              <v-list dark>
                 <v-list-item
                   v-for="child in product.child"
                   :key="child.id"
@@ -94,56 +84,42 @@
         </v-list-item>
       </template>
     </v-list>
-    <!-- <v-list class="pt-0">
-      <template v-for="item in menuItems">
-        <v-list-item
-          :key="item.name"
-          :to="`/${item.slug}`"
-          nuxt
-          ripple
-          exact
-          :title="item.name"
-        >
-          <v-list-item-title>{{ item.name }}</v-list-item-title>
-        </v-list-item>
-      </template>
-    </v-list> -->
   </v-navigation-drawer>
 </template>
 <style lang="scss" scoped module>
 .wrapper {
   background-color: #363636 !important;
+  z-index: 400;
   .subHeader {
     color: #fff !important;
   }
 }
 </style>
-<style lang="scss" >
+<style lang="scss" scoped>
 .navigation-drawer-wrapper {
-  .theme--light.v-list {
-    color: #fff !important;
-  }
-  .theme--light.v-list-item:not(.v-list-item--active):not(.v-list-item--disabled) {
-    color: #fff !important;
-  }
-}
-
-.v-list {
-  .v-list-group__header__append-icon {
-    width: 24px !important;
-    min-width: 24px !important;
-  }
-  .v-list-item--active {
-    // color: inherit;
-    .icon {
-      // color: rgba(0, 0, 0, 0.5);
-      transform: rotate(180deg);
+  // .theme--light.v-list {
+  //   color: #fff !important;
+  // }
+  // .theme--light.v-list-item:not(.v-list-item--active):not(.v-list-item--disabled) {
+  //   color: #fff !important;
+  // }
+  ::v-deep .v-list {
+    .v-list-group__header__append-icon {
+      width: 24px !important;
+      min-width: 24px !important;
     }
-  }
-  .v-list-group {
+    .v-list-item--active {
+      // color: inherit;
+      .icon {
+        // color: rgba(0, 0, 0, 0.5);
+        transform: rotate(180deg);
+      }
+    }
     .v-list-group {
-      .v-list-group__header {
-        padding-left: 0;
+      .v-list-group {
+        .v-list-group__header {
+          padding-left: 0 !important;
+        }
       }
     }
   }

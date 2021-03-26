@@ -2,39 +2,67 @@
 //
 // The variables you want to modify
 // $font-size-root: 20px;
-$body-font-family: 'Montserrat';
-$heading-font-family: 'Montserrat';
+$body-font-family: "Montserrat";
+$heading-font-family: "Montserrat";
 $font-size-root: 18px;
 $color-pack: false;
 // @import '~vuetify/src/styles/styles.sass';
-$dialog-max-height: 90vh;
-$utilities: ("typography":false,
-    "overflow":false,
-    "overflow-x":false,
-    "display":("responsive": false),
-    "float":false,
-    "flex-direction":(responsive:false),
-    "flex-grow":false,
-    "flex-shrink":false,
-    "flex-wrap":(responsive:false,
-        values: wrap nowrap),
-    "justify-content":("responsive": false),
-    "align-items":("responsive": false),
-    "align-content": (responsive: false),
+// $dialog-max-height: 90vh;
+$dialog-max-height: calc(100vh - var(--toolbar-height) + var(--dialog-margin) * 2 - 40px);
+$img-preload-filter: none;
+$utilities: (
+    "typography": false,
+    "overflow": false,
+    "overflow-x": false,
+    "display": (
+        "responsive": false,
+    ),
+    "float": false,
+    "flex-direction": (
+        responsive: false,
+    ),
+    "flex-grow": false,
+    "flex-shrink": false,
+    "flex-wrap": (
+        responsive: false,
+        values: wrap nowrap,
+    ),
+    "justify-content": (
+        "responsive": false,
+    ),
+    "align-items": (
+        "responsive": false,
+    ),
+    "align-content": (
+        responsive: false,
+    ),
     "align-self": false,
     "order": false,
-
     // Margin utilities
-    "margin": (responsive: false),
-    "margin-x": (responsive: false),
-    "margin-y": (responsive: false),
-    "margin-top": (responsive: false),
-    "margin-right": (responsive: false),
-    "margin-bottom": (responsive: false),
-    "margin-left": (responsive: false),
+    "margin":
+        (
+            responsive: false,
+        ),
+    "margin-x": (
+        responsive: false,
+    ),
+    "margin-y": (
+        responsive: false,
+    ),
+    "margin-top": (
+        responsive: false,
+    ),
+    "margin-right": (
+        responsive: false,
+    ),
+    "margin-bottom": (
+        responsive: false,
+    ),
+    "margin-left": (
+        responsive: false,
+    ),
     "margin-start": false,
     "margin-end": false,
-
     // Negative margin utilities
     "negative-margin": false,
     "negative-margin-x": false,
@@ -43,20 +71,33 @@ $utilities: ("typography":false,
     "negative-margin-right": false,
     "negative-margin-bottom": false,
     "negative-margin-left": false,
-    "negative-margin-start":false,
+    "negative-margin-start": false,
     "negative-margin-end": false,
-
     // Padding utilities
-    "padding": (responsive: false),
-    "padding-x": (responsive: false),
-    "padding-y": (responsive: false),
-    "padding-top": (responsive: false),
-    "padding-right": (responsive:false),
-    "padding-bottom": (responsive: false),
-    "padding-left": (responsive: false),
+    "padding":
+        (
+            responsive: false,
+        ),
+    "padding-x": (
+        responsive: false,
+    ),
+    "padding-y": (
+        responsive: false,
+    ),
+    "padding-top": (
+        responsive: false,
+    ),
+    "padding-right": (
+        responsive: false,
+    ),
+    "padding-bottom": (
+        responsive: false,
+    ),
+    "padding-left": (
+        responsive: false,
+    ),
     "padding-start": false,
-    "padding-end":false,
-
+    "padding-end": false,
     // Border
     "rounded": false,
     "rounded-top": false,
@@ -67,16 +108,14 @@ $utilities: ("typography":false,
     "rounded-top-right": false,
     "rounded-bottom-right": false,
     "rounded-bottom-left": false,
-
     // Text
     // "text-align": (responsive: false),
     "text-decoration": false,
     "white-space": false,
     "overflow-wrap": false,
     // "text-overflow": false,
-    // "text-transform": false,
+    // "text-transform": false,,,,
 );
-
 
 // $typography: (responsive: false);
 
@@ -351,7 +390,7 @@ $utilities: ("typography":false,
 //         values: (truncate: nowrap hidden ellipsis)),
 //     "text-transform": (property: text-transform,
 //         class: text,
-//         values: none capitalize lowercase uppercase), 
+//         values: none capitalize lowercase uppercase),
 //     "typography": (responsive: true,
 //         property: (font-size,
 //             font-weight,

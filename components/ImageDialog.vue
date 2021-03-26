@@ -4,8 +4,9 @@
     :max-width="imgWidth"
     :scrollable="false"
     :max-height="imgHeight"
+    content-class="dialog-content-wrapper"
   >
-    <v-card :class="$style.dialogImgWrapper" dark>
+    <v-card :class="$style.dialogImgWrapper" class="pa-3" dark>
       <!-- <div> -->
       <v-img
         :class="$style.dialogImg"
@@ -13,9 +14,8 @@
         :alt="alt"
         contain
         :max-width="imgWidth"
-        :height="imgHeight"
       />
-      <!-- </div> -->
+      <!-- :height="imgHeight" </div> -->
       <div :class="$style.buttonWrapper">
         <v-btn class="close-btn" fab @click="close">
           <!-- style=" z-index: 10" -->
@@ -67,15 +67,32 @@ export default {
   },
 };
 </script>
-
+<style lang="scss" >
+.dialog-content-wrapper {
+  margin-top: calc(var(--toolbar-height) + var(--dialog-margin)) !important;
+  margin-bottom: var(--dialog-margin) !important;
+  max-width: var(--dialog-width) !important;
+}
+</style>
 <style lang="scss" scoped module>
 .dialogImgWrapper {
   position: relative;
   max-height: inherit;
+  height: inherit;
+
   .dialogImg {
     // height: 100%;
     max-height: inherit;
     width: 100%;
+    max-height: calc(
+      100vh - #{$toolbar-mobile-height + $dialog-mobile-margin * 2}
+    ) !important;
+    border-radius: inherit;
+    @include md {
+      max-height: calc(
+        100vh - #{$toolbar-desktop-height + $dialog-desktop-margin * 2}
+      ) !important;
+    }
   }
   .buttonWrapper {
     position: absolute;

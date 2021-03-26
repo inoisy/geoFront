@@ -30,7 +30,12 @@
           cols="12"
           md="6"
         >
-          <v-img
+          <service-image
+            :class="$style.serviceFeatureImg"
+            :imgUrl="imgUrl"
+            :alt="name"
+          />
+          <!-- <v-img
             :class="$style.serviceFeatureImg"
             :src="imgUrl"
             :alt="name"
@@ -38,7 +43,7 @@
             aspect-ratio="1.555"
             max-height="400px"
             gradient="to top right, rgba(0,0,0,0), rgba(0,0,0,.4)"
-          />
+          /> -->
         </v-col>
       </v-row>
     </v-container>
@@ -154,10 +159,7 @@
 }
 </style>
 <script>
-import ServiceImage from "~/components/ServiceImage.vue";
-
 export default {
-  components: { ServiceImage },
   props: {
     isWithGray: {
       type: Boolean,
