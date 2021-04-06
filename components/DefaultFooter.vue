@@ -18,17 +18,20 @@
         <v-col class="" cols="12" sm="6" md="6" lg="3">
           <v-subheader class="hidden-sm-and-down">КОНТАКТЫ</v-subheader>
           <v-list style="background: transparent !important">
+            <!-- :href="`tel:${info.phone}`"
+              {{ info.phone }}
+              -->
             <v-list-item
-              class
+              class="ct_hid"
               title="Телефон"
-              :href="`tel:${info.phone}`"
+              href="tel:+74991120654"
               height="48"
             >
               <v-list-item-icon>
                 <svg-icon name="phone" />
               </v-list-item-icon>
               <v-list-item-content itemprop="telephone">
-                {{ info.phone }}
+                +7 (499) 112-06-54
               </v-list-item-content>
             </v-list-item>
             <v-list-item :href="`mailto:${info.email}`" title="email">

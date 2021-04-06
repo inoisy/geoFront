@@ -36,17 +36,26 @@
           <svg-icon name="arrowdown" style="margin-right: -5px" />
         </v-btn>
       </template>
-
+      <!-- href="tel:+74991120654">
+            +7 (499) 112-06-54 -->
+      <!-- :href="`tel:${info.phone}`" -->
+      <!-- {{ info.phone }} -->
+      <!-- <client-only> -->
       <v-btn
-        class="d-dlex"
-        :href="`tel:${info.phone}`"
+        class="d-dlex ct_hid"
+        href="tel:+74991120654"
         :class="$style.linkTel"
         title="Телефон"
         text
       >
         <svg-icon name="phone" />
-        <span :class="$style.linkTelText" class="pl-2">{{ info.phone }}</span>
+        <span :class="$style.linkTelText" class="pl-2">
+          +7 (499) 112-06-54
+        </span>
       </v-btn>
+      <!-- </client-only> -->
+      <!-- <a class="ct_hid" href="tel:+74991120654">+7 (499) 112-06-54</a> -->
+
       <v-btn
         :class="$style.linkIcon"
         class="d-dlex"

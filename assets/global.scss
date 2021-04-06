@@ -122,6 +122,10 @@ body {
     height: 24px;
 }
 
+a[href="tel:+74991120654"] {
+    visibility: hidden;
+}
+
 html {
     font-size: 14px !important;
     scroll-behavior: smooth;

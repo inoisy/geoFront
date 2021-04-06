@@ -56,13 +56,7 @@ export const mutations = {
 }
 export const actions = {
     async nuxtServerInit(state) {
-        state.commit("init", data);
-        // const cache = await this._vm.$getCachedData(), { app }
-        // // console.log("cache", cache)
-        // if (cache) {
-        //     await state.commit("init", cache)
-        // } else {
-        // console.log(this.app.context)
+        state.commit("init", data)
         const client = this.app.apolloProvider.defaultClient;
         const query = gql`
         {
@@ -76,7 +70,6 @@ export const actions = {
                 }
             }
             info{
-                phone
                 email
                 accessTime
                 address
@@ -86,7 +79,7 @@ export const actions = {
             }
         }
         `
-        //     `
+        //     `phone
         const {
             data: generalData
         } = await client.query({

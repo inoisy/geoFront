@@ -14,7 +14,9 @@
       <lazy-default-footer v-if="isFooter" />
     </v-lazy>
     <lazy-default-dialog v-if="isDialog" />
-    <lazy-floating-button v-if="isMounted" />
+    <v-fab-transition appear>
+      <lazy-floating-button v-if="isMounted" />
+    </v-fab-transition>
     <lazy-navigation-drawer
       v-if="drawer"
       :show="drawer"
@@ -26,6 +28,22 @@
 <script>
 import LazyHydrate from "vue-lazy-hydration";
 export default {
+  // head() {
+  //   return {
+  // title: 'Payment Page - My awesome project',
+  // script: [
+  //   {
+  //     hid: "calltracking",
+  //     src: `http://cc.calltracking.ru/phone.ecee0.10700.async.js?nc=${Math.floor(
+  //       new Date().getTime() / 300000
+  //     )}`,
+  //     // defer: true,'<https://js.stripe.com/v3/>',
+  //     // Changed after script load
+  //     // callback: () => { this.isStripeLoaded = true }
+  //   },
+  // ],
+  //   };
+  // },
   components: {
     LazyHydrate,
   },

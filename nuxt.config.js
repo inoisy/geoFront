@@ -33,7 +33,7 @@ module.exports = async () => {
   return {
     target: isDev ? "server" : process.env.TARGET || "static",
     generate: {
-      fallback: '404.html',
+      // fallback: '404.html',
       // subFolders: false,
       dir: process.env.GENERATE_DIR || "/var/www/front",
       routes
@@ -50,6 +50,9 @@ module.exports = async () => {
       baseUrl: backendUrl,
       imageBaseUrl: process.env.IMAGE_BACKEND_URL || backendUrl,
       yandexMetrikaID: process.env.YANDEX_ID,
+      googleAnalytics: {
+        id: process.env.GOOGLE_ANALYTICS_ID
+      }
     },
     privateRuntimeConfig: {
 
@@ -78,11 +81,9 @@ module.exports = async () => {
       ],
     },
 
-
-
     // Global CSS (https://go.nuxtjs.dev/config-css)
     css: [
-      '@/assets/global.scss',
+      '~/assets/global.scss',
     ],
 
     // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
@@ -97,6 +98,7 @@ module.exports = async () => {
 
     // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
     buildModules: [
+      '@nuxtjs/google-analytics',
       '~/modules/hook.js',
       // https://go.nuxtjs.dev/eslint
       // '@nuxtjs/eslint-module',
@@ -203,26 +205,8 @@ module.exports = async () => {
       //     config: {}, // Additional config
       //   }] 
     ],
-    // cache: {
-    //   // if you're serving multiple host names (with differing
-    //   // results) from the same server, set this option to true.
-    //   // (cache keys will be prefixed by your host name)
-    //   // if your server is behind a reverse-proxy, please use
-    //   // express or whatever else that uses 'X-Forwarded-Host'
-    //   // header field to provide req.hostname (actual host name)
-    //   useHostPrefix: false,
-    //   pages: ["/"],
-    //   store: {
-    //     type: 'memory',
-
-    //     // maximum number of pages to store in memory
-    //     // if limit is reached, least recently used page
-    //     // is removed.
-    //     max: 100,
-
-    //     // number of seconds to store this page in cache
-    //     ttl: 600000,
-    //   },
+    // googleAnalytics: {
+    //   id: process.env.GA_ID
     // },
 
     svgSprite: {

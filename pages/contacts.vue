@@ -12,12 +12,20 @@
             class="pa-3"
           >
             <v-list style="background: transparent !important" light>
-              <v-list-item title="Телефон" :href="`tel:${info.phone}`">
+              <!-- href="tel:+74991120654">
+            +7 (499) 112-06-54  -->
+              <!-- :href="`tel:${info.phone}`" -->
+              <!-- {{ info.phone }} -->
+              <v-list-item
+                title="Телефон"
+                class="ct_hid"
+                href="tel:+74991120654"
+              >
                 <v-list-item-icon>
                   <svg-icon name="phone" />
                 </v-list-item-icon>
                 <v-list-item-content itemprop="telephone">
-                  {{ info.phone }}
+                  +7 (499) 112-06-54
                 </v-list-item-content>
               </v-list-item>
               <v-list-item :href="`mailto:${info.email}`" title="email">

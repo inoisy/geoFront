@@ -14,8 +14,10 @@
           Получить консультацию и расчёт полной стоимости услуг можно оставив
           контакты в форме ниже или позвонив по телефону
 
-          <a :class="$style.phone" :href="`tel:${phone}`">
-            {{ phone }}
+          <!-- <a :class="$style.phone" :href="`tel:${phone}`"> -->
+          <!-- {{ phone }} -->
+          <a :class="$style.phone" class="ct_hid" href="tel:+74991120654">
+            +7 (499) 112-06-54
           </a>
         </div>
         <!-- outlined dark-->
