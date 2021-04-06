@@ -43,9 +43,16 @@
   </section>
 </template>
 <style lang="scss" scoped module>
+@function strip-unit($number) {
+  @if type-of($number) == "number" and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
 .stepsWrapper {
   $icon-size: 70px;
-  $icon-padding: 18px;
+  $icon-padding: 10px;
   // background-color: #ececec;
   // color: #18191f;
   .steps {
@@ -56,16 +63,17 @@
           content: "";
           display: block;
           position: absolute;
-          transition: all 0.2s ease-in-out;
-          width: 0;
-          height: 0;
-          margin: auto;
+          transition: 0.3s ease-in-out;
+          transform-origin: center;
+          width: $icon-size + $icon-padding * 2;
+          height: $icon-size + $icon-padding * 2;
           top: 50%;
-          left: 0;
-          right: 0;
-          background: #f2f2f2;
-          box-sizing: border-box;
-          border-radius: 100%;
+          left: 50%;
+          background-color: $white;
+          opacity: 0;
+          border-radius: 50%;
+          transform: translate(-50%, -50%);
+          mix-blend-mode: difference;
         }
       }
     }
@@ -73,31 +81,19 @@
       .stepImageWrapper {
         .stepImageInner {
           &:before {
-            // top: 0;
-            top: -$icon-padding;
-            left: -$icon-padding;
-            width: $icon-size + $icon-padding * 2;
-            height: $icon-size + $icon-padding * 2;
-            // line-height: 103px;
-            background: $black;
+            // background-color: $black;
+            opacity: 1;
+            z-index: 1;
           }
-          .stepImage {
-            filter: invert(1);
-          }
+          // .stepImage {
+          //   filter: invert(1);
+          // }
         }
-
-        // .stepImage {
-        //   // box-shadow: 0 0 10px #ccc;
-        //   // // transform: scale(1.1);
-        //   // transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
-        // }
       }
     }
 
-    // &:nth-child(even)
     margin-bottom: 50px;
     align-items: center;
-    // justify-content: center;
     display: flex;
     flex-direction: column;
     &:first-child .stepPath {
@@ -124,17 +120,12 @@
       .stepImage {
         transition: all 0.2s ease-in-out;
         width: 53px;
-        // max-width: 53px;
         min-height: 53px;
-        // transform: translateZ(0);
-        // transition-timing-function: ease-out;
       }
     }
     .stepPath {
       position: absolute;
-      // transform: translate(-50px, -65px) rotate(108deg);
       transform: translate(-30px, -57px) rotate(95deg);
-      // max-height: 53px; scale(-0.4)
       width: 70px;
       min-width: 70px;
       height: 25px;
@@ -142,14 +133,9 @@
     }
 
     &:nth-child(even) .stepPath {
-      // transform: translate(-75px, -65px) rotate(-96deg) scale(-0.4);
       transform: translate(0px, -57px) rotate(-82deg);
     }
   }
-  // > div {
-  //   padding-top: 80px;
-  //   padding-bottom: 75px;
-  // }
 
   @include md {
     .steps {
@@ -157,19 +143,14 @@
         font-weight: bold;
         font-size: 20px;
       }
-      // .stepsText {
-      //   font-size: 16px;
-      // }
       align-items: flex-start;
       margin-bottom: 0px;
       .stepImageWrapper {
         justify-content: space-between;
-        // padding-left: 16px;
       }
       .stepPath {
         position: relative;
         transform: translate(0, 0) rotate(0);
-        // scale(0.8)
         margin-left: 24px;
         width: calc(100% - 80px);
         min-width: unset;
@@ -182,7 +163,6 @@
       }
       &:nth-child(even) .stepPath {
         transform: translate(0, -22px) rotate(-166deg);
-        // transform: translate(-131px, -76px) rotate(441.85deg) scale(-0.4);scale(0.8)
       }
       &:last-child .stepPath {
         display: none;
@@ -190,7 +170,6 @@
     }
   }
   @include lg {
-    // .stepsWrapper {
     .steps {
       .stepPath {
         margin-left: 40px;
@@ -200,7 +179,6 @@
         transform: translate(0, -22px) rotate(-166deg) scale(1);
       }
     }
-    // }
   }
 }
 </style>

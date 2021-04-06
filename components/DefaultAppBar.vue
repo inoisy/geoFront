@@ -1,5 +1,5 @@
 <template>
-  <header :class="$style.appBar">
+  <header :class="$style.appBar" id="appBar">
     <v-container
       fill-height
       :class="$style['header']"

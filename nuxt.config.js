@@ -39,7 +39,11 @@ module.exports = async () => {
       routes
     },
     loading: {
-      color: 'rgb(0, 126, 255)'
+      color: 'rgb(0, 126, 255)',
+      throttle: 30,
+      duration: 3000,
+      continuous: true,
+      failedColor: "white"
     },
     publicRuntimeConfig: {
       siteUrl,

@@ -10,7 +10,6 @@
     </LazyHydrate>
     <section class="sectionWrapper">
       <v-container>
-        <!-- <v-row no-gutters> -->
         <div class="pa-3">
           <LazyHydrate when-visible>
             <mobile-aside-menu
@@ -26,7 +25,6 @@
             <content-wrapper :content="service.content" />
           </LazyHydrate>
         </div>
-        <!-- </v-row> -->
       </v-container>
     </section>
     <LazyHydrate
@@ -56,7 +54,6 @@ export default {
     LazyHydrate,
   },
   async asyncData({ params, app, error }) {
-    // console.log("asyncData");
     const {
       data: { services },
     } = await app.apolloProvider.defaultClient.query({
@@ -80,9 +77,6 @@ export default {
               name
               slug
               description
-              # parent {
-              #   slug
-              # }
               img {
                 url
                 formats
@@ -100,17 +94,6 @@ export default {
       });
     }
     const { child, ...service } = services[0];
-    // const children = child.reduce((acc, val) => {
-    //   acc.push({
-    //     ...val,
-    //     img: calculateImageUrl(val.img),
-    //   });
-    //   return acc;
-    // }, []);
-    // console.log(
-    //   "🚀 ~ file: index.vue ~ line 116 ~ children ~ children",
-    //   children
-    // );
 
     return {
       service,
@@ -120,7 +103,7 @@ export default {
           img: calculateImageUrl(val.img),
         });
         return acc;
-      }, []), // Object.freeze(services[0]),
+      }, []),
       breadcrumbs: [
         {
           text: "Главная",
@@ -137,24 +120,6 @@ export default {
       ],
     };
   },
-  // computed: {
-  //   breadcrumbs() {
-  //     return [
-  //       {
-  //         text: "Главная",
-  //         to: "/",
-  //       },
-  //       {
-  //         text: "Услуги",
-  //         to: "/services",
-  //       },
-  //       {
-  //         text: this.service.name,
-  //         to: this.service.slug,
-  //       },
-  //     ];
-  //   },
-  // },
   head() {
     return {
       title: this.service.name,
@@ -190,14 +155,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped module>
-// .section {
-//   padding-top: 4.5rem;
-//   padding-bottom: 4rem;
-//   @include md {
-//     padding-top: 6rem;
-//     padding-bottom: 5rem;
-//   }
-// }
-</style>

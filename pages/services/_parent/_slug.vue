@@ -17,8 +17,9 @@
               v-if="imgUrl"
               :imgUrl="thumbnailUrl"
               :alt="service.name"
-              @show="showImageDialog = true"
+              @show="handleImageDialog"
             />
+            <!-- showImageDialog = true -->
           </LazyHydrate>
           <LazyHydrate never>
             <content-wrapper :content="service.content" />
@@ -27,27 +28,18 @@
       </v-container>
     </section>
     <lazy-benefits
+      id="benefits"
       v-if="benefits"
       :class="$style.section"
       class="sectionWrapper"
       :items="benefits"
     />
-
-    <!--:key="`dynamic-${index}`" <template v-for="(item, index) in service.dynamicContent">
-      <lazy-benefits
-        v-if="item.__typename === 'ComponentGroupsAdvantages'"
-        :class="$style.section"
-        :items="item.advantage"
-        :key="`dynamic-${index}`"
-      />
-      <lazy-steps
-        v-else-if="item.__typename === 'ComponentGroupsStepsGroup'"
-        :class="$style.section"
-        :items="item.stepItem"
-        :key="`dynamic-${index}`"
-      />
-    </template> -->
-    <section :class="$style.section" class="sectionWrapper" v-if="!!pricesFind">
+    <section
+      id="prices"
+      :class="$style.section"
+      class="sectionWrapper"
+      v-if="!!pricesFind"
+    >
       <v-container>
         <h2 class="pageHeader mb-8 pa-3">Стоимость работ</h2>
         <lazy-prices class="pa-3" :content="pricesFind" />
@@ -82,52 +74,19 @@
         show: showImageDialog,
       }"
       @close="showImageDialog = false"
+      @loaded="loadingEnd"
     />
-    <!-- :img="imgUrl"
-      imgWidth:0,
-      imgHeight:0
-      :alt="service.name"
-      :show="showImageDialog" -->
+    <!-- showImageDialog = false -->
   </div>
 </template>
 
 <style lang="scss" scoped module>
-// .header {
-//   font-size: 2.5rem;
-//   font-weight: 600;
-//   line-height: ;
-// }
-// .header {
-//   // font-weight: 600;
-//   // font-size: 18px;
-//   // line-height: 125%;
-//   // margin-bottom: 16px;
-//   font-weight: 600;
-//   font-size: 2.3rem;
-//   line-height: 125%;
-
-//   @include md {
-//     font-size: 2.9rem;
-//   }
-// }
-// .contentWithImgWrapper {
-
-// }
-
-// .othersWrapper {
-//   background-color: $gray;
-//   color: $black;
-// }
 .section {
-  // padding-top: 6rem;
-  // padding-bottom: 5rem;
-
   &:nth-child(2n + 1) {
     background-color: $gray;
     --content-color: white;
   }
 }
-// .section
 </style>
 <script>
 import gql from "graphql-tag";
@@ -215,8 +174,6 @@ const query = gql`
     }
   }
 `;
-// console.log("🚀 ~ file: _slug.vue ~ line 91 ~ query", query);
-
 export default {
   components: {
     LazyHydrate,
@@ -237,7 +194,6 @@ export default {
       },
       query,
     });
-    // if(!data)
     if (!services || !services.length) {
       return error({
         statusCode: 404,
@@ -254,7 +210,6 @@ export default {
         ...service
       },
     ] = services;
-    // console.log("🚀 ~ file: _slug.vue ~ line 243 ~ service", parentData);
     let benefits;
     const advantagesObject = dynamicContent.find(
       (item) => item.__typename === "ComponentGroupsAdvantages"
@@ -313,13 +268,6 @@ export default {
     } else {
       pricesFind = parentData.prices;
     }
-    // const siblings = ;
-
-    // const service = service;
-    // const breadcrumbs = ;
-
-    // const siblings = siblings;
-    // const isTooManyChilds = ;
     const parentSlug = parentData.slug;
     let thumbnailUrl, imgUrl, imgWidth, imgHeight;
     if (img) {
@@ -339,7 +287,6 @@ export default {
       imgHeight,
       benefits,
       icon: iconFind,
-      // isTooManyChilds: siblings.length > 4,
       siblings: parentData.child.reduce((acc, sibling) => {
         const { img, ...siblingData } = sibling;
         acc.push({
@@ -366,59 +313,6 @@ export default {
         },
       ],
     };
-    // isTooManyChilds() {
-    //   return this.child.length > 5;
-    // },
-    // breadcrumbs() {
-    // const base = [
-    //   {
-    //     text: "Главная",
-    //     to: "/",
-    //   },
-    //   {
-    //     text: "Услуги",
-    //     to: "/services",
-    //   },
-    // ];
-    //   if (this.parentSlug) {
-    //     base.push({
-    //       text: this.service.parent[0].name,
-    //       to: `/services/${this.parentSlug}`,
-    //     });
-    //   }
-    //   base.push({
-    //     text: this.service.name,
-    //     to: this.service.slug,
-    //   });
-    //   return base;
-    // },
-    // this.parentSlug = service.parent[0].slug;
-    // return {
-    //   service: service,
-    //   parentSlug: service.parent[0].slug,
-    // };
-    // } catch (err) {
-    //   console.log("🚀 ~ file: _slug.vue ~ line 195 ~ fetch ~ err", err);
-
-    // return this.$nuxt.error({
-    //   statusCode: 404,
-    //   message: "Информацию не удалось получить",
-    // });
-    // }
-    // if (isLoading) {
-    //   this.$nuxt.$loading.finish();
-    // }
-    // console.log("🚀 ~ file: _slug.vue ~ line 162 ~ asyncData ~ data", service);
-    // if (!service) {
-    //   return error({
-    //     statusCode: 404,
-    //     message: "Информацию не удалось получить",
-    //   });
-    // }
-    // return {
-    //   service: service,
-    //   parentSlug: service.parent[0].slug,
-    // };
   },
   data() {
     return {
@@ -434,51 +328,6 @@ export default {
       imgHeight: 0,
     };
   },
-
-  // computed: {
-  // child() {
-  //   return this.service.parent[0].child;
-  //   // .filter(
-  //   //   (item) => item.slug !== this.service.slug
-  //   // );
-  // },
-  // parentSlug() {
-  //   if (this.service.parent && this.service.parent.length) {
-  //     return this.service.parent[0].slug;
-  //   } else {
-  //     return "";
-  //   }
-  // },
-  // breadcrumbs() {
-  //   const base = [
-  //     {
-  //       text: "Главная",
-  //       to: "/",
-  //     },
-  //     {
-  //       text: "Услуги",
-  //       to: "/services",
-  //     },
-  //   ];
-  //   if (this.parentSlug) {
-  //     base.push({
-  //       text: this.service.parent[0].name,
-  //       to: `/services/${this.parentSlug}`,
-  //     });
-  //   }
-  //   base.push({
-  //     text: this.service.name,
-  //     to: this.service.slug,
-  //   });
-  //   return base;
-  // },
-  // isTooManyChilds() {
-  //   return this.child.length > 5;
-  // },
-  // },
-  // mounted() {
-  //   console.log(this.service);
-  // },
   head() {
     return {
       title: this.service.name,
@@ -511,6 +360,24 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    handleImageDialog() {
+      this.loadingStart();
+      this.showImageDialog = true;
+    },
+    loadingStart() {
+      if (!process.client) {
+        return;
+      }
+      this.$nuxt.$loading.start();
+    },
+    loadingEnd() {
+      if (!process.client) {
+        return;
+      }
+      this.$nuxt.$loading.finish();
+    },
   },
 };
 </script>

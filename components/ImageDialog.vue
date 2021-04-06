@@ -1,26 +1,31 @@
 <template>
   <v-dialog
     v-model="isShow"
-    :max-width="imgWidth"
     :scrollable="false"
-    :max-height="imgHeight"
-    content-class="dialog-content-wrapper"
+    :max-width="`calc(var(--dialog-img-max-height) * ${1 / aspectRatio})`"
   >
-    <v-card :class="$style.dialogImgWrapper" class="pa-3" dark>
-      <!-- <div> -->
-      <v-img
-        :class="$style.dialogImg"
-        :src="imgUrl"
-        :alt="alt"
-        contain
-        :max-width="imgWidth"
-      />
-      <!-- :height="imgHeight" </div> -->
-      <div :class="$style.buttonWrapper">
-        <v-btn class="close-btn" fab @click="close">
-          <!-- style=" z-index: 10" -->
-          <svg-icon name="close" />
-        </v-btn>
+    <v-card :class="$style.imageDialogInner" dark>
+      <div class="pos-relative">
+        <div :style="`padding-top: ${aspectRatio * 100}%`" />
+        <v-img
+          :class="$style.dialogImg"
+          :src="imgUrl"
+          :alt="alt"
+          cover
+          @load="$emit('loaded')"
+          @error="$emit('loaded')"
+        >
+          <template v-slot:placeholder>
+            <div class="fill-height row align-center justify-center ma-auto">
+              <v-progress-circular indeterminate color="accent" />
+            </div>
+          </template>
+        </v-img>
+        <div :class="$style.buttonWrapper">
+          <v-btn :class="$style.button" fab @click="isShow = false">
+            <svg-icon name="close" />
+          </v-btn>
+        </div>
       </div>
     </v-card>
   </v-dialog>
@@ -48,19 +53,23 @@ export default {
       type: Number,
     },
   },
-  methods: {
-    close() {
-      this.$emit("close");
-    },
-  },
+  // methods: {
+  //   close() {
+  //     this.$emit("close");
+  //   },
+  // },
   computed: {
+    aspectRatio() {
+      return this.imgHeight / this.imgWidth;
+    },
     isShow: {
       get() {
         return this.show;
       },
       set(val) {
         if (!val) {
-          this.close();
+          this.$emit("close");
+          // this.close();
         }
       },
     },
@@ -68,42 +77,55 @@ export default {
 };
 </script>
 <style lang="scss" >
-.dialog-content-wrapper {
-  margin-top: calc(var(--toolbar-height) + var(--dialog-margin)) !important;
-  margin-bottom: var(--dialog-margin) !important;
-  max-width: var(--dialog-width) !important;
+.pos-relative {
+  position: relative;
+}
+:root {
+  --dialog-margin: 20px;
+  --dialog-max-height: calc(
+    100vh - var(--toolbar-height) - var(--dialog-margin) * 2
+  );
+  --fab-button-size: 44px;
+  --dialog-img-padding: 12px;
+  --dialog-img-max-height: calc(
+    var(--dialog-max-height) - var(--dialog-img-padding) * 2
+  );
+  @include md {
+    --dialog-margin: 40px;
+    --dialog-img-padding: 24px;
+    --fab-button-size: 48px;
+  }
 }
 </style>
 <style lang="scss" scoped module>
-.dialogImgWrapper {
+.imageDialogInner {
   position: relative;
   max-height: inherit;
   height: inherit;
-
+  overflow: hidden;
+  padding: var(--dialog-img-padding);
   .dialogImg {
-    // height: 100%;
-    max-height: inherit;
-    width: 100%;
-    max-height: calc(
-      100vh - #{$toolbar-mobile-height + $dialog-mobile-margin * 2}
-    ) !important;
     border-radius: inherit;
-    @include md {
-      max-height: calc(
-        100vh - #{$toolbar-desktop-height + $dialog-desktop-margin * 2}
-      ) !important;
-    }
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    border-radius: 4px;
+    overflow: hidden;
+    transform: translateZ(0) perspective(1px);
   }
   .buttonWrapper {
     position: absolute;
-    top: 16px;
-    right: 16px;
+    top: var(--dialog-img-padding);
+    right: var(--dialog-img-padding);
+    z-index: 10;
+    .button {
+      width: var(--fab-button-size) !important;
+      height: var(--fab-button-size) !important;
+      border: thin solid $white;
+    }
   }
-  // .dialogImg {
-  //   max-height: calc(100vh - 64px);
-  //   @include md {
-  //     max-height: calc(90vh - 24px);
-  //   }
-  // }
 }
 </style>
