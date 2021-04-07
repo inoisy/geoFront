@@ -17,7 +17,7 @@
           <!-- <a :class="$style.phone" :href="`tel:${phone}`"> -->
           <!-- {{ phone }} -->
           <a :class="$style.phone" class="ct_hid" href="tel:+74991120654">
-            +7 (499) 112-06-54
+            <span class="phone-text">+7 (499) 112-06-54</span>
           </a>
         </div>
         <!-- outlined dark-->
