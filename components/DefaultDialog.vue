@@ -346,17 +346,39 @@ export default {
           // if (window.yaCounter54918895) {
           //
           // }
-          this.clear();
 
-          if (
-            this.$config.yandexMetrikaID &&
-            window[`yaCounter${this.$config.yandexMetrikaID}`]
-          ) {
-            console.log("order");
-            window[`yaCounter${this.$config.yandexMetrikaID}`].reachGoal(
-              "order"
+          try {
+            if (
+              this.$config.yandexMetrikaID &&
+              window[`yaCounter${this.$config.yandexMetrikaID}`]
+            ) {
+              console.log("order");
+              window[`yaCounter${this.$config.yandexMetrikaID}`].reachGoal(
+                "order"
+              );
+            }
+            this.$ga.event({
+              eventCategory: "order",
+              eventAction: "orderAction",
+              eventLabel: "orderLabel",
+              eventValue: 111,
+              //  {
+              //   name: this.name,
+              //   phone: this.phone,
+              //   message: this.message,
+              //   email: this.email,
+              //   serviceName: this.$store.state.dialog.name,
+              // },
+            });
+          } catch (error) {
+            console.log(
+              "🚀 ~ file: DefaultDialog.vue ~ line 361 ~ .then ~ error",
+              error
             );
+          } finally {
+            this.clear();
           }
+
           // window[`yaCounter${this.$config.yandexMetrikaID}`]
         })
         .catch(() => {

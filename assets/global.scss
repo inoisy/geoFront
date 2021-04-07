@@ -123,7 +123,9 @@ body {
 }
 
 a[href="tel:+74991120654"] {
-    visibility: hidden;
+    .phone-text {
+        visibility: hidden;
+    }
 }
 
 html {

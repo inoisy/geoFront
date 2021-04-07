@@ -40,7 +40,7 @@
             +7 (499) 112-06-54 -->
       <!-- :href="`tel:${info.phone}`" -->
       <!-- {{ info.phone }} -->
-      <!-- <client-only> -->
+      <!-- <client-only> <span class="phone-text">-->
       <v-btn
         class="d-dlex ct_hid"
         href="tel:+74991120654"
@@ -49,7 +49,7 @@
         text
       >
         <svg-icon name="phone" />
-        <span :class="$style.linkTelText" class="pl-2">
+        <span :class="$style.linkTelText" class="pl-2 phone-text">
           +7 (499) 112-06-54
         </span>
       </v-btn>
@@ -159,6 +159,7 @@
       padding: 0 var(--padding) !important;
       .linkTelText {
         display: inline;
+        width: 173px;
       }
     }
     // @include lg {

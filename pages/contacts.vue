@@ -25,7 +25,7 @@
                   <svg-icon name="phone" />
                 </v-list-item-icon>
                 <v-list-item-content itemprop="telephone">
-                  +7 (499) 112-06-54
+                  <span class="phone-text">+7 (499) 112-06-54</span>
                 </v-list-item-content>
               </v-list-item>
               <v-list-item :href="`mailto:${info.email}`" title="email">
