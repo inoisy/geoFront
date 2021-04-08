@@ -55,7 +55,6 @@ module.exports = async () => {
       }
     },
     privateRuntimeConfig: {
-
       yandexMapID: process.env.MAP_KEY
     },
     // Global page headers (https://go.nuxtjs.dev/config-head)
@@ -151,20 +150,7 @@ module.exports = async () => {
           // defer: true,
           // useLocal:true
         }],
-      // ['@rkaliev/nuxtjs-yandex-metrika',
-      //   {
-      //     id: process.env.YANDEX_ID,
-      //     clickmap: true,
-      //     trackLinks: true,
-      //     accurateTrackBounce: true,
-      //     webvisor: true,
-      //     useCDN: false
-      //   }],
-      // '@blokwise/dynamic',
-      // 'nuxt-ssr-cache',
-      // https://go.nuxtjs.dev/axios
-      // '@nuxtjs/axios',
-      // https://www.npmjs.com/package/@nuxtjs/svg-sprite
+
       '@nuxtjs/svg-sprite',
       'nuxt-webfontloader',
       ['@nuxtjs/apollo', {
