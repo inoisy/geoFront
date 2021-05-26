@@ -31,13 +31,14 @@ module.exports = async () => {
   const isDev = process.env.NODE_ENV !== 'production'
 
   return {
-    target: isDev ? "server" : process.env.TARGET || "static",
-    generate: {
-      // fallback: '404.html',
-      // subFolders: false,
-      dir: process.env.GENERATE_DIR || "/var/www/front",
-      routes
-    },
+    // target: "server",
+    // target: isDev ? "server" : process.env.TARGET || "static",
+    // generate: {
+    //   // fallback: '404.html',
+    //   // subFolders: false,
+    //   dir: process.env.GENERATE_DIR || "/var/www/front",
+    //   routes
+    // },
     loading: {
       color: 'rgb(0, 126, 255)',
       throttle: 30,
@@ -86,11 +87,11 @@ module.exports = async () => {
     ],
 
     // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-    plugins: [
+    // plugins: [
       // { src: '~/plugins/ymapPlugin.js', mode: 'client' },
       // '~/plugins/cachedApi.js',
       // '~/plugins/cache.js',
-    ],
+    // ],
 
     // Auto import components (https://go.nuxtjs.dev/config-components)
     components: true,
@@ -251,7 +252,7 @@ module.exports = async () => {
       //     }],
       //   ]
       // },
-      transpile: ["@nuxtjs/apollo", "@nuxtjs/vuetify", /^@nuxtjs.*/, "vue-lazy-hydration", "vue-the-mask", "vue-yandex-maps", "vuelidate", "nuxt-social-meta", "nuxt-ssr-cache", "graphql-tag", "vuelidate"]
+      transpile: ["@nuxtjs/apollo", "@nuxtjs/vuetify", /^@nuxtjs.*/, "vue-lazy-hydration", "vue-the-mask", "vue-yandex-maps", "vuelidate", "nuxt-social-meta", "graphql-tag", "vuelidate"]
     }
   }
 }

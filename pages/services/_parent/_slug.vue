@@ -11,7 +11,7 @@
     </LazyHydrate>
     <section :class="$style.section" class="sectionWrapper">
       <v-container>
-        <div class="pa-3" style="min-height: 400px">
+        <div class="pa-3" style="min-height: 400px;">
           <LazyHydrate when-visible>
             <lazy-thumbnail
               v-if="imgUrl"
@@ -21,9 +21,9 @@
             />
             <!-- showImageDialog = true -->
           </LazyHydrate>
-          <LazyHydrate never>
+          <!-- <LazyHydrate when-visible> -->
             <content-wrapper :content="service.content" />
-          </LazyHydrate>
+          <!-- </LazyHydrate> -->
         </div>
       </v-container>
     </section>
@@ -81,12 +81,13 @@
 </template>
 
 <style lang="scss" scoped module>
-.section {
-  &:nth-child(2n + 1) {
-    background-color: $gray;
-    --content-color: white;
-  }
-}
+    .section {
+        &:nth-child(2n + 1) {
+            background-color: $gray;
+
+            --content-color: white;
+        }
+    }
 </style>
 <script>
 import gql from "graphql-tag";
@@ -193,6 +194,7 @@ export default {
         slug: params.slug,
       },
       query,
+      fetchPolicy: 'no-cache'
     });
     if (!services || !services.length) {
       return error({

@@ -8,5 +8,8 @@ export default ({ $config }) => {
     return {
         httpEndpoint: $config.baseUrl + "/graphql", // process.env.BACKEND_URL + "/graphql" ||
         cache,
+        $query: {
+            fetchPolicy: 'no-cache',
+        },
     }
 }

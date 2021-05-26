@@ -73,7 +73,7 @@ export default async function (ctx) {
         JSON.stringify({ info, services }),
       );
 
-      await download("https://mc.yandex.ru/metrika/tag.js", "../static", "tag.js")
+      // await download("https://mc.yandex.ru/metrika/tag.js", "../static", "tag.js")
 
     } catch (e) {
       throw new Error(e)
