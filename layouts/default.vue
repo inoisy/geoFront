@@ -3,20 +3,20 @@
         <LazyHydrate when-idle>
             <default-app-bar @show="drawer = true" />
         </LazyHydrate>
-        <v-main>
-            <nuxt />
-        </v-main>
-        <v-lazy
+        <VMain>
+            <Nuxt />
+        </VMain>
+        <VLazy
             v-model="isFooter"
             min-height="300"
             style="background-color: #06070c;"
         >
             <lazy-default-footer v-if="isFooter" />
-        </v-lazy>
+        </VLazy>
         <lazy-default-dialog v-if="isDialog" />
-        <v-fab-transition appear>
+        <VFabTransition appear>
             <lazy-floating-button v-if="isMounted" />
-        </v-fab-transition>
+        </VFabTransition>
         <lazy-navigation-drawer
             v-if="drawer"
             :show="drawer"

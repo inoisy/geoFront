@@ -1,6 +1,6 @@
 <template>
     <div :class="$style.floatingButtonWrapper">
-        <v-btn
+        <VBtn
             :class="$style.floatingButton"
             color="black"
             dark
@@ -9,8 +9,8 @@
             title="Обратный звонок"
             @click="handleOffer"
         >
-            <svg-icon name="order" />
-        </v-btn>
+            <SvgIcon name="order" />
+        </VBtn>
     </div>
 </template>
 <script>

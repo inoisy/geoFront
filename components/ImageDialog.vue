@@ -1,13 +1,13 @@
 <template>
-    <v-dialog
+    <VDialog
         v-model="isShow"
         :scrollable="false"
         :max-width="`calc(var(--dialog-img-max-height) * ${1 / aspectRatio})`"
     >
-        <v-card :class="$style.imageDialogInner" dark>
+        <VCard :class="$style.imageDialogInner" dark>
             <div class="pos-relative">
                 <div :style="`padding-top: ${aspectRatio * 100}%`" />
-                <v-img
+                <VImg
                     :class="$style.dialogImg"
                     :src="imgUrl"
                     :alt="alt"
@@ -17,21 +17,21 @@
                 >
                     <template #placeholder>
                         <div class="fill-height row align-center justify-center ma-auto">
-                            <v-progress-circular indeterminate color="accent" />
+                            <VProgressCircular indeterminate color="accent" />
                         </div>
                     </template>
-                </v-img>
+                </VImg>
                 <div :class="$style.buttonWrapper">
-                    <v-btn :class="$style.button"
-                           fab
-                           @click="isShow = false"
+                    <VBtn :class="$style.button"
+                          fab
+                          @click="isShow = false"
                     >
-                        <svg-icon name="close" />
-                    </v-btn>
+                        <SvgIcon name="close" />
+                    </VBtn>
                 </div>
             </div>
-        </v-card>
-    </v-dialog>
+        </VCard>
+    </VDialog>
 </template>
 
 <script>

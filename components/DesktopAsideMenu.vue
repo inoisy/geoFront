@@ -1,24 +1,24 @@
 <template>
-    <v-card :class="$style.asideMenu"
-            class="hidden-sm-and-down"
-            light
+    <VCard :class="$style.asideMenu"
+           class="hidden-sm-and-down"
+           light
     >
-        <v-list color="transparent"
-                dense
-                light
+        <VList color="transparent"
+               dense
+               light
         >
-            <v-list-item
+            <VListItem
                 v-for="child in services"
                 :key="child.id"
                 :to="`/services/${slug}/${child.slug}`"
                 :title="child.name"
             >
-                <v-list-item-content>
-                    <v-list-item-title v-text="child.name"> </v-list-item-title>
-                </v-list-item-content>
-            </v-list-item>
-        </v-list>
-    </v-card>
+                <VListItemContent>
+                    <VListItemTitle v-text="child.name"> </VListItemTitle>
+                </VListItemContent>
+            </VListItem>
+        </VList>
+    </VCard>
 </template>
 
 <script>
@@ -38,7 +38,7 @@ export default {
 <style lang="scss" module>
     .asideMenu {
         float: right;
-        max-width: 30%;
+        max-width: 30% !important;
         margin-bottom: 30px;
         margin-left: 30px;
     }

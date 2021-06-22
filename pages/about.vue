@@ -4,15 +4,15 @@
             <default-header :header="title" :breadcrumbs="breadcrumbs" />
         </LazyHydrate>
         <section class="white black--text">
-            <v-container class="sectionWrapper">
-                <v-row no-gutters>
-                    <v-col class="pa-3" cols="12">
+            <VContainer class="sectionWrapper">
+                <VRow no-gutters>
+                    <VCol class="pa-3" cols="12">
                         <LazyHydrate never>
-                            <content-wrapper :content="page.content" />
+                            <ContentWrapper><div v-html="page.content"/></ContentWrapper>
                         </LazyHydrate>
-                    </v-col>
-                </v-row>
-            </v-container>
+                    </VCol>
+                </VRow>
+            </VContainer>
         </section>
     </div>
 </template>

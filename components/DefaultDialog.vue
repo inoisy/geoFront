@@ -1,5 +1,5 @@
 <template>
-    <v-dialog
+    <VDialog
         v-model="isShow"
         width="600"
         style="overflow-x: hidden;"
@@ -7,8 +7,8 @@
         light
         @click:outside="close"
     >
-        <v-card :class="$style.dialogInner">
-            <v-btn
+        <VCard :class="$style.dialogInner">
+            <VBtn
                 :class="$style.closeButton"
                 class="ml-auto"
                 text
@@ -18,8 +18,8 @@
                 color="black"
                 @click="close"
             >
-                <svg-icon name="close" />
-            </v-btn>
+                <SvgIcon name="close" />
+            </VBtn>
             <div v-if="!formSuccess">
                 <div
                     :class="$style.header"
@@ -75,7 +75,7 @@
                     />
 
                     <v-flex xs12>
-                        <v-btn
+                        <VBtn
                             class="ml-0"
                             outlined
                             large
@@ -86,7 +86,7 @@
                             @click="submit"
                         >
                             Отправить
-                        </v-btn>
+                        </VBtn>
                     </v-flex>
 
                     <v-slide-y-transition>
@@ -109,7 +109,7 @@
                 </v-form>
             </div>
             <div v-else>
-                <svg-icon name="checked" :class="$style.successIcon" />
+                <SvgIcon name="checked" :class="$style.successIcon" />
 
                 <div :class="$style.successHeader" class="text-center">
                     Заявка отправлена!
@@ -125,8 +125,8 @@
                     formError && 'error',
                 ]"
             />
-        </v-card>
-    </v-dialog>
+        </VCard>
+    </VDialog>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-    <v-card
+    <VCard
         :to="`/services/${parentSlug}/${slug}`"
         :title="name"
         nuxt
@@ -8,21 +8,22 @@
     >
         <service-image :img-url="imgUrl" :alt="name" />
 
-        <v-card-title :class="$style.cardTitle">
+        <VCard-title :class="$style.cardTitle">
             <span class="text-truncate">
                 {{ name }}
             </span>
-        </v-card-title>
-        <v-card-text :class="$style.cardDescription">
+        </VCard-title>
+        <VCard-text :class="$style.cardDescription">
             <div :class="$style.elepsis">
                 {{ description }}
             </div>
-        </v-card-text>
-    </v-card>
+        </VCard-text>
+    </VCard>
 </template>
 
 <script>
 export default {
+    name: 'ServiceCard',
     props: {
         name: {
             type: String,

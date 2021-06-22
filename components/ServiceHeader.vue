@@ -3,7 +3,7 @@
         :class="$style.firstSection"
         :style="`background-image: url(${require('~/assets/bg.jpg')})`"
     >
-        <v-container
+        <VContainer
             :class="[$style.firstSectionInner, noIcon && 'noIcon']"
             fill-height
         >
@@ -24,7 +24,7 @@
                 >
                 </div>
                 <div v-if="price" :class="$style.price">{{ price }}</div>
-                <v-btn
+                <VBtn
                     :class="$style.button"
                     class="callToActionButton mb-0"
                     outlined
@@ -33,7 +33,7 @@
                     @click="handleOffer"
                 >
                     Заказать работы
-                </v-btn>
+                </VBtn>
                 <div v-if="icon && icon.url" :class="$style.iconWrapper">
                     <img
                         :class="$style.icon"
@@ -43,13 +43,14 @@
                     />
                 </div>
             </div>
-        </v-container>
+        </VContainer>
     </section>
 </template>
 <script>
 import Breadcrumbs from '~/components/Breadcrumbs.vue';
 
 export default {
+    name: 'ServiceHeader',
     components: {
         Breadcrumbs,
     },

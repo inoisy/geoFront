@@ -1,10 +1,10 @@
 <template>
-    <v-row no-gutters>
-        <v-col v-for="child in items"
-               :key="child.id"
-               class="pa-3"
-               cols="12"
-               sm="6"
+    <VRow no-gutters>
+        <VCol v-for="child in items"
+              :key="child.id"
+              class="pa-3"
+              cols="12"
+              sm="6"
         >
             <service-card
                 v-bind="{
@@ -15,12 +15,13 @@
                     parentSlug: parentSlug,
                 }"
             />
-        </v-col>
-    </v-row>
+        </VCol>
+    </VRow>
 </template>
 
 <script>
 export default {
+    name: 'ServiceCards',
     props: {
         items: {
             type: Array,

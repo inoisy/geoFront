@@ -1,6 +1,6 @@
 <template>
     <header id="appBar" :class="$style.appBar">
-        <v-container
+        <VContainer
             fill-height
             :class="$style['header']"
             class="py-0 d-flex align-center"
@@ -8,7 +8,7 @@
             <logo class="pr-3 mr-auto fill-height" />
 
             <template v-for="(item, index) in menuItems">
-                <v-btn
+                <VBtn
                     v-if="!item.disable"
                     :key="index"
                     :to="`/${item.slug}`"
@@ -21,8 +21,8 @@
                     exact
                 >
                     {{ item.name }}
-                </v-btn>
-                <v-btn
+                </VBtn>
+                <VBtn
                     v-else
                     :id="item.slug"
                     :key="index"
@@ -33,47 +33,47 @@
                     tile
                 >
                     {{ item.name }}
-                    <svg-icon name="arrowdown" style="margin-right: -5px;" />
-                </v-btn>
+                    <SvgIcon name="arrowdown" style="margin-right: -5px;" />
+                </VBtn>
             </template>
-            <v-btn
+            <VBtn
                 class="d-dlex ct_hid"
                 href="tel:+74991120654"
                 :class="$style.linkTel"
                 title="Телефон"
                 text
             >
-                <svg-icon name="phone" />
+                <SvgIcon name="phone" />
                 <span :class="$style.linkTelText" class="pl-2 phone-text">
                     +7 (499) 112-06-54
                 </span>
-            </v-btn>
+            </VBtn>
 
 
-            <v-btn
+            <VBtn
                 :class="$style.linkIcon"
                 class="d-dlex"
                 icon
                 :href="`mailto:${info.email}`"
                 title="Почта"
             >
-                <svg-icon name="mail" />
-            </v-btn>
-            <v-btn
+                <SvgIcon name="mail" />
+            </VBtn>
+            <VBtn
                 :class="$style.linkIcon"
                 class="hidden-md-and-up"
                 icon
                 title="Меню"
                 @click.stop="$emit('show')"
             >
-                <svg-icon name="menu" />
-            </v-btn>
+                <SvgIcon name="menu" />
+            </VBtn>
             <lazy-toolbar-catalog-menu
                 v-if="!isMobile && isMounted"
                 :items="menuItems[0].items"
                 parent-slug="services"
             />
-        </v-container>
+        </VContainer>
     </header>
 </template>
 

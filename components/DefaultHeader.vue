@@ -3,23 +3,23 @@
         :class="$style.firstSection"
         :style="`background-image: url(${require('~/assets/bg.jpg')})`"
     >
-        <v-container fill-height class="py-12">
-            <v-row align="center" no-gutters>
+        <VContainer fill-height class="py-12">
+            <VRow align="center" no-gutters>
                 <breadcrumbs
                     class="px-3"
                     :items="breadcrumbs"
                     :class="$style.breadcrumbs"
                 />
-                <v-col class="pa-3"
-                       cols="12"
-                       sm="10"
-                       md="10"
-                       lg="7"
+                <VCol class="pa-3"
+                      cols="12"
+                      sm="10"
+                      md="10"
+                      lg="7"
                 >
                     <h1 :class="$style.header" class="mb-0">{{ header }}</h1>
-                </v-col>
-            </v-row>
-        </v-container>
+                </VCol>
+            </VRow>
+        </VContainer>
     </section>
 </template>
 <script>

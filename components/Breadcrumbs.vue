@@ -5,7 +5,7 @@
             :key="item.to"
             :class="$style.breadcrumbsItem"
         >
-            <nuxt-link
+            <NuxtLink
                 v-if="item.to"
                 :class="$style.breadcrumbsItemLink"
                 :to="item.to"
@@ -15,7 +15,7 @@
                 :event="i === length ? '' : 'click'"
             >
                 {{ item.text }}
-            </nuxt-link>
+            </NuxtLink>
             <div v-else :class="$style.breadcrumbsItemLink">
                 {{ item.text }}
             </div>

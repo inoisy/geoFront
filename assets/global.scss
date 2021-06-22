@@ -2,6 +2,10 @@ body {
     min-width: 320px;
 }
 
+.nuxt-progress {
+    background: linear-gradient(90deg, lighten($accent, 30%) 0%, lighten($accent, 15%) 45%, $accent 100%) !important;
+}
+
 .v-toolbar__content {
     padding: 0 !important;
 }

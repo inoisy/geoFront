@@ -1,13 +1,13 @@
 <template>
     <section :class="$style.benefitsWrapper">
-        <v-container>
-            <v-row>
-                <v-col cols="12">
+        <VContainer>
+            <VRow>
+                <VCol cols="12">
                     <h2 class="mb-10 pageHeader">Наши преимущества</h2>
-                </v-col>
-            </v-row>
-            <v-row class="justify-center" no-gutters>
-                <v-col
+                </VCol>
+            </VRow>
+            <VRow class="justify-center" no-gutters>
+                <VCol
                     v-for="(benefit, i) in items"
                     :key="`benefit-${i}`"
                     :class="$style.benefitItem"
@@ -17,7 +17,7 @@
                     md="6"
                 >
                     <div :class="$style.benefitsImageWrapper">
-                        <v-img
+                        <VImg
                             :class="$style.benefitsImage"
                             :src="
                                 benefit.icon
@@ -32,9 +32,9 @@
                         <h3 :class="$style.benefitsHeader">{{ benefit.header }}</h3>
                         <div :class="$style.benefitsText">{{ benefit.content }}</div>
                     </div>
-                </v-col>
-            </v-row>
-        </v-container>
+                </VCol>
+            </VRow>
+        </VContainer>
     </section>
 </template>
 <script>

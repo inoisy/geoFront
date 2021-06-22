@@ -10,23 +10,26 @@
             :class="$style.servicesWrapper"
             class="sectionWrapper"
         >
-            <v-container>
-                <v-row align="center" no-gutters>
-                    <v-col class="pa-3" cols="12">
-                        <nuxt-link :to="`/services/${service.slug}`" :title="service.name">
+            <VContainer>
+                <VRow align="center" no-gutters>
+                    <VCol class="pa-3" cols="12">
+                        <NuxtLink :to="`/services/${service.slug}`" :title="service.name">
                             <h2 :class="$style.serviceHeader" class="d-inline-block">
                                 {{ service.name }}
                             </h2>
-                        </nuxt-link>
+                        </NuxtLink>
                         <div v-if="service.prices" class="position-relative">
-                            <prices :class="$style.prices" :content="service.prices" />
-                            <v-img
+                            <Prices :class="$style.prices">
+                                <div v-html="service.prices"/>
+                            </Prices>
+
+                            <VImg
                                 v-if="service.icon"
                                 :class="$style.servicesIcon"
                                 :src="imageBaseUrl + service.icon.url"
                                 :alt="service.name"
                             />
-                            <v-btn
+                            <VBtn
                                 :class="$style.button"
                                 class="callToActionButton"
                                 outlined
@@ -35,7 +38,7 @@
                                 @click="handleOffer(service)"
                             >
                                 Заказать
-                            </v-btn>
+                            </VBtn>
                         </div>
                         <div
                             v-for="child in service.child"
@@ -44,24 +47,21 @@
                             class="position-relative"
                         >
                             <div class="mb-6">
-                                <nuxt-link
+                                <NuxtLink
                                     :class="$style.childLink"
                                     :title="child.name"
                                     :to="`/services/${service.slug}/${child.slug}`"
                                 >
                                     <h2 :class="$style.childName">{{ child.name }}</h2>
-                                </nuxt-link>
+                                </NuxtLink>
                             </div>
-
-                            <prices
-                                v-if="child.prices"
-                                :class="$style.prices"
-                                :content="child.prices"
-                            />
+                            <Prices v-if="child.prices" :class="$style.prices">
+                                <div v-html="child.prices"/>
+                            </Prices>
                             <div v-else-if="child.price" :class="$style.price">
                                 {{ child.price }}
                             </div>
-                            <v-btn
+                            <VBtn
                                 :class="$style.button"
                                 class="callToActionButton"
                                 outlined
@@ -70,17 +70,17 @@
                                 @click="handleOffer(child)"
                             >
                                 Заказать
-                            </v-btn>
-                            <v-img
+                            </VBtn>
+                            <VImg
                                 v-if="child.icon"
                                 :class="$style.servicesIcon"
                                 :src="imageBaseUrl + child.icon.url"
                                 :alt="child.name"
                             />
                         </div>
-                    </v-col>
-                </v-row>
-            </v-container>
+                    </VCol>
+                </VRow>
+            </VContainer>
         </section>
     </div>
 </template>

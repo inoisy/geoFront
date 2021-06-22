@@ -1,10 +1,10 @@
 <template>
     <v-slide-group>
         <template #next>
-            <svg-icon name="next" />
+            <SvgIcon name="next" />
         </template>
         <template #prev>
-            <svg-icon name="prev" />
+            <SvgIcon name="prev" />
         </template>
         <v-slide-item v-for="child in items" :key="child.id">
             <div :class="$style.slideItem">
@@ -26,6 +26,7 @@
 import ServiceCard from '~/components/ServiceCard.vue';
 
 export default {
+    name: 'ServiceSlider',
     components: { ServiceCard },
     props: {
         items: {

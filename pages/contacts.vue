@@ -2,51 +2,51 @@
     <div>
         <default-header :header="title" :breadcrumbs="breadcrumbs"></default-header>
         <section class="white">
-            <v-container class="sectionWrapper">
-                <v-row no-gutters>
-                    <v-col
+            <VContainer class="sectionWrapper">
+                <VRow no-gutters>
+                    <VCol
                         cols="12"
                         md="6"
                         lg="4"
                         :class="$style.contactsWrapper"
                         class="pa-3"
                     >
-                        <v-list style="background: transparent !important;" light>
-                            <v-list-item
+                        <VList style="background: transparent !important;" light>
+                            <VListItem
                                 title="Телефон"
                                 class="ct_hid"
                                 href="tel:+74991120654"
                             >
-                                <v-list-item-icon>
-                                    <svg-icon name="phone" />
-                                </v-list-item-icon>
-                                <v-list-item-content itemprop="telephone">
+                                <VListItem-icon>
+                                    <SvgIcon name="phone" />
+                                </VListItem-icon>
+                                <VListItemContent itemprop="telephone">
                                     <span class="phone-text">+7 (499) 112-06-54</span>
-                                </v-list-item-content>
-                            </v-list-item>
-                            <v-list-item :href="`mailto:${info.email}`" title="email">
-                                <v-list-item-icon>
-                                    <svg-icon name="mail" />
-                                </v-list-item-icon>
-                                <v-list-item-content itemprop="email">
+                                </VListItemContent>
+                            </VListItem>
+                            <VListItem :href="`mailto:${info.email}`" title="email">
+                                <VListItem-icon>
+                                    <SvgIcon name="mail" />
+                                </VListItem-icon>
+                                <VListItemContent itemprop="email">
                                     {{ info.email }}
-                                </v-list-item-content>
-                            </v-list-item>
-                            <v-list-item title="Адрес">
-                                <v-list-item-icon>
-                                    <svg-icon name="pin" />
-                                </v-list-item-icon>
+                                </VListItemContent>
+                            </VListItem>
+                            <VListItem title="Адрес">
+                                <VListItem-icon>
+                                    <SvgIcon name="pin" />
+                                </VListItem-icon>
                                 {{ info.address }}
-                            </v-list-item>
-                            <v-list-item title="Время работы">
-                                <v-list-item-icon>
-                                    <svg-icon name="time" />
-                                </v-list-item-icon>
+                            </VListItem>
+                            <VListItem title="Время работы">
+                                <VListItem-icon>
+                                    <SvgIcon name="time" />
+                                </VListItem-icon>
                                 {{ info.accessTime }}
-                            </v-list-item>
-                        </v-list>
-                    </v-col>
-                    <v-col
+                            </VListItem>
+                        </VList>
+                    </VCol>
+                    <VCol
                         cols="12"
                         md="6"
                         offset-lg="1"
@@ -57,9 +57,9 @@
                         <client-only>
                             <map-component :coords="info.addressCoords" />
                         </client-only>
-                    </v-col>
-                </v-row>
-            </v-container>
+                    </VCol>
+                </VRow>
+            </VContainer>
         </section>
     </div>
 </template>

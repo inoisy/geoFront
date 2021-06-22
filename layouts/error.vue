@@ -1,24 +1,29 @@
 <template>
-    <v-container class="fill-height" style="min-height: 70vh;">
-        <v-row justify="center">
-            <v-col cols="12"
-                   md="6"
-                   class="py-16"
+    <VContainer class="fill-height" style="min-height: 70vh;">
+        <VRow justify="center">
+            <VCol cols="12"
+                  md="6"
+                  class="py-16"
+                  style="
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;"
             >
                 <h1 :class="$style.title">{{ error.statusCode }}</h1>
                 <h2 :class="$style.info">{{ error.message }}</h2>
-                <v-btn :class="$style.button"
-                       to="/"
-                       replace
-                       color="black"
-                       dark
-                       large
+                <VBtn :class="$style.button"
+                      to="/"
+                      replace
+                      color="black"
+                      dark
+                      large
                 >
                     Вернуться на главную
-                </v-btn>
-            </v-col>
-        </v-row>
-    </v-container>
+                </VBtn>
+            </VCol>
+        </VRow>
+    </VContainer>
 </template>
 <script>
 export default {

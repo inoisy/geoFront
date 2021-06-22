@@ -1,16 +1,16 @@
 <template>
     <div>
         <LazyHydrate when-idle>
-            <service-header
+            <ServiceHeader
                 :breadcrumbs="breadcrumbs"
                 :header="service.name"
                 :subheader="service.subheader"
                 :icon="service.icon"
             >
-            </service-header>
+            </ServiceHeader>
         </LazyHydrate>
         <section class="sectionWrapper">
-            <v-container>
+            <VContainer>
                 <div class="pa-3">
                     <LazyHydrate when-visible>
                         <mobile-aside-menu
@@ -22,9 +22,9 @@
                     <LazyHydrate when-visible>
                         <desktop-aside-menu :services="children" :slug="service.slug" />
                     </LazyHydrate>
-                    <content-wrapper :content="service.content" />
+                    <ContentWrapper><div v-html="service.content"/></ContentWrapper>
                 </div>
-            </v-container>
+            </VContainer>
         </section>
         <LazyHydrate
             v-for="(child, i) in children"

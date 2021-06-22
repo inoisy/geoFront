@@ -1,16 +1,16 @@
 <template>
-    <nuxt-link class="logoWrapper"
-               :class="mini && 'mini'"
-               to="/"
-               title="Логотип"
+    <NuxtLink class="logoWrapper"
+              :class="mini && 'mini'"
+              to="/"
+              title="Логотип"
     >
-        <v-img
+        <VImg
             class="logo"
             :src="require('~/assets/logo.svg')"
             alt="Логотип"
             contain
         />
-    </nuxt-link>
+    </NuxtLink>
 </template>
 <script>
 export default {

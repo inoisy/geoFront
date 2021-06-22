@@ -9,31 +9,31 @@
             :class="$style.servicesWrapper"
             class="sectionWrapper"
         >
-            <v-container fill-height>
-                <v-row align="center" no-gutters>
-                    <v-col :class="$style.serviceItem"
-                           class="pa-3"
-                           cols="12"
+            <VContainer fill-height>
+                <VRow align="center" no-gutters>
+                    <VCol :class="$style.serviceItem"
+                          class="pa-3"
+                          cols="12"
                     >
-                        <v-img
+                        <VImg
                             v-if="service.icon"
                             :class="$style.servicesIcon"
                             :src="imageBaseUrl + service.icon.url"
                             :alt="service.name"
                         />
                         <div :class="$style.servicesTextWrapper" class="mb-7">
-                            <nuxt-link
+                            <NuxtLink
                                 :to="`/services/${service.slug}`"
                                 :title="service.name"
                             >
                                 <h2 :class="$style.serviceHeader" class="d-inline-block">
                                     {{ service.name }}
                                 </h2>
-                            </nuxt-link>
+                            </NuxtLink>
 
-                            <div class="mb-7" v-html="service.descriptionLong"></div>
+                            <div class="mb-7" v-html="service.descriptionLong"/>
                             <div :class="$style.buttonWrapper">
-                                <v-btn
+                                <VBtn
                                     :class="$style.button"
                                     class="mb-3"
                                     :to="`/services/${service.slug}`"
@@ -42,8 +42,8 @@
                                     light
                                 >
                                     Подробнее
-                                </v-btn>
-                                <v-btn
+                                </VBtn>
+                                <VBtn
                                     :class="$style.button"
                                     outlined
                                     light
@@ -51,23 +51,23 @@
                                     @click="handleOffer(service)"
                                 >
                                     Заказать работы
-                                </v-btn>
+                                </VBtn>
                             </div>
                         </div>
 
                         <ul v-if="service.child && service.child.length">
                             <li v-for="child in service.child" :key="child.id">
-                                <nuxt-link
+                                <NuxtLink
                                     :title="child.name"
                                     :to="`/services/${service.slug}/${child.slug}`"
                                 >
                                     {{ child.name }}
-                                </nuxt-link>
+                                </NuxtLink>
                             </li>
                         </ul>
-                    </v-col>
-                </v-row>
-            </v-container>
+                    </VCol>
+                </VRow>
+            </VContainer>
         </section>
     </div>
 </template>

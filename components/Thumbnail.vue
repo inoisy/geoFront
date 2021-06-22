@@ -1,17 +1,17 @@
 <template>
-    <v-card v-if="imgUrl"
-            :class="$style.imgWrapper"
-            hover
-            @click="$emit('show')"
+    <VCard v-if="imgUrl"
+           :class="$style.imgWrapper"
+           hover
+           @click="$emit('show')"
     >
-        <v-img
+        <VImg
             :src="imgUrl"
             :alt="alt"
             :title="alt"
             :aspect-ratio="14 / 9"
             max-height="300px"
         />
-    </v-card>
+    </VCard>
 </template>
 <script>
 export default {

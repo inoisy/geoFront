@@ -32,7 +32,7 @@ const devModules = [
 
 export default async () => {
     const isDev = process.env.NODE_ENV !== 'production';
-    console.log('🚀 ~ file: nuxt.config.js ~ line 29 ~ module.exports= ~ isDev', isDev);
+    // console.log('🚀 ~ file: nuxt.config.js ~ line 29 ~ module.exports= ~ isDev', isDev);
 
     return {
         loading: {

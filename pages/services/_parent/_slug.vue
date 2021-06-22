@@ -1,7 +1,7 @@
 <template>
     <div>
         <LazyHydrate when-idle>
-            <service-header
+            <ServiceHeader
                 :breadcrumbs="breadcrumbs"
                 :header="service.name"
                 :subheader="service.subheader"
@@ -10,24 +10,21 @@
             />
         </LazyHydrate>
         <section :class="$style.section" class="sectionWrapper">
-            <v-container>
+            <VContainer>
                 <div class="pa-3" style="min-height: 400px;">
                     <LazyHydrate when-visible>
-                        <lazy-thumbnail
+                        <LazyThumbnail
                             v-if="imgUrl"
                             :img-url="thumbnailUrl"
                             :alt="service.name"
                             @show="handleImageDialog"
                         />
-
                     </LazyHydrate>
-
-                    <content-wrapper :content="service.content" />
-
+                    <ContentWrapper><div v-html="service.content"/></ContentWrapper>
                 </div>
-            </v-container>
+            </VContainer>
         </section>
-        <lazy-benefits
+        <LazyBenefits
             v-if="benefits"
             id="benefits"
             :class="$style.section"
@@ -40,31 +37,33 @@
             :class="$style.section"
             class="sectionWrapper"
         >
-            <v-container>
+            <VContainer>
                 <h2 class="pageHeader mb-8 pa-3">Стоимость работ</h2>
-                <lazy-prices class="pa-3" :content="pricesFind" />
-            </v-container>
+                <LazyPrices class="pa-3">
+                    <div v-html="pricesFind"/>
+                </LazyPrices>
+            </VContainer>
         </section>
-        <call-to-action />
+        <CallToAction />
         <section :class="$style.section" class="sectionWrapper">
-            <v-container>
+            <VContainer>
                 <h2 class="pageHeader mb-12 pa-3">Смотрите также</h2>
                 <LazyHydrate when-visible>
-                    <lazy-service-slider
+                    <LazyServiceSlider
                         v-if="siblings.length > 4"
                         :items="siblings"
                         :parent-slug="parentSlug"
                     />
-                    <lazy-service-cards
+                    <LazyServiceCards
                         v-else
                         :items="siblings"
                         :parent-slug="parentSlug"
                     />
                 </LazyHydrate>
-            </v-container>
+            </VContainer>
         </section>
 
-        <lazy-image-dialog
+        <LazyImageDialog
             v-if="showImageDialog"
             v-bind="{
                 imgUrl,

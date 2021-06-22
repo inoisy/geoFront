@@ -6,73 +6,73 @@
         height="auto"
         :style="`background-image: url(${require('~/assets/footerbg.jpg')})`"
     >
-        <v-container class="py-12">
-            <v-row class="d-flex justify-center">
-                <v-col class="pt-5 px-7"
-                       cols="12"
-                       sm="6"
-                       md="6"
-                       lg="3"
+        <VContainer class="py-12">
+            <VRow class="d-flex justify-center">
+                <VCol class="pt-5 px-7"
+                      cols="12"
+                      sm="6"
+                      md="6"
+                      lg="3"
                 >
                     <logo :mini="true" class="mb-5" />
                     <div style=" font-size: 14px; font-weight: normal; line-height: 24px;">
                         {{ info.descriptor }}
                     </div>
-                </v-col>
-                <v-col class=""
-                       cols="12"
-                       sm="6"
-                       md="6"
-                       lg="3"
+                </VCol>
+                <VCol class=""
+                      cols="12"
+                      sm="6"
+                      md="6"
+                      lg="3"
                 >
                     <v-subheader class="hidden-sm-and-down">КОНТАКТЫ</v-subheader>
-                    <v-list style="background: transparent !important;">
+                    <VList style="background: transparent !important;">
 
-                        <v-list-item
+                        <VListItem
                             class="ct_hid"
                             title="Телефон"
                             href="tel:+74991120654"
                             height="48"
                         >
-                            <v-list-item-icon>
-                                <svg-icon name="phone" />
-                            </v-list-item-icon>
-                            <v-list-item-content itemprop="telephone">
+                            <VListItem-icon>
+                                <SvgIcon name="phone" />
+                            </VListItem-icon>
+                            <VListItemContent itemprop="telephone">
                                 <span class="phone-text"> +7 (499) 112-06-54 </span>
-                            </v-list-item-content>
-                        </v-list-item>
-                        <v-list-item :href="`mailto:${info.email}`" title="email">
-                            <v-list-item-icon>
-                                <svg-icon name="mail" />
-                            </v-list-item-icon>
-                            <v-list-item-content itemprop="email">
+                            </VListItemContent>
+                        </VListItem>
+                        <VListItem :href="`mailto:${info.email}`" title="email">
+                            <VListItem-icon>
+                                <SvgIcon name="mail" />
+                            </VListItem-icon>
+                            <VListItemContent itemprop="email">
                                 {{ info.email }}
-                            </v-list-item-content>
-                        </v-list-item>
-                        <v-list-item title="Адрес">
-                            <v-list-item-icon>
-                                <svg-icon name="pin" />
-                            </v-list-item-icon>
-                            <v-list-item-content>
+                            </VListItemContent>
+                        </VListItem>
+                        <VListItem title="Адрес">
+                            <VListItem-icon>
+                                <SvgIcon name="pin" />
+                            </VListItem-icon>
+                            <VListItemContent>
                                 <span style="font-size: 12px;">
                                     {{ info.address }}
                                 </span>
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-list>
-                </v-col>
-                <v-col class="hidden-sm-and-down"
-                       cols="12"
-                       sm="6"
-                       md="6"
-                       lg="3"
+                            </VListItemContent>
+                        </VListItem>
+                    </VList>
+                </VCol>
+                <VCol class="hidden-sm-and-down"
+                      cols="12"
+                      sm="6"
+                      md="6"
+                      lg="3"
                 >
                     <v-subheader>НАВИГАЦИЯ</v-subheader>
-                    <v-list
+                    <VList
                         style="background: transparent !important;"
                         class="footer-list"
                     >
-                        <v-list-item
+                        <VListItem
                             v-for="menuItem in menuItems"
                             :key="menuItem.slug"
                             :to="`/${menuItem.slug}`"
@@ -80,21 +80,21 @@
                             exact
                         >
                             {{ menuItem.name }}
-                        </v-list-item>
-                    </v-list>
-                </v-col>
-                <v-col class="hidden-sm-and-down"
-                       cols="12"
-                       sm="6"
-                       md="6"
-                       lg="3"
+                        </VListItem>
+                    </VList>
+                </VCol>
+                <VCol class="hidden-sm-and-down"
+                      cols="12"
+                      sm="6"
+                      md="6"
+                      lg="3"
                 >
                     <v-subheader>УСЛУГИ</v-subheader>
-                    <v-list
+                    <VList
                         style="background: transparent !important;"
                         class="footer-list"
                     >
-                        <v-list-item
+                        <VListItem
                             v-for="service in services"
                             :key="service.slug"
                             :to="`/services/${service.slug}`"
@@ -102,11 +102,11 @@
                             exact
                         >
                             {{ service.name }}
-                        </v-list-item>
-                    </v-list>
-                </v-col>
-            </v-row>
-        </v-container>
+                        </VListItem>
+                    </VList>
+                </VCol>
+            </VRow>
+        </VContainer>
     </v-footer>
 </template>
 

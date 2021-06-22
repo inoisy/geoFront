@@ -1,15 +1,15 @@
 <template>
-    <v-menu
+    <VMenu
         v-model="showMenu"
         offset-y
         left
         content-class="catalog-menu-inner"
         :activator="`#${parentSlug}`"
     >
-        <v-list dense dark>
+        <VList dense dark>
             <template v-for="(child, index) in items">
                 <template v-if="child.child && child.child.length">
-                    <v-menu
+                    <VMenu
                         :key="`${child.name}-${index}`"
                         close-delay="150"
                         offset-x
@@ -22,53 +22,54 @@
                         "
                     >
                         <template #activator="{ on, attrs }">
-                            <v-list-item
+                            <VListItem
                                 v-bind="attrs"
                                 :to="`/${parentSlug}/${child.slug}`"
                                 v-on="on"
                             >
-                                <v-list-item-title>{{ child.name }}</v-list-item-title>
+                                <VListItemTitle>{{ child.name }}</VListItemTitle>
                                 <div class="ml-auto pl-3 d-inline-flex">
-                                    <svg-icon
+                                    <SvgIcon
                                         name="arrowdown"
                                         style=" width: 24px; height: 24px; margin: auto; transform: rotate(270deg);"
                                     />
                                 </div>
-                            </v-list-item>
+                            </VListItem>
                         </template>
                         <template v-if="child.child && child.child.length">
-                            <v-list
+                            <VList
                                 dense
                                 dark
                                 :class="[child.child.length > 10 && 'two-columns']"
                             >
-                                <v-list-item
+                                <VListItem
                                     v-for="(grandChild, i) in child.child"
                                     :key="`${grandChild.name}-${i}`"
                                     :to="`/${parentSlug}/${child.slug}/${grandChild.slug}`"
                                     class="list-item"
                                 >
-                                    <v-list-item-title>{{ grandChild.name }}</v-list-item-title>
-                                </v-list-item>
-                            </v-list>
+                                    <VListItemTitle>{{ grandChild.name }}</VListItemTitle>
+                                </VListItem>
+                            </VList>
                         </template>
-                    </v-menu>
+                    </VMenu>
                 </template>
                 <template v-else>
-                    <v-list-item
+                    <VListItem
                         :key="`${child.name}-${index}`"
                         :to="`/${parentSlug}/${child.slug}`"
                     >
-                        <v-list-item-title>{{ child.name }}</v-list-item-title>
-                    </v-list-item>
+                        <VListItemTitle>{{ child.name }}</VListItemTitle>
+                    </VListItem>
                 </template>
             </template>
-        </v-list>
-    </v-menu>
+        </VList>
+    </VMenu>
 </template>
 
 <script>
 export default {
+    name: 'ToolbarCatalogMenu',
     props: {
         items: {
             type: Array,

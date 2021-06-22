@@ -1,25 +1,15 @@
-<template>
-    <div class="wrapper" v-html="content" />
-</template>
-
 <script>
-export default {
-    props: {
-        content: {
-            type: String,
-            default: null,
-        },
-    },
-};
+import { createSimpleFunctional } from '~/utils/helpers';
+export default createSimpleFunctional('prices__wrapper', 'div', 'prices');
 </script>
 
-<style lang="scss" scoped>
-    .wrapper {
-        ::v-deep h3 {
+<style lang="scss">
+    .prices__wrapper {
+        h3 {
             margin-bottom: 1rem;
         }
 
-        ::v-deep .table {
+        .table {
             & + * {
                 margin-top: 3.5rem;
             }
@@ -32,7 +22,7 @@ export default {
             overflow-y: hidden;
         }
 
-        ::v-deep table {
+        table {
             width: 100%;
             max-width: 100%;
             border-spacing: 0;

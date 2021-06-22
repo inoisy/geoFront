@@ -1,6 +1,6 @@
 <template>
     <div :class="$style.chipsWrapper">
-        <nuxt-link
+        <NuxtLink
             v-for="child in services"
             :key="child.id"
             v-ripple
@@ -10,7 +10,7 @@
             :title="child.name"
         >
             {{ child.name }}
-        </nuxt-link>
+        </NuxtLink>
     </div>
 </template>
 <script>

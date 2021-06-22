@@ -3,7 +3,7 @@
                 :src="src"
                 dark
     >
-        <v-container :class="$style.parallaxInner">
+        <VContainer :class="$style.parallaxInner">
             <h2 class="pageHeader mb-2 pa-3 col col-12">Бесплатная консультация</h2>
             <div
                 class="mb-3 pa-3 col col-12 col-sm-8 col-md-8 col-lg-7 text-center text-md-left"
@@ -20,14 +20,14 @@
                         <span class="phone-text">+7 (499) 112-06-54</span>
                     </a>
                 </div>
-                <v-btn class="callToActionButton"
-                       color="white"
-                       @click="handleOffer"
+                <VBtn class="callToActionButton"
+                      color="white"
+                      @click="handleOffer"
                 >
                     Получить консультацию
-                </v-btn>
+                </VBtn>
             </div>
-        </v-container>
+        </VContainer>
     </v-parallax>
 </template>
 

@@ -5,20 +5,20 @@
                 :class="$style.firstSection"
                 :style="`background-image: url(${require('~/assets/bg1.jpg')})`"
             >
-                <v-container
+                <VContainer
                     :class="$style.firstSectionInner"
                     fill-height
                     class="py-12"
                 >
-                    <v-row justify="center"
-                           align="center"
-                           no-gutters
+                    <VRow justify="center"
+                          align="center"
+                          no-gutters
                     >
-                        <v-col class="pa-3"
-                               cols="12"
-                               sm="10"
-                               md="10"
-                               lg="7"
+                        <VCol class="pa-3"
+                              cols="12"
+                              sm="10"
+                              md="10"
+                              lg="7"
                         >
                             <h1 :class="$style.header" class="mb-5 text-center">
                                 {{ page.header }}
@@ -26,29 +26,29 @@
                             <p :class="$style.subheader" class="text-center mb-6">
                                 {{ page.subheader }}
                             </p>
-                            <v-btn
+                            <VBtn
                                 class="callToActionButton mx-auto d-flex"
                                 outlined
                                 dark
                                 @click="handleOffer(false)"
                             >
                                 Оставить заявку
-                            </v-btn>
-                        </v-col>
-                    </v-row>
-                </v-container>
+                            </VBtn>
+                        </VCol>
+                    </VRow>
+                </VContainer>
             </section>
         </LazyHydrate>
         <LazyHydrate when-visible>
             <section>
-                <v-container style="position: relative;">
-                    <v-row
+                <VContainer style="position: relative;">
+                    <VRow
                         justify="center"
                         align="center"
                         :class="$style.serviceCardWrapper"
                         no-gutters
                     >
-                        <v-col
+                        <VCol
                             v-for="(service, i) in services"
                             :key="`service-card-${i}`"
                             class="mb-3 pa-3"
@@ -56,7 +56,7 @@
                             sm="10"
                             md="4"
                         >
-                            <v-card
+                            <VCard
                                 :to="`/services/${service.slug}`"
                                 :class="$style.serviceCard"
                                 :title="service.name"
@@ -67,7 +67,7 @@
                                     :class="$style.serviceImgWrapper"
                                     class="d-flex align-center mb-2"
                                 >
-                                    <v-img
+                                    <VImg
                                         :src="
                                             service.icon
                                                 ? $config.imageBaseUrl + service.icon.url
@@ -86,10 +86,10 @@
                                 <div :class="$style.serviceCardDescription">
                                     {{ service.description }}
                                 </div>
-                            </v-card>
-                        </v-col>
-                    </v-row>
-                </v-container>
+                            </VCard>
+                        </VCol>
+                    </VRow>
+                </VContainer>
             </section>
         </LazyHydrate>
         <LazyHydrate

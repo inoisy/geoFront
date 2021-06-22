@@ -11,35 +11,35 @@
         @input="change"
     >
         <v-subheader :class="$style.subHeader">НАВИГАЦИЯ</v-subheader>
-        <v-list :class="$style.listWrapper"
-                dark
-                class="pt-0"
+        <VList :class="$style.listWrapper"
+               dark
+               class="pt-0"
         >
             <template v-for="item in menuItems">
-                <v-list-group v-if="item.items && item.items.length > 0" :key="item.to">
-                    <v-list-item
+                <VList-group v-if="item.items && item.items.length > 0" :key="item.to">
+                    <VListItem
                         slot="activator"
                         class="pl-0"
                         :to="item.to"
                         :title="item.name"
                     >
-                        <v-list-item-content>
+                        <VListItemContent>
                             {{ item.name }}
-                        </v-list-item-content>
-                    </v-list-item>
+                        </VListItemContent>
+                    </VListItem>
                     <template #appendIcon>
-                        <svg-icon class="icon" name="arrowdown" />
+                        <SvgIcon class="icon" name="arrowdown" />
                     </template>
 
-                    <v-list
+                    <VList
                         v-for="product in item.items"
                         :key="product.name"
                         class="pa-0"
                         dense
                         dark
                     >
-                        <v-list-group>
-                            <v-list-item
+                        <VList-group>
+                            <VListItem
                                 slot="activator"
                                 class="pl-6"
                                 nuxt
@@ -48,15 +48,15 @@
                                 :to="`/${item.slug}/${product.slug}`"
                                 :title="product.name"
                             >
-                                <v-list-item-title>
+                                <VListItemTitle>
                                     {{ product.name }}
-                                </v-list-item-title>
-                            </v-list-item>
+                                </VListItemTitle>
+                            </VListItem>
                             <template #appendIcon>
-                                <svg-icon class="icon" name="arrowdown" />
+                                <SvgIcon class="icon" name="arrowdown" />
                             </template>
-                            <v-list dark>
-                                <v-list-item
+                            <VList dark>
+                                <VListItem
                                     v-for="child in product.child"
                                     :key="child.id"
                                     nuxt
@@ -65,15 +65,15 @@
                                     :to="`/${item.slug}/${product.slug}/${child.slug}`"
                                     :title="child.name"
                                 >
-                                    <v-list-item-title class="pl-6">
+                                    <VListItemTitle class="pl-6">
                                         {{ child.name }}
-                                    </v-list-item-title>
-                                </v-list-item>
-                            </v-list>
-                        </v-list-group>
-                    </v-list>
-                </v-list-group>
-                <v-list-item
+                                    </VListItemTitle>
+                                </VListItem>
+                            </VList>
+                        </VList-group>
+                    </VList>
+                </VList-group>
+                <VListItem
                     v-else
                     :key="item.name"
                     active-class="text--accent"
@@ -83,10 +83,10 @@
                     exact
                     :title="item.name"
                 >
-                    <v-list-item-title>{{ item.name }}</v-list-item-title>
-                </v-list-item>
+                    <VListItemTitle>{{ item.name }}</VListItemTitle>
+                </VListItem>
             </template>
-        </v-list>
+        </VList>
     </v-navigation-drawer>
 </template>
 <script>

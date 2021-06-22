@@ -1,14 +1,14 @@
 <template>
     <section :class="$style.stepsWrapper">
-        <v-container>
-            <v-row>
-                <v-col cols="12">
+        <VContainer>
+            <VRow>
+                <VCol cols="12">
                     <h2 class="mb-10 text-center text-md-left pageHeader">Этапы работ</h2>
-                </v-col>
-            </v-row>
+                </VCol>
+            </VRow>
 
-            <v-row class="justify-center">
-                <v-col
+            <VRow class="justify-center">
+                <VCol
                     v-for="(step, i) in items"
                     :key="`step${i}`"
                     :class="$style.steps"
@@ -17,7 +17,7 @@
                 >
                     <div :class="$style.stepImageWrapper" class="mb-6">
                         <div :class="$style.stepImageInner">
-                            <v-img
+                            <VImg
                                 v-if="step.icon"
                                 :class="$style.stepImage"
                                 :src="$config.imageBaseUrl + step.icon.url"
@@ -28,7 +28,7 @@
                             />
                         </div>
 
-                        <svg-icon :class="$style.stepPath" name="path" />
+                        <SvgIcon :class="$style.stepPath" name="path" />
                     </div>
 
                     <h3 :class="$style.stepsHeader" class="mb-2">
@@ -37,14 +37,15 @@
                     <div :class="$style.stepsText" class="mb-3 text-center text-md-left">
                         {{ step.content }}
                     </div>
-                </v-col>
-            </v-row>
-        </v-container>
+                </VCol>
+            </VRow>
+        </VContainer>
     </section>
 </template>
 
 <script>
 export default {
+    name: 'Steps',
     props: {
         items: {
             type: Array,

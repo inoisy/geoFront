@@ -1,5 +1,5 @@
 <template>
-    <v-img
+    <VImg
         :src="imgUrl"
         :alt="alt"
         :title="alt"
@@ -9,17 +9,18 @@
         transition="none"
     >
         <template #placeholder>
-            <v-row class="fill-height ma-0"
-                   align="center"
-                   justify="center"
+            <VRow class="fill-height ma-0"
+                  align="center"
+                  justify="center"
             >
-                <v-progress-circular indeterminate color="accent"></v-progress-circular>
-            </v-row>
+                <VProgressCircular indeterminate color="accent"></VProgressCircular>
+            </VRow>
         </template>
-    </v-img>
+    </VImg>
 </template>
 <script>
 export default {
+    name: 'ServiceImage',
     props: {
         imgUrl: {
             type: String,

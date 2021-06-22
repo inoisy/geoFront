@@ -1,23 +1,6 @@
 <script>
-export default {
-    name: 'ContentWrapper',
-    functional: true,
-    props: {
-        content: {
-            type: String,
-            default: '',
-        },
-    },
-    render(createElement, { props }) {
-        return createElement('div', {
-            key: 'contentWrapper',
-            class: 'contentWrapper',
-            domProps: {
-                innerHTML: props.content,
-            },
-        });
-    },
-};
+import { createSimpleFunctional } from '~/utils/helpers';
+export default createSimpleFunctional('contentWrapper', 'div', 'contentWrapper');
 </script>
 <style lang="scss">
     .contentWrapper {

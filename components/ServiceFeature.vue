@@ -3,38 +3,38 @@
         :class="[$style.serviceFeatureWrapper, isWithGray && $style.withGray]"
         class="sectionWrapper"
     >
-        <v-container>
-            <v-row :class="$style.serviceFeatureRow"
-                   justify="center"
-                   no-gutters
+        <VContainer>
+            <VRow :class="$style.serviceFeatureRow"
+                  justify="center"
+                  no-gutters
             >
-                <v-col :class="$style.serviceFeatureTextWrapper"
-                       cols="12"
-                       md="6"
+                <VCol :class="$style.serviceFeatureTextWrapper"
+                      cols="12"
+                      md="6"
                 >
                     <h2 :class="$style.serviceFeatureHeader">
                         {{ header }}
                     </h2>
                     <div :class="$style.serviceFeatureContent" v-html="content" />
                     <div :class="$style.buttonWrapper">
-                        <v-btn :class="$style.button"
-                               :to="slug"
-                               outlined
-                               light
+                        <VBtn :class="$style.button"
+                              :to="slug"
+                              outlined
+                              light
                         >
                             Подробнее
-                        </v-btn>
-                        <v-btn
+                        </VBtn>
+                        <VBtn
                             :class="$style.button"
                             outlined
                             light
                             @click="handleOffer(name)"
                         >
                             Заказать
-                        </v-btn>
+                        </VBtn>
                     </div>
-                </v-col>
-                <v-col
+                </VCol>
+                <VCol
                     v-if="imgUrl"
                     :class="$style.serviceFeatureImgWrapper"
                     cols="12"
@@ -45,16 +45,55 @@
                         :img-url="imgUrl"
                         :alt="name"
                     />
-                </v-col>
-            </v-row>
-        </v-container>
+                </VCol>
+            </VRow>
+        </VContainer>
     </section>
 </template>
+
+<script>
+export default {
+    name: 'ServiceFeature',
+    props: {
+        isWithGray: {
+            type: Boolean,
+            default: false,
+        },
+        imgUrl: {
+            type: String,
+            default: null,
+        },
+        header: {
+            type: String,
+            default: '',
+        },
+        content: {
+            type: String,
+            default: '',
+        },
+        slug: {
+            type: String,
+            default: '',
+        },
+        name: {
+            type: String,
+            default: '',
+        },
+    },
+    methods: {
+        handleOffer(name) {
+            this.$store.dispatch('showDialog', {
+                isShow: true,
+                name,
+            });
+        },
+    },
+};
+</script>
 <style lang="scss" module>
     .serviceFeatureWrapper {
         background-color: white;
-        // padding-top: 6rem;
-        // padding-bottom: 5rem;
+
         &.withGray {
             &:nth-child(odd) {
                 background-color: $gray;
@@ -62,7 +101,6 @@
         }
 
         &:nth-child(odd) {
-            // background-color: $gray;
             .serviceFeatureRow {
                 flex-direction: row-reverse;
             }
@@ -137,15 +175,11 @@
                     @include sm {
                         font-size: 28px;
                     }
-                    // @include md {
-                    //   font-size: 32px;
-                    // }
                 }
 
                 .serviceFeatureContent {
                     margin-bottom: 35px;
                     font-weight: 300;
-                    // font-size: 16px;
                     line-height: 150%;
 
                     & ::v-deep p:last-of-type {
@@ -173,42 +207,3 @@
         }
     }
 </style>
-<script>
-export default {
-    props: {
-        isWithGray: {
-            type: Boolean,
-            default: false,
-        },
-        imgUrl: {
-            type: String,
-            default: null,
-            // default: () => {},
-        },
-        header: {
-            type: String,
-            default: '',
-        },
-        content: {
-            type: String,
-            default: '',
-        },
-        slug: {
-            type: String,
-            default: '',
-        },
-        name: {
-            type: String,
-            default: '',
-        },
-    },
-    methods: {
-        handleOffer(name) {
-            this.$store.dispatch('showDialog', {
-                isShow: true,
-                name,
-            });
-        },
-    },
-};
-</script>
