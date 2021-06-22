@@ -42,146 +42,7 @@
         </v-container>
     </section>
 </template>
-<style lang="scss" scoped module>
-@function strip-unit($number) {
-  @if type-of($number) == "number" and not unitless($number) {
-    @return $number / ($number * 0 + 1);
-  }
 
-  @return $number;
-}
-.stepsWrapper {
-  $icon-size: 70px;
-  $icon-padding: 10px;
-  // background-color: #ececec;
-  // color: #18191f;
-  .steps {
-    .stepImageWrapper {
-      .stepImageInner {
-        position: relative;
-        &:before {
-          content: "";
-          display: block;
-          position: absolute;
-          transition: 0.3s ease-in-out;
-          transform-origin: center;
-          width: $icon-size + $icon-padding * 2;
-          height: $icon-size + $icon-padding * 2;
-          top: 50%;
-          left: 50%;
-          background-color: $white;
-          opacity: 0;
-          border-radius: 50%;
-          transform: translate(-50%, -50%);
-          mix-blend-mode: difference;
-        }
-      }
-    }
-    &:hover {
-      .stepImageWrapper {
-        .stepImageInner {
-          &:before {
-            // background-color: $black;
-            opacity: 1;
-            z-index: 1;
-          }
-          // .stepImage {
-          //   filter: invert(1);
-          // }
-        }
-      }
-    }
-
-    margin-bottom: 50px;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    &:first-child .stepPath {
-      display: none;
-    }
-    &:last-child {
-      margin-bottom: 0px;
-    }
-    .stepsHeader {
-      font-weight: 600;
-      font-size: 18px;
-    }
-    .stepsText {
-      font-size: 14px;
-      font-weight: 300;
-      @include lg {
-        font-size: 16px;
-      }
-    }
-    .stepImageWrapper {
-      display: flex;
-      width: 100%;
-      justify-content: center;
-      .stepImage {
-        transition: all 0.2s ease-in-out;
-        width: 53px;
-        min-height: 53px;
-      }
-    }
-    .stepPath {
-      position: absolute;
-      transform: translate(-30px, -57px) rotate(95deg);
-      width: 70px;
-      min-width: 70px;
-      height: 25px;
-      min-height: 25px;
-    }
-
-    &:nth-child(even) .stepPath {
-      transform: translate(0px, -57px) rotate(-82deg);
-    }
-  }
-
-  @include md {
-    .steps {
-      .stepsHeader {
-        font-weight: bold;
-        font-size: 20px;
-      }
-      align-items: flex-start;
-      margin-bottom: 0px;
-      .stepImageWrapper {
-        justify-content: space-between;
-      }
-      .stepPath {
-        position: relative;
-        transform: translate(0, 0) rotate(0);
-        margin-left: 24px;
-        width: calc(100% - 80px);
-        min-width: unset;
-        height: 53px;
-        min-height: 53px;
-      }
-
-      &:first-child .stepPath {
-        display: block;
-      }
-      &:nth-child(even) .stepPath {
-        transform: translate(0, -22px) rotate(-166deg);
-      }
-      &:last-child .stepPath {
-        display: none;
-      }
-    }
-  }
-  @include lg {
-    .steps {
-      .stepPath {
-        margin-left: 40px;
-        transform: translate(0, 0) rotate(0) scale(1);
-      }
-      &:nth-child(even) .stepPath {
-        transform: translate(0, -22px) rotate(-166deg) scale(1);
-      }
-    }
-  }
-}
-</style>
 <script>
 export default {
     props: {
@@ -192,3 +53,159 @@ export default {
     },
 };
 </script>
+<style lang="scss" scoped module>
+    @function strip-unit($number) {
+        @if type-of($number) == "number" and not unitless($number) {
+            @return $number / ($number * 0 + 1);
+        }
+
+        @return $number;
+    }
+
+    .stepsWrapper {
+        $icon-size: 70px;
+        $icon-padding: 10px;
+        // background-color: #ececec;
+        // color: #18191f;
+        .steps {
+            .stepImageWrapper {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+
+                .stepImage {
+                    width: 53px;
+                    min-height: 53px;
+                    transition: all .2s ease-in-out;
+                }
+
+                .stepImageInner {
+                    position: relative;
+
+                    &:before {
+                        content: "";
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        display: block;
+                        width: $icon-size + $icon-padding * 2;
+                        height: $icon-size + $icon-padding * 2;
+                        border-radius: 50%;
+                        background-color: $white;
+                        opacity: 0;
+                        transform: translate(-50%, -50%);
+                        transform-origin: center;
+                        transition: .3s ease-in-out;
+                        mix-blend-mode: difference;
+                    }
+                }
+            }
+
+            &:hover {
+                .stepImageWrapper {
+                    .stepImageInner {
+                        &:before {
+                            z-index: 1;
+                            // background-color: $black;
+                            opacity: 1;
+                        }
+                        // .stepImage {
+                        //   filter: invert(1);
+                        // }
+                    }
+                }
+            }
+
+            display: flex;
+            align-items: center;
+            margin-bottom: 50px;
+            flex-direction: column;
+
+            &:first-child .stepPath {
+                display: none;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            .stepsHeader {
+                font-size: 18px;
+                font-weight: 600;
+            }
+
+            .stepsText {
+                font-size: 14px;
+                font-weight: 300;
+
+                @include lg {
+                    font-size: 16px;
+                }
+            }
+
+            .stepPath {
+                position: absolute;
+                width: 70px;
+                min-width: 70px;
+                height: 25px;
+                min-height: 25px;
+                transform: translate(-30px, -57px) rotate(95deg);
+            }
+
+            &:nth-child(even) .stepPath {
+                transform: translate(0, -57px) rotate(-82deg);
+            }
+        }
+
+        @include md {
+            .steps {
+                .stepsHeader {
+                    font-size: 20px;
+                    font-weight: bold;
+                }
+
+                align-items: flex-start;
+                margin-bottom: 0;
+
+                .stepImageWrapper {
+                    justify-content: space-between;
+                }
+
+                .stepPath {
+                    position: relative;
+                    width: calc(100% - 80px);
+                    min-width: unset;
+                    height: 53px;
+                    min-height: 53px;
+                    margin-left: 24px;
+                    transform: translate(0, 0) rotate(0);
+                }
+
+                &:first-child .stepPath {
+                    display: block;
+                }
+
+                &:nth-child(even) .stepPath {
+                    transform: translate(0, -22px) rotate(-166deg);
+                }
+
+                &:last-child .stepPath {
+                    display: none;
+                }
+            }
+        }
+
+        @include lg {
+            .steps {
+                .stepPath {
+                    margin-left: 40px;
+                    transform: translate(0, 0) rotate(0) scale(1);
+                }
+
+                &:nth-child(even) .stepPath {
+                    transform: translate(0, -22px) rotate(-166deg) scale(1);
+                }
+            }
+        }
+    }
+</style>

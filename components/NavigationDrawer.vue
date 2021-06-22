@@ -90,43 +90,46 @@
     </v-navigation-drawer>
 </template>
 <style lang="scss" scoped module>
-.wrapper {
-  background-color: #363636 !important;
-  z-index: 400;
-  .subHeader {
-    color: #fff !important;
-  }
-}
+    .wrapper {
+        z-index: 400;
+        background-color: #363636 !important;
+
+        .subHeader {
+            color: #fff !important;
+        }
+    }
 </style>
 <style lang="scss" scoped>
-.navigation-drawer-wrapper {
-  // .theme--light.v-list {
-  //   color: #fff !important;
-  // }
-  // .theme--light.v-list-item:not(.v-list-item--active):not(.v-list-item--disabled) {
-  //   color: #fff !important;
-  // }
-  ::v-deep .v-list {
-    .v-list-group__header__append-icon {
-      width: 24px !important;
-      min-width: 24px !important;
-    }
-    .v-list-item--active {
-      // color: inherit;
-      .icon {
-        // color: rgba(0, 0, 0, 0.5);
-        transform: rotate(180deg);
-      }
-    }
-    .v-list-group {
-      .v-list-group {
-        .v-list-group__header {
-          padding-left: 0 !important;
+    .navigation-drawer-wrapper {
+        // .theme--light.v-list {
+        //   color: #fff !important;
+        // }
+        // .theme--light.v-list-item:not(.v-list-item--active):not(.v-list-item--disabled) {
+        //   color: #fff !important;
+        // }
+        ::v-deep .v-list {
+            .v-list-group__header__append-icon {
+                width: 24px !important;
+                min-width: 24px !important;
+            }
+
+            .v-list-item--active {
+                // color: inherit;
+                .icon {
+                    // color: rgba(0, 0, 0, 0.5);
+                    transform: rotate(180deg);
+                }
+            }
+
+            .v-list-group {
+                .v-list-group {
+                    .v-list-group__header {
+                        padding-left: 0 !important;
+                    }
+                }
+            }
         }
-      }
     }
-  }
-}
 </style>
 <script>
 export default {

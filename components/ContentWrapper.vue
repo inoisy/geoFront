@@ -49,6 +49,7 @@
                     background: $black;
                     text-align: center;
                     font-size: 1.1rem;
+                    font-weight: bold;
                     line-height: #{$size};
                     // display: inline-block;
                     // background: #f3f3f3;
@@ -62,7 +63,6 @@
                     // font-weight: 700;
                     // margin: 0 10px 10px 0;
                     color: white;
-                    font-weight: bold;
                     box-shadow: 1px 1px 0 #999;
                 }
             }

@@ -26,6 +26,7 @@ async function routes() {
 }
 module.exports = async () => {
     const isDev = process.env.NODE_ENV !== 'production';
+    console.log('🚀 ~ file: nuxt.config.js ~ line 29 ~ module.exports= ~ isDev', isDev);
 
     return {
         loading: {

@@ -16,7 +16,7 @@
                        lg="3"
                 >
                     <logo :mini="true" class="mb-5" />
-                    <div style="font-weight: normal; font-size: 14px; line-height: 24px">
+                    <div style=" font-size: 14px; font-weight: normal; line-height: 24px;">
                         {{ info.descriptor }}
                     </div>
                 </v-col>
@@ -27,7 +27,7 @@
                        lg="3"
                 >
                     <v-subheader class="hidden-sm-and-down">КОНТАКТЫ</v-subheader>
-                    <v-list style="background: transparent !important">
+                    <v-list style="background: transparent !important;">
                         <!-- :href="`tel:${info.phone}`"
               {{ info.phone }}
               -->
@@ -57,7 +57,7 @@
                                 <svg-icon name="pin" />
                             </v-list-item-icon>
                             <v-list-item-content>
-                                <span style="font-size: 12px">
+                                <span style="font-size: 12px;">
                                     {{ info.address }}
                                 </span>
                             </v-list-item-content>
@@ -72,7 +72,7 @@
                 >
                     <v-subheader>НАВИГАЦИЯ</v-subheader>
                     <v-list
-                        style="background: transparent !important"
+                        style="background: transparent !important;"
                         class="footer-list"
                     >
                         <v-list-item
@@ -94,7 +94,7 @@
                 >
                     <v-subheader>УСЛУГИ</v-subheader>
                     <v-list
-                        style="background: transparent !important"
+                        style="background: transparent !important;"
                         class="footer-list"
                     >
                         <v-list-item
@@ -113,19 +113,20 @@
     </v-footer>
 </template>
 <style lang="scss" scoped module>
-.footer {
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 80% 50%;
-  min-height: inherit;
-  // background-image: url(/footerbg.jpg);
-  @include sm {
-    background-position: 90% 50%;
-  }
-  @include md {
-    background-position: 100% 50%;
-  }
-}
+    .footer {
+        min-height: inherit;
+        background-position: 80% 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        // background-image: url(/footerbg.jpg);
+        @include sm {
+            background-position: 90% 50%;
+        }
+
+        @include md {
+            background-position: 100% 50%;
+        }
+    }
 </style>
 <script>
 // import Logo from "~/components/Logo.vue";

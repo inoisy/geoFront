@@ -20,31 +20,10 @@
         </v-card-text>
     </v-card>
 </template>
-<style lang="scss" scoped module>
-.cardTitle {
-  font-size: 1rem !important;
-  line-height: 150% !important;
-  font-weight: bold;
-}
-.cardDescription {
-  // font-size: 16px !important;
-  line-height: 125% !important;
-  .elepsis {
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    display: -webkit-box;
-    overflow: hidden;
-    color: rgba(0, 0, 0, 0.87);
-  }
-}
-</style>
+
 <script>
 export default {
     props: {
-        // item: {
-        //   type: Object,
-        //   default: () => {},
-        // },
         name: {
             type: String,
             required: true,
@@ -66,25 +45,24 @@ export default {
             required: true,
         },
     },
-    // data() {
-    //   return {
-    //     imageBaseUrl: this.$config.imageBaseUrl,
-    //   };
-    // },
-    // computed: {
-    //   imgUrl() {
-    //     if (!this.item.img) {
-    //       return require("~/assets/icons/no-camera.svg");
-    //     }
-    //     if (
-    //       this.item.img.formats &&
-    //       this.item.img.formats.small &&
-    //       this.item.img.formats.small.url
-    //     ) {
-    //       return this.imageBaseUrl + this.item.img.formats.small.url;
-    //     }
-    //     return this.imageBaseUrl + this.item.img.url;
-    //   },
-    // },
 };
 </script>
+<style lang="scss" scoped module>
+    .cardTitle {
+        font-size: 1rem !important;
+        font-weight: bold;
+        line-height: 150% !important;
+    }
+
+    .cardDescription {
+        line-height: 125% !important;
+
+        .elepsis {
+            overflow: hidden;
+            display: -webkit-box;
+            color: rgba(0, 0, 0, .87);
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+    }
+</style>

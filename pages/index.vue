@@ -330,17 +330,17 @@ export default {
         .serviceCardHeader {
             text-transform: uppercase;
             font-size: 22px;
-            color: #18191f;
             font-weight: 600;
+            color: #18191f;
         }
 
         .serviceCardDescription {
             margin: 0;
             font-size: 12px;
-            line-height: 150%;
-            color: #18191f;
             font-weight: normal;
             font-weight: 300;
+            line-height: 150%;
+            color: #18191f;
         }
 
         @include sm {

@@ -16,12 +16,12 @@ body {
 
 .v-slide-group__prev--disabled,
 .v-slide-group__next--disabled {
-    color: rgba(0, 0, 0, 0.38) !important;
+    color: rgba(0, 0, 0, .38) !important;
 }
 
 .error {
-    background-color: $error !important;
     border-color: $error !important;
+    background-color: $error !important;
 }
 
 .error--text {
@@ -30,8 +30,8 @@ body {
 }
 
 .success {
-    background-color: $success !important;
     border-color: $success !important;
+    background-color: $success !important;
 }
 
 .success--text {
@@ -40,11 +40,10 @@ body {
 }
 
 .pageHeader {
-    font-weight: 600;
-
-    line-height: 125%;
     text-align: center;
     font-size: 2.3rem;
+    font-weight: 600;
+    line-height: 125%;
 
     @include md {
         text-align: left;
@@ -57,26 +56,26 @@ body {
     // min-width: 64px !important;
     padding: 0 16px !important;
     font-size: 12px !important;
-    box-shadow: 0 0 15px rgba($white, 0.65);
+    box-shadow: 0 0 15px rgba($white, .65);
     transition-property: box-shadow, transform, opacity, background-color, border-color, color;
 
     &:hover {
-        background-color: $accent !important;
         border-color: $accent !important;
+        background-color: $accent !important;
         color: $white;
-        box-shadow: 0 0 18px rgba($accent, 0.7) !important;
+        box-shadow: 0 0 18px rgba($accent, .7) !important;
     }
 
     @include md {
-        height: 44px !important;
         min-width: 78px;
+        height: 44px !important;
         padding: 0 19.5555555556px !important;
         font-size: 14px !important;
     }
 
     @include lg {
-        height: 52px !important;
         min-width: 92px;
+        height: 52px !important;
         padding: 0 23.1111111111px !important;
         font-size: 1rem !important;
     }
@@ -92,13 +91,12 @@ body {
 
     &:before {
         content: "";
-
-        background-color: #151317;
+        position: absolute;
+        top: 0;
+        z-index: 0;
         width: 100%;
         height: 100px;
-        position: absolute;
-        z-index: 0;
-        top: 0;
+        background-color: #151317;
     }
 
     .v-main__wrap {

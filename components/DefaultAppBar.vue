@@ -33,7 +33,7 @@
                     tile
                 >
                     {{ item.name }}
-                    <svg-icon name="arrowdown" style="margin-right: -5px" />
+                    <svg-icon name="arrowdown" style="margin-right: -5px;" />
                 </v-btn>
             </template>
             <!-- href="tel:+74991120654">
@@ -83,125 +83,134 @@
     </header>
 </template>
 <style lang="scss" scoped module>
-.appBar {
-  height: var(--toolbar-height);
-  min-height: var(--toolbar-height);
+    .appBar {
+        // border-color: rgb(21, 19, 23);
+        // box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%),
+        //   0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+        // box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%),
+        //   0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+        position: fixed;
+        top: 0;
+        right: 0;
+        // transform: translateY(0px);
+        left: 0;
+        z-index: 250;
+        height: var(--toolbar-height);
+        min-height: var(--toolbar-height);
+        margin-top: 0;
+        background-color: rgb(21, 19, 23);
 
-  background-color: rgb(21, 19, 23);
-  // border-color: rgb(21, 19, 23);
-  // box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%),
-  //   0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
-  // box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%),
-  //   0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
-  position: fixed;
-  top: 0;
-  z-index: 250;
-  margin-top: 0px;
-  // transform: translateY(0px);
-  left: 0px;
-  right: 0px;
-  --icon-size: 36px;
-  --font-size: 14px;
-  --padding: 6px;
+        --icon-size: 36px;
+        --font-size: 14px;
+        --padding: 6px;
 
-  @include sm {
-    --icon-size: 48px;
-  }
-  @include md {
-    --padding: 8px;
-  }
-  @include lg {
-    --font-size: 15px;
-    --padding: 16px;
-  }
-  // @include md {
+        @include sm {
+            --icon-size: 48px;
+        }
 
-  // }
-  .header {
-    flex-wrap: nowrap !important;
-    background-color: #151317;
-  }
+        @include md {
+            --padding: 8px;
+        }
 
-  .link,
-  .linkTel {
-    font-size: var(--font-size) !important;
-  }
-  .link {
-    height: 100% !important;
-    min-width: 100px;
-    color: #f1f3ef;
-    padding: 0 var(--padding) !important;
-  }
+        @include lg {
+            --font-size: 15px;
+            --padding: 16px;
+        }
+        // @include md {
 
-  .linkTel {
-    height: var(--icon-size) !important;
-    width: var(--icon-size) !important;
-    display: flex;
-    min-height: var(--icon-size) !important;
-    min-width: var(--icon-size) !important;
-    padding: 0;
-    border-radius: 50%;
-    color: $white !important;
-    font-size: var(--font-size);
-    // @include sm {
-    //   height: var(--icon-size) !important;
-    //   width: var(--icon-size) !important;
-    // }
-    .linkTelText {
-      display: none;
+        // }
+        .header {
+            flex-wrap: nowrap !important;
+            background-color: #151317;
+        }
+
+        .link,
+        .linkTel {
+            font-size: var(--font-size) !important;
+        }
+
+        .link {
+            min-width: 100px;
+            height: 100% !important;
+            padding: 0 var(--padding) !important;
+            color: #f1f3ef;
+        }
+
+        .linkTel {
+            display: flex;
+            width: var(--icon-size) !important;
+            min-width: var(--icon-size) !important;
+            height: var(--icon-size) !important;
+            min-height: var(--icon-size) !important;
+            padding: 0;
+            border-radius: 50%;
+            font-size: var(--font-size);
+            color: $white !important;
+            // @include sm {
+            //   height: var(--icon-size) !important;
+            //   width: var(--icon-size) !important;
+            // }
+            .linkTelText {
+                display: none;
+            }
+
+            @include lg {
+                width: unset !important;
+                height: 100% !important;
+                padding: 0 var(--padding) !important;
+                border-radius: 0;
+                // font-size: 0.8rem !important;
+                color: #f1f3ef;
+
+                .linkTelText {
+                    display: inline;
+                    width: 173px;
+                }
+            }
+            // @include lg {
+            //   padding: 0 16px !important;
+            // }
+        }
+
+        .linkIcon {
+            display: flex;
+            width: var(--icon-size) !important;
+            height: var(--icon-size) !important;
+            color: $white !important;
+        }
+
+        .linkIcon + .linkIcon {
+            margin-left: 5px;
+        }
+
+        .linkTel + .linkIcon {
+            margin-left: 5px;
+        }
+
+        .link + .linkTel {
+            margin-left: 5px;
+        }
+        // @include sm {
+        //   .linkIcon {
+        //     height: var(--icon-size) !important;
+        //     width: var(--icon-size) !important;
+        //   }
+        // }
+        // @include md {
+        //   .link,
+        //   .linkTel {
+        //     font-size: 0.8rem !important;
+        //     // padding: 0 6px !important;
+        //   }
+        // }
+        // @include lg {
+        //   .link,
+        //   .linkTel {
+        //     font-size: 0.85rem !important;
+        //     // padding: 0 12px !important;
+        //   }
+        // }
     }
-    @include lg {
-      height: 100% !important;
-      width: unset !important;
-      // font-size: 0.8rem !important;
-      color: #f1f3ef;
-      border-radius: 0;
-      padding: 0 var(--padding) !important;
-      .linkTelText {
-        display: inline;
-        width: 173px;
-      }
-    }
-    // @include lg {
-    //   padding: 0 16px !important;
-    // }
-  }
-  .linkIcon {
-    height: var(--icon-size) !important;
-    width: var(--icon-size) !important;
-    display: flex;
-    color: $white !important;
-  }
-  .linkIcon + .linkIcon {
-    margin-left: 5px;
-  }
-  .linkTel + .linkIcon {
-    margin-left: 5px;
-  }
-  .link + .linkTel {
-    margin-left: 5px;
-  }
-  // @include sm {
-  //   .linkIcon {
-  //     height: var(--icon-size) !important;
-  //     width: var(--icon-size) !important;
-  //   }
-  // }
-  // @include md {
-  //   .link,
-  //   .linkTel {
-  //     font-size: 0.8rem !important;
-  //     // padding: 0 6px !important;
-  //   }
-  // }
-  // @include lg {
-  //   .link,
-  //   .linkTel {
-  //     font-size: 0.85rem !important;
-  //     // padding: 0 12px !important;
-  //   }
-  // }
-}
 </style>
 <script>
 // import Logo from "~/components/Logo.vue";

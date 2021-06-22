@@ -14,116 +14,129 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.wrapper {
-  ::v-deep h3 {
-    margin-bottom: 1rem;
-  }
-  ::v-deep .table {
-    & + * {
-      margin-top: 3.5rem;
-    }
-    & + .table {
-      margin-top: 2.5rem;
-    }
-    overflow-x: auto;
-    overflow-y: hidden;
-  }
-  // ::v-deep table + h3 {
-  //   margin-top: 25px;
-  // }
-  // ::v-deep figcaption {
-  //   &:not(:nth-of-type(n + 1)) {
-  //     margin-top: 25px;
-  //   }
-  // }
-  ::v-deep table {
-    border-spacing: 0;
-    max-width: 100%;
-    width: 100%;
-    line-height: 125%;
-    font-size: 0.875rem;
-    @include md {
-      font-size: 1rem;
-    }
-    tr:not(:last-child) td {
-      border-bottom: thin solid rgba(0, 0, 0, 0.12);
-    }
-
-    tr td:not(:last-child),
-    td:only-child {
-      border-right: thin solid rgba(0, 0, 0, 0.12);
-    }
-
-    // tbody > tr:hover {
-    //   background: #eee;
-    // }
-    thead {
-      tr {
-        th {
-          border-bottom: thin solid rgba(0, 0, 0, 0.12);
-          padding: 0.2rem 0.8rem;
-          transition: height 0.2s cubic-bezier(0.4, 0, 0.6, 1);
-          height: 48px;
-          user-select: none;
-          color: rgba($black, 0.75) !important;
-          span {
-            color: rgba($black, 0.75) !important;
-          }
-          &:last-child {
-            text-align: right;
-            white-space: nowrap;
-            padding-right: 2px;
-          }
-          &:first-child {
-            text-align: left;
-            padding-left: 2px;
-          }
-          &:not(:last-child) {
-            border-right: thin solid rgba(0, 0, 0, 0.12);
-          }
-        }
-      }
-    }
-    // td,
-    // th {
-    //   height: 36px;
-    // }
-    tbody {
-      tr {
-        &:hover {
-          background: var(--content-color, #eee);
-        }
-        td {
-          p {
-            margin-bottom: 0;
-          }
-          padding: 0.3rem 0.8rem;
-          transition: height 0.2s cubic-bezier(0.4, 0, 0.6, 1);
-          height: 48px;
-          text-align: center;
-          min-width: 90px;
-          &:last-child {
-            text-align: right;
-            // white-space: break;
-            padding-right: 2px;
-          }
-          &:first-child {
-            text-align: left;
-            padding-left: 2px;
-          }
+    .wrapper {
+        ::v-deep h3 {
+            margin-bottom: 1rem;
         }
 
-        // td:only-child:not([rowspan]) {
-        //   padding-left: 16px;
-        //   // padding-right: 16px;
+        ::v-deep .table {
+            & + * {
+                margin-top: 3.5rem;
+            }
+
+            & + .table {
+                margin-top: 2.5rem;
+            }
+
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+        // ::v-deep table + h3 {
+        //   margin-top: 25px;
         // }
-
-        // td:not(:first-child) {
-        //   padding-left: 16px;
-        //   // padding-right: 16px;
+        // ::v-deep figcaption {
+        //   &:not(:nth-of-type(n + 1)) {
+        //     margin-top: 25px;
+        //   }
         // }
-      }
+        ::v-deep table {
+            width: 100%;
+            max-width: 100%;
+            border-spacing: 0;
+            font-size: .875rem;
+            line-height: 125%;
+
+            @include md {
+                font-size: 1rem;
+            }
+
+            tr:not(:last-child) td {
+                border-bottom: thin solid rgba(0, 0, 0, .12);
+            }
+
+            tr td:not(:last-child),
+            td:only-child {
+                border-right: thin solid rgba(0, 0, 0, .12);
+            }
+
+            // tbody > tr:hover {
+            //   background: #eee;
+            // }
+            thead {
+                tr {
+                    th {
+                        height: 48px;
+                        padding: .2rem .8rem;
+                        border-bottom: thin solid rgba(0, 0, 0, .12);
+                        color: rgba($black, .75) !important;
+                        transition: height .2s cubic-bezier(.4, 0, .6, 1);
+                        user-select: none;
+
+                        span {
+                            color: rgba($black, .75) !important;
+                        }
+
+                        &:last-child {
+                            padding-right: 2px;
+                            text-align: right;
+                            white-space: nowrap;
+                        }
+
+                        &:first-child {
+                            padding-left: 2px;
+                            text-align: left;
+                        }
+
+                        &:not(:last-child) {
+                            border-right: thin solid rgba(0, 0, 0, .12);
+                        }
+                    }
+                }
+            }
+            // td,
+            // th {
+            //   height: 36px;
+            // }
+            tbody {
+                tr {
+                    &:hover {
+                        background: var(--content-color, #eee);
+                    }
+
+                    td {
+                        p {
+                            margin-bottom: 0;
+                        }
+
+                        min-width: 90px;
+                        height: 48px;
+                        padding: .3rem .8rem;
+                        text-align: center;
+                        transition: height .2s cubic-bezier(.4, 0, .6, 1);
+
+                        &:last-child {
+                            // white-space: break;
+                            padding-right: 2px;
+                            text-align: right;
+                        }
+
+                        &:first-child {
+                            padding-left: 2px;
+                            text-align: left;
+                        }
+                    }
+
+                    // td:only-child:not([rowspan]) {
+                    //   padding-left: 16px;
+                    //   // padding-right: 16px;
+                    // }
+
+                    // td:not(:first-child) {
+                    //   padding-left: 16px;
+                    //   // padding-right: 16px;
+                    // }
+                }
+            }
+        }
     }
-  }
-}
 </style>

@@ -36,10 +36,10 @@ export default {
 };
 </script>
 <style lang="scss" scoped module>
-.asideMenu {
-  max-width: 30%;
-  float: right;
-  margin-left: 30px;
-  margin-bottom: 30px;
-}
+    .asideMenu {
+        float: right;
+        max-width: 30%;
+        margin-bottom: 30px;
+        margin-left: 30px;
+    }
 </style>

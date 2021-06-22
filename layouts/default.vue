@@ -9,7 +9,7 @@
         <v-lazy
             v-model="isFooter"
             min-height="300"
-            style="background-color: #06070c"
+            style="background-color: #06070c;"
         >
             <lazy-default-footer v-if="isFooter" />
         </v-lazy>

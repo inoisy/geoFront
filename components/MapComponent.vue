@@ -4,7 +4,7 @@
         :coords="coords"
         zoom="16"
         class="mb-6"
-        style="width: 100%; height: 100%"
+        style="width: 100%; height: 100%;"
     >
         <ymap-marker marker-id="1"
                      marker-type="placemark"

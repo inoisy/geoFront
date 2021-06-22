@@ -6,7 +6,7 @@ $min-width: 320px;
 $background: #f2f2f2;
 
 // Link color
-$link: #000000;
+$link: #000;
 
 // Link hover color
 $link-hover: #2d56d0;
@@ -25,6 +25,7 @@ $toolbar-desktop-height: 90px;
 
 :root {
     --toolbar-height: #{$toolbar-mobile-height};
+
     @include md {
         --toolbar-height: #{$toolbar-desktop-height};
     }

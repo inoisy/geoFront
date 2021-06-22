@@ -33,44 +33,45 @@ export default {
 };
 </script>
 <style lang="scss">
-.xxx-enter-active {
-  transition: opacity 3s ease-in-out;
-}
+    .xxx-enter-active {
+        transition: opacity 3s ease-in-out;
+    }
 
-.xxx-leave-active {
-  transition: none;
-}
+    .xxx-leave-active {
+        transition: none;
+    }
 
-.xxx-enter,
-.xxx-leave,
-.xxx-leave-to {
-  opacity: 0;
-}
+    .xxx-enter,
+    .xxx-leave,
+    .xxx-leave-to {
+        opacity: 0;
+    }
 
-.xxx-enter-to {
-  opacity: 1;
-}
+    .xxx-enter-to {
+        opacity: 1;
+    }
 
-.dialog-enter,
-.dialog-leave-to {
-  transition: opacity 3s ease-in-out;
-  // .modal-mask {
-  //   opacity: 0;
-  // }
-  // .modal-inner {
-  transform: scale(0.5);
-  opacity: 0;
-  // }
-}
-.dialog-enter-to,
-.dialog-leave {
-  transition: opacity 3s ease-in-out;
-  // .modal-mask {
-  //   opacity: 1;
-  // }
-  // .modal-inner {
-  transform: scale(1);
-  opacity: 1;
-  // }
-}
+    .dialog-enter,
+    .dialog-leave-to {
+        opacity: 0;
+        // .modal-mask {
+        //   opacity: 0;
+        // }
+        // .modal-inner {
+        transform: scale(.5);
+        transition: opacity 3s ease-in-out;
+        // }
+    }
+
+    .dialog-enter-to,
+    .dialog-leave {
+        opacity: 1;
+        // .modal-mask {
+        //   opacity: 1;
+        // }
+        // .modal-inner {
+        transform: scale(1);
+        transition: opacity 3s ease-in-out;
+        // }
+    }
 </style>

@@ -40,36 +40,41 @@ export default {
 </script>
 
 <style style lang="scss" scoped module>
-.breadcrumbs {
-  list-style-type: none;
-  padding: 18px 12px;
-  .breadcrumbsItem {
-    align-items: center;
-    display: inline;
-    font-size: 12px;
-    @include md {
-      font-size: 14px;
+    .breadcrumbs {
+        padding: 18px 12px;
+        list-style-type: none;
+
+        .breadcrumbsItem {
+            display: inline;
+            align-items: center;
+            font-size: 12px;
+
+            @include md {
+                font-size: 14px;
+            }
+
+            &:not(:last-child) {
+                &:after {
+                    content: "/";
+                    display: inline;
+                    padding: 0 12px;
+                    color: rgba($white, .5);
+                }
+            }
+
+            &:last-child {
+                .breadcrumbsItemLink {
+                    color: rgba(255, 255, 255, .5);
+                    pointer-events: none;
+                }
+            }
+
+            .breadcrumbsItemLink {
+                display: inline;
+                align-items: center;
+                text-decoration: none;
+                color: white;
+            }
+        }
     }
-    &:not(:last-child) {
-      &:after {
-        content: "/";
-        display: inline;
-        padding: 0 12px;
-        color: rgba($white, 0.5);
-      }
-    }
-    &:last-child {
-      .breadcrumbsItemLink {
-        color: rgba(255, 255, 255, 0.5);
-        pointer-events: none;
-      }
-    }
-    .breadcrumbsItemLink {
-      color: white;
-      align-items: center;
-      display: inline;
-      text-decoration: none;
-    }
-  }
-}
 </style>

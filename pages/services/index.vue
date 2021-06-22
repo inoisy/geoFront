@@ -72,118 +72,136 @@
     </div>
 </template>
 <style lang="scss" scoped module>
-.servicesWrapper {
-  // padding-top: 6rem;
-  // padding-bottom: 5rem;
-  &:nth-child(2n + 1) {
-    background-color: #f4f4f4;
-  }
-  // background-color: white;
-  // color: $black;
-  a {
-    text-decoration: none;
-  }
-  ul {
-    list-style: square inside url("~assets/icons/bullet.svg");
-    padding-left: 0px;
-    li {
-      margin-bottom: 15px;
-      a {
-        color: $black;
-        &:hover {
-          color: $accent;
+    .servicesWrapper {
+        // padding-top: 6rem;
+        // padding-bottom: 5rem;
+        &:nth-child(2n + 1) {
+            background-color: #f4f4f4;
         }
-      }
-    }
-  }
-  .buttonWrapper {
-    display: flex;
-    flex-wrap: wrap;
-    @include sm {
-      flex-wrap: nowrap;
-      .button + .button {
-        margin-left: 10px;
-      }
-    }
-    .button {
-      flex: 1 1 100%;
-      @include sm {
-        flex: 0 0 190px;
-      }
-    }
-  }
+        // background-color: white;
+        // color: $black;
+        a {
+            text-decoration: none;
+        }
 
-  .serviceItem {
-    position: relative;
-  }
-  --icon-size: 100px;
-  .servicesIcon {
-    width: var(--icon-size);
-    height: var(--icon-size);
-    // position: absolute;
-    float: right;
-    margin-bottom: 10px;
-    margin-left: 10px;
-    // right: 14px;
-    opacity: 0.3;
-    @include sm {
-      --icon-size: 150px;
-    }
-  }
-  .serviceHeader {
-    font-weight: 600;
-    font-size: 22px;
-    text-transform: uppercase;
-    color: $black;
-    position: relative;
-    margin-bottom: 40px;
-    &:hover {
-      color: $accent;
-    }
-    &:after {
-      content: "";
-      display: block;
-      height: 1px;
-      width: 90px;
-      background-color: $black;
-      position: absolute;
-      top: 40px;
-    }
-  }
-}
+        ul {
+            padding-left: 0;
+            list-style: square inside url("~assets/icons/bullet.svg");
 
-// @include sm {
-//   .servicesWrapper {
-//     .servicesTextWrapper {
-//       max-width: 70%;
-//     }
-//     .servicesIcon {
-//       width: 25%;
-//       height: auto;
-//     }
-//   }
-// }
-@include md {
-  .servicesWrapper {
-    .servicesTextWrapper {
-      max-width: 60%;
+            li {
+                margin-bottom: 15px;
+
+                a {
+                    color: $black;
+
+                    &:hover {
+                        color: $accent;
+                    }
+                }
+            }
+        }
+
+        .buttonWrapper {
+            display: flex;
+            flex-wrap: wrap;
+
+            @include sm {
+                flex-wrap: nowrap;
+
+                .button + .button {
+                    margin-left: 10px;
+                }
+            }
+
+            .button {
+                flex: 1 1 100%;
+
+                @include sm {
+                    flex: 0 0 190px;
+                }
+            }
+        }
+
+        .serviceItem {
+            position: relative;
+        }
+
+        --icon-size: 100px;
+
+        .servicesIcon {
+            // position: absolute;
+            float: right;
+            width: var(--icon-size);
+            height: var(--icon-size);
+            margin-bottom: 10px;
+            margin-left: 10px;
+            // right: 14px;
+            opacity: .3;
+
+            @include sm {
+                --icon-size: 150px;
+            }
+        }
+
+        .serviceHeader {
+            position: relative;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            font-size: 22px;
+            font-weight: 600;
+            color: $black;
+
+            &:hover {
+                color: $accent;
+            }
+
+            &:after {
+                content: "";
+                position: absolute;
+                top: 40px;
+                display: block;
+                width: 90px;
+                height: 1px;
+                background-color: $black;
+            }
+        }
     }
-    .servicesIcon {
-      width: 27%;
-      height: auto;
+
+    // @include sm {
+    //   .servicesWrapper {
+    //     .servicesTextWrapper {
+    //       max-width: 70%;
+    //     }
+    //     .servicesIcon {
+    //       width: 25%;
+    //       height: auto;
+    //     }
+    //   }
+    // }
+    @include md {
+        .servicesWrapper {
+            .servicesTextWrapper {
+                max-width: 60%;
+            }
+
+            .servicesIcon {
+                width: 27%;
+                height: auto;
+            }
+        }
     }
-  }
-}
-@include lg {
-  .servicesWrapper {
-    .servicesTextWrapper {
-      max-width: 60%;
+
+    @include lg {
+        .servicesWrapper {
+            .servicesTextWrapper {
+                max-width: 60%;
+            }
+
+            .servicesIcon {
+                width: 20%;
+            }
+        }
     }
-    .servicesIcon {
-      width: 20%;
-    }
-  }
-}
 </style>
 <script>
 import gql from 'graphql-tag';

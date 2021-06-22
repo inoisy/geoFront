@@ -1,5 +1,5 @@
 <template>
-    <v-container class="fill-height" style="min-height: 70vh">
+    <v-container class="fill-height" style="min-height: 70vh;">
         <v-row justify="center">
             <v-col cols="12"
                    md="6"
@@ -27,24 +27,27 @@ export default {
 </script>
 
 <style scoped module>
-.title {
-  /* margin-top: 15px; */
-  font-size: 5rem;
-  text-align: center;
-  line-height: 100%;
-  margin-bottom: 25px;
-}
-.info {
-  font-weight: 300;
-  color: #484848;
-  margin: 0;
-  text-align: center;
-}
-.button {
-  margin-top: 35px;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  width: 270px;
-}
+    .title {
+        margin-bottom: 25px;
+        text-align: center;
+
+        /* margin-top: 15px; */
+        font-size: 5rem;
+        line-height: 100%;
+    }
+
+    .info {
+        margin: 0;
+        text-align: center;
+        font-weight: 300;
+        color: #484848;
+    }
+
+    .button {
+        display: flex;
+        width: 270px;
+        margin-top: 35px;
+        margin-right: auto;
+        margin-left: auto;
+    }
 </style>

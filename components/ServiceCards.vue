@@ -6,7 +6,6 @@
                cols="12"
                sm="6"
         >
-            <!-- <LazyHydrate  when-visible> -->
             <service-card
                 v-bind="{
                     name: child.name,
@@ -16,8 +15,6 @@
                     parentSlug: parentSlug,
                 }"
             />
-            <!-- :parent-slug="slug" -->
-            <!-- :item="child" -->
         </v-col>
     </v-row>
 </template>
@@ -43,6 +40,3 @@ export default {
     },
 };
 </script>
-
-<style>
-</style>

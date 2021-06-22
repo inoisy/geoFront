@@ -80,55 +80,62 @@ export default {
 };
 </script>
 <style lang="scss" >
-.pos-relative {
-  position: relative;
-}
-:root {
-  --dialog-margin: 20px;
-  --dialog-max-height: calc(
-    100vh - var(--toolbar-height) - var(--dialog-margin) * 2
-  );
-  --fab-button-size: 44px;
-  --dialog-img-padding: 12px;
-  --dialog-img-max-height: calc(
-    var(--dialog-max-height) - var(--dialog-img-padding) * 2
-  );
-  @include md {
-    --dialog-margin: 40px;
-    --dialog-img-padding: 24px;
-    --fab-button-size: 48px;
-  }
-}
+    .pos-relative {
+        position: relative;
+    }
+
+    :root {
+        --dialog-margin: 20px;
+        --dialog-max-height:
+            calc(
+                100vh - var(--toolbar-height) - var(--dialog-margin) * 2
+            );
+        --fab-button-size: 44px;
+        --dialog-img-padding: 12px;
+        --dialog-img-max-height:
+            calc(
+                var(--dialog-max-height) - var(--dialog-img-padding) * 2
+            );
+
+        @include md {
+            --dialog-margin: 40px;
+            --dialog-img-padding: 24px;
+            --fab-button-size: 48px;
+        }
+    }
 </style>
 <style lang="scss" scoped module>
-.imageDialogInner {
-  position: relative;
-  max-height: inherit;
-  height: inherit;
-  overflow: hidden;
-  padding: var(--dialog-img-padding);
-  .dialogImg {
-    border-radius: inherit;
-    width: 100%;
-    height: 100%;
-    display: block;
-    position: absolute;
-    top: 0px;
-    left: 0;
-    border-radius: 4px;
-    overflow: hidden;
-    transform: translateZ(0) perspective(1px);
-  }
-  .buttonWrapper {
-    position: absolute;
-    top: var(--dialog-img-padding);
-    right: var(--dialog-img-padding);
-    z-index: 10;
-    .button {
-      width: var(--fab-button-size) !important;
-      height: var(--fab-button-size) !important;
-      border: thin solid $white;
+    .imageDialogInner {
+        position: relative;
+        overflow: hidden;
+        height: inherit;
+        max-height: inherit;
+        padding: var(--dialog-img-padding);
+
+        .dialogImg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            border-radius: 4px;
+            transform: translateZ(0) perspective(1px);
+        }
+
+        .buttonWrapper {
+            position: absolute;
+            top: var(--dialog-img-padding);
+            right: var(--dialog-img-padding);
+            z-index: 10;
+
+            .button {
+                width: var(--fab-button-size) !important;
+                height: var(--fab-button-size) !important;
+                border: thin solid $white;
+            }
+        }
     }
-  }
-}
 </style>

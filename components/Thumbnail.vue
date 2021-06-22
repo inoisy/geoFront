@@ -52,21 +52,24 @@ export default {
 </script>
 
 <style lang="scss" scoped module>
-.imgWrapper {
-  width: 100%;
-  display: inline-flex;
-  margin-bottom: 2rem;
-  @include sm {
-    float: right;
-    width: 250px;
-    margin-left: 1rem;
-    margin-bottom: 1rem;
-  }
-  @include md {
-    width: 350px;
-  }
-  @include lg {
-    width: 400px;
-  }
-}
+    .imgWrapper {
+        display: inline-flex;
+        width: 100%;
+        margin-bottom: 2rem;
+
+        @include sm {
+            float: right;
+            width: 250px;
+            margin-bottom: 1rem;
+            margin-left: 1rem;
+        }
+
+        @include md {
+            width: 350px;
+        }
+
+        @include lg {
+            width: 400px;
+        }
+    }
 </style>

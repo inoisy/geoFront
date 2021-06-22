@@ -8,6 +8,7 @@
         "stylelint-order"
     ],
     "rules": {
+        "selector-pseudo-element-no-unknown": null,
         "at-rule-no-unknown": null,
         "scss/at-rule-no-unknown": true,
         "at-rule-empty-line-before": [
@@ -48,9 +49,9 @@
                 ]
             }
         ],
-        "declaration-no-important": true,
+        "declaration-no-important": null,
         "no-descending-specificity": null,
-        "value-no-vendor-prefix": true,
+        "value-no-vendor-prefix": null,
         "selector-no-vendor-prefix": true,
         "selector-pseudo-element-colon-notation": "single",
         "indentation": [

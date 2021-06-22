@@ -32,11 +32,11 @@
                                     <svg-icon
                                         name="arrowdown"
                                         style="
-                      width: 24px;
-                      height: 24px;
-                      transform: rotate(270deg);
-                      margin: auto;
-                    "
+    width: 24px;
+    height: 24px;
+    margin: auto;
+    transform: rotate(270deg);
+"
                                     />
                                 </div>
                             </v-list-item>
@@ -103,40 +103,44 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// .list {
-//   background: #1e1e1e;
-//   color: $white;
-// }
-.two-columns {
-  column-count: 2;
-  max-width: 100%;
-  position: relative;
-  .list-item {
-    float: left;
-    page-break-inside: avoid;
-    -moz-column-break-inside: avoid;
-    break-inside: avoid;
-    width: 100%;
-    // min-height: 30px !important;
-    // height: 30px !important;
-    // font-size: 12px;
-  }
-  .list-item-child {
-    padding-left: 1rem;
-  }
-}
-.catalog-second-level-menu-inner {
-  min-width: 300px !important;
-  max-width: 350px;
-  // width: 300px;
-}
-.second-level-two-column {
-  min-width: 27rem !important;
-  max-width: 27rem;
-}
+    // .list {
+    //   background: #1e1e1e;
+    //   color: $white;
+    // }
+    .two-columns {
+        position: relative;
+        max-width: 100%;
+        column-count: 2;
 
-.catalog-menu-inner {
-  min-width: 180px;
-  max-width: 280px;
-}
+        .list-item {
+            float: left;
+            width: 100%;
+            page-break-inside: avoid;
+            -moz-column-break-inside: avoid;
+            break-inside: avoid;
+            // min-height: 30px !important;
+            // height: 30px !important;
+            // font-size: 12px;
+        }
+
+        .list-item-child {
+            padding-left: 1rem;
+        }
+    }
+
+    .catalog-second-level-menu-inner {
+        min-width: 300px !important;
+        max-width: 350px;
+        // width: 300px;
+    }
+
+    .second-level-two-column {
+        min-width: 27rem !important;
+        max-width: 27rem;
+    }
+
+    .catalog-menu-inner {
+        min-width: 180px;
+        max-width: 280px;
+    }
 </style>

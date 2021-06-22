@@ -25,26 +25,29 @@
     <!-- </div> -->
 </template>
 <style lang="scss" scoped module>
-.firstSection {
-  background-position: center;
-  background-color: #161616;
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: 370px;
-  color: $white;
-  .breadcrumbs {
-    position: absolute;
-    top: 10px;
-    padding-left: 12px;
-  }
-  > div {
-    min-height: inherit;
-  }
-  .header {
-    font-weight: 600;
-    font-size: 3.5rem;
-  }
-}
+    .firstSection {
+        min-height: 370px;
+        background-color: #161616;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: $white;
+
+        .breadcrumbs {
+            position: absolute;
+            top: 10px;
+            padding-left: 12px;
+        }
+
+        > div {
+            min-height: inherit;
+        }
+
+        .header {
+            font-size: 3.5rem;
+            font-weight: 600;
+        }
+    }
 </style>
 <script>
 import Breadcrumbs from '~/components/Breadcrumbs.vue';

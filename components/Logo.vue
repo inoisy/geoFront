@@ -14,36 +14,41 @@
     </nuxt-link>
 </template>
 <style lang="scss" scoped>
-.logoWrapper {
-  display: flex;
-  align-items: center;
-  .logo {
-    width: 160px;
-    max-height: 85%;
-    @include sm {
-      width: 200px;
+    .logoWrapper {
+        display: flex;
+        align-items: center;
+
+        .logo {
+            width: 160px;
+            max-height: 85%;
+
+            @include sm {
+                width: 200px;
+            }
+
+            @include md {
+                width: 260px;
+            }
+        }
+
+        &.mini {
+            .logo {
+                width: 180px;
+                max-width: 180px;
+                height: 50px;
+            }
+        }
+
+        &:hover {
+            opacity: .8;
+        }
     }
-    @include md {
-      width: 260px;
-    }
-  }
-  &.mini {
-    .logo {
-      width: 180px;
-      max-width: 180px;
-      height: 50px;
-    }
-  }
-  &:hover {
-    opacity: 0.8;
-  }
-}
-// .mini {
-//   .logo {
-//     width: 180px;
-//     height: 50px;
-//   }
-// }
+    // .mini {
+    //   .logo {
+    //     width: 180px;
+    //     height: 50px;
+    //   }
+    // }
 </style>
 <script>
 export default {

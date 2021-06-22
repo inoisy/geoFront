@@ -10,9 +10,9 @@
 :src="require('~/assets/call.jpg?resize&size=1980')" :srcSet="srcSet.srcSet" :src="srcSet.src"-->
             <div
                 class="mb-3 pa-3 col col-12 col-sm-8 col-md-8 col-lg-7 text-center text-md-left"
-                style="font-size: 1.2rem"
+                style="font-size: 1.2rem;"
             >
-                <div style="margin-bottom: 2.5rem">
+                <div style="margin-bottom: 2.5rem;">
                     <!-- Остались вопросы или не можете определиться какая услуга вам нужна? -->
                     Получить консультацию и расчёт полной стоимости услуг можно оставив
                     контакты в форме ниже или позвонив по телефону
@@ -84,50 +84,56 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-// .callToActionButton {
-//   box-shadow: 0 2px 15px rgba($white, 0.65);
-//   transition-property: box-shadow, transform, opacity, background-color,
-//     border-color, color;
-//   &:hover {
-//     background-color: $accent !important;
-//     border-color: $accent !important;
-//     color: $white;
-//     box-shadow: 0 2px 18px rgba($accent, 0.8);
-//   }
-// }
-.parallaxWrapper {
-  color: $black;
-  background-color: $white;
-  ::v-deep .v-parallax__image {
-    filter: brightness(0.2);
-    // background-color: #000000;
-    // &:after {
-    //   content: "";
-    //   background-image: linear-gradient(147deg, #000000 0%, #434343 58%);
+    // .callToActionButton {
+    //   box-shadow: 0 2px 15px rgba($white, 0.65);
+    //   transition-property: box-shadow, transform, opacity, background-color,
+    //     border-color, color;
+    //   &:hover {
+    //     background-color: $accent !important;
+    //     border-color: $accent !important;
+    //     color: $white;
+    //     box-shadow: 0 2px 18px rgba($accent, 0.8);
+    //   }
     // }
-    /* width: 100%; */
-    /* max-width: ; */
-  }
-}
+    .parallaxWrapper {
+        background-color: $white;
+        color: $black;
+
+        ::v-deep .v-parallax__image {
+            filter: brightness(.2);
+            // background-color: #000000;
+            // &:after {
+            //   content: "";
+            //   background-image: linear-gradient(147deg, #000000 0%, #434343 58%);
+            // }
+
+            /* width: 100%; */
+
+            /* max-width: ; */
+        }
+    }
 </style>
 <style lang="scss" scoped module>
-// color: #f1f3ef;
-// background-color: #161616;
-.parallaxInner {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  @include md {
-    align-items: flex-start;
-  }
-}
-.phone {
-  font-weight: 700;
-  white-space: nowrap;
-  text-decoration: none;
-  color: $white;
-  &:hover {
-    color: $accent;
-  }
-}
+    // color: #f1f3ef;
+    // background-color: #161616;
+    .parallaxInner {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        @include md {
+            align-items: flex-start;
+        }
+    }
+
+    .phone {
+        text-decoration: none;
+        white-space: nowrap;
+        font-weight: 700;
+        color: $white;
+
+        &:hover {
+            color: $accent;
+        }
+    }
 </style>

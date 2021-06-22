@@ -2,7 +2,7 @@
     <v-dialog
         v-model="isShow"
         width="600"
-        style="overflow-x: hidden"
+        style="overflow-x: hidden;"
         content-class="dialog-active"
         light
         @click:outside="close"
@@ -129,67 +129,76 @@
     </v-dialog>
 </template>
 <style lang="scss">
-.dialog-active {
-  overflow-x: hidden;
-}
+    .dialog-active {
+        overflow-x: hidden;
+    }
 </style>
 <style lang="scss" scoped module>
-.dialogInner {
-  padding: 24px 20px 30px;
-  @include md {
-    padding: 2.2rem 2rem 2.4rem;
-  }
-}
-.successIcon {
-  width: 230px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 30px;
-  max-width: 70%;
-  height: auto;
-  display: block;
-}
-.successHeader {
-  font-size: 2rem;
-  font-weight: 900;
-  line-height: 125%;
-  margin-bottom: 1.2rem;
-}
-.successSubHeader {
-  font-size: 1rem;
-  @include lg {
-    font-size: 1.2rem;
-  }
-}
+    .dialogInner {
+        padding: 24px 20px 30px;
 
-.closeButton {
-  position: absolute;
-  right: 1rem;
-  top: 1rem;
-}
-.header {
-  font-size: 1.5rem;
-  padding-right: 44px;
-  font-weight: 600;
-  line-height: 125%;
-  @include sm {
-    font-size: 2rem;
-  }
-}
-.subheader {
-  font-size: 1rem;
-  margin-bottom: 1rem;
-}
-.bottomLine {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  width: 100%;
-  height: 7px;
-  background: darken($accent, 10%);
-}
+        @include md {
+            padding: 2.2rem 2rem 2.4rem;
+        }
+    }
+
+    .successIcon {
+        display: block;
+        width: 230px;
+        max-width: 70%;
+        height: auto;
+        margin-right: auto;
+        margin-bottom: 30px;
+        margin-left: auto;
+    }
+
+    .successHeader {
+        margin-bottom: 1.2rem;
+        font-size: 2rem;
+        font-weight: 900;
+        line-height: 125%;
+    }
+
+    .successSubHeader {
+        font-size: 1rem;
+
+        @include lg {
+            font-size: 1.2rem;
+        }
+    }
+
+    .closeButton {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+    }
+
+    .header {
+        padding-right: 44px;
+        font-size: 1.5rem;
+        font-weight: 600;
+        line-height: 125%;
+
+        @include sm {
+            font-size: 2rem;
+        }
+    }
+
+    .subheader {
+        margin-bottom: 1rem;
+        font-size: 1rem;
+    }
+
+    .bottomLine {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 7px;
+        margin: auto;
+        background: darken($accent, 10%);
+    }
 </style>
 <script>
 import gql from 'graphql-tag';
