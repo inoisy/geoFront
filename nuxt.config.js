@@ -1,8 +1,5 @@
-// const LRU = require("lru-cache")
-
 const siteUrl = process.env.SITE_URL || "https://geoworksmsk.ru"
 const backendUrl = process.env.BACKEND_URL || "https://api.geoworksmsk.ru"
-// BACKEND_URL = http://localhost:1337 "http://localhost:1337"; 
 const companyName = 'GeoWorks'
 const description = `Инженерные изыскания в Москве и МО. Геодезические, геологические изыскания, кадастровые услуги "под ключ" для проектирования и строительства.`
 
@@ -31,14 +28,6 @@ module.exports = async () => {
   const isDev = process.env.NODE_ENV !== 'production'
 
   return {
-    // target: "server",
-    // target: isDev ? "server" : process.env.TARGET || "static",
-    // generate: {
-    //   // fallback: '404.html',
-    //   // subFolders: false,
-    //   dir: process.env.GENERATE_DIR || "/var/www/front",
-    //   routes
-    // },
     loading: {
       color: 'rgb(0, 126, 255)',
       throttle: 30,
@@ -86,13 +75,6 @@ module.exports = async () => {
       '~/assets/global.scss',
     ],
 
-    // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-    // plugins: [
-      // { src: '~/plugins/ymapPlugin.js', mode: 'client' },
-      // '~/plugins/cachedApi.js',
-      // '~/plugins/cache.js',
-    // ],
-
     // Auto import components (https://go.nuxtjs.dev/config-components)
     components: true,
 
@@ -121,10 +103,6 @@ module.exports = async () => {
           optimizationLevel: 3,
         },
         pngquant: false,
-        // gifsicle: {
-        //   interlaced: true,
-        //   optimizationLevel: 3,
-        // },
         svgo: {
           // enable/disable svgo plugins here
         },
@@ -134,7 +112,6 @@ module.exports = async () => {
         },
       },]
     ],
-    // dev: false,
     // Modules (https://go.nuxtjs.dev/config-modules)
     modules: [
       [
@@ -147,9 +124,6 @@ module.exports = async () => {
           accurateTrackBounce: true,
           webvisor: true,
           useCDN: false,
-          // dev: false
-          // defer: true,
-          // useLocal:true
         }],
 
       '@nuxtjs/svg-sprite',
@@ -157,9 +131,6 @@ module.exports = async () => {
       ['@nuxtjs/apollo', {
         clientConfigs: {
           default: '~/graphql/config/config.js'
-          // {
-          //   httpEndpoint: backendUrl + '/graphql',
-          // },
         }
       }],
       // ['vue-yandex-maps/nuxt', ],
@@ -181,20 +152,7 @@ module.exports = async () => {
         locale: 'ru_RU',
         themeColor: '#151317'
       }],
-
-
-      //  ['@nuxtjs/redirect-module', process.env.REDIRECT_ROUTES],
-      // ['@nuxtjs/google-analytics', {
-      //   id: process.env.GOOGLE_ID
-      // }],
-      //  ['@nuxtjs/sentry', {
-      //     dsn: process.env.SENTRY_DSN, // Enter your project's DSN here
-      //     config: {}, // Additional config
-      //   }] 
     ],
-    // googleAnalytics: {
-    //   id: process.env.GA_ID
-    // },
 
     svgSprite: {
       input: '~/assets/icons/'
@@ -211,11 +169,6 @@ module.exports = async () => {
         './assets/styles/_vars/*.scss',
       ]
     },
-    // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-    // axios: {
-    //   baseURL: backendUrl
-    // },
-
     // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
     vuetify: {
       customVariables: ["~/assets/variables.scss"],
@@ -225,16 +178,6 @@ module.exports = async () => {
       },
       theme: {
         disable: true,
-        //   dark: true,
-        //   // options: { themeCache },
-        //   themes: {
-        //     dark: {
-        //       accent: "#1867c0"
-        //     },
-        //     light: {
-        //       accent: "#1867c0"
-        //     }
-        //   }
       },
       defaultAssets: false,
       optionsPath: './vuetify.options.js'

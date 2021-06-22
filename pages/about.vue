@@ -16,13 +16,9 @@
     </section>
   </div>
 </template>
-<style lang="scss" scoped module>
-</style>
 <script>
 import gql from "graphql-tag";
 import LazyHydrate from "vue-lazy-hydration";
-
-// import DefaultHeader from "~/components/DefaultHeader.vue";
 
 const title = "О компании";
 export default {
@@ -67,11 +63,6 @@ export default {
       ],
     };
   },
-  // methods: {
-  //   handleOffer() {
-  //     return true;
-  //   },
-  // },
   head() {
     return {
       title,

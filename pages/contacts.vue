@@ -11,11 +11,7 @@
             :class="$style.contactsWrapper"
             class="pa-3"
           >
-            <v-list style="background: transparent !important" light>
-              <!-- href="tel:+74991120654">
-            +7 (499) 112-06-54  -->
-              <!-- :href="`tel:${info.phone}`" -->
-              <!-- {{ info.phone }} -->
+            <v-list style="background: transparent !important;" light>
               <v-list-item
                 title="Телефон"
                 class="ct_hid"
@@ -68,30 +64,30 @@
   </div>
 </template>
 <style lang="scss" scoped module>
-.yandexMapWrapper {
-  min-height: 400px;
-  @include md {
-    height: 300px;
-    min-height: 300px;
-  }
-  @include lg {
-    height: 400px;
-    min-height: 400px;
-  }
-}
-.contactsWrapper {
-  display: flex;
-  align-items: center;
-}
+    .yandexMapWrapper {
+        min-height: 400px;
+
+        @include md {
+            height: 300px;
+            min-height: 300px;
+        }
+
+        @include lg {
+            height: 400px;
+            min-height: 400px;
+        }
+    }
+
+    .contactsWrapper {
+        display: flex;
+        align-items: center;
+    }
 </style>
 <script>
 import {
-  // hydrateOnInteraction,
-  // hydrateNever,
   hydrateWhenIdle,
   hydrateWhenVisible,
 } from "vue-lazy-hydration";
-// import LazyHydrate from "vue-lazy-hydration";
 
 const title = "Контакты";
 const description =

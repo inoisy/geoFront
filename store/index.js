@@ -1,4 +1,3 @@
-// import gql from "graphql-tag";
 import data from '~/static/data.json'
 import gql from "graphql-tag";
 
@@ -79,48 +78,13 @@ export const actions = {
             }
         }
         `
-        //     `phone
         const {
             data: generalData
         } = await client.query({
             query
         })
-        //     // if (data.services && data.services.length) {
         state.commit("init", generalData);
-        //     // }
-        // }
     },
-    // async fetchMainPage(state) {
-    //     const client = this.app.apolloProvider.defaultClient;
-    //     const query = gql`{
-    //         mainPage {
-    //             title
-    //             metaDescription
-    //             content
-    //             benefits {
-    //             header
-    //             content
-    //             icon {
-    //                 url
-    //             }
-    //             }
-    //             steps {
-    //             header
-    //             content
-    //             icon {
-    //                 url
-    //             }
-    //             order
-    //             }
-    //         }
-    //         }`
-    //     const {
-    //         data
-    //     } = await client.query({
-    //         query
-    //     })
-    //     return data
-    // },
     showDialog(state, data) {
         state.commit("dialog", data)
     }

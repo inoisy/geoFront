@@ -11,8 +11,15 @@
     "lint": "yarn lint:js",
     "test": "jest",
     "generate_graphql": "graphql-codegen --config graphql/config/codegen.yml",
-    "updateList": "ncu --reject sass-loader,core-js,vue-template-compiler,vue",
-    "updateInstall": "ncu -u --reject sass-loader,core-js,vue-template-compiler,vue"
+    "update:list": "ncu --reject sass-loader,core-js,vue-template-compiler,vue",
+    "update": "ncu -u --reject sass-loader,core-js,vue-template-compiler,vue",
+    "el:check": "eslint --ext .js --ext .vue .",
+    "sl:check": "stylelint \"**/*.{scss,vue}\"",
+    "lint:check": "npm run el:check && npm run sl:check",
+    "el:fix": "eslint --ext .vue --ext .js . --fix",
+    "sl:fix": "stylelint \"**/*.{scss,vue}\" --fix",
+    "elsl:fix": "eslint --ext .vue --ext .js . --fix && stylelint \"**/*.{scss,vue}\" --fix",
+    "lint:fix": "npm run el:fix && npm run sl:fix"
   },
   "dependencies": {
     "@nuxtjs/apollo": "^4.0.1-rc.5",
