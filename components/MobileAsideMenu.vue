@@ -1,6 +1,6 @@
 <template>
-  <div :class="$style.chipsWrapper">
-    <!-- <v-chip-group class="mb-12 hidden-md-and-up" column light>
+    <div :class="$style.chipsWrapper">
+        <!-- <v-chip-group class="mb-12 hidden-md-and-up" column light>
       <v-chip
         v-for="child in services"
         :key="child.id"
@@ -11,18 +11,18 @@
         <span class="d-inline-block text-truncate"> {{ child.name }}</span>
       </v-chip>
     </v-chip-group> -->
-    <nuxt-link
-      v-for="child in services"
-      :key="child.id"
-      :class="$style.chipItem"
-      exact
-      v-ripple
-      :to="`/services/${slug}/${child.slug}`"
-      :title="child.name"
-    >
-      {{ child.name }}
-    </nuxt-link>
-  </div>
+        <nuxt-link
+            v-for="child in services"
+            :key="child.id"
+            v-ripple
+            :class="$style.chipItem"
+            exact
+            :to="`/services/${slug}/${child.slug}`"
+            :title="child.name"
+        >
+            {{ child.name }}
+        </nuxt-link>
+    </div>
 </template>
 <style lang="scss" scoped module>
 .chipSelected {
@@ -102,15 +102,15 @@
 </style>
 <script>
 export default {
-  props: {
-    services: {
-      type: Array,
-      default: () => [],
+    props: {
+        services: {
+            type: Array,
+            default: () => [],
+        },
+        slug: {
+            type: String,
+            default: '',
+        },
     },
-    slug: {
-      type: String,
-      default: "",
-    },
-  },
 };
 </script>

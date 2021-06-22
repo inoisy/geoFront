@@ -1,41 +1,51 @@
 <template>
-  <section
-    :class="[$style.serviceFeatureWrapper, isWithGray && $style.withGray]"
-    class="sectionWrapper"
-  >
-    <v-container>
-      <v-row :class="$style.serviceFeatureRow" justify="center" no-gutters>
-        <v-col :class="$style.serviceFeatureTextWrapper" cols="12" md="6">
-          <h2 :class="$style.serviceFeatureHeader">
-            {{ header }}
-          </h2>
-          <div :class="$style.serviceFeatureContent" v-html="content" />
-          <div :class="$style.buttonWrapper">
-            <v-btn :class="$style.button" :to="slug" outlined light>
-              Подробнее
-            </v-btn>
-            <v-btn
-              :class="$style.button"
-              outlined
-              light
-              @click="handleOffer(name)"
+    <section
+        :class="[$style.serviceFeatureWrapper, isWithGray && $style.withGray]"
+        class="sectionWrapper"
+    >
+        <v-container>
+            <v-row :class="$style.serviceFeatureRow"
+                   justify="center"
+                   no-gutters
             >
-              Заказать
-            </v-btn>
-          </div>
-        </v-col>
-        <v-col
-          v-if="imgUrl"
-          :class="$style.serviceFeatureImgWrapper"
-          cols="12"
-          md="6"
-        >
-          <service-image
-            :class="$style.serviceFeatureImg"
-            :imgUrl="imgUrl"
-            :alt="name"
-          />
-          <!-- <v-img
+                <v-col :class="$style.serviceFeatureTextWrapper"
+                       cols="12"
+                       md="6"
+                >
+                    <h2 :class="$style.serviceFeatureHeader">
+                        {{ header }}
+                    </h2>
+                    <div :class="$style.serviceFeatureContent" v-html="content" />
+                    <div :class="$style.buttonWrapper">
+                        <v-btn :class="$style.button"
+                               :to="slug"
+                               outlined
+                               light
+                        >
+                            Подробнее
+                        </v-btn>
+                        <v-btn
+                            :class="$style.button"
+                            outlined
+                            light
+                            @click="handleOffer(name)"
+                        >
+                            Заказать
+                        </v-btn>
+                    </div>
+                </v-col>
+                <v-col
+                    v-if="imgUrl"
+                    :class="$style.serviceFeatureImgWrapper"
+                    cols="12"
+                    md="6"
+                >
+                    <service-image
+                        :class="$style.serviceFeatureImg"
+                        :img-url="imgUrl"
+                        :alt="name"
+                    />
+                    <!-- <v-img
             :class="$style.serviceFeatureImg"
             :src="imgUrl"
             :alt="name"
@@ -44,10 +54,10 @@
             max-height="400px"
             gradient="to top right, rgba(0,0,0,0), rgba(0,0,0,.4)"
           /> -->
-        </v-col>
-      </v-row>
-    </v-container>
-  </section>
+                </v-col>
+            </v-row>
+        </v-container>
+    </section>
 </template>
 <style lang="scss" scoped module>
 .serviceFeatureWrapper {
@@ -160,40 +170,40 @@
 </style>
 <script>
 export default {
-  props: {
-    isWithGray: {
-      type: Boolean,
-      default: false,
+    props: {
+        isWithGray: {
+            type: Boolean,
+            default: false,
+        },
+        imgUrl: {
+            type: String,
+            default: null,
+            // default: () => {},
+        },
+        header: {
+            type: String,
+            default: '',
+        },
+        content: {
+            type: String,
+            default: '',
+        },
+        slug: {
+            type: String,
+            default: '',
+        },
+        name: {
+            type: String,
+            default: '',
+        },
     },
-    imgUrl: {
-      type: String,
-      default: null,
-      // default: () => {},
+    methods: {
+        handleOffer(name) {
+            this.$store.dispatch('showDialog', {
+                isShow: true,
+                name,
+            });
+        },
     },
-    header: {
-      type: String,
-      default: "",
-    },
-    content: {
-      type: String,
-      default: "",
-    },
-    slug: {
-      type: String,
-      default: "",
-    },
-    name: {
-      type: String,
-      default: "",
-    },
-  },
-  methods: {
-    handleOffer(name) {
-      this.$store.dispatch("showDialog", {
-        isShow: true,
-        name,
-      });
-    },
-  },
 };
 </script>

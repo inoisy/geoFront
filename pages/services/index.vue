@@ -1,72 +1,75 @@
 <template>
-  <div>
-    <LazyHydrate when-idle>
-      <default-header :header="title" :breadcrumbs="breadcrumbs" />
-    </LazyHydrate>
-    <section
-      v-for="(service, i) in services"
-      :key="`service-${i}`"
-      :class="$style.servicesWrapper"
-      class="sectionWrapper"
-    >
-      <v-container fill-height>
-        <v-row align="center" no-gutters>
-          <v-col :class="$style.serviceItem" class="pa-3" cols="12">
-            <v-img
-              v-if="service.icon"
-              :class="$style.servicesIcon"
-              :src="imageBaseUrl + service.icon.url"
-              :alt="service.name"
-            />
-            <div :class="$style.servicesTextWrapper" class="mb-7">
-              <nuxt-link
-                :to="`/services/${service.slug}`"
-                :title="service.name"
-              >
-                <h2 :class="$style.serviceHeader" class="d-inline-block">
-                  {{ service.name }}
-                </h2>
-              </nuxt-link>
+    <div>
+        <LazyHydrate when-idle>
+            <default-header :header="title" :breadcrumbs="breadcrumbs" />
+        </LazyHydrate>
+        <section
+            v-for="(service, i) in services"
+            :key="`service-${i}`"
+            :class="$style.servicesWrapper"
+            class="sectionWrapper"
+        >
+            <v-container fill-height>
+                <v-row align="center" no-gutters>
+                    <v-col :class="$style.serviceItem"
+                           class="pa-3"
+                           cols="12"
+                    >
+                        <v-img
+                            v-if="service.icon"
+                            :class="$style.servicesIcon"
+                            :src="imageBaseUrl + service.icon.url"
+                            :alt="service.name"
+                        />
+                        <div :class="$style.servicesTextWrapper" class="mb-7">
+                            <nuxt-link
+                                :to="`/services/${service.slug}`"
+                                :title="service.name"
+                            >
+                                <h2 :class="$style.serviceHeader" class="d-inline-block">
+                                    {{ service.name }}
+                                </h2>
+                            </nuxt-link>
 
-              <div class="mb-7" v-html="service.descriptionLong"></div>
-              <div :class="$style.buttonWrapper">
-                <v-btn
-                  :class="$style.button"
-                  class="mb-3"
-                  :to="`/services/${service.slug}`"
-                  title="Подробнее"
-                  outlined
-                  light
-                >
-                  Подробнее
-                </v-btn>
-                <v-btn
-                  :class="$style.button"
-                  outlined
-                  light
-                  title="Заказать работы"
-                  @click="handleOffer(service)"
-                >
-                  Заказать работы
-                </v-btn>
-              </div>
-            </div>
+                            <div class="mb-7" v-html="service.descriptionLong"></div>
+                            <div :class="$style.buttonWrapper">
+                                <v-btn
+                                    :class="$style.button"
+                                    class="mb-3"
+                                    :to="`/services/${service.slug}`"
+                                    title="Подробнее"
+                                    outlined
+                                    light
+                                >
+                                    Подробнее
+                                </v-btn>
+                                <v-btn
+                                    :class="$style.button"
+                                    outlined
+                                    light
+                                    title="Заказать работы"
+                                    @click="handleOffer(service)"
+                                >
+                                    Заказать работы
+                                </v-btn>
+                            </div>
+                        </div>
 
-            <ul v-if="service.child && service.child.length">
-              <li v-for="child in service.child" :key="child.id">
-                <nuxt-link
-                  :title="child.name"
-                  :to="`/services/${service.slug}/${child.slug}`"
-                >
-                  {{ child.name }}
-                </nuxt-link>
-              </li>
-            </ul>
-          </v-col>
-        </v-row>
-      </v-container>
-    </section>
-  </div>
+                        <ul v-if="service.child && service.child.length">
+                            <li v-for="child in service.child" :key="child.id">
+                                <nuxt-link
+                                    :title="child.name"
+                                    :to="`/services/${service.slug}/${child.slug}`"
+                                >
+                                    {{ child.name }}
+                                </nuxt-link>
+                            </li>
+                        </ul>
+                    </v-col>
+                </v-row>
+            </v-container>
+        </section>
+    </div>
 </template>
 <style lang="scss" scoped module>
 .servicesWrapper {
@@ -183,21 +186,21 @@
 }
 </style>
 <script>
-import gql from "graphql-tag";
-import LazyHydrate from "vue-lazy-hydration";
+import gql from 'graphql-tag';
+import LazyHydrate from 'vue-lazy-hydration';
 
-const title = "Услуги";
+const title = 'Услуги';
 const description =
-  "Наша организация оказывает широкий спектр современных и востребованных геодезических услуг. После проведения научных изысканий подготавливаются проектные документы, служащие основой по вопросам строительства объектов.";
+    'Наша организация оказывает широкий спектр современных и востребованных геодезических услуг. После проведения научных изысканий подготавливаются проектные документы, служащие основой по вопросам строительства объектов.';
 export default {
-  components: {
-    LazyHydrate,
-  },
-  async asyncData({ app, error }) {
-    const {
-      data: { services },
-    } = await app.apolloProvider.defaultClient.query({
-      query: gql`
+    components: {
+        LazyHydrate,
+    },
+    async asyncData({ app, error }) {
+        const {
+            data: { services },
+        } = await app.apolloProvider.defaultClient.query({
+            query: gql`
         {
           services(where: { isMain: true }) {
             name
@@ -213,76 +216,76 @@ export default {
           }
         }
       `,
-    });
-    if (!services) {
-      return error({
-        statusCode: 404,
-        message: "Информацию не удалось получить",
-      });
-    }
+        });
+        if (!services) {
+            return error({
+                statusCode: 404,
+                message: 'Информацию не удалось получить',
+            });
+        }
 
-    return {
-      services, // : services, // Object.freeze(services), // services.forEach(Object.freeze),
-    };
-  },
-
-  data() {
-    return {
-      imageBaseUrl: this.$config.imageBaseUrl,
-      title,
-      breadcrumbs: [
-        {
-          text: "Главная",
-          to: "/",
-        },
-        {
-          text: title,
-          to: "/services",
-        },
-      ],
-    };
-  },
-  methods: {
-    handleOffer(service) {
-      this.$store.dispatch("showDialog", {
-        name: service.name,
-        isShow: true,
-      });
-      return true;
+        return {
+            services, // : services, // Object.freeze(services), // services.forEach(Object.freeze),
+        };
     },
-  },
-  head() {
-    return {
-      title,
-      meta: [
-        {
-          hid: "description",
-          name: "description",
-          content: description,
+
+    data() {
+        return {
+            imageBaseUrl: this.$config.imageBaseUrl,
+            title,
+            breadcrumbs: [
+                {
+                    text: 'Главная',
+                    to: '/',
+                },
+                {
+                    text: title,
+                    to: '/services',
+                },
+            ],
+        };
+    },
+    head() {
+        return {
+            title,
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: description,
+                },
+                {
+                    hid: 'og:url',
+                    property: 'og:url',
+                    content: this.$config.siteUrl + '/services',
+                },
+                {
+                    hid: 'og:title',
+                    property: 'og:title',
+                    content: title,
+                },
+                {
+                    hid: 'og:description',
+                    property: 'og:description',
+                    content: description,
+                },
+            ],
+            link: [
+                {
+                    rel: 'canonical',
+                    href: this.$config.siteUrl + '/services',
+                },
+            ],
+        };
+    },
+    methods: {
+        handleOffer(service) {
+            this.$store.dispatch('showDialog', {
+                name: service.name,
+                isShow: true,
+            });
+            return true;
         },
-        {
-          hid: "og:url",
-          property: "og:url",
-          content: this.$config.siteUrl + "/services",
-        },
-        {
-          hid: "og:title",
-          property: "og:title",
-          content: title,
-        },
-        {
-          hid: "og:description",
-          property: "og:description",
-          content: description,
-        },
-      ],
-      link: [
-        {
-          rel: "canonical",
-          href: this.$config.siteUrl + "/services",
-        },
-      ],
-    };
-  },
+    },
 };
 </script>

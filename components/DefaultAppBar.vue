@@ -1,86 +1,86 @@
 <template>
-  <header :class="$style.appBar" id="appBar">
-    <v-container
-      fill-height
-      :class="$style['header']"
-      class="py-0 d-flex align-center"
-    >
-      <logo class="pr-3 mr-auto fill-height" />
+    <header id="appBar" :class="$style.appBar">
+        <v-container
+            fill-height
+            :class="$style['header']"
+            class="py-0 d-flex align-center"
+        >
+            <logo class="pr-3 mr-auto fill-height" />
 
-      <template v-for="(item, index) in menuItems">
-        <v-btn
-          v-if="!item.disable"
-          :key="index"
-          :to="`/${item.slug}`"
-          :title="item.name"
-          :class="$style.link"
-          class="ma-0 hidden-sm-and-down"
-          text
-          tile
-          nuxt
-          exact
-        >
-          {{ item.name }}
-        </v-btn>
-        <v-btn
-          v-else
-          :id="item.slug"
-          :key="index"
-          :title="item.name"
-          :class="$style.link"
-          class="ma-0 hidden-sm-and-down"
-          text
-          tile
-        >
-          {{ item.name }}
-          <svg-icon name="arrowdown" style="margin-right: -5px" />
-        </v-btn>
-      </template>
-      <!-- href="tel:+74991120654">
+            <template v-for="(item, index) in menuItems">
+                <v-btn
+                    v-if="!item.disable"
+                    :key="index"
+                    :to="`/${item.slug}`"
+                    :title="item.name"
+                    :class="$style.link"
+                    class="ma-0 hidden-sm-and-down"
+                    text
+                    tile
+                    nuxt
+                    exact
+                >
+                    {{ item.name }}
+                </v-btn>
+                <v-btn
+                    v-else
+                    :id="item.slug"
+                    :key="index"
+                    :title="item.name"
+                    :class="$style.link"
+                    class="ma-0 hidden-sm-and-down"
+                    text
+                    tile
+                >
+                    {{ item.name }}
+                    <svg-icon name="arrowdown" style="margin-right: -5px" />
+                </v-btn>
+            </template>
+            <!-- href="tel:+74991120654">
             +7 (499) 112-06-54 -->
-      <!-- :href="`tel:${info.phone}`" -->
-      <!-- {{ info.phone }} -->
-      <!-- <client-only> <span class="phone-text">-->
-      <v-btn
-        class="d-dlex ct_hid"
-        href="tel:+74991120654"
-        :class="$style.linkTel"
-        title="Телефон"
-        text
-      >
-        <svg-icon name="phone" />
-        <span :class="$style.linkTelText" class="pl-2 phone-text">
-          +7 (499) 112-06-54
-        </span>
-      </v-btn>
-      <!-- </client-only> -->
-      <!-- <a class="ct_hid" href="tel:+74991120654">+7 (499) 112-06-54</a> -->
+            <!-- :href="`tel:${info.phone}`" -->
+            <!-- {{ info.phone }} -->
+            <!-- <client-only> <span class="phone-text">-->
+            <v-btn
+                class="d-dlex ct_hid"
+                href="tel:+74991120654"
+                :class="$style.linkTel"
+                title="Телефон"
+                text
+            >
+                <svg-icon name="phone" />
+                <span :class="$style.linkTelText" class="pl-2 phone-text">
+                    +7 (499) 112-06-54
+                </span>
+            </v-btn>
+            <!-- </client-only> -->
+            <!-- <a class="ct_hid" href="tel:+74991120654">+7 (499) 112-06-54</a> -->
 
-      <v-btn
-        :class="$style.linkIcon"
-        class="d-dlex"
-        icon
-        :href="`mailto:${info.email}`"
-        title="Почта"
-      >
-        <svg-icon name="mail" />
-      </v-btn>
-      <v-btn
-        :class="$style.linkIcon"
-        class="hidden-md-and-up"
-        icon
-        title="Меню"
-        @click.stop="$emit('show')"
-      >
-        <svg-icon name="menu" />
-      </v-btn>
-      <lazy-toolbar-catalog-menu
-        v-if="!isMobile && isMounted"
-        :items="menuItems[0].items"
-        parent-slug="services"
-      />
-    </v-container>
-  </header>
+            <v-btn
+                :class="$style.linkIcon"
+                class="d-dlex"
+                icon
+                :href="`mailto:${info.email}`"
+                title="Почта"
+            >
+                <svg-icon name="mail" />
+            </v-btn>
+            <v-btn
+                :class="$style.linkIcon"
+                class="hidden-md-and-up"
+                icon
+                title="Меню"
+                @click.stop="$emit('show')"
+            >
+                <svg-icon name="menu" />
+            </v-btn>
+            <lazy-toolbar-catalog-menu
+                v-if="!isMobile && isMounted"
+                :items="menuItems[0].items"
+                parent-slug="services"
+            />
+        </v-container>
+    </header>
 </template>
 <style lang="scss" scoped module>
 .appBar {
@@ -207,29 +207,29 @@
 // import Logo from "~/components/Logo.vue";
 
 export default {
-  // components: { Logo },
-  data() {
-    return {
-      isMounted: false,
-    };
-  },
-  computed: {
-    isMobile() {
-      return this.$vuetify.breakpoint.smAndDown;
+    // components: { Logo },
+    data() {
+        return {
+            isMounted: false,
+        };
     },
-    menuItems() {
-      return this.$store.getters.menuItems;
+    computed: {
+        isMobile() {
+            return this.$vuetify.breakpoint.smAndDown;
+        },
+        menuItems() {
+            return this.$store.getters.menuItems;
+        },
+        info() {
+            return this.$store.state.info;
+        },
+        services() {
+            return this.$store.state.services;
+        },
     },
-    info() {
-      return this.$store.state.info;
-    },
-    services() {
-      return this.$store.state.services;
-    },
-  },
 
-  mounted() {
-    this.isMounted = true;
-  },
+    mounted() {
+        this.isMounted = true;
+    },
 };
 </script>

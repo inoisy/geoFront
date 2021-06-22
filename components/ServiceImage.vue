@@ -1,32 +1,35 @@
 <template>
-  <v-img
-    :src="imgUrl"
-    :alt="alt"
-    :title="alt"
-    aspect-ratio="1.555"
-    max-height="400px"
-    gradient="to top right, rgba(0,0,0,0), rgba(0,0,0,.4)"
-    transition="none"
-  >
-    <template v-slot:placeholder>
-      <v-row class="fill-height ma-0" align="center" justify="center">
-        <v-progress-circular indeterminate color="accent"></v-progress-circular>
-      </v-row>
-    </template>
-  </v-img>
+    <v-img
+        :src="imgUrl"
+        :alt="alt"
+        :title="alt"
+        aspect-ratio="1.555"
+        max-height="400px"
+        gradient="to top right, rgba(0,0,0,0), rgba(0,0,0,.4)"
+        transition="none"
+    >
+        <template #placeholder>
+            <v-row class="fill-height ma-0"
+                   align="center"
+                   justify="center"
+            >
+                <v-progress-circular indeterminate color="accent"></v-progress-circular>
+            </v-row>
+        </template>
+    </v-img>
 </template>
 <script>
 export default {
-  props: {
-    imgUrl: {
-      type: String,
-      required: true,
+    props: {
+        imgUrl: {
+            type: String,
+            required: true,
+        },
+        alt: {
+            type: String,
+            required: true,
+        },
     },
-    alt: {
-      type: String,
-      required: true,
-    },
-  },
 };
 </script>
 <style lang="scss">

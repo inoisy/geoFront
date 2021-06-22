@@ -1,17 +1,17 @@
 <template>
-  <div :class="$style.floatingButtonWrapper">
-    <v-btn
-      :class="$style.floatingButton"
-      color="black"
-      dark
-      fab
-      large
-      title="Обратный звонок"
-      @click="handleOffer"
-    >
-      <svg-icon name="order" />
-    </v-btn>
-  </div>
+    <div :class="$style.floatingButtonWrapper">
+        <v-btn
+            :class="$style.floatingButton"
+            color="black"
+            dark
+            fab
+            large
+            title="Обратный звонок"
+            @click="handleOffer"
+        >
+            <svg-icon name="order" />
+        </v-btn>
+    </div>
 </template>
 <style lang="scss" scoped module>
 .floatingButtonWrapper {
@@ -53,20 +53,20 @@
 </style>
 <script>
 export default {
-  // data() {
-  //   return { show: false };
-  // },
-  // mounted() {
-  //   this.show = true;
-  // },
-  methods: {
-    handleOffer() {
-      this.$store.dispatch("showDialog", {
-        name: "",
-        isShow: true,
-      });
-      return true;
+    // data() {
+    //   return { show: false };
+    // },
+    // mounted() {
+    //   this.show = true;
+    // },
+    methods: {
+        handleOffer() {
+            this.$store.dispatch('showDialog', {
+                name: '',
+                isShow: true,
+            });
+            return true;
+        },
     },
-  },
 };
 </script>

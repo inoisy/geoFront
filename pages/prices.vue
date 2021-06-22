@@ -1,129 +1,129 @@
 <template>
-  <div>
-    <LazyHydrate when-idle>
-      <default-header :header="title" :breadcrumbs="breadcrumbs" />
-    </LazyHydrate>
+    <div>
+        <LazyHydrate when-idle>
+            <default-header :header="title" :breadcrumbs="breadcrumbs" />
+        </LazyHydrate>
 
-    <section
-      v-for="(service, i) in services"
-      :key="`service-${i}`"
-      :class="$style.servicesWrapper"
-      class="sectionWrapper"
-    >
-      <v-container>
-        <v-row align="center" no-gutters>
-          <v-col class="pa-3" cols="12">
-            <nuxt-link :to="`/services/${service.slug}`" :title="service.name">
-              <h2 :class="$style.serviceHeader" class="d-inline-block">
-                {{ service.name }}
-              </h2>
-            </nuxt-link>
-            <div v-if="service.prices" class="position-relative">
-              <prices :class="$style.prices" :content="service.prices" />
-              <v-img
-                v-if="service.icon"
-                :class="$style.servicesIcon"
-                :src="imageBaseUrl + service.icon.url"
-                :alt="service.name"
-              />
-              <v-btn
-                :class="$style.button"
-                class="callToActionButton"
-                outlined
-                light
-                title="Заказать"
-                @click="handleOffer(service)"
-              >
-                Заказать
-              </v-btn>
-            </div>
-            <div
-              v-for="child in service.child"
-              :key="child.id"
-              :class="$style.childWrapper"
-              class="position-relative"
-            >
-              <div class="mb-6">
-                <nuxt-link
-                  :class="$style.childLink"
-                  :title="child.name"
-                  :to="`/services/${service.slug}/${child.slug}`"
-                >
-                  <h2 :class="$style.childName">{{ child.name }}</h2>
-                </nuxt-link>
-              </div>
+        <section
+            v-for="(service, i) in services"
+            :key="`service-${i}`"
+            :class="$style.servicesWrapper"
+            class="sectionWrapper"
+        >
+            <v-container>
+                <v-row align="center" no-gutters>
+                    <v-col class="pa-3" cols="12">
+                        <nuxt-link :to="`/services/${service.slug}`" :title="service.name">
+                            <h2 :class="$style.serviceHeader" class="d-inline-block">
+                                {{ service.name }}
+                            </h2>
+                        </nuxt-link>
+                        <div v-if="service.prices" class="position-relative">
+                            <prices :class="$style.prices" :content="service.prices" />
+                            <v-img
+                                v-if="service.icon"
+                                :class="$style.servicesIcon"
+                                :src="imageBaseUrl + service.icon.url"
+                                :alt="service.name"
+                            />
+                            <v-btn
+                                :class="$style.button"
+                                class="callToActionButton"
+                                outlined
+                                light
+                                title="Заказать"
+                                @click="handleOffer(service)"
+                            >
+                                Заказать
+                            </v-btn>
+                        </div>
+                        <div
+                            v-for="child in service.child"
+                            :key="child.id"
+                            :class="$style.childWrapper"
+                            class="position-relative"
+                        >
+                            <div class="mb-6">
+                                <nuxt-link
+                                    :class="$style.childLink"
+                                    :title="child.name"
+                                    :to="`/services/${service.slug}/${child.slug}`"
+                                >
+                                    <h2 :class="$style.childName">{{ child.name }}</h2>
+                                </nuxt-link>
+                            </div>
 
-              <prices
-                v-if="child.prices"
-                :class="$style.prices"
-                :content="child.prices"
-              />
-              <div v-else-if="child.price" :class="$style.price">
-                {{ child.price }}
-              </div>
-              <v-btn
-                :class="$style.button"
-                class="callToActionButton"
-                outlined
-                light
-                title="Заказать"
-                @click="handleOffer(child)"
-              >
-                Заказать
-              </v-btn>
-              <v-img
-                v-if="child.icon"
-                :class="$style.servicesIcon"
-                :src="imageBaseUrl + child.icon.url"
-                :alt="child.name"
-              />
-            </div>
-          </v-col>
-        </v-row>
+                            <prices
+                                v-if="child.prices"
+                                :class="$style.prices"
+                                :content="child.prices"
+                            />
+                            <div v-else-if="child.price" :class="$style.price">
+                                {{ child.price }}
+                            </div>
+                            <v-btn
+                                :class="$style.button"
+                                class="callToActionButton"
+                                outlined
+                                light
+                                title="Заказать"
+                                @click="handleOffer(child)"
+                            >
+                                Заказать
+                            </v-btn>
+                            <v-img
+                                v-if="child.icon"
+                                :class="$style.servicesIcon"
+                                :src="imageBaseUrl + child.icon.url"
+                                :alt="child.name"
+                            />
+                        </div>
+                    </v-col>
+                </v-row>
 
-        <!-- <svg-icon
+                <!-- <svg-icon
                       name="bullet"
                       style="width: 13px; height: 13px"
                     ></svg-icon> -->
-        <!-- <v-col cols="12" pa-3>
+                <!-- <v-col cols="12" pa-3>
             {{ services }} -->
 
-        <!-- <LazyHydrate never>
+                <!-- <LazyHydrate never>
               <content-wrapper :content="page.content" />
             </LazyHydrate> -->
-        <!-- </v-col> -->
-        <!-- </v-row> -->
-      </v-container>
-    </section>
-  </div>
+                <!-- </v-col> -->
+                <!-- </v-row> -->
+            </v-container>
+        </section>
+    </div>
 </template>
 
 <script>
-import gql from "graphql-tag";
-import LazyHydrate from "vue-lazy-hydration";
+import gql from 'graphql-tag';
+import LazyHydrate from 'vue-lazy-hydration';
 
 // import DefaultHeader from "~/components/DefaultHeader.vue";
 
-const title = "Цены";
+const title = 'Цены';
 export default {
-  components: {
-    LazyHydrate,
-  },
-  async asyncData({
-    params,
-    app: {
-      apolloProvider: { defaultClient: apolloClient },
+    components: {
+        LazyHydrate,
     },
-    error,
-  }) {
-    // const client = ;
-    const {
-      data: { services },
-    } = await apolloClient.query({
-      variables: {
-        slug: params.parent,
-      },
-      query: gql`
+    async asyncData({
+        params,
+        app: {
+            apolloProvider: { defaultClient: apolloClient },
+        },
+        error,
+    }) {
+        // const client = ;
+        const {
+            data: { services },
+        } = await apolloClient.query({
+            variables: {
+                slug: params.parent,
+            },
+            query: gql`
         query ServicePricesQuery {
           services(where: { isMain: true }, sort: "name:asc") {
             name
@@ -149,124 +149,124 @@ export default {
           }
         }
       `,
-    });
+        });
 
-    if (!services || !services.length) {
-      return error({
-        statusCode: 404,
-        message: "Информацию не удалось получить",
-      });
-    }
-    // const { child, ...service } = services[0];
-    // const children = child.reduce((acc, val) => {
-    //   acc.push({
-    //     ...val,
-    //     img: calculateImageUrl(val.img),
-    //   });
-    //   return acc;
-    // }, []);
-    // console.log("prices ", services);
+        if (!services || !services.length) {
+            return error({
+                statusCode: 404,
+                message: 'Информацию не удалось получить',
+            });
+        }
+        // const { child, ...service } = services[0];
+        // const children = child.reduce((acc, val) => {
+        //   acc.push({
+        //     ...val,
+        //     img: calculateImageUrl(val.img),
+        //   });
+        //   return acc;
+        // }, []);
+        // console.log("prices ", services);
 
-    return {
-      services: services, //.filter((item) => item.child.length),
-      // .reduce((acc, item) => {
-      //   const { child, ...itemData } = item;
-      //   const child = Object.assign({})
-      //   console.log("🚀 ~ file: prices.vue ~ line 325 ~ .reduce ~ itemData", {
-      //     ...itemData,
-      //     child: child.sort((a, b) => a.price > b.price),
-      //   });
-      //   // acc.push();
-      //   acc.push(item);
-      //   return acc;
-      // }, []), // TODO
-      // service,
-      // children: child.reduce((acc, val) => {
-      //   acc.push({
-      //     ...val,
-      //     img: calculateImageUrl(val.img),
-      //   });
-      //   return acc;
-      // }, []), // Object.freeze(services[0]),
-      // breadcrumbs: [
-      //   {
-      //     text: "Главная",
-      //     to: "/",
-      //   },
-      //   {
-      //     text: "Услуги",
-      //     to: "/services",
-      //   },
-      //   {
-      //     text: service.name,
-      //     to: service.slug,
-      //   },
-      // ],
-    };
-  },
-  data() {
-    return {
-      title,
-      imageBaseUrl: this.$config.imageBaseUrl,
-      breadcrumbs: [
-        {
-          text: "Главная",
-          to: "/",
-        },
-        {
-          text: title,
-          //   to: "/about",
-        },
-      ],
-    };
-  },
-  methods: {
-    handleOffer(service) {
-      this.$store.dispatch("showDialog", {
-        name: service.name,
-        isShow: true,
-      });
-      return true;
+        return {
+            services, // .filter((item) => item.child.length),
+            // .reduce((acc, item) => {
+            //   const { child, ...itemData } = item;
+            //   const child = Object.assign({})
+            //   console.log("🚀 ~ file: prices.vue ~ line 325 ~ .reduce ~ itemData", {
+            //     ...itemData,
+            //     child: child.sort((a, b) => a.price > b.price),
+            //   });
+            //   // acc.push();
+            //   acc.push(item);
+            //   return acc;
+            // }, []), // TODO
+            // service,
+            // children: child.reduce((acc, val) => {
+            //   acc.push({
+            //     ...val,
+            //     img: calculateImageUrl(val.img),
+            //   });
+            //   return acc;
+            // }, []), // Object.freeze(services[0]),
+            // breadcrumbs: [
+            //   {
+            //     text: "Главная",
+            //     to: "/",
+            //   },
+            //   {
+            //     text: "Услуги",
+            //     to: "/services",
+            //   },
+            //   {
+            //     text: service.name,
+            //     to: service.slug,
+            //   },
+            // ],
+        };
     },
-  },
-  // methods: {
-  //   handleOffer() {
-  //     return true;
-  //   },
-  // },
-  head() {
-    return {
-      title,
-      meta: [
-        // {
-        //   hid: "description",
-        //   name: "description",
-        //   content: this.page.metaDescription || `${title} - GeoWorks`,
-        // },
-        {
-          hid: "og:url",
-          property: "og:url",
-          content: this.$config.siteUrl + this.$route.path,
+    data() {
+        return {
+            title,
+            imageBaseUrl: this.$config.imageBaseUrl,
+            breadcrumbs: [
+                {
+                    text: 'Главная',
+                    to: '/',
+                },
+                {
+                    text: title,
+                    //   to: "/about",
+                },
+            ],
+        };
+    },
+    // methods: {
+    //   handleOffer() {
+    //     return true;
+    //   },
+    // },
+    head() {
+        return {
+            title,
+            meta: [
+                // {
+                //   hid: "description",
+                //   name: "description",
+                //   content: this.page.metaDescription || `${title} - GeoWorks`,
+                // },
+                {
+                    hid: 'og:url',
+                    property: 'og:url',
+                    content: this.$config.siteUrl + this.$route.path,
+                },
+                {
+                    hid: 'og:title',
+                    property: 'og:title',
+                    content: title,
+                },
+                // {
+                //   hid: "og:description",
+                //   property: "og:description",
+                //   content: this.page.metaDescription || `${title} - GeoWorks`,
+                // },
+            ],
+            link: [
+                {
+                    rel: 'canonical',
+                    href: this.$config.siteUrl + '/prices',
+                },
+            ],
+        };
+    },
+    methods: {
+        handleOffer(service) {
+            this.$store.dispatch('showDialog', {
+                name: service.name,
+                isShow: true,
+            });
+            return true;
         },
-        {
-          hid: "og:title",
-          property: "og:title",
-          content: title,
-        },
-        // {
-        //   hid: "og:description",
-        //   property: "og:description",
-        //   content: this.page.metaDescription || `${title} - GeoWorks`,
-        // },
-      ],
-      link: [
-        {
-          rel: "canonical",
-          href: this.$config.siteUrl + "/prices",
-        },
-      ],
-    };
-  },
+    },
 };
 </script>
 <style lang="scss" scoped module>

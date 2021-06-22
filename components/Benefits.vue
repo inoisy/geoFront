@@ -1,41 +1,41 @@
 <template>
-  <section :class="$style.benefitsWrapper">
-    <v-container>
-      <v-row>
-        <v-col cols="12">
-          <h2 class="mb-10 pageHeader">Наши преимущества</h2>
-        </v-col>
-      </v-row>
-      <v-row class="justify-center" no-gutters>
-        <v-col
-          v-for="(benefit, i) in items"
-          :key="`benefit-${i}`"
-          :class="$style.benefitItem"
-          class="pa-3"
-          cols="12"
-          sm="10"
-          md="6"
-        >
-          <div :class="$style.benefitsImageWrapper">
-            <v-img
-              :class="$style.benefitsImage"
-              :src="
-                benefit.icon
-                  ? $config.imageBaseUrl + benefit.icon.url
-                  : '/no-camera.svg'
-              "
-              :alt="benefit.header"
-              contain
-            />
-          </div>
-          <div :class="$style.benefitsTextWrapper">
-            <h3 :class="$style.benefitsHeader">{{ benefit.header }}</h3>
-            <div :class="$style.benefitsText">{{ benefit.content }}</div>
-          </div>
-        </v-col>
-      </v-row>
-    </v-container>
-  </section>
+    <section :class="$style.benefitsWrapper">
+        <v-container>
+            <v-row>
+                <v-col cols="12">
+                    <h2 class="mb-10 pageHeader">Наши преимущества</h2>
+                </v-col>
+            </v-row>
+            <v-row class="justify-center" no-gutters>
+                <v-col
+                    v-for="(benefit, i) in items"
+                    :key="`benefit-${i}`"
+                    :class="$style.benefitItem"
+                    class="pa-3"
+                    cols="12"
+                    sm="10"
+                    md="6"
+                >
+                    <div :class="$style.benefitsImageWrapper">
+                        <v-img
+                            :class="$style.benefitsImage"
+                            :src="
+                                benefit.icon
+                                    ? $config.imageBaseUrl + benefit.icon.url
+                                    : '/no-camera.svg'
+                            "
+                            :alt="benefit.header"
+                            contain
+                        />
+                    </div>
+                    <div :class="$style.benefitsTextWrapper">
+                        <h3 :class="$style.benefitsHeader">{{ benefit.header }}</h3>
+                        <div :class="$style.benefitsText">{{ benefit.content }}</div>
+                    </div>
+                </v-col>
+            </v-row>
+        </v-container>
+    </section>
 </template>
 <style lang="scss" scoped module>
 .benefitsWrapper {
@@ -146,11 +146,11 @@
 </style>
 <script>
 export default {
-  props: {
-    items: {
-      type: Array,
-      default: () => [],
+    props: {
+        items: {
+            type: Array,
+            default: () => [],
+        },
     },
-  },
 };
 </script>

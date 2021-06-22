@@ -1,41 +1,41 @@
 <template>
-  <ul :class="$style.breadcrumbs">
-    <li
-      v-for="(item, i) in items"
-      :key="item.to"
-      :class="$style.breadcrumbsItem"
-    >
-      <nuxt-link
-        v-if="item.to"
-        :class="$style.breadcrumbsItemLink"
-        :to="item.to"
-        nuxt
-        exact
-        :title="item.text"
-        :event="i === length ? '' : 'click'"
-      >
-        {{ item.text }}
-      </nuxt-link>
-      <div v-else :class="$style.breadcrumbsItemLink">
-        {{ item.text }}
-      </div>
-    </li>
-  </ul>
+    <ul :class="$style.breadcrumbs">
+        <li
+            v-for="(item, i) in items"
+            :key="item.to"
+            :class="$style.breadcrumbsItem"
+        >
+            <nuxt-link
+                v-if="item.to"
+                :class="$style.breadcrumbsItemLink"
+                :to="item.to"
+                nuxt
+                exact
+                :title="item.text"
+                :event="i === length ? '' : 'click'"
+            >
+                {{ item.text }}
+            </nuxt-link>
+            <div v-else :class="$style.breadcrumbsItemLink">
+                {{ item.text }}
+            </div>
+        </li>
+    </ul>
 </template>
 
 <script>
 export default {
-  props: {
-    items: {
-      type: Array,
-      default: () => [],
+    props: {
+        items: {
+            type: Array,
+            default: () => [],
+        },
     },
-  },
-  computed: {
-    length() {
-      return this.items.length - 1;
+    computed: {
+        length() {
+            return this.items.length - 1;
+        },
     },
-  },
 };
 </script>
 

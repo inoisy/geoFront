@@ -1,46 +1,46 @@
 <template>
-  <section :class="$style.stepsWrapper">
-    <v-container>
-      <v-row>
-        <v-col cols="12">
-          <h2 class="mb-10 text-center text-md-left pageHeader">Этапы работ</h2>
-        </v-col>
-      </v-row>
+    <section :class="$style.stepsWrapper">
+        <v-container>
+            <v-row>
+                <v-col cols="12">
+                    <h2 class="mb-10 text-center text-md-left pageHeader">Этапы работ</h2>
+                </v-col>
+            </v-row>
 
-      <v-row class="justify-center">
-        <v-col
-          v-for="(step, i) in items"
-          :key="`step${i}`"
-          :class="$style.steps"
-          cols="10"
-          md="3"
-        >
-          <div :class="$style.stepImageWrapper" class="mb-6">
-            <div :class="$style.stepImageInner">
-              <v-img
-                v-if="step.icon"
-                :class="$style.stepImage"
-                :src="$config.imageBaseUrl + step.icon.url"
-                :alt="step.header"
-                width="53px"
-                max-width="53px"
-                contain
-              />
-            </div>
+            <v-row class="justify-center">
+                <v-col
+                    v-for="(step, i) in items"
+                    :key="`step${i}`"
+                    :class="$style.steps"
+                    cols="10"
+                    md="3"
+                >
+                    <div :class="$style.stepImageWrapper" class="mb-6">
+                        <div :class="$style.stepImageInner">
+                            <v-img
+                                v-if="step.icon"
+                                :class="$style.stepImage"
+                                :src="$config.imageBaseUrl + step.icon.url"
+                                :alt="step.header"
+                                width="53px"
+                                max-width="53px"
+                                contain
+                            />
+                        </div>
 
-            <svg-icon :class="$style.stepPath" name="path" />
-          </div>
+                        <svg-icon :class="$style.stepPath" name="path" />
+                    </div>
 
-          <h3 :class="$style.stepsHeader" class="mb-2">
-            {{ step.header }}
-          </h3>
-          <div :class="$style.stepsText" class="mb-3 text-center text-md-left">
-            {{ step.content }}
-          </div>
-        </v-col>
-      </v-row>
-    </v-container>
-  </section>
+                    <h3 :class="$style.stepsHeader" class="mb-2">
+                        {{ step.header }}
+                    </h3>
+                    <div :class="$style.stepsText" class="mb-3 text-center text-md-left">
+                        {{ step.content }}
+                    </div>
+                </v-col>
+            </v-row>
+        </v-container>
+    </section>
 </template>
 <style lang="scss" scoped module>
 @function strip-unit($number) {
@@ -184,11 +184,11 @@
 </style>
 <script>
 export default {
-  props: {
-    items: {
-      type: Array,
-      default: () => [],
+    props: {
+        items: {
+            type: Array,
+            default: () => [],
+        },
     },
-  },
 };
 </script>

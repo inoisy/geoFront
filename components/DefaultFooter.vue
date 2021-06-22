@@ -1,96 +1,116 @@
 <template>
-  <v-footer
-    :class="$style.footer"
-    class="footer pa-0"
-    dark
-    height="auto"
-    :style="`background-image: url(${require('~/assets/footerbg.jpg')})`"
-  >
-    <!-- v-intersect.once="onIntersect" -->
-    <v-container class="py-12">
-      <v-row class="d-flex justify-center">
-        <v-col class="pt-5 px-7" cols="12" sm="6" md="6" lg="3">
-          <logo :mini="true" class="mb-5" />
-          <div style="font-weight: normal; font-size: 14px; line-height: 24px">
-            {{ info.descriptor }}
-          </div>
-        </v-col>
-        <v-col class="" cols="12" sm="6" md="6" lg="3">
-          <v-subheader class="hidden-sm-and-down">КОНТАКТЫ</v-subheader>
-          <v-list style="background: transparent !important">
-            <!-- :href="`tel:${info.phone}`"
+    <v-footer
+        :class="$style.footer"
+        class="footer pa-0"
+        dark
+        height="auto"
+        :style="`background-image: url(${require('~/assets/footerbg.jpg')})`"
+    >
+        <!-- v-intersect.once="onIntersect" -->
+        <v-container class="py-12">
+            <v-row class="d-flex justify-center">
+                <v-col class="pt-5 px-7"
+                       cols="12"
+                       sm="6"
+                       md="6"
+                       lg="3"
+                >
+                    <logo :mini="true" class="mb-5" />
+                    <div style="font-weight: normal; font-size: 14px; line-height: 24px">
+                        {{ info.descriptor }}
+                    </div>
+                </v-col>
+                <v-col class=""
+                       cols="12"
+                       sm="6"
+                       md="6"
+                       lg="3"
+                >
+                    <v-subheader class="hidden-sm-and-down">КОНТАКТЫ</v-subheader>
+                    <v-list style="background: transparent !important">
+                        <!-- :href="`tel:${info.phone}`"
               {{ info.phone }}
               -->
-            <v-list-item
-              class="ct_hid"
-              title="Телефон"
-              href="tel:+74991120654"
-              height="48"
-            >
-              <v-list-item-icon>
-                <svg-icon name="phone" />
-              </v-list-item-icon>
-              <v-list-item-content itemprop="telephone">
-                <span class="phone-text"> +7 (499) 112-06-54 </span>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item :href="`mailto:${info.email}`" title="email">
-              <v-list-item-icon>
-                <svg-icon name="mail" />
-              </v-list-item-icon>
-              <v-list-item-content itemprop="email">
-                {{ info.email }}
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item title="Адрес">
-              <v-list-item-icon>
-                <svg-icon name="pin" />
-              </v-list-item-icon>
-              <v-list-item-content>
-                <span style="font-size: 12px">
-                  {{ info.address }}
-                </span>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
-        </v-col>
-        <v-col class="hidden-sm-and-down" cols="12" sm="6" md="6" lg="3">
-          <v-subheader>НАВИГАЦИЯ</v-subheader>
-          <v-list
-            style="background: transparent !important"
-            class="footer-list"
-          >
-            <v-list-item
-              v-for="menuItem in menuItems"
-              :key="menuItem.slug"
-              :to="`/${menuItem.slug}`"
-              :title="menuItem.name"
-              exact
-            >
-              {{ menuItem.name }}
-            </v-list-item>
-          </v-list>
-        </v-col>
-        <v-col class="hidden-sm-and-down" cols="12" sm="6" md="6" lg="3">
-          <v-subheader>УСЛУГИ</v-subheader>
-          <v-list
-            style="background: transparent !important"
-            class="footer-list"
-          >
-            <v-list-item
-              v-for="service in services"
-              :key="service.slug"
-              :to="`/services/${service.slug}`"
-              :title="service.name"
-              exact
-            >
-              {{ service.name }}
-            </v-list-item>
-          </v-list>
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-footer>
+                        <v-list-item
+                            class="ct_hid"
+                            title="Телефон"
+                            href="tel:+74991120654"
+                            height="48"
+                        >
+                            <v-list-item-icon>
+                                <svg-icon name="phone" />
+                            </v-list-item-icon>
+                            <v-list-item-content itemprop="telephone">
+                                <span class="phone-text"> +7 (499) 112-06-54 </span>
+                            </v-list-item-content>
+                        </v-list-item>
+                        <v-list-item :href="`mailto:${info.email}`" title="email">
+                            <v-list-item-icon>
+                                <svg-icon name="mail" />
+                            </v-list-item-icon>
+                            <v-list-item-content itemprop="email">
+                                {{ info.email }}
+                            </v-list-item-content>
+                        </v-list-item>
+                        <v-list-item title="Адрес">
+                            <v-list-item-icon>
+                                <svg-icon name="pin" />
+                            </v-list-item-icon>
+                            <v-list-item-content>
+                                <span style="font-size: 12px">
+                                    {{ info.address }}
+                                </span>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </v-list>
+                </v-col>
+                <v-col class="hidden-sm-and-down"
+                       cols="12"
+                       sm="6"
+                       md="6"
+                       lg="3"
+                >
+                    <v-subheader>НАВИГАЦИЯ</v-subheader>
+                    <v-list
+                        style="background: transparent !important"
+                        class="footer-list"
+                    >
+                        <v-list-item
+                            v-for="menuItem in menuItems"
+                            :key="menuItem.slug"
+                            :to="`/${menuItem.slug}`"
+                            :title="menuItem.name"
+                            exact
+                        >
+                            {{ menuItem.name }}
+                        </v-list-item>
+                    </v-list>
+                </v-col>
+                <v-col class="hidden-sm-and-down"
+                       cols="12"
+                       sm="6"
+                       md="6"
+                       lg="3"
+                >
+                    <v-subheader>УСЛУГИ</v-subheader>
+                    <v-list
+                        style="background: transparent !important"
+                        class="footer-list"
+                    >
+                        <v-list-item
+                            v-for="service in services"
+                            :key="service.slug"
+                            :to="`/services/${service.slug}`"
+                            :title="service.name"
+                            exact
+                        >
+                            {{ service.name }}
+                        </v-list-item>
+                    </v-list>
+                </v-col>
+            </v-row>
+        </v-container>
+    </v-footer>
 </template>
 <style lang="scss" scoped module>
 .footer {
@@ -110,17 +130,17 @@
 <script>
 // import Logo from "~/components/Logo.vue";
 export default {
-  // components: { Logo },
-  computed: {
-    menuItems() {
-      return this.$store.getters.menuItems;
+    // components: { Logo },
+    computed: {
+        menuItems() {
+            return this.$store.getters.menuItems;
+        },
+        info() {
+            return this.$store.state.info;
+        },
+        services() {
+            return this.$store.state.services;
+        },
     },
-    info() {
-      return this.$store.state.info;
-    },
-    services() {
-      return this.$store.state.services;
-    },
-  },
 };
 </script>

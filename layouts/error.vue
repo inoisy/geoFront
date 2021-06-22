@@ -1,19 +1,28 @@
 <template>
-  <v-container class="fill-height" style="min-height: 70vh">
-    <v-row justify="center">
-      <v-col cols="12" md="6" class="py-16">
-        <h1 :class="$style.title">{{ error.statusCode }}</h1>
-        <h2 :class="$style.info">{{ error.message }}</h2>
-        <v-btn :class="$style.button" to="/" replace color="black" dark large>
-          Вернуться на главную
-        </v-btn>
-      </v-col>
-    </v-row>
-  </v-container>
+    <v-container class="fill-height" style="min-height: 70vh">
+        <v-row justify="center">
+            <v-col cols="12"
+                   md="6"
+                   class="py-16"
+            >
+                <h1 :class="$style.title">{{ error.statusCode }}</h1>
+                <h2 :class="$style.info">{{ error.message }}</h2>
+                <v-btn :class="$style.button"
+                       to="/"
+                       replace
+                       color="black"
+                       dark
+                       large
+                >
+                    Вернуться на главную
+                </v-btn>
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
 <script>
 export default {
-  props: { error: { type: Object, default: () => {} } },
+    props: { error: { type: Object, default: () => {} } },
 };
 </script>
 

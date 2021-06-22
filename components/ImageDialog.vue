@@ -1,79 +1,82 @@
 <template>
-  <v-dialog
-    v-model="isShow"
-    :scrollable="false"
-    :max-width="`calc(var(--dialog-img-max-height) * ${1 / aspectRatio})`"
-  >
-    <v-card :class="$style.imageDialogInner" dark>
-      <div class="pos-relative">
-        <div :style="`padding-top: ${aspectRatio * 100}%`" />
-        <v-img
-          :class="$style.dialogImg"
-          :src="imgUrl"
-          :alt="alt"
-          cover
-          @load="$emit('loaded')"
-          @error="$emit('loaded')"
-        >
-          <template v-slot:placeholder>
-            <div class="fill-height row align-center justify-center ma-auto">
-              <v-progress-circular indeterminate color="accent" />
+    <v-dialog
+        v-model="isShow"
+        :scrollable="false"
+        :max-width="`calc(var(--dialog-img-max-height) * ${1 / aspectRatio})`"
+    >
+        <v-card :class="$style.imageDialogInner" dark>
+            <div class="pos-relative">
+                <div :style="`padding-top: ${aspectRatio * 100}%`" />
+                <v-img
+                    :class="$style.dialogImg"
+                    :src="imgUrl"
+                    :alt="alt"
+                    cover
+                    @load="$emit('loaded')"
+                    @error="$emit('loaded')"
+                >
+                    <template #placeholder>
+                        <div class="fill-height row align-center justify-center ma-auto">
+                            <v-progress-circular indeterminate color="accent" />
+                        </div>
+                    </template>
+                </v-img>
+                <div :class="$style.buttonWrapper">
+                    <v-btn :class="$style.button"
+                           fab
+                           @click="isShow = false"
+                    >
+                        <svg-icon name="close" />
+                    </v-btn>
+                </div>
             </div>
-          </template>
-        </v-img>
-        <div :class="$style.buttonWrapper">
-          <v-btn :class="$style.button" fab @click="isShow = false">
-            <svg-icon name="close" />
-          </v-btn>
-        </div>
-      </div>
-    </v-card>
-  </v-dialog>
+        </v-card>
+    </v-dialog>
 </template>
 
 <script>
 export default {
-  props: {
-    show: {
-      type: Boolean,
-      default: false,
+    props: {
+        show: {
+            type: Boolean,
+            default: false,
+        },
+        imgUrl: {
+            type: String,
+            required: true,
+        },
+        alt: {
+            type: String,
+            required: true,
+        },
+        imgWidth: {
+            type: Number,
+        },
+        imgHeight: {
+            type: Number,
+        },
     },
-    imgUrl: {
-      type: String,
-      required: true,
+    // methods: {
+    //   close() {
+    //     this.$emit("close");
+    //   },
+    // },
+    computed: {
+        aspectRatio() {
+            return this.imgHeight / this.imgWidth;
+        },
+        isShow: {
+            get() {
+                return this.show;
+            },
+            set(val) {
+                if (!val) {
+                    this.$emit('close');
+                    // this.close();
+                }
+            },
+        },
     },
-    alt: {
-      type: String,
-      required: true,
-    },
-    imgWidth: {
-      type: Number,
-    },
-    imgHeight: {
-      type: Number,
-    },
-  },
-  // methods: {
-  //   close() {
-  //     this.$emit("close");
-  //   },
-  // },
-  computed: {
-    aspectRatio() {
-      return this.imgHeight / this.imgWidth;
-    },
-    isShow: {
-      get() {
-        return this.show;
-      },
-      set(val) {
-        if (!val) {
-          this.$emit("close");
-          // this.close();
-        }
-      },
-    },
-  },
 };
 </script>
 <style lang="scss" >

@@ -1,15 +1,15 @@
 <template>
-  <div class="wrapper" v-html="content" />
+    <div class="wrapper" v-html="content" />
 </template>
 
 <script>
 export default {
-  props: {
-    content: {
-      type: String,
-      default: null,
+    props: {
+        content: {
+            type: String,
+            default: null,
+        },
     },
-  },
 };
 </script>
 

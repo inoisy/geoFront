@@ -1,13 +1,17 @@
 <template>
-  <nuxt-link class="logoWrapper" :class="mini && 'mini'" to="/" title="Логотип">
-    <!-- <svg-icon name="logo" class="logo" /> -->
-    <v-img
-      class="logo"
-      :src="require('~/assets/logo.svg')"
-      alt="Логотип"
-      contain
-    />
-  </nuxt-link>
+    <nuxt-link class="logoWrapper"
+               :class="mini && 'mini'"
+               to="/"
+               title="Логотип"
+    >
+        <!-- <svg-icon name="logo" class="logo" /> -->
+        <v-img
+            class="logo"
+            :src="require('~/assets/logo.svg')"
+            alt="Логотип"
+            contain
+        />
+    </nuxt-link>
 </template>
 <style lang="scss" scoped>
 .logoWrapper {
@@ -43,11 +47,11 @@
 </style>
 <script>
 export default {
-  props: {
-    mini: {
-      type: Boolean,
-      default: false,
+    props: {
+        mini: {
+            type: Boolean,
+            default: false,
+        },
     },
-  },
 };
 </script>

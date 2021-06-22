@@ -121,35 +121,35 @@
 </style>
 <script>
 export default {
-  name: 'ContentWrapper',
-  functional: true,
-  props: {
-    content: {
-      type: String,
-      default: "",
+    name: 'ContentWrapper',
+    functional: true,
+    props: {
+        content: {
+            type: String,
+            default: '',
+        },
     },
-  },
-  render: function(createElement, {props}) {
-      // let html = props.html;
-      // try {
-      //     const compiledTemplate = templateCompiler(props.html);
-      //     html = compiledTemplate({...props.variables});
-      // } catch (error) {
-      //     console.log('ERROR WHILE COMPILING TEMPLATE: ', error);
-      // }
-      return createElement('div', {
-          key: 'contentWrapper',
-          class: 'contentWrapper',
-          domProps: {
-              innerHTML: props.content
-          }
-      });
-  },
-  // props: {
-  //   content: {
-  //     type: String,
-  //     default: "",
-  //   },
-  // },
+    render(createElement, { props }) {
+        // let html = props.html;
+        // try {
+        //     const compiledTemplate = templateCompiler(props.html);
+        //     html = compiledTemplate({...props.variables});
+        // } catch (error) {
+        //     console.log('ERROR WHILE COMPILING TEMPLATE: ', error);
+        // }
+        return createElement('div', {
+            key: 'contentWrapper',
+            class: 'contentWrapper',
+            domProps: {
+                innerHTML: props.content,
+            },
+        });
+    },
+    // props: {
+    //   content: {
+    //     type: String,
+    //     default: "",
+    //   },
+    // },
 };
 </script>

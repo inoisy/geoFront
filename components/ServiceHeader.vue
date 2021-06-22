@@ -1,50 +1,51 @@
 <template>
-  <section
-    :class="$style.firstSection"
-    :style="`background-image: url(${require('~/assets/bg.jpg')})`"
-  >
-    <v-container
-      :class="[$style.firstSectionInner, noIcon && 'noIcon']"
-      fill-height
+    <section
+        :class="$style.firstSection"
+        :style="`background-image: url(${require('~/assets/bg.jpg')})`"
     >
-      <breadcrumbs :items="breadcrumbs" :class="$style.breadcrumbs" />
+        <v-container
+            :class="[$style.firstSectionInner, noIcon && 'noIcon']"
+            fill-height
+        >
+            <breadcrumbs :items="breadcrumbs" :class="$style.breadcrumbs" />
 
-      <div :class="$style.textWrapper">
-        <h1
-          :class="[$style.header, header.length > 50 && $style.longHeader]"
-          class="mb-6"
-        >
-          {{ header }}
-        </h1>
-        <div
-          v-if="subheader"
-          :class="$style.subheader"
-          class="mb-10"
-          v-html="subheader"
-        ></div>
-        <div v-if="price" :class="$style.price">{{ price }}</div>
-        <v-btn
-          :class="$style.button"
-          class="callToActionButton mb-0"
-          outlined
-          dark
-          title="Заказать работы"
-          @click="handleOffer"
-        >
-          Заказать работы
-        </v-btn>
-        <div v-if="icon && icon.url" :class="$style.iconWrapper">
-          <img
-            :class="$style.icon"
-            :src="imageBaseUrl + icon.url"
-            :alt="header"
-            :title="header"
-          />
-        </div>
-      </div>
-      <!-- </v-row> -->
-    </v-container>
-  </section>
+            <div :class="$style.textWrapper">
+                <h1
+                    :class="[$style.header, header.length > 50 && $style.longHeader]"
+                    class="mb-6"
+                >
+                    {{ header }}
+                </h1>
+                <div
+                    v-if="subheader"
+                    :class="$style.subheader"
+                    class="mb-10"
+                    v-html="subheader"
+                >
+                </div>
+                <div v-if="price" :class="$style.price">{{ price }}</div>
+                <v-btn
+                    :class="$style.button"
+                    class="callToActionButton mb-0"
+                    outlined
+                    dark
+                    title="Заказать работы"
+                    @click="handleOffer"
+                >
+                    Заказать работы
+                </v-btn>
+                <div v-if="icon && icon.url" :class="$style.iconWrapper">
+                    <img
+                        :class="$style.icon"
+                        :src="imageBaseUrl + icon.url"
+                        :alt="header"
+                        :title="header"
+                    />
+                </div>
+            </div>
+            <!-- </v-row> -->
+        </v-container>
+    </section>
 </template>
 
 <style lang="scss" scoped module>
@@ -298,52 +299,52 @@
 }
 </style>
 <script>
-import Breadcrumbs from "~/components/Breadcrumbs.vue";
+import Breadcrumbs from '~/components/Breadcrumbs.vue';
 
 export default {
-  components: {
-    Breadcrumbs,
-  },
-  props: {
-    breadcrumbs: {
-      type: Array,
-      default: () => [],
+    components: {
+        Breadcrumbs,
     },
-    header: {
-      type: String,
-      default: null,
+    props: {
+        breadcrumbs: {
+            type: Array,
+            default: () => [],
+        },
+        header: {
+            type: String,
+            default: null,
+        },
+        subheader: {
+            type: String,
+            default: null,
+        },
+        icon: {
+            type: Object,
+            default: () => {},
+        },
+        price: {
+            type: String,
+            default: null,
+        },
     },
-    subheader: {
-      type: String,
-      default: null,
+    data() {
+        return {
+            imageBaseUrl: this.$config.imageBaseUrl,
+        };
     },
-    icon: {
-      type: Object,
-      default: () => {},
+    computed: {
+        noIcon() {
+            return !(this.icon && this.icon.url);
+        },
     },
-    price: {
-      type: String,
-      default: null,
+    methods: {
+        handleOffer() {
+            this.$store.dispatch('showDialog', {
+                name: this.header,
+                isShow: true,
+            });
+            return true;
+        },
     },
-  },
-  data() {
-    return {
-      imageBaseUrl: this.$config.imageBaseUrl,
-    };
-  },
-  computed: {
-    noIcon() {
-      return !(this.icon && this.icon.url);
-    },
-  },
-  methods: {
-    handleOffer() {
-      this.$store.dispatch("showDialog", {
-        name: this.header,
-        isShow: true,
-      });
-      return true;
-    },
-  },
 };
 </script>

@@ -1,42 +1,51 @@
 <template>
-  <v-parallax class="parallaxWrapper" :src="src" dark>
-    <!-- :height="height" -->
-    <v-container :class="$style.parallaxInner">
-      <h2 class="pageHeader mb-2 pa-3 col col-12">Бесплатная консультация</h2>
-      <!-- <img :srcSet="srcSet.srcSet" :src="srcSet.src" />
+    <v-parallax class="parallaxWrapper"
+                :src="src"
+                dark
+    >
+        <!-- :height="height" -->
+        <v-container :class="$style.parallaxInner">
+            <h2 class="pageHeader mb-2 pa-3 col col-12">Бесплатная консультация</h2>
+            <!-- <img :srcSet="srcSet.srcSet" :src="srcSet.src" />
 :src="require('~/assets/call.jpg?resize&size=1980')" :srcSet="srcSet.srcSet" :src="srcSet.src"-->
-      <div
-        class="mb-3 pa-3 col col-12 col-sm-8 col-md-8 col-lg-7 text-center text-md-left"
-        style="font-size: 1.2rem"
-      >
-        <div style="margin-bottom: 2.5rem">
-          <!-- Остались вопросы или не можете определиться какая услуга вам нужна? -->
-          Получить консультацию и расчёт полной стоимости услуг можно оставив
-          контакты в форме ниже или позвонив по телефону
+            <div
+                class="mb-3 pa-3 col col-12 col-sm-8 col-md-8 col-lg-7 text-center text-md-left"
+                style="font-size: 1.2rem"
+            >
+                <div style="margin-bottom: 2.5rem">
+                    <!-- Остались вопросы или не можете определиться какая услуга вам нужна? -->
+                    Получить консультацию и расчёт полной стоимости услуг можно оставив
+                    контакты в форме ниже или позвонив по телефону
 
-          <!-- <a :class="$style.phone" :href="`tel:${phone}`"> -->
-          <!-- {{ phone }} -->
-          <a :class="$style.phone" class="ct_hid" href="tel:+74991120654">
-            <span class="phone-text">+7 (499) 112-06-54</span>
-          </a>
-        </div>
-        <!-- outlined dark-->
-        <v-btn class="callToActionButton" color="white" @click="handleOffer">
-          Получить консультацию
-        </v-btn>
-      </div>
-      <!-- <LazyHydrate on-interaction>
+                    <!-- <a :class="$style.phone" :href="`tel:${phone}`"> -->
+                    <!-- {{ phone }} -->
+                    <a :class="$style.phone"
+                       class="ct_hid"
+                       href="tel:+74991120654"
+                    >
+                        <span class="phone-text">+7 (499) 112-06-54</span>
+                    </a>
+                </div>
+                <!-- outlined dark-->
+                <v-btn class="callToActionButton"
+                       color="white"
+                       @click="handleOffer"
+                >
+                    Получить консультацию
+                </v-btn>
+            </div>
+            <!-- <LazyHydrate on-interaction>
         <contact-form
           class="col col-sm-10 col-md-9 mx-auto"
           :full-width="false"
         />
       </LazyHydrate> -->
-    </v-container>
-  </v-parallax>
+        </v-container>
+    </v-parallax>
 </template>
 
 <script>
-const oneSize = require("~/assets/call.jpg?resize&size=1980");
+const oneSize = require('~/assets/call.jpg?resize&size=1980');
 // $xl-width:1904px;
 // $lg-width: 1264px;
 // $md-width: 960px;
@@ -49,29 +58,29 @@ const oneSize = require("~/assets/call.jpg?resize&size=1980");
 // );
 
 export default {
-  data() {
-    return {
-      // srcSet: multipleSizes,
-      src: oneSize.src,
-    };
-  },
-  methods: {
-    handleOffer() {
-      this.$store.dispatch("showDialog", {
-        name: this.header,
-        isShow: true,
-      });
-      return true;
+    data() {
+        return {
+            // srcSet: multipleSizes,
+            src: oneSize.src,
+        };
     },
-  },
-  computed: {
-    // height() {
-    //   return this.$vuetify.breakpoint.smAndDown ? 500 : 500;
-    // },
-    phone() {
-      return this.$store.state.info.phone;
+    computed: {
+        // height() {
+        //   return this.$vuetify.breakpoint.smAndDown ? 500 : 500;
+        // },
+        phone() {
+            return this.$store.state.info.phone;
+        },
     },
-  },
+    methods: {
+        handleOffer() {
+            this.$store.dispatch('showDialog', {
+                name: this.header,
+                isShow: true,
+            });
+            return true;
+        },
+    },
 };
 </script>
 <style lang="scss" scoped>
