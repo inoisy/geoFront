@@ -7,7 +7,7 @@
         hover
     >
         <service-image :img-url="imgUrl" :alt="name" />
-        <!-- <v-img :src="imgUrl" height="200px" :alt="name" :title="name" /> -->
+
         <v-card-title :class="$style.cardTitle">
             <span class="text-truncate">
                 {{ name }}
@@ -47,7 +47,7 @@ export default {
     },
 };
 </script>
-<style lang="scss" scoped module>
+<style lang="scss" module>
     .cardTitle {
         font-size: 1rem !important;
         font-weight: bold;

@@ -22,7 +22,7 @@ export default {
     data() {
         return {
             mapSettings: {
-                apiKey: this.$config.yandexMapID, // process.env.MAP_KEY,
+                apiKey: this.$config.yandexMapID,
                 lang: 'ru_RU',
                 version: '2.1',
             },

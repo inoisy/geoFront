@@ -3,6 +3,9 @@
         "stylelint-config-standard",
         "stylelint-config-css-modules"
     ],
+    "ignoreFiles": [
+        ".nuxt/**/*"
+    ],
     "plugins": [
         "stylelint-scss",
         "stylelint-order"

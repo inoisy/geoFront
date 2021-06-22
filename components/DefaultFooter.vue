@@ -6,7 +6,6 @@
         height="auto"
         :style="`background-image: url(${require('~/assets/footerbg.jpg')})`"
     >
-        <!-- v-intersect.once="onIntersect" -->
         <v-container class="py-12">
             <v-row class="d-flex justify-center">
                 <v-col class="pt-5 px-7"
@@ -28,9 +27,7 @@
                 >
                     <v-subheader class="hidden-sm-and-down">КОНТАКТЫ</v-subheader>
                     <v-list style="background: transparent !important;">
-                        <!-- :href="`tel:${info.phone}`"
-              {{ info.phone }}
-              -->
+
                         <v-list-item
                             class="ct_hid"
                             title="Телефон"
@@ -112,26 +109,9 @@
         </v-container>
     </v-footer>
 </template>
-<style lang="scss" scoped module>
-    .footer {
-        min-height: inherit;
-        background-position: 80% 50%;
-        background-repeat: no-repeat;
-        background-size: cover;
-        // background-image: url(/footerbg.jpg);
-        @include sm {
-            background-position: 90% 50%;
-        }
 
-        @include md {
-            background-position: 100% 50%;
-        }
-    }
-</style>
 <script>
-// import Logo from "~/components/Logo.vue";
 export default {
-    // components: { Logo },
     computed: {
         menuItems() {
             return this.$store.getters.menuItems;
@@ -145,3 +125,19 @@ export default {
     },
 };
 </script>
+<style lang="scss" module>
+    .footer {
+        min-height: inherit;
+        background-position: 80% 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        @include sm {
+            background-position: 90% 50%;
+        }
+
+        @include md {
+            background-position: 100% 50%;
+        }
+    }
+</style>

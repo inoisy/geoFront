@@ -63,26 +63,7 @@
         </section>
     </div>
 </template>
-<style lang="scss" scoped module>
-    .yandexMapWrapper {
-        min-height: 400px;
 
-        @include md {
-            height: 300px;
-            min-height: 300px;
-        }
-
-        @include lg {
-            height: 400px;
-            min-height: 400px;
-        }
-    }
-
-    .contactsWrapper {
-        display: flex;
-        align-items: center;
-    }
-</style>
 <script>
 import {
     hydrateWhenIdle,
@@ -153,3 +134,23 @@ export default {
     },
 };
 </script>
+<style lang="scss" module>
+    .yandexMapWrapper {
+        min-height: 400px;
+
+        @include md {
+            height: 300px;
+            min-height: 300px;
+        }
+
+        @include lg {
+            height: 400px;
+            min-height: 400px;
+        }
+    }
+
+    .contactsWrapper {
+        display: flex;
+        align-items: center;
+    }
+</style>

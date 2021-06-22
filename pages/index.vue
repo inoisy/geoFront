@@ -74,6 +74,7 @@
                                                 : '/no-camera.svg'
                                         "
                                         :alt="service.name"
+                                        contain
                                         class="d-block mx-auto"
                                         width="55px"
                                         height="55px"
@@ -198,7 +199,7 @@ export default {
         }, []);
         return {
             page: mainPage,
-            services: servicesData, // : services,
+            services: servicesData,
         };
     },
     head() {
@@ -245,7 +246,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped module>
+<style lang="scss" module>
     .section {
         &:nth-child(2n) {
             background-color: $gray;
@@ -313,14 +314,12 @@ export default {
         transition-property: all;
         transition-timing-function: ease;
         flex-direction: column;
-        // transition-duration: 2s;
         box-shadow: 4px 4px 10px rgba(0, 0, 0, .24) !important;
 
         &:hover {
             transform: translateY(-5px);
             transform-origin: center;
             box-shadow: 4px 4px 25px 4px rgba(0, 0, 0, .25) !important;
-            // transition-duration: 2s;
         }
 
         .serviceImgWrapper {
@@ -360,71 +359,4 @@ export default {
         }
     }
 
-    // .serviceFeatureRow {
-    //   .serviceFeatureImgWrapper {
-    //     display: flex;
-    //     align-items: center;
-    //     .serviceFeatureImg {
-    //       border-radius: 3px;
-    //       box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.1);
-    //       width: 100%;
-    //       max-width: 100%;
-    //       display: block;
-    //     }
-    //   }
-    //   .serviceFeatureTextWrapper {
-    //     color: #18191f;
-    //     display: flex;
-    //     flex-direction: column;
-    //     justify-content: center;
-    //     .serviceFeatureHeader {
-    //       font-weight: 600;
-    //       font-size: 32px;
-    //       margin-bottom: 24px;
-    //       line-height: 125%;
-    //     }
-    //     .serviceFeatureContent {
-    //       font-weight: 300;
-    //       font-size: 16px;
-    //       line-height: 150%;
-    //     }
-    //   }
-    //   &:nth-child(odd) {
-    //     flex-direction: row-reverse;
-    //   }
-    //   @include md {
-    //     .serviceFeatureImgWrapper {
-    //       padding-left: 8.33333%;
-    //     }
-    //     // padding-left: 8.33333%;
-    //     &:nth-child(odd) {
-    //       .serviceFeatureImgWrapper {
-    //         padding-right: 8.33333%;
-    //         padding-left: 12px;
-    //       }
-    //     }
-    //   }
-    // }
-
-    // @include sm {
-    //   .header {
-    //     font-size: 36px;
-    //   }
-    //   .subheader {
-    //     font-size: 18px;
-    //   }
-    //   .firstSection {
-    //     background-position: 70%;
-    //   }
-    // }
-    // @include md {
-    //   .firstSection {
-    //     background-position: center;
-    //   }
-    // }
-    // @include lg {
-    //   .header {
-    //     font-size: 48px;
-    //   }
-    // }
 </style>

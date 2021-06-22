@@ -37,7 +37,17 @@
         </v-container>
     </section>
 </template>
-<style lang="scss" scoped module>
+<script>
+export default {
+    props: {
+        items: {
+            type: Array,
+            default: () => [],
+        },
+    },
+};
+</script>
+<style lang="scss" module>
     .benefitsWrapper {
         color: #18191f;
 
@@ -107,10 +117,6 @@
                     left: 0;
                     border-radius: 50%;
                     border: #e1e1e1 solid 1px;
-                    // -webkit-transition-duration: 0.3s;
-                    // transition-duration: 0.3s;
-                    // // -webkit-transition-property: top, right, bottom, left;
-                    // transition-property: all;
                     transition: .3s ease all;
                 }
 
@@ -152,21 +158,8 @@
                     @include sm {
                         font-size: 14px;
                     }
-                    // @include md {
-                    //   font-size: 1rem;
-                    // }
                 }
             }
         }
     }
 </style>
-<script>
-export default {
-    props: {
-        items: {
-            type: Array,
-            default: () => [],
-        },
-    },
-};
-</script>

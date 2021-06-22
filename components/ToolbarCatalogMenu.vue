@@ -31,12 +31,7 @@
                                 <div class="ml-auto pl-3 d-inline-flex">
                                     <svg-icon
                                         name="arrowdown"
-                                        style="
-    width: 24px;
-    height: 24px;
-    margin: auto;
-    transform: rotate(270deg);
-"
+                                        style=" width: 24px; height: 24px; margin: auto; transform: rotate(270deg);"
                                     />
                                 </div>
                             </v-list-item>
@@ -92,21 +87,15 @@ export default {
     watch: {
         '$route.path'() {
             this.showMenu = false;
-            // console.log("watch", this.$route.path, this.showMenu);
         },
     },
     beforeDestroy() {
         this.showMenu = false;
-    // console.log("beforeDestroy", this.showMenu);
     },
 };
 </script>
 
 <style lang="scss" scoped>
-    // .list {
-    //   background: #1e1e1e;
-    //   color: $white;
-    // }
     .two-columns {
         position: relative;
         max-width: 100%;
@@ -118,9 +107,6 @@ export default {
             page-break-inside: avoid;
             -moz-column-break-inside: avoid;
             break-inside: avoid;
-            // min-height: 30px !important;
-            // height: 30px !important;
-            // font-size: 12px;
         }
 
         .list-item-child {
@@ -131,7 +117,6 @@ export default {
     .catalog-second-level-menu-inner {
         min-width: 300px !important;
         max-width: 350px;
-        // width: 300px;
     }
 
     .second-level-two-column {

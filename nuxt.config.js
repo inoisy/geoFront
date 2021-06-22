@@ -1,9 +1,9 @@
+import axios from 'axios';
+
 const siteUrl = process.env.SITE_URL || 'https://geoworksmsk.ru';
 const backendUrl = process.env.BACKEND_URL || 'https://api.geoworksmsk.ru';
 const companyName = 'GeoWorks';
 const description = 'Инженерные изыскания в Москве и МО. Геодезические, геологические изыскания, кадастровые услуги "под ключ" для проектирования и строительства.';
-
-const axios = require('axios');
 
 async function routes() {
     const routes = [];
@@ -24,7 +24,13 @@ async function routes() {
 
     return routes;
 }
-module.exports = async () => {
+
+const devModules = [
+    '@nuxtjs/stylelint-module',
+    '@nuxtjs/eslint-module',
+];
+
+export default async () => {
     const isDev = process.env.NODE_ENV !== 'production';
     console.log('🚀 ~ file: nuxt.config.js ~ line 29 ~ module.exports= ~ isDev', isDev);
 
@@ -81,6 +87,7 @@ module.exports = async () => {
 
         // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
         buildModules: [
+            ...(isDev ? devModules : []),
             '@nuxtjs/google-analytics',
             '~/modules/hook.js',
             // https://go.nuxtjs.dev/eslint
@@ -184,7 +191,19 @@ module.exports = async () => {
             defaultAssets: false,
             optionsPath: './vuetify.options.js',
         },
+        // Stylelint options
+        stylelint: {
+            files: [
+                'assets/**/*.{s?(a|c)ss}',
+                '**/components/**/*.{s?(a|c)ss}',
+                '**/{components,layouts,services}/**/*.vue',
+            ],
+        },
 
+        // Eslint options
+        eslint: {
+            cache: false,
+        },
         // Build Configuration (https://go.nuxtjs.dev/config-build)
         build: {
             // babel: {

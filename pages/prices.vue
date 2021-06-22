@@ -80,19 +80,6 @@
                         </div>
                     </v-col>
                 </v-row>
-
-                <!-- <svg-icon
-                      name="bullet"
-                      style="width: 13px; height: 13px"
-                    ></svg-icon> -->
-                <!-- <v-col cols="12" pa-3>
-            {{ services }} -->
-
-                <!-- <LazyHydrate never>
-              <content-wrapper :content="page.content" />
-            </LazyHydrate> -->
-                <!-- </v-col> -->
-                <!-- </v-row> -->
             </v-container>
         </section>
     </div>
@@ -102,7 +89,6 @@
 import gql from 'graphql-tag';
 import LazyHydrate from 'vue-lazy-hydration';
 
-// import DefaultHeader from "~/components/DefaultHeader.vue";
 
 const title = 'Цены';
 export default {
@@ -116,7 +102,6 @@ export default {
         },
         error,
     }) {
-        // const client = ;
         const {
             data: { services },
         } = await apolloClient.query({
@@ -157,51 +142,12 @@ export default {
                 message: 'Информацию не удалось получить',
             });
         }
-        // const { child, ...service } = services[0];
-        // const children = child.reduce((acc, val) => {
-        //   acc.push({
-        //     ...val,
-        //     img: calculateImageUrl(val.img),
-        //   });
-        //   return acc;
-        // }, []);
-        // console.log("prices ", services);
+
 
         return {
-            services, // .filter((item) => item.child.length),
-            // .reduce((acc, item) => {
-            //   const { child, ...itemData } = item;
-            //   const child = Object.assign({})
-            //   console.log("🚀 ~ file: prices.vue ~ line 325 ~ .reduce ~ itemData", {
-            //     ...itemData,
-            //     child: child.sort((a, b) => a.price > b.price),
-            //   });
-            //   // acc.push();
-            //   acc.push(item);
-            //   return acc;
-            // }, []), // TODO
-            // service,
-            // children: child.reduce((acc, val) => {
-            //   acc.push({
-            //     ...val,
-            //     img: calculateImageUrl(val.img),
-            //   });
-            //   return acc;
-            // }, []), // Object.freeze(services[0]),
-            // breadcrumbs: [
-            //   {
-            //     text: "Главная",
-            //     to: "/",
-            //   },
-            //   {
-            //     text: "Услуги",
-            //     to: "/services",
-            //   },
-            //   {
-            //     text: service.name,
-            //     to: service.slug,
-            //   },
-            // ],
+            services,
+
+
         };
     },
     data() {
@@ -215,25 +161,19 @@ export default {
                 },
                 {
                     text: title,
-                    //   to: "/about",
+
                 },
             ],
         };
     },
-    // methods: {
-    //   handleOffer() {
-    //     return true;
-    //   },
-    // },
+
+
     head() {
         return {
             title,
             meta: [
-                // {
-                //   hid: "description",
-                //   name: "description",
-                //   content: this.page.metaDescription || `${title} - GeoWorks`,
-                // },
+
+
                 {
                     hid: 'og:url',
                     property: 'og:url',
@@ -244,11 +184,8 @@ export default {
                     property: 'og:title',
                     content: title,
                 },
-                // {
-                //   hid: "og:description",
-                //   property: "og:description",
-                //   content: this.page.metaDescription || `${title} - GeoWorks`,
-                // },
+
+
             ],
             link: [
                 {
@@ -269,9 +206,8 @@ export default {
     },
 };
 </script>
-<style lang="scss" scoped module>
+<style lang="scss" module>
     .servicesWrapper {
-        // padding-top: 6rem;
         padding-bottom: 6rem;
 
         --button-color: 93 93 93;
@@ -281,8 +217,7 @@ export default {
 
             --content-color: white;
         }
-        // background-color: white;
-        // color: $black;
+
         .button {
             width: 100%;
             margin-top: 2rem;
@@ -304,18 +239,12 @@ export default {
                 font-size: 2rem;
                 line-height: 125%;
             }
-            // .prices{
-            //   & ~ .button
-            // }
 
             .price {
                 margin-top: -10px;
                 font-size: 1.7rem;
                 font-weight: bold;
                 color: rgba($black, .87);
-                // & + .button {
-                //   margin-bottom: 10px;
-                // }
             }
 
             & + .childWrapper {
@@ -335,34 +264,13 @@ export default {
                 }
             }
         }
-        // .buttonWrapper {
-        //   display: flex;
-        //   flex-wrap: wrap;
-        //   @include sm {
-        //     flex-wrap: nowrap;
-        //     .button + .button {
-        //       margin-left: 10px;
-        //     }
-        //   }
-        //   .button {
-        //     flex: 1 1 100%;
-        //     @include sm {
-        //       flex: 0 0 190px;
-        //     }
-        //   }
-        // }
 
-        // .serviceItem {
-        //   position: relative;
-        // }
         --icon-size: 100px;
 
         .servicesIcon {
-            // right: 14px;
             position: absolute;
             top: 0;
             right: 0;
-            // position: absolute;
             float: right;
             width: var(--icon-size);
             height: var(--icon-size);

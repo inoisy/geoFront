@@ -39,7 +39,7 @@ export default {
 };
 </script>
 
-<style style lang="scss" scoped module>
+<style style lang="scss" module>
     .breadcrumbs {
         padding: 18px 12px;
         list-style-type: none;

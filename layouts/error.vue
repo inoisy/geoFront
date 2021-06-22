@@ -22,11 +22,11 @@
 </template>
 <script>
 export default {
-    props: { error: { type: Object, default: () => {} } },
+    props: { error: { type: Object, default: () => ({}) } },
 };
 </script>
 
-<style scoped module>
+<style module>
     .title {
         margin-bottom: 25px;
         text-align: center;

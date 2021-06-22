@@ -13,7 +13,22 @@
         </v-btn>
     </div>
 </template>
-<style lang="scss" scoped module>
+<script>
+export default {
+
+
+    methods: {
+        handleOffer() {
+            this.$store.dispatch('showDialog', {
+                name: '',
+                isShow: true,
+            });
+            return true;
+        },
+    },
+};
+</script>
+<style lang="scss" module>
     .floatingButtonWrapper {
         position: fixed;
         right: 16px;
@@ -58,22 +73,3 @@
         }
     }
 </style>
-<script>
-export default {
-    // data() {
-    //   return { show: false };
-    // },
-    // mounted() {
-    //   this.show = true;
-    // },
-    methods: {
-        handleOffer() {
-            this.$store.dispatch('showDialog', {
-                name: '',
-                isShow: true,
-            });
-            return true;
-        },
-    },
-};
-</script>

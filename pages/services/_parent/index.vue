@@ -22,9 +22,7 @@
                     <LazyHydrate when-visible>
                         <desktop-aside-menu :services="children" :slug="service.slug" />
                     </LazyHydrate>
-                    <!-- <LazyHydrate when-visible> -->
                     <content-wrapper :content="service.content" />
-                    <!-- </LazyHydrate> -->
                 </div>
             </v-container>
         </section>

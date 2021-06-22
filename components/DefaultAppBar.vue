@@ -36,11 +36,6 @@
                     <svg-icon name="arrowdown" style="margin-right: -5px;" />
                 </v-btn>
             </template>
-            <!-- href="tel:+74991120654">
-            +7 (499) 112-06-54 -->
-            <!-- :href="`tel:${info.phone}`" -->
-            <!-- {{ info.phone }} -->
-            <!-- <client-only> <span class="phone-text">-->
             <v-btn
                 class="d-dlex ct_hid"
                 href="tel:+74991120654"
@@ -53,8 +48,7 @@
                     +7 (499) 112-06-54
                 </span>
             </v-btn>
-            <!-- </client-only> -->
-            <!-- <a class="ct_hid" href="tel:+74991120654">+7 (499) 112-06-54</a> -->
+
 
             <v-btn
                 :class="$style.linkIcon"
@@ -82,17 +76,39 @@
         </v-container>
     </header>
 </template>
-<style lang="scss" scoped module>
+
+<script>
+export default {
+    data() {
+        return {
+            isMounted: false,
+        };
+    },
+    computed: {
+        isMobile() {
+            return this.$vuetify.breakpoint.smAndDown;
+        },
+        menuItems() {
+            return this.$store.getters.menuItems;
+        },
+        info() {
+            return this.$store.state.info;
+        },
+        services() {
+            return this.$store.state.services;
+        },
+    },
+
+    mounted() {
+        this.isMounted = true;
+    },
+};
+</script>
+<style lang="scss" module>
     .appBar {
-        // border-color: rgb(21, 19, 23);
-        // box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%),
-        //   0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
-        // box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%),
-        //   0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
         position: fixed;
         top: 0;
         right: 0;
-        // transform: translateY(0px);
         left: 0;
         z-index: 250;
         height: var(--toolbar-height);
@@ -116,9 +132,7 @@
             --font-size: 15px;
             --padding: 16px;
         }
-        // @include md {
 
-        // }
         .header {
             flex-wrap: nowrap !important;
             background-color: #151317;
@@ -146,10 +160,7 @@
             border-radius: 50%;
             font-size: var(--font-size);
             color: $white !important;
-            // @include sm {
-            //   height: var(--icon-size) !important;
-            //   width: var(--icon-size) !important;
-            // }
+
             .linkTelText {
                 display: none;
             }
@@ -159,7 +170,6 @@
                 height: 100% !important;
                 padding: 0 var(--padding) !important;
                 border-radius: 0;
-                // font-size: 0.8rem !important;
                 color: #f1f3ef;
 
                 .linkTelText {
@@ -167,9 +177,6 @@
                     width: 173px;
                 }
             }
-            // @include lg {
-            //   padding: 0 16px !important;
-            // }
         }
 
         .linkIcon {
@@ -190,55 +197,5 @@
         .link + .linkTel {
             margin-left: 5px;
         }
-        // @include sm {
-        //   .linkIcon {
-        //     height: var(--icon-size) !important;
-        //     width: var(--icon-size) !important;
-        //   }
-        // }
-        // @include md {
-        //   .link,
-        //   .linkTel {
-        //     font-size: 0.8rem !important;
-        //     // padding: 0 6px !important;
-        //   }
-        // }
-        // @include lg {
-        //   .link,
-        //   .linkTel {
-        //     font-size: 0.85rem !important;
-        //     // padding: 0 12px !important;
-        //   }
-        // }
     }
 </style>
-<script>
-// import Logo from "~/components/Logo.vue";
-
-export default {
-    // components: { Logo },
-    data() {
-        return {
-            isMounted: false,
-        };
-    },
-    computed: {
-        isMobile() {
-            return this.$vuetify.breakpoint.smAndDown;
-        },
-        menuItems() {
-            return this.$store.getters.menuItems;
-        },
-        info() {
-            return this.$store.state.info;
-        },
-        services() {
-            return this.$store.state.services;
-        },
-    },
-
-    mounted() {
-        this.isMounted = true;
-    },
-};
-</script>

@@ -4,7 +4,6 @@
                to="/"
                title="Логотип"
     >
-        <!-- <svg-icon name="logo" class="logo" /> -->
         <v-img
             class="logo"
             :src="require('~/assets/logo.svg')"
@@ -13,6 +12,17 @@
         />
     </nuxt-link>
 </template>
+<script>
+export default {
+    props: {
+        mini: {
+            type: Boolean,
+            default: false,
+        },
+    },
+};
+</script>
+
 <style lang="scss" scoped>
     .logoWrapper {
         display: flex;
@@ -43,20 +53,5 @@
             opacity: .8;
         }
     }
-    // .mini {
-    //   .logo {
-    //     width: 180px;
-    //     height: 50px;
-    //   }
-    // }
+
 </style>
-<script>
-export default {
-    props: {
-        mini: {
-            type: Boolean,
-            default: false,
-        },
-    },
-};
-</script>

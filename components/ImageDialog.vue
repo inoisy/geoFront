@@ -51,16 +51,15 @@ export default {
         },
         imgWidth: {
             type: Number,
+            required: true,
         },
         imgHeight: {
             type: Number,
+            required: true,
         },
     },
-    // methods: {
-    //   close() {
-    //     this.$emit("close");
-    //   },
-    // },
+
+
     computed: {
         aspectRatio() {
             return this.imgHeight / this.imgWidth;
@@ -72,7 +71,6 @@ export default {
             set(val) {
                 if (!val) {
                     this.$emit('close');
-                    // this.close();
                 }
             },
         },
@@ -104,7 +102,7 @@ export default {
         }
     }
 </style>
-<style lang="scss" scoped module>
+<style lang="scss" module>
     .imageDialogInner {
         position: relative;
         overflow: hidden;

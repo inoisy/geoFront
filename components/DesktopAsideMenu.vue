@@ -35,7 +35,7 @@ export default {
     },
 };
 </script>
-<style lang="scss" scoped module>
+<style lang="scss" module>
     .asideMenu {
         float: right;
         max-width: 30%;

@@ -1,5 +1,4 @@
 <template>
-    <!-- <div> -->
     <section
         :class="$style.firstSection"
         :style="`background-image: url(${require('~/assets/bg.jpg')})`"
@@ -22,9 +21,26 @@
             </v-row>
         </v-container>
     </section>
-    <!-- </div> -->
 </template>
-<style lang="scss" scoped module>
+<script>
+import Breadcrumbs from '~/components/Breadcrumbs.vue';
+
+export default {
+    components: { Breadcrumbs },
+    props: {
+        header: {
+            type: String,
+            default: '',
+        },
+        breadcrumbs: {
+            type: Array,
+            default: () => [],
+        },
+    },
+};
+</script>
+
+<style lang="scss" module>
     .firstSection {
         min-height: 370px;
         background-color: #161616;
@@ -49,20 +65,3 @@
         }
     }
 </style>
-<script>
-import Breadcrumbs from '~/components/Breadcrumbs.vue';
-
-export default {
-    components: { Breadcrumbs },
-    props: {
-        header: {
-            type: String,
-            default: '',
-        },
-        breadcrumbs: {
-            type: Array,
-            default: () => [],
-        },
-    },
-};
-</script>

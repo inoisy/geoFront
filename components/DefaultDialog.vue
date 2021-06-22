@@ -110,7 +110,7 @@
             </div>
             <div v-else>
                 <svg-icon name="checked" :class="$style.successIcon" />
-                <!-- <v-icon size="200" class="mx-auto d-flex">check_circle_outline</v-icon> -->
+
                 <div :class="$style.successHeader" class="text-center">
                     Заявка отправлена!
                 </div>
@@ -128,82 +128,11 @@
         </v-card>
     </v-dialog>
 </template>
-<style lang="scss">
-    .dialog-active {
-        overflow-x: hidden;
-    }
-</style>
-<style lang="scss" scoped module>
-    .dialogInner {
-        padding: 24px 20px 30px;
 
-        @include md {
-            padding: 2.2rem 2rem 2.4rem;
-        }
-    }
-
-    .successIcon {
-        display: block;
-        width: 230px;
-        max-width: 70%;
-        height: auto;
-        margin-right: auto;
-        margin-bottom: 30px;
-        margin-left: auto;
-    }
-
-    .successHeader {
-        margin-bottom: 1.2rem;
-        font-size: 2rem;
-        font-weight: 900;
-        line-height: 125%;
-    }
-
-    .successSubHeader {
-        font-size: 1rem;
-
-        @include lg {
-            font-size: 1.2rem;
-        }
-    }
-
-    .closeButton {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-    }
-
-    .header {
-        padding-right: 44px;
-        font-size: 1.5rem;
-        font-weight: 600;
-        line-height: 125%;
-
-        @include sm {
-            font-size: 2rem;
-        }
-    }
-
-    .subheader {
-        margin-bottom: 1rem;
-        font-size: 1rem;
-    }
-
-    .bottomLine {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 7px;
-        margin: auto;
-        background: darken($accent, 10%);
-    }
-</style>
 <script>
 import gql from 'graphql-tag';
 
-// import ContactForm from "~/components/ContactForm";
+
 import { validationMixin } from 'vuelidate';
 import { mask } from 'vue-the-mask';
 
@@ -302,14 +231,8 @@ export default {
                 isShow: false,
             });
         },
-        // selectFile(file) {
-        //   console.log(
-        //     "🚀 ~ file: ContactForm.vue ~ line 93 ~ selectFile ~ file",
-        //     file
-        //   );
-        //   // this.progress = 0;
-        //   this.file = file;
-        // },
+
+
         handleFileUpload() {
             this.file = this.$refs.file.files[0];
         },
@@ -363,9 +286,6 @@ export default {
                 .then(() => {
                     this.formSuccess = true;
 
-                    // if (window.yaCounter54918895) {
-                    //
-                    // }
 
                     try {
                         if (
@@ -380,21 +300,14 @@ export default {
                             eventAction: 'orderAction',
                             eventLabel: 'orderLabel',
                             eventValue: 111,
-                            //  {
-                            //   name: this.name,
-                            //   phone: this.phone,
-                            //   message: this.message,
-                            //   email: this.email,
-                            //   serviceName: this.$store.state.dialog.name,
-                            // },
+
+
                         });
                     } catch (error) {
                         console.log('🚀 ~ file: DefaultDialog.vue ~ line 361 ~ .then ~ error', error);
                     } finally {
                         this.clear();
                     }
-
-                    // window[`yaCounter${this.$config.yandexMetrikaID}`]
                 })
                 .catch(() => {
                     this.formError = true;
@@ -404,3 +317,75 @@ export default {
     },
 };
 </script>
+<style lang="scss">
+    .dialog-active {
+        overflow-x: hidden;
+    }
+</style>
+<style lang="scss" module>
+    .dialogInner {
+        padding: 24px 20px 30px;
+
+        @include md {
+            padding: 2.2rem 2rem 2.4rem;
+        }
+    }
+
+    .successIcon {
+        display: block;
+        width: 230px;
+        max-width: 70%;
+        height: auto;
+        margin-right: auto;
+        margin-bottom: 30px;
+        margin-left: auto;
+    }
+
+    .successHeader {
+        margin-bottom: 1.2rem;
+        font-size: 2rem;
+        font-weight: 900;
+        line-height: 125%;
+    }
+
+    .successSubHeader {
+        font-size: 1rem;
+
+        @include lg {
+            font-size: 1.2rem;
+        }
+    }
+
+    .closeButton {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+    }
+
+    .header {
+        padding-right: 44px;
+        font-size: 1.5rem;
+        font-weight: 600;
+        line-height: 125%;
+
+        @include sm {
+            font-size: 2rem;
+        }
+    }
+
+    .subheader {
+        margin-bottom: 1rem;
+        font-size: 1rem;
+    }
+
+    .bottomLine {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 7px;
+        margin: auto;
+        background: darken($accent, 10%);
+    }
+</style>

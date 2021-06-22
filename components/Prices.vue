@@ -31,14 +31,7 @@ export default {
             overflow-x: auto;
             overflow-y: hidden;
         }
-        // ::v-deep table + h3 {
-        //   margin-top: 25px;
-        // }
-        // ::v-deep figcaption {
-        //   &:not(:nth-of-type(n + 1)) {
-        //     margin-top: 25px;
-        //   }
-        // }
+
         ::v-deep table {
             width: 100%;
             max-width: 100%;
@@ -59,9 +52,6 @@ export default {
                 border-right: thin solid rgba(0, 0, 0, .12);
             }
 
-            // tbody > tr:hover {
-            //   background: #eee;
-            // }
             thead {
                 tr {
                     th {
@@ -93,10 +83,7 @@ export default {
                     }
                 }
             }
-            // td,
-            // th {
-            //   height: 36px;
-            // }
+
             tbody {
                 tr {
                     &:hover {
@@ -115,7 +102,6 @@ export default {
                         transition: height .2s cubic-bezier(.4, 0, .6, 1);
 
                         &:last-child {
-                            // white-space: break;
                             padding-right: 2px;
                             text-align: right;
                         }
@@ -125,16 +111,6 @@ export default {
                             text-align: left;
                         }
                     }
-
-                    // td:only-child:not([rowspan]) {
-                    //   padding-left: 16px;
-                    //   // padding-right: 16px;
-                    // }
-
-                    // td:not(:first-child) {
-                    //   padding-left: 16px;
-                    //   // padding-right: 16px;
-                    // }
                 }
             }
         }

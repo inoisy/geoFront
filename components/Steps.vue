@@ -53,7 +53,7 @@ export default {
     },
 };
 </script>
-<style lang="scss" scoped module>
+<style lang="scss" module>
     @function strip-unit($number) {
         @if type-of($number) == "number" and not unitless($number) {
             @return $number / ($number * 0 + 1);
@@ -65,8 +65,7 @@ export default {
     .stepsWrapper {
         $icon-size: 70px;
         $icon-padding: 10px;
-        // background-color: #ececec;
-        // color: #18191f;
+
         .steps {
             .stepImageWrapper {
                 display: flex;
@@ -106,12 +105,8 @@ export default {
                     .stepImageInner {
                         &:before {
                             z-index: 1;
-                            // background-color: $black;
                             opacity: 1;
                         }
-                        // .stepImage {
-                        //   filter: invert(1);
-                        // }
                     }
                 }
             }

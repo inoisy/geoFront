@@ -19,11 +19,11 @@
                             :alt="service.name"
                             @show="handleImageDialog"
                         />
-                        <!-- showImageDialog = true -->
+
                     </LazyHydrate>
-                    <!-- <LazyHydrate when-visible> -->
+
                     <content-wrapper :content="service.content" />
-                    <!-- </LazyHydrate> -->
+
                 </div>
             </v-container>
         </section>
@@ -76,19 +76,11 @@
             @close="showImageDialog = false"
             @loaded="loadingEnd"
         />
-    <!-- showImageDialog = false -->
+
     </div>
 </template>
 
-<style lang="scss" scoped module>
-    .section {
-        &:nth-child(2n + 1) {
-            background-color: $gray;
 
-            --content-color: white;
-        }
-    }
-</style>
 <script>
 import gql from 'graphql-tag';
 import LazyHydrate from 'vue-lazy-hydration';
@@ -379,3 +371,12 @@ export default {
     },
 };
 </script>
+<style lang="scss" module>
+    .section {
+        &:nth-child(2n + 1) {
+            background-color: $gray;
+
+            --content-color: white;
+        }
+    }
+</style>

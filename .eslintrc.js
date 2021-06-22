@@ -13,9 +13,14 @@ module.exports = {
         'eslint:recommended',
         'google',
     ],
-    plugins: [],
-    // add your custom rules here
+    plugins: [
+        'vue',
+    ],
+    globals: {
+        _: false,
+    },
     rules: {
+        'import/no-named-as-default': 'off',
         'no-alert': 'off',
         'no-console': 0,
         'no-eval': 'error',

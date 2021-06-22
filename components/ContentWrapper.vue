@@ -1,3 +1,24 @@
+<script>
+export default {
+    name: 'ContentWrapper',
+    functional: true,
+    props: {
+        content: {
+            type: String,
+            default: '',
+        },
+    },
+    render(createElement, { props }) {
+        return createElement('div', {
+            key: 'contentWrapper',
+            class: 'contentWrapper',
+            domProps: {
+                innerHTML: props.content,
+            },
+        });
+    },
+};
+</script>
 <style lang="scss">
     .contentWrapper {
         color: $black;
@@ -51,17 +72,6 @@
                     font-size: 1.1rem;
                     font-weight: bold;
                     line-height: #{$size};
-                    // display: inline-block;
-                    // background: #f3f3f3;
-                    // width: 30px;
-                    // height: 30px;
-                    // -webkit-border-radius: 30px;
-                    // border-radius: 30px;
-                    // text-align: center;
-                    // line-height: 30px;
-                    // font-size: 15px;
-                    // font-weight: 700;
-                    // margin: 0 10px 10px 0;
                     color: white;
                     box-shadow: 1px 1px 0 #999;
                 }
@@ -96,19 +106,14 @@
                     padding-top: 10px;
                     padding-right: 16px;
                     padding-bottom: 10px;
-                    // &:last-child {
-                    //   text-align: right;
-                    // }
                 }
 
                 td:only-child:not([rowspan]) {
                     padding-left: 16px;
-                    // padding-right: 16px;
                 }
 
                 td:not(:first-child) {
                     padding-left: 16px;
-                    // padding-right: 16px;
                 }
             }
 
@@ -119,37 +124,3 @@
         }
     }
 </style>
-<script>
-export default {
-    name: 'ContentWrapper',
-    functional: true,
-    props: {
-        content: {
-            type: String,
-            default: '',
-        },
-    },
-    render(createElement, { props }) {
-        // let html = props.html;
-        // try {
-        //     const compiledTemplate = templateCompiler(props.html);
-        //     html = compiledTemplate({...props.variables});
-        // } catch (error) {
-        //     console.log('ERROR WHILE COMPILING TEMPLATE: ', error);
-        // }
-        return createElement('div', {
-            key: 'contentWrapper',
-            class: 'contentWrapper',
-            domProps: {
-                innerHTML: props.content,
-            },
-        });
-    },
-    // props: {
-    //   content: {
-    //     type: String,
-    //     default: "",
-    //   },
-    // },
-};
-</script>

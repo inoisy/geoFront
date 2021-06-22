@@ -45,21 +45,12 @@
                         :img-url="imgUrl"
                         :alt="name"
                     />
-                    <!-- <v-img
-            :class="$style.serviceFeatureImg"
-            :src="imgUrl"
-            :alt="name"
-            :title="name"
-            aspect-ratio="1.555"
-            max-height="400px"
-            gradient="to top right, rgba(0,0,0,0), rgba(0,0,0,.4)"
-          /> -->
                 </v-col>
             </v-row>
         </v-container>
     </section>
 </template>
-<style lang="scss" scoped module>
+<style lang="scss" module>
     .serviceFeatureWrapper {
         background-color: white;
         // padding-top: 6rem;
