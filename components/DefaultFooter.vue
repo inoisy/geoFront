@@ -41,7 +41,7 @@
                             />
                         </v-btn>
                         <v-btn
-                            style="margin-left: 15px;"
+                            style="margin-left: 8px;"
                             href="https://www.instagram.com/geoworks_s"
                             target="_blanc"
                             icon
