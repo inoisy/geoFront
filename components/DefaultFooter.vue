@@ -21,15 +21,7 @@
                     </div>
                     <div >
                         <!-- <a href="tg://resolve?domain=<USERNAME>">Telegram</a> -->
-                        <!-- <v-btn
-                            style="margin-left: -5px;"
-                            :href="contacts.instagram"
-                            target="_blanc"
-                            icon
-                            dark
-                        >
-                            <svg-icon name="instagram" style="width: 23px; height: 23px;" />
-                        </v-btn> -->
+
                         <!-- <v-btn
                             :href="`tg://resolve?domain=inoisy`"
                             target="_blanc"
@@ -46,8 +38,16 @@
                         >
                             <svg-icon
                                 name="whatsapp"
-                                style="width: 22.5px; height: 22.5px;"
                             />
+                        </v-btn>
+                        <v-btn
+                            style="margin-left: 15px;"
+                            href="https://www.instagram.com/geoworks_s"
+                            target="_blanc"
+                            icon
+                            dark
+                        >
+                            <svg-icon name="instagram" />
                         </v-btn>
                     </div>
                 </VCol>
