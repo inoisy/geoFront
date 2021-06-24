@@ -72,7 +72,7 @@ export default {
             icon {
               url
             }
-            child(sort: "name:asc") {
+            child(sort: "order:asc") {
               name
               slug
               description

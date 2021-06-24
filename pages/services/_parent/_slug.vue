@@ -134,7 +134,7 @@ const query = gql`
         icon {
           url
         }
-        child(where: { slug_ne: $slug }) {
+        child(sort: "order:asc", where: { slug_ne: $slug ,}) {
           name
           slug
           description

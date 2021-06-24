@@ -110,7 +110,7 @@ export default {
 </script>
 <style lang="scss" module>
     .wrapper {
-        z-index: 400;
+        z-index: 1111;
         background-color: #363636 !important;
 
         .subHeader {
@@ -120,6 +120,8 @@ export default {
 </style>
 <style lang="scss" scoped>
     .navigation-drawer-wrapper {
+        z-index: 1111;
+
         ::v-deep .v-list {
             .v-list-group__header__append-icon {
                 width: 24px !important;

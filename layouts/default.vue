@@ -17,8 +17,7 @@
         <VFabTransition appear>
             <lazy-floating-button v-if="isMounted" />
         </VFabTransition>
-        <lazy-navigation-drawer
-            v-if="drawer"
+        <navigation-drawer
             :show="drawer"
             @close="drawer = false"
         />

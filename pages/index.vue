@@ -319,6 +319,7 @@ export default {
         &:hover {
             transform: translateY(-5px);
             transform-origin: center;
+            transition-duration: .6s;
             box-shadow: 4px 4px 25px 4px rgba(0, 0, 0, .25) !important;
         }
 

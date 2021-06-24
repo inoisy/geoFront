@@ -110,7 +110,7 @@ export default {
         top: 0;
         right: 0;
         left: 0;
-        z-index: 250;
+        z-index: 12;
         height: var(--toolbar-height);
         min-height: var(--toolbar-height);
         margin-top: 0;
