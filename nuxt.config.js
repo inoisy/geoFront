@@ -32,7 +32,6 @@ const devModules = [
 
 export default async () => {
     const isDev = process.env.NODE_ENV !== 'production';
-    // console.log('🚀 ~ file: nuxt.config.js ~ line 29 ~ module.exports= ~ isDev', isDev);
 
     return {
         loading: {
@@ -54,7 +53,6 @@ export default async () => {
         privateRuntimeConfig: {
             yandexMapID: process.env.MAP_KEY,
         },
-        // Global page headers (https://go.nuxtjs.dev/config-head)
         head: {
             htmlAttrs: {
                 lang: 'ru',
@@ -77,24 +75,17 @@ export default async () => {
             ],
         },
 
-        // Global CSS (https://go.nuxtjs.dev/config-css)
         css: [
             '~/assets/global.scss',
         ],
 
-        // Auto import components (https://go.nuxtjs.dev/config-components)
         components: true,
 
-        // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
         buildModules: [
             ...(isDev ? devModules : []),
             '@nuxtjs/google-analytics',
             '~/modules/hook.js',
-            // https://go.nuxtjs.dev/eslint
-            // '@nuxtjs/eslint-module',
-            // https://go.nuxtjs.dev/vuetify
             '@nuxtjs/vuetify',
-            // https://github.com/nuxt-community/style-resources-module
             '@nuxtjs/style-resources',
             ['@aceforth/nuxt-optimized-images', {
                 inlineImageLimit: 1000,
@@ -120,10 +111,8 @@ export default async () => {
                 },
             }],
         ],
-        // Modules (https://go.nuxtjs.dev/config-modules)
         modules: [
             [
-                // "~/modules/metrika/index.js", // TODO
                 '@nuxtjs/yandex-metrika',
                 {
                     id: process.env.YANDEX_ID,
@@ -200,22 +189,10 @@ export default async () => {
             ],
         },
 
-        // Eslint options
         eslint: {
             cache: false,
         },
-        // Build Configuration (https://go.nuxtjs.dev/config-build)
         build: {
-            // babel: {
-            //   sourceType: 'unambiguous',
-            //   presets: [
-            //     ["@nuxt/babel-preset-app", {
-            //       corejs: {
-            //         version: 2
-            //       }
-            //     }],
-            //   ]
-            // },
             transpile: ['@nuxtjs/apollo', '@nuxtjs/vuetify', /^@nuxtjs.*/, 'vue-lazy-hydration', 'vue-the-mask', 'vue-yandex-maps', 'vuelidate', 'nuxt-social-meta', 'graphql-tag', 'vuelidate'],
         },
     };

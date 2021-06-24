@@ -15,8 +15,40 @@
                       lg="3"
                 >
                     <logo :mini="true" class="mb-5" />
-                    <div style=" font-size: 14px; font-weight: normal; line-height: 24px;">
+                    <div class="mb-5" style=" font-size: 14px; font-weight: normal; line-height: 24px;">
                         {{ info.descriptor }}
+
+                    </div>
+                    <div >
+                        <!-- <a href="tg://resolve?domain=<USERNAME>">Telegram</a> -->
+                        <!-- <v-btn
+                            style="margin-left: -5px;"
+                            :href="contacts.instagram"
+                            target="_blanc"
+                            icon
+                            dark
+                        >
+                            <svg-icon name="instagram" style="width: 23px; height: 23px;" />
+                        </v-btn> -->
+                        <!-- <v-btn
+                            :href="`tg://resolve?domain=inoisy`"
+                            target="_blanc"
+                            icon
+                            dark
+                        >
+                            <svg-icon name="telegram" style="width: 23px; height: 23px;" />
+                        </v-btn> -->
+                        <v-btn
+                            :href="`https://wa.me/79773691665`"
+                            target="_blanc"
+                            icon
+                            dark
+                        >
+                            <svg-icon
+                                name="whatsapp"
+                                style="width: 22.5px; height: 22.5px;"
+                            />
+                        </v-btn>
                     </div>
                 </VCol>
                 <VCol class=""
