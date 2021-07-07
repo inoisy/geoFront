@@ -20,6 +20,7 @@
                         <VBtn :class="$style.button"
                               :to="slug"
                               outlined
+                              color="accent"
                               light
                         >
                             Подробнее

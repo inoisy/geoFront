@@ -311,7 +311,7 @@ export default {
         text-align: center;
         color: #18191f;
         transition-duration: .6s;
-        transition-property: all;
+        transition-property: all !important;
         transition-timing-function: ease;
         flex-direction: column;
         box-shadow: 4px 4px 10px rgba(0, 0, 0, .24) !important;

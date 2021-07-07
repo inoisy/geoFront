@@ -87,22 +87,23 @@ export default {
         const {
             data: { services },
         } = await app.apolloProvider.defaultClient.query({
+            fetchPolicy: 'no-cache',
             query: gql`
-        {
-          services(where: { isMain: true }) {
-            name
-            slug
-            descriptionLong
-            icon {
-              url
-            }
-            child(sort: "order:asc") {
-              name
-              slug
-            }
-          }
-        }
-      `,
+              {
+                services(where: { isMain: true }) {
+                  name
+                  slug
+                  descriptionLong
+                  icon {
+                    url
+                  }
+                  child(sort: "order:asc") {
+                    name
+                    slug
+                  }
+                }
+              }
+            `,
         });
         if (!services) {
             return error({

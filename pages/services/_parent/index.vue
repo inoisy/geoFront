@@ -56,6 +56,7 @@ export default {
         const {
             data: { services },
         } = await app.apolloProvider.defaultClient.query({
+            fetchPolicy: 'no-cache',
             variables: {
                 slug: params.parent,
             },

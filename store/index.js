@@ -60,7 +60,7 @@ export const actions = {
             services(where:{isMain:true}) {
                 name
                 slug
-                child(sort: "name:asc") {
+                child(sort: "order:asc") {
                     id
                     name
                     slug
